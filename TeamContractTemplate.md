@@ -29,9 +29,9 @@ A fully fuctioning mobile application that is robust so we can be confident in i
 
 *How will each member contribute to the project?*
 
-- A:
-- B: Will complete the stories assigned to me and help with writing documentation and design document.
-- C:
+- A: Plant sub-system and mobile app developement
+- B: Geo-location and mobile app developement
+- C: Security systems and mobile app developement
 
 ### Frequency of communication
 
