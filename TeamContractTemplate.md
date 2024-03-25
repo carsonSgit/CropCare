@@ -4,9 +4,9 @@ This is an informal contract to ensure that all team members have a common under
 
 ### Team Members
 
-- Name of member A:
-- Name of member B:
-- Name of member C:
+- Name of member A: Carson 
+- Name of member B: Kevin
+- Name of member C: Cristiano
 
 ### Strength & Weaknesses
 
