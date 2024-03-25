@@ -13,7 +13,7 @@ This is an informal contract to ensure that all team members have a common under
 *Within the context of this project, what are the strengths and weaknesses that each member brings to the team?*
 
 - A: 
-- B:
+- B: Good at implementing complex features. Not the best at planning ahead.
 - C: Good planning abilities, solid technical skills. Struggle to grasp complex topics
 
 ### Definition of “good enough” for this project
@@ -27,7 +27,7 @@ This is an informal contract to ensure that all team members have a common under
 *How will each member contribute to the project?*
 
 - A:
-- B:
+- B: Will complete the stories assigned to me and help with writing documentation and design document.
 - C:
 
 ### Frequency of communication
@@ -53,9 +53,8 @@ I pledge to not take longer than a day to respond to any messages. My reponse ti
 *(If unsure, assume a hypothetical situation such as you have not completed your work in time or you have not replied to a message in a timely manner).*
 
 - A:
-- B:
+- B: Discuss what you think is good and what needs improvement and why.
 - C: I would like to receive constructive criticism, where the issues with my work are pointed out and possible changes are recommended to me.
-
 ### In case of conflict
 
 *If a team member fails to communicate as described in this contract or does not respond to constructive feedback, what measures should the other teammate take?*
