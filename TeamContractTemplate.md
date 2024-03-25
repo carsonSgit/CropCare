@@ -22,6 +22,9 @@ This is an informal contract to ensure that all team members have a common under
 
 *(One response for the whole team)*
 
+A fully fuctioning mobile application that is robust so we can be confident in its ability to control our hardware. Everyone in the team should be satisfied with the final product in order for it to be considered "good enough".
+
+
 ### Division of work
 
 *How will each member contribute to the project?*
