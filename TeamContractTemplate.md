@@ -44,7 +44,7 @@ Our team wil work hard to communicate often, at least every three days. This ope
 
 *(One response per team)*
 
-I pledge to not take longer than a day to respond to any messages. My reponse time will be reduced during working hours thuesday to thursday as I am at work.
+Response delays should be no greater than 24 hours, expecially during days close to deadlines.
 
 ### Receiving feedback
 
