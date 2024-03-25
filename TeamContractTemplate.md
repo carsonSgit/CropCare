@@ -12,7 +12,7 @@ This is an informal contract to ensure that all team members have a common under
 
 *Within the context of this project, what are the strengths and weaknesses that each member brings to the team?*
 
-- A: 
+- A: In the context of this project, my strengths are geared more towards documenting & researching. My weaknessses would be that I am new to Python & Azure is not something I am strong in. 
 - B: Good at implementing complex features. Not the best at planning ahead.
 - C: Good planning abilities, solid technical skills. Struggle to grasp complex topics
 
@@ -52,7 +52,7 @@ I pledge to not take longer than a day to respond to any messages. My reponse ti
 
 *(If unsure, assume a hypothetical situation such as you have not completed your work in time or you have not replied to a message in a timely manner).*
 
-- A:
+- A: Just let me know what the issue is & what you think the proper direction would be to resolve it.
 - B: Discuss what you think is good and what needs improvement and why.
 - C: I would like to receive constructive criticism, where the issues with my work are pointed out and possible changes are recommended to me.
 ### In case of conflict
