@@ -12,9 +12,9 @@ This is an informal contract to ensure that all team members have a common under
 
 *Within the context of this project, what are the strengths and weaknesses that each member brings to the team?*
 
-- A:
+- A: 
 - B:
-- C:
+- C: Good planning abilities, solid technical skills. Struggle to grasp complex topics
 
 ### Definition of “good enough” for this project
 
@@ -36,11 +36,15 @@ This is an informal contract to ensure that all team members have a common under
 
 *(One response per team)*
 
+Our team wil work hard to communicate often, at least every three days. This open communication will ensure that everyone stays on the same page and no one falls behind or feels lost.
+
 ### Response delays
 
 *What is a reasonable delay to reply to messages? Is it the same for weekdays and weekends?*
 
 *(One response per team)*
+
+I pledge to not take longer than a day to respond to any messages. My reponse time will be reduced during working hours thuesday to thursday as I am at work.
 
 ### Receiving feedback
 
@@ -50,10 +54,12 @@ This is an informal contract to ensure that all team members have a common under
 
 - A:
 - B:
-- C:
+- C: I would like to receive constructive criticism, where the issues with my work are pointed out and possible changes are recommended to me.
 
 ### In case of conflict
 
 *If a team member fails to communicate as described in this contract or does not respond to constructive feedback, what measures should the other teammate take?*
 
 *(One response for the whole team)*
+
+In case of conflict we will communicate with the teacher and disscuss a solution.
