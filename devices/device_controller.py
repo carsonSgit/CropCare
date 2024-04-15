@@ -1,6 +1,6 @@
-from sensors import ISensor, AReading
+from interfaces.sensors import ISensor, AReading
 from time import sleep
-from actuators import IActuator, ACommand
+from interfaces.actuators import IActuator, ACommand
 from dotenv import load_dotenv
 import os
 
@@ -16,7 +16,7 @@ else:
         MockTempController as TempController,
     )
     from mock.mock_fan import MockFanController as FanController
-    from mock..mock_led import MockLEDController as LEDController
+    from mock.mock_led import MockLEDController as LEDController
 
 
 class DeviceController:

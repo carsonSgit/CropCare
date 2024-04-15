@@ -1,0 +1,6 @@
+colorzero==2.0
+gpiozero==2.0.1
+grove.py @ git+https://github.com/Seeed-Studio/grove.py"
+lgpio==0.2.2.0
+python-dotenv==1.0.1
+smbus2==0.4.3

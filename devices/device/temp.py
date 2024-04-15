@@ -1,5 +1,5 @@
 from grove.grove_temperature_humidity_aht20 import GroveTemperatureHumidityAHT20
-from sensors import ISensor, AReading
+from interfaces.sensors import ISensor, AReading
 
 
 class TempController(ISensor):

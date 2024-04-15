@@ -1,5 +1,5 @@
 from random import random
-from sensors import ISensor, AReading
+from interfaces.sensors import ISensor, AReading
 from time import sleep
 
 

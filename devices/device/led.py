@@ -1,5 +1,5 @@
 from gpiozero import PWMLED
-from actuators import IActuator, ACommand
+from interfaces.actuators import IActuator, ACommand
 
 
 class LEDController(IActuator):

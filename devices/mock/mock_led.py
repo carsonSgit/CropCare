@@ -1,4 +1,4 @@
-from actuators import IActuator, ACommand
+from interfaces.actuators import IActuator, ACommand
 from time import sleep
 
 

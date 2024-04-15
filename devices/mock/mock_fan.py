@@ -1,5 +1,5 @@
 from time import sleep
-from actuators import IActuator, ACommand
+from interfaces.actuators import IActuator, ACommand
 
 
 class MockFanController(IActuator):
