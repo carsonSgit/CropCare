@@ -40,7 +40,7 @@ class MockVibrationController(IActuator):
                 value (str): The value to control the actuator.
 
             Returns:
-                bool: True as this is just a mock vibration controller.
+                bool: True as there is no control for the vibration sensor.
         """
         return True
 
@@ -74,7 +74,7 @@ class MockVibrationController(IActuator):
 
     def start_detection(self):
         """
-            Starts the vibration detection loop.
+            Starts the vibration detection.
 
             As this is mock, it be determined as "detected" on random chance.
         """
