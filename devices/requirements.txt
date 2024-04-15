@@ -1,6 +1,9 @@
 colorzero==2.0
+evdev==1.7.0
 gpiozero==2.0.1
-grove.py @ git+https://github.com/Seeed-Studio/grove.py"
+grove.py @ git+https://github.com/Seeed-Studio/grove.py
 lgpio==0.2.2.0
 python-dotenv==1.0.1
+RPi.GPIO==0.7.1
+seeed-python-reterminal @ git+https://github.com/Seeed-Studio/Seeed_Python_ReTerminal
 smbus2==0.4.3
