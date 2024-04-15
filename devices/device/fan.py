@@ -2,7 +2,6 @@ from gpiozero import output_devices
 from time import sleep
 from interfaces.actuators import IActuator, ACommand
 
-
 class FanController(IActuator):
     """
     A class representing a fan controller.

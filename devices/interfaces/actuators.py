@@ -14,6 +14,8 @@ class ACommand(ABC):
         LIGHT_ON_OFF = 'light-on-off'
         LIGHT_PULSE = 'light-pulse'
         VIBRATION = "vibration"
+        BUZZER = 'buzzer'
+
 
     # Class properties that must be defined in implementation classes
 
