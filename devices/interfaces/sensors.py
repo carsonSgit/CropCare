@@ -24,6 +24,7 @@ class AReading(ABC):
         FAHRENHEIT = '°F'
         HUMIDITY = '% HR'
         UNITLESS = 'unitless'
+        LUX = 'nm'
 
     # Class properties that must be defined in implementation classes
     reading_type: Type
