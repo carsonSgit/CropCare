@@ -11,12 +11,14 @@ if env == "prod":
     from device.temp import TempController
     from device.fan import FanController
     from device.led import LEDController
+    from device.buzzer import BuzzerController
 else:
     from mock.mock_temp import (
         MockTempController as TempController,
     )
     from mock.mock_fan import MockFanController as FanController
     from mock.mock_led import MockLEDController as LEDController
+    from mock.mock_buzzer import MockBuzzerController as BuzzerController
     from mock.mock_luminosity import MockLuminositySensor as LuminositySensor
 
 
@@ -48,6 +50,7 @@ class DeviceController:
             # Instantiate each actuator inside this list, separate items by comma.
             FanController(12, ACommand.Type.FAN, "OFF"),
             LEDController(16, ACommand.Type.LIGHT_ON_OFF, "OFF"),
+            BuzzerController(26, ACommand.Type.BUZZER, "OFF")
         ]
 
     def read_sensors(self) -> list[AReading]:
@@ -81,18 +84,20 @@ if __name__ == "__main__":
     TEST_SLEEP_TIME = 2
 
     while True:
-        print(device_manager.read_sensors())
-
         commands = [
             ACommand(ACommand.Type.FAN, "ON"),
             ACommand(ACommand.Type.LIGHT_ON_OFF, "ON"),
+            ACommand(ACommand.Type.BUZZER, "ON"),
         ]
-
         device_manager.control_actuators(commands)
-
+        print(device_manager.read_sensors())
         sleep(TEST_SLEEP_TIME)
 
         commands = [
             ACommand(ACommand.Type.FAN, "OFF"),
             ACommand(ACommand.Type.LIGHT_ON_OFF, "OFF"),
+            ACommand(ACommand.Type.BUZZER, "OFF"),
         ]
+        device_manager.control_actuators(commands)
+        print(device_manager.read_sensors())
+        sleep(TEST_SLEEP_TIME)
