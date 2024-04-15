@@ -1,7 +1,6 @@
 from gpiozero import output_devices
 from time import sleep
-from actuators import IActuator, ACommand
-
+from interfaces.actuators import IActuator, ACommand
 
 class FanController(IActuator):
     """
