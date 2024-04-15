@@ -17,6 +17,7 @@ else:
     )
     from mock.mock_fan import MockFanController as FanController
     from mock.mock_led import MockLEDController as LEDController
+    from mock.mock_luminosity import MockLuminositySensor as LuminositySensor
 
 
 class DeviceController:
@@ -33,7 +34,8 @@ class DeviceController:
 
         return [
             # Instantiate each sensor inside this list, separate items by comma.
-            TempController(4, "AHT20", AReading.Type.TEMPERATURE)
+            TempController(4, "AHT20", AReading.Type.TEMPERATURE),
+            LuminositySensor(1, "awdw", AReading.Type.LUMINOSITY)
         ]
 
     def _initialize_actuators(self) -> list[IActuator]:
