@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CropCare.Views.SignUpPage"
+             Title="SignUpPage">
+    <VerticalStackLayout>
+        <Label Text="Sign Up" FontSize="Large" HorizontalOptions="Center" />
+        <Entry Placeholder="Email" Text="{Binding Email}"/>
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+        <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPassword}" />
+        <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
+        <Button Text="Already have an account? Login" Clicked="OnLoginButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>
