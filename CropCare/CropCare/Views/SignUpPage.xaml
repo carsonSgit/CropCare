@@ -4,11 +4,16 @@
              x:Class="CropCare.Views.SignUpPage"
              Title="SignUpPage">
     <VerticalStackLayout>
-        <Label Text="Sign Up" FontSize="Large" HorizontalOptions="Center" />
-        <Entry Placeholder="Email" Text="{Binding Email}"/>
-        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-        <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPassword}" />
-        <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
-        <Button Text="Already have an account? Login" Clicked="OnLoginButtonClicked" />
+        <Frame >
+            <VerticalStackLayout>
+                <Label Text="Sign Up" FontSize="Large" HorizontalOptions="Center" />
+                <Entry Placeholder="Email" Text="{Binding Email}"/>
+                <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+                <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPassword}" />
+                <Button Text="Sign Up" Clicked="Btn_SignUp_Clicked" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Text="Already have an account? Login" Clicked="Btn_Login_Clicked" Margin="10" />
     </VerticalStackLayout>
 </ContentPage>

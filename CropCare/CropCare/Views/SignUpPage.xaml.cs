@@ -1,3 +1,6 @@
+using CropCare.Services;
+using Firebase.Auth;
+
 namespace CropCare.Views;
 
 public partial class SignUpPage : ContentPage
@@ -12,17 +15,41 @@ public partial class SignUpPage : ContentPage
 		BindingContext = this;
 	}
 
-	private async void SignUpButton_Clicked(object sender, EventArgs e)
+	private async void Btn_SignUp_Clicked(object sender, EventArgs e)
 	{
         if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmPassword))
 		{
             await DisplayAlert("Error", "Please enter your email and password", "OK");
             return;
         }
+		if(Password != ConfirmPassword)
+		{
+            await DisplayAlert("Error", "Passwords must match", "OK");
+            return;
+        }
+		if(Connectivity.NetworkAccess != NetworkAccess.Internet)
+		{
+            await DisplayAlert("Alert", "No internet connection", "OK");
+            return;
+        }
+        try
+        {
+            AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
+            await DisplayAlert("Success", "User signed up! ", "OK");
+            await Shell.Current.GoToAsync($"//Index");
+        }
+        catch (FirebaseAuthException ex)
+        {
+            await DisplayAlert("Alert", "An error occurred: " + ex.Message, "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Alert", "An error occurred: " + ex.Message, "OK");
+        }
     }
 
-	private async void LoginButton_Clicked(object sender, EventArgs e)
+	private async void Btn_Login_Clicked(object sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new LoginPage());
-	}
+        await Shell.Current.GoToAsync($"//Login");
+    }
 }

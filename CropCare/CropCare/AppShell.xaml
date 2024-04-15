@@ -9,7 +9,7 @@
 
     <!-- Landing Page -->
     <ShellContent Route="Login" ContentTemplate="{DataTemplate views:LoginPage}" />
-    <ShellContent Route="SignUpPage" ContentTemplate="{DataTemplate views:SignUpPage}" />
+    <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" />
     <!-- App Tabs: note the use of FlyoutDisplayOptions="AsMultipleItems"  -->
     <TabBar Route="Index" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent

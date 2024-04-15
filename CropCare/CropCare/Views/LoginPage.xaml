@@ -4,8 +4,27 @@
              x:Class="CropCare.Views.LoginPage"
              Title="LoginPage">
     <VerticalStackLayout>
-        <Entry Placeholder="Email" Text="{Binding Email}" />
-        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-        <Button Text="Login" Clicked="LoginButton_Clicked" />
+        <Frame x:Name="LoginView" Margin="10" BackgroundColor="Transparent" BorderColor="Transparent" >
+            <VerticalStackLayout>
+                <Entry Placeholder="Email" Text="{Binding Email}" />
+                <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+                <Button Text="Login" Clicked="Btn_Login_Clicked" />
+                <Label Text="Don't have an account?" />
+                <Button Text="Register" Clicked="Btn_SignUp_Clicked" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Frame  x:Name="LogoutView" Margin="10" BackgroundColor="Transparent" IsVisible="False">
+            <StackLayout>
+                <Label Text="User Details:" FontAttributes="Bold"/>
+                <Label x:Name="lblUser" FontAttributes="Italic" Margin="0,5,0,30"/>
+                <Button Text="Log Out" 
+                        SemanticProperties.Hint="Click to log out"
+                        Clicked="Btn_Logout_Clicked" 
+                        VerticalOptions="CenterAndExpand" 
+                        BackgroundColor="Black"  />
+
+            </StackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>
