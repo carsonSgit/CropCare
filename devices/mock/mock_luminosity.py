@@ -1,8 +1,8 @@
 from interfaces.sensors import ISensor, AReading
-import seeed_python_reterminal.core as rt
+from random import random
 from time import sleep
 
-class LuminositySensor(ISensor):
+class MockLuminositySensor(ISensor):
     """
     A sensor class for reading Temperature and/or Humidity
 
@@ -46,7 +46,7 @@ class LuminositySensor(ISensor):
             list[AReading]: a list of temperature and humidity readings.
 
         """
-        luminosity = rt.illuminance
+        luminosity = random() * 100
         return [
             AReading(AReading.Type.LUMINOSITY, AReading.Unit.LUX, luminosity),
         ]
