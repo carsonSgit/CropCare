@@ -7,10 +7,12 @@ public partial class LoginPage : ContentPage
 {
 	public string Email { get; set; }
 	public string Password { get; set; }
+    public UserCredential User { get; set; }
 
 	public LoginPage()
 	{
 		InitializeComponent();
+        User = AuthService.UserCreds;
 		BindingContext = this;
 	}
 
@@ -31,8 +33,8 @@ public partial class LoginPage : ContentPage
         try
         {
             AuthService.UserCreds = await AuthService.Client.SignInWithEmailAndPasswordAsync(Email, Password);
-            LoginView.IsVisible = false;
-            LogoutView.IsVisible = true;
+            //LoginView.IsVisible = false;
+            //LogoutView.IsVisible = true;
             await DisplayAlert("Success", "User logged in! ", "OK");
             await Shell.Current.GoToAsync($"//Index");
         }
@@ -55,8 +57,8 @@ public partial class LoginPage : ContentPage
             Email = string.Empty;
             Password = string.Empty;
             lblUser.Text = string.Empty;
-            LogoutView.IsVisible = false;
-            LoginView.IsVisible = true;
+            //LogoutView.IsVisible = false;
+            //LoginView.IsVisible = true;
             await Shell.Current.GoToAsync($"//Login");
         }
         catch (Exception ex)
