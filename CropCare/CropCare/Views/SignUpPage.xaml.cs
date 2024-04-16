@@ -56,7 +56,7 @@ public partial class SignUpPage : ContentPage
             await DisplayAlert("Alert", "An error occurred: " + ex.Message, "OK");
         }
     }
-
+    
 	private async void Btn_Login_Clicked(object sender, EventArgs e)
 	{
         await Shell.Current.GoToAsync($"//Login");
