@@ -37,7 +37,7 @@
                 
             </StackLayout>
         </Frame>
-
+        
         <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 00, 0, 0">
             <Label Text="Don't have an account? " VerticalOptions="Center" FontSize="Small"/>
             <Label Text="Sign Up Here" 
