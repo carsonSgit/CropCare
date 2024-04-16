@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="CropCare.Views.SignUpPage"
+             Shell.NavBarIsVisible="false"
              Title="SignUpPage">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="#538D22"/>
+    </Page.Behaviors>
+
     <VerticalStackLayout>
         <Frame >
             <VerticalStackLayout>
@@ -13,7 +20,17 @@
                 <Button Text="Sign Up" Clicked="Btn_SignUp_Clicked" />
             </VerticalStackLayout>
         </Frame>
-
-        <Button Text="Already have an account? Login" Clicked="Btn_Login_Clicked" Margin="10" />
+        
+        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 50, 0, 0">
+            <Label Text="Already have an account? " VerticalOptions="Center" />
+            <Label Text="Login Here" 
+                   FontAttributes="Bold" 
+                   TextColor="#3A5A40" 
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_Login_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
