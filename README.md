@@ -44,6 +44,9 @@ This page will contain settings for the account of our users. These settings may
 # 📱 App Prototype
 ![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/98350514/13b4257c-38d5-4ae7-a987-5229442d5077)
 
+# 🧩 App UML Diagram
+![UMLDiagram](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/c7ace04c-f154-440b-9180-05e953e329a8)
+
 # 🛠️ App Features
 
 
