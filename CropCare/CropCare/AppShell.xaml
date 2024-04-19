@@ -8,31 +8,24 @@
     Shell.FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <Label Text="CropCare" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center" />
+        <Label Text="CropCare" FontSize="Large"  VerticalOptions="Center" Margin="20,0,0,0"/>
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
-        <Label Text="CropCare Inc. ©" />
+        <Label Text="CropCare Inc. ©" Margin="20,20,20,0"/>
     </Shell.FlyoutFooter>
     
     <!-- Landing Page -->
     <ShellContent Route="Login" ContentTemplate="{DataTemplate views:LoginPage}" />
     <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" />
-    <!-- App Tabs: note the use of FlyoutDisplayOptions="AsMultipleItems"  -->
-    <TabBar Route="Index" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent
-                Title="Overview"
-                ContentTemplate="{DataTemplate views:OverviewPage}"
-                Route="OverviewPage" Icon="speedometer.png"/>
-        <!-- Add the login page to be used to display account info and to logout-->
-        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}"
-                      Icon="home.png"/>
-    </TabBar>
+
     
     <!-- Flyout Menu -->
-    <FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Settings" />
-        <ShellContent Title="About" />
+    <FlyoutItem Route="Index" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" Route="DashboardPage"/>
+        <ShellContent Title="Overview" ContentTemplate="{DataTemplate views:OverviewPage}" Route="OverviewPage"/>
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" Route="SettingsPage"/>
+        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
     </FlyoutItem>
 
 </Shell>
