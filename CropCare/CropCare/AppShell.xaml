@@ -13,7 +13,7 @@
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
-        <Label Text="CropCare Inc. ©" Margin="20,20,20,0"/>
+        <Label Text="CropCare Inc. ©" Margin="20,20,0,20"/>
     </Shell.FlyoutFooter>
     
     <!-- Landing Page -->
