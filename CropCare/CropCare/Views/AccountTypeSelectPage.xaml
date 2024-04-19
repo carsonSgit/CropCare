@@ -49,6 +49,6 @@
             </HorizontalStackLayout>
         </Frame>
         
-        <Button Text="Register" Clicked="Btn_SignUp_Clicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#73A942"/>
+        <Button Text="Register" Clicked="Btn_Register_Clicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#73A942"/>
     </VerticalStackLayout>
 </ContentPage>

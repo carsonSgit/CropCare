@@ -8,6 +8,7 @@ public partial class SignUpPage : ContentPage
 	public string Email { get; set; }
 	public string Password { get; set; }
 	public string ConfirmPassword { get; set; }
+    public string Name { get; set; }
 
 	public SignUpPage()
 	{
@@ -34,21 +35,24 @@ public partial class SignUpPage : ContentPage
         }
         try
         {
-            await Navigation.PushAsync(new AccountTypeSelectPage(this.Email, this.Password));
+            await Navigation.PushAsync(new AccountTypeSelectPage(this.Email, this.Password, this.Name));
 
-            /*
-            AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            await DisplayAlert("Success", "User signed up! ", "OK");
-            
-            Email = string.Empty;
-            Password = string.Empty;
-            ConfirmPassword = string.Empty;
-            await Shell.Current.GoToAsync($"//Index");
+
+            //AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
+            //Models.User user = new Models.User(Email, Name);
+            //await App.Repo.UsersDb.AddItemAsync(user);
+            //App.CurrentUser = user;
+
+            //await DisplayAlert("Success", "User signed up! ", "OK");
+            //Email = string.Empty;
+            //Password = string.Empty;
+            //ConfirmPassword = string.Empty;
+            //await Shell.Current.GoToAsync($"//Index");
 
             OnPropertyChanged(nameof(Email));
             OnPropertyChanged(nameof(Password));
             OnPropertyChanged(nameof(ConfirmPassword));
-            */
+
         }
         catch (FirebaseAuthException ex)
         {

@@ -1,4 +1,6 @@
-﻿using MauiFitness.Config;
+﻿using CropCare.DataRepos;
+using CropCare.Models;
+using MauiFitness.Config;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
@@ -8,7 +10,15 @@ namespace CropCare
     {
 
         public static Settings Settings { get; private set; }
-
+        public static User CurrentUser { get; set; }
+        private static CropCareRepo repo;
+        public static CropCareRepo Repo
+        {
+            get
+            {
+                return repo ??= new CropCareRepo();
+            }
+        }
         public App()
         {
             InitializeComponent();
