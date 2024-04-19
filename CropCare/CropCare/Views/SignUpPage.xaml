@@ -14,9 +14,12 @@
         <Frame BackgroundColor="Transparent" BorderColor="Transparent">
             <VerticalStackLayout>
                 <Image Source="loginhero.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
-                <Label Text="REGISTER" FontSize="35" Margin="0, 20, 0, 30" HorizontalOptions="Center" TextColor="#538D22"/>
+                <Label Text="REGISTER" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="#538D22"/>
 
-                <Label Text="Email" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+                <Label Text="Name" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Name" Text="{Binding Name}"/>
+
+                <Label Text="Email" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
                 <Entry Placeholder="Email" Text="{Binding Email}"/>
 
                 <Label Text="Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
