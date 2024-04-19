@@ -9,7 +9,7 @@
     Shell.FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <Label Text="CropCare" FontSize="Large"  VerticalOptions="Center" Margin="20,0,0,0"/>
+        <Label Text="CropCare" FontSize="Large"  VerticalOptions="Center" Margin="20,20,0,20"/>
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
@@ -26,8 +26,12 @@
                 Title="Overview"
                 ContentTemplate="{DataTemplate views:OverviewPage}"
                 Route="OverviewPage" />
+        <ShellContent
+                Title="Settings"
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="CropsPage" />
         <!-- Add the login page to be used to display account info and to logout-->
-        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}"
+        <ShellContent Title="Logout" ContentTemplate="{DataTemplate views:LoginPage}"
                       Icon="home.png"/>
     </FlyoutItem>
 
