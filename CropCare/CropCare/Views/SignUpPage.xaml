@@ -34,7 +34,7 @@
         
         
         
-        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 50, 0, 0">
+        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 0, 0, 0">
             <Label Text="Already have an account? " VerticalOptions="Center" />
             <Label Text="Login Here" 
                    FontAttributes="Bold" 

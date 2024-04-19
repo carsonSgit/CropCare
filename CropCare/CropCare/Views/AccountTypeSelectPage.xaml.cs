@@ -25,7 +25,18 @@ public partial class AccountTypeSelectPage : ContentPage
             //AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
             await DisplayAlert("Success", "User signed up! ", "OK");
             await DisplayAlert("Accountype", "KEVIN ADD THE ACCOUNT TYPE: " + this.AccountType, "Yes, I will");
-            
+
+
+            AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
+            await DisplayAlert("Success", "User signed up! ", "OK");
+
+            Email = string.Empty;
+            Password = string.Empty;
+            await Shell.Current.GoToAsync($"//Index");
+
+            OnPropertyChanged(nameof(Email));
+            OnPropertyChanged(nameof(Password));
+
             Email = string.Empty;
             Password = string.Empty;
             

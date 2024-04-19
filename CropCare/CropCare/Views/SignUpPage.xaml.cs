@@ -35,20 +35,6 @@ public partial class SignUpPage : ContentPage
         try
         {
             await Navigation.PushAsync(new AccountTypeSelectPage(this.Email, this.Password));
-
-            /*
-            AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            await DisplayAlert("Success", "User signed up! ", "OK");
-            
-            Email = string.Empty;
-            Password = string.Empty;
-            ConfirmPassword = string.Empty;
-            await Shell.Current.GoToAsync($"//Index");
-
-            OnPropertyChanged(nameof(Email));
-            OnPropertyChanged(nameof(Password));
-            OnPropertyChanged(nameof(ConfirmPassword));
-            */
         }
         catch (FirebaseAuthException ex)
         {

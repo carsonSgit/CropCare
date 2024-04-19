@@ -5,8 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
+    <Shell.FlyoutHeader>
+        <Label Text="CropCare" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Center" />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Label Text="CropCare Inc. ©" />
+    </Shell.FlyoutFooter>
+    
     <!-- Landing Page -->
     <ShellContent Route="Login" ContentTemplate="{DataTemplate views:LoginPage}" />
     <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" />
@@ -20,5 +28,11 @@
         <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}"
                       Icon="home.png"/>
     </TabBar>
+    
+    <!-- Flyout Menu -->
+    <FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Settings" />
+        <ShellContent Title="About" />
+    </FlyoutItem>
 
 </Shell>
