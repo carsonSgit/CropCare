@@ -37,7 +37,7 @@ public partial class LoginPage : ContentPage
             //LoginView.IsVisible = false;
             //LogoutView.IsVisible = true;
             await DisplayAlert("Success", "User logged in! ", "OK");
-            await Shell.Current.GoToAsync($"//Index");
+            await Shell.Current.GoToAsync($"//OverviewPage");
         }
         catch (FirebaseAuthException ex)
         {
