@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
+    Shell.TabBarIsVisible="False"
     Shell.FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
@@ -16,16 +17,19 @@
     </Shell.FlyoutFooter>
     
     <!-- Landing Page -->
-    <ShellContent Route="Login" ContentTemplate="{DataTemplate views:LoginPage}" />
-    <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" />
-
-    
-    <!-- Flyout Menu -->
+    <ShellContent Route="Login"  ContentTemplate="{DataTemplate views:LoginPage}" FlyoutItemIsVisible="False"/>
+    <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" FlyoutItemIsVisible="False"/>
+        
+    <!-- App Flyout: note the use of FlyoutDisplayOptions="AsMultipleItems"  -->
     <FlyoutItem Route="Index" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" Route="DashboardPage"/>
-        <ShellContent Title="Overview" ContentTemplate="{DataTemplate views:OverviewPage}" Route="OverviewPage"/>
-        <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" Route="SettingsPage"/>
-        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
+        <ShellContent
+                Title="Overview"
+                ContentTemplate="{DataTemplate views:OverviewPage}"
+                Route="OverviewPage" />
+        <!-- Add the login page to be used to display account info and to logout-->
+        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}"
+                      Icon="home.png"/>
     </FlyoutItem>
+
 
 </Shell>
