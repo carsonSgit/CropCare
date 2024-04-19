@@ -5,20 +5,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.TabBarIsVisible="False"
+    Shell.FlyoutBehavior="Flyout">
 
+    <Shell.FlyoutHeader>
+        <Label Text="CropCare" FontSize="Large"  VerticalOptions="Center" Margin="20,20,0,20"/>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Label Text="CropCare Inc. ©" Margin="20,20,0,20"/>
+    </Shell.FlyoutFooter>
+    
     <!-- Landing Page -->
-    <ShellContent Route="Login" ContentTemplate="{DataTemplate views:LoginPage}" />
-    <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" />
-    <!-- App Tabs: note the use of FlyoutDisplayOptions="AsMultipleItems"  -->
-    <TabBar Route="Index" FlyoutDisplayOptions="AsMultipleItems">
+    <ShellContent Route="Login"  ContentTemplate="{DataTemplate views:LoginPage}" FlyoutItemIsVisible="False"/>
+    <ShellContent Route="Signup" ContentTemplate="{DataTemplate views:SignUpPage}" FlyoutItemIsVisible="False"/>
+        
+    <!-- App Flyout: note the use of FlyoutDisplayOptions="AsMultipleItems"  -->
+    <FlyoutItem Route="Index" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
                 Title="Overview"
                 ContentTemplate="{DataTemplate views:OverviewPage}"
-                Route="OverviewPage" Icon="speedometer.png"/>
+                Route="OverviewPage" />
+        <ShellContent
+                Title="Settings"
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="CropsPage" />
         <!-- Add the login page to be used to display account info and to logout-->
-        <ShellContent Title="Account" ContentTemplate="{DataTemplate views:LoginPage}"
+        <ShellContent Title="Logout" ContentTemplate="{DataTemplate views:LoginPage}"
                       Icon="home.png"/>
-    </TabBar>
+    </FlyoutItem>
+
 
 </Shell>

@@ -4,7 +4,7 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.LoginPage"
-             Shell.NavBarIsVisible="false"
+             Shell.NavBarIsVisible="False"
              Title="LoginPage">
     <ContentPage.Resources>
         <ResourceDictionary>

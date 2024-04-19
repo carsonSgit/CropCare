@@ -37,8 +37,10 @@ public partial class LoginPage : ContentPage
             App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync()).FirstOrDefault(u => u.Email == Email);
             //LoginView.IsVisible = false;
             //LogoutView.IsVisible = true;
+
             await DisplayAlert("Success", $"{App.CurrentUser.Name} logged in! ", "OK");
-            await Shell.Current.GoToAsync($"//Index");
+            await Shell.Current.GoToAsync($"//OverviewPage");
+
         }
         catch (FirebaseAuthException ex)
         {

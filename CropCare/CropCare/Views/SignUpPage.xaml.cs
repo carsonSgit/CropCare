@@ -35,6 +35,7 @@ public partial class SignUpPage : ContentPage
         }
         try
         {
+
             await Navigation.PushAsync(new AccountTypeSelectPage(this.Email, this.Password, this.Name));
 
 

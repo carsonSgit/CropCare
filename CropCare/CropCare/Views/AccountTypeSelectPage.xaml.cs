@@ -39,10 +39,6 @@ public partial class AccountTypeSelectPage : ContentPage
             await Shell.Current.GoToAsync($"//Index");
 
             await DisplayAlert("Success", "User signed up! ", "OK");
-            //await DisplayAlert("Accountype", "KEVIN ADD THE ACCOUNT TYPE: " + this.AccountType, "Yes, I will");
-
-
-
             
             Email = string.Empty;
             Password = string.Empty;
