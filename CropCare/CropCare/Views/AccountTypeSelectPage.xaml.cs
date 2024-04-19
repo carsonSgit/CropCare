@@ -44,16 +44,20 @@ public partial class AccountTypeSelectPage : ContentPage
 
     private async void OnTechnicienCardTapped(object sender, EventArgs e)
     {
-        technicienCardShadow.Opacity = (float)0.6;
-        ownerCardShadow.Opacity = 0;
-        this.AccountType = "Technicien";
+        technicianCard.BorderColor = Colors.Black;
+        technicianShadow.Opacity = 1;
+        ownerCard.BorderColor = Colors.Transparent;
+        ownerShadow.Opacity = 0;
+        this.AccountType = "Technician";
         //ownerCard.Effects.Clear();
     }
 
     private async void OnOwnerCardTapped(object sender, EventArgs e)
     {
-        ownerCardShadow.Opacity = (float)0.6;
-        technicienCardShadow.Opacity = 0;
+        ownerCard.BorderColor = Colors.Black;
+        ownerShadow.Opacity = 1;
+        technicianCard.BorderColor = Colors.Transparent;
+        technicianShadow.Opacity = 0;
         this.AccountType = "Owner";
         //technicienCard.Effects.Clear();
     }
