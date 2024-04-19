@@ -1,42 +1,45 @@
 using Firebase.Auth;
 using CropCare.Services;
 using System.Windows;
+using static Java.Util.Jar.Attributes;
 
 namespace CropCare.Views;
 
 public partial class AccountTypeSelectPage : ContentPage
 {
     public string Email { get; set; }
+    public string Name { get; set; }
     public string Password { get; set; }
     public string AccountType { get; set; }
 
-    public AccountTypeSelectPage(string email, string password)
+    public AccountTypeSelectPage(string email, string password, string name)
 	{
         this.Email = email;
         this.Password = password;
+        this.Name = name;
 
 		InitializeComponent();
 	}
 
-    private async void Btn_SignUp_Clicked(object sender, EventArgs e)
+    private async void Btn_Register_Clicked(object sender, EventArgs e)
     {
         try
         {
             //AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            await DisplayAlert("Success", "User signed up! ", "OK");
-            await DisplayAlert("Accountype", "KEVIN ADD THE ACCOUNT TYPE: " + this.AccountType, "Yes, I will");
-
-
+            //App.CurrentUser.IsOwner = this.AccountType == "Owner";
+            //await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
             AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            await DisplayAlert("Success", "User signed up! ", "OK");
+            Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner");
+
+            await App.Repo.UsersDb.AddItemAsync(user);
+            App.CurrentUser = user;
 
             Email = string.Empty;
             Password = string.Empty;
             await Shell.Current.GoToAsync($"//Index");
 
-            OnPropertyChanged(nameof(Email));
-            OnPropertyChanged(nameof(Password));
-
+            await DisplayAlert("Success", "User signed up! ", "OK");
+            
             Email = string.Empty;
             Password = string.Empty;
             

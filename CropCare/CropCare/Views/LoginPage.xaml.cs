@@ -1,6 +1,6 @@
 using CropCare.Services;
 using Firebase.Auth;
-
+using System.Linq;
 namespace CropCare.Views;
 
 public partial class LoginPage : ContentPage
@@ -34,10 +34,13 @@ public partial class LoginPage : ContentPage
         try
         {
             AuthService.UserCreds = await AuthService.Client.SignInWithEmailAndPasswordAsync(Email, Password);
+            App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync()).FirstOrDefault(u => u.Email == Email);
             //LoginView.IsVisible = false;
             //LogoutView.IsVisible = true;
-            await DisplayAlert("Success", "User logged in! ", "OK");
+
+            await DisplayAlert("Success", $"{App.CurrentUser.Name} logged in! ", "OK");
             await Shell.Current.GoToAsync($"//OverviewPage");
+
         }
         catch (FirebaseAuthException ex)
         {
