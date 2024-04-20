@@ -25,9 +25,12 @@ public partial class AccountTypeSelectPage : ContentPage
     {
         try
         {
-            //AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            //App.CurrentUser.IsOwner = this.AccountType == "Owner";
-            //await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
+            if(Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await DisplayAlert("Alert", "No internet connection", "OK");
+                return;
+            }
+
             AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
             Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner");
 
@@ -47,11 +50,11 @@ public partial class AccountTypeSelectPage : ContentPage
         }
         catch (FirebaseAuthException ex)
         {
-            await DisplayAlert("Alert", "An error occurred: " + ex.Message, "OK");
+            await DisplayAlert("Alert", "Could not create account: " + ex.Reason, "OK");
         }
-        catch (Exception ex)
+        catch
         {
-            await DisplayAlert("Alert", "An error occurred: " + ex.Message, "OK");
+            await DisplayAlert("Alert", "An unexpected error occurred, please try again later.", "OK");
         }
     }
 
@@ -63,7 +66,6 @@ public partial class AccountTypeSelectPage : ContentPage
         ownerCard.BorderColor = Colors.Transparent;
         ownerShadow.Opacity = 0;
         this.AccountType = "Technician";
-        //ownerCard.Effects.Clear();
     }
 
     private async void OnOwnerCardTapped(object sender, EventArgs e)
@@ -73,7 +75,6 @@ public partial class AccountTypeSelectPage : ContentPage
         technicianCard.BorderColor = Colors.Transparent;
         technicianShadow.Opacity = 0;
         this.AccountType = "Owner";
-        //technicienCard.Effects.Clear();
     }
 
 }
