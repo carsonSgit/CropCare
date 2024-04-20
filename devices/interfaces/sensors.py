@@ -14,6 +14,7 @@ class AReading(ABC):
         TEMPERATURE = 'temperature'
         HUMIDITY = 'humidity'
         LUMINOSITY = 'luminosity'
+        NOISE = 'decibels'
 
     class Unit(str, Enum):
         """Enum defining all possible units for sensor measuremens.
