@@ -6,8 +6,11 @@ namespace CropCare.Views;
 public partial class SettingsPage : ContentPage
 {
 	public string Name { get; set; } = App.CurrentUser.Name;
+    public bool UpdateEnabled { get; set; } = false;
 
-	public SettingsPage()
+    public Color UpdateButtonColor { get; set; } = Colors.White;
+
+    public SettingsPage()
 	{
 		InitializeComponent();
 		BindingContext = this;
@@ -15,10 +18,11 @@ public partial class SettingsPage : ContentPage
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        btn_update.IsVisible = Name != App.CurrentUser.Name;
+        UpdateEnabled = Name != App.CurrentUser.Name;
+        UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
     }
 
-	private async void Btn_Update_Clicked(object sender, EventArgs e)
+    private async void Btn_Update_Clicked(object sender, EventArgs e)
 	{
         if(Connectivity.NetworkAccess != NetworkAccess.Internet)
 		{
