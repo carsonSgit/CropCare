@@ -9,9 +9,10 @@ class MockGPSSensor(ISensor):
     Attributes:
         model (str): The model of the GPS sensor.
         type (AReading.Type): The type of the sensor reading.
+        fixed_latitude (float): The fixed latitude value.
+        fixed_longitude (float): The fixed longitude value.
 
     Methods:
-        generate_random_reading(): Generates random latitude and longitude values.
         read_sensor(): Simulates reading the GPS data from the sensor.
 
     """
@@ -30,18 +31,8 @@ class MockGPSSensor(ISensor):
         """
         self.model = model
         self.type = type
-
-    def generate_random_reading(self) -> tuple:
-        """
-        Generates random latitude and longitude values.
-
-        Returns:
-            tuple: A tuple containing latitude (float) and longitude (float).
-
-        """
-        latitude = round(random.uniform(-90, 90), 6)
-        longitude = round(random.uniform(-180, 180), 6)
-        return latitude, longitude
+        self.fixed_latitude = round(random.uniform(-90, 90), 6)
+        self.fixed_longitude = round(random.uniform(-180, 180), 6)
 
     def read_sensor(self) -> AReading:
         """
@@ -51,10 +42,9 @@ class MockGPSSensor(ISensor):
             AReading: An AReading object representing the GPS data.
 
         """
-        latitude, longitude = self.generate_random_reading()
         return [
-            AReading(AReading.Type.LATITUDE, AReading.Unit.DEGREE, latitude),
-            AReading(AReading.Type.LONGITUDE, AReading.Unit.DEGREE, longitude)
+            AReading(AReading.Type.LATITUDE, AReading.Unit.DEGREE, self.fixed_latitude),
+            AReading(AReading.Type.LONGITUDE, AReading.Unit.DEGREE, self.fixed_longitude)
         ]
 
 gps = MockGPSSensor("Mock GPS", AReading.Type.GPS)
