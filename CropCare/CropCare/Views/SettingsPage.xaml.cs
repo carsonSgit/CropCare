@@ -5,9 +5,14 @@ namespace CropCare.Views;
 
 public partial class SettingsPage : ContentPage
 {
+    // Property to store the user's name
 	public string Name { get; set; } = App.CurrentUser.Name;
+    // Propterty to enable or disable the update button
+    public bool UpdateEnabled { get; set; } = false;
+    // Property to change the color of the update button
+    public Color UpdateButtonColor { get; set; } = Colors.White;
 
-	public SettingsPage()
+    public SettingsPage()
 	{
 		InitializeComponent();
 		BindingContext = this;
@@ -15,10 +20,13 @@ public partial class SettingsPage : ContentPage
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        btn_update.IsVisible = Name != App.CurrentUser.Name;
+        // Enable the update button if the name is different from the current saved user's name
+        UpdateEnabled = Name != App.CurrentUser.Name;
+        // Change the color of the update button to differentiate between enabled and disabled states
+        UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
     }
 
-	private async void Btn_Update_Clicked(object sender, EventArgs e)
+    private async void Btn_Update_Clicked(object sender, EventArgs e)
 	{
         if(Connectivity.NetworkAccess != NetworkAccess.Internet)
 		{
@@ -50,6 +58,24 @@ public partial class SettingsPage : ContentPage
     {
         await AuthService.Client.ResetEmailPasswordAsync(App.CurrentUser.Email);
         await DisplayAlert("Password Reset", "An email to reset password was sent to " + App.CurrentUser.Email, "OK");
+    }
+
+    // Method to handle the app theme switch
+    private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        // Set the app theme based on the switch state
+        if (ThemeSwitch.IsToggled)
+        {
+            // Set the app theme to light
+            App.Current.UserAppTheme = AppTheme.Light;
+        }
+        else
+        {
+            // Set the app theme to dark
+            App.Current.UserAppTheme = AppTheme.Dark;
+        }
+        // Save the app theme preference
+        Preferences.Set("apptheme", ThemeSwitch.IsToggled);
     }
 
 }
