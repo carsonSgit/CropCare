@@ -12,6 +12,9 @@ if env == "prod":
     from device.fan import FanController
     from device.led import LEDController
     from device.buzzer import BuzzerController
+    from device.luminosity import LuminositySensor
+    from device.soilmoisture import SoilMoistureSensor
+    from device.waterlevel import WaterLevelSensor
 else:
     from mock.mock_temp import (
         MockTempController as TempController,
@@ -20,6 +23,8 @@ else:
     from mock.mock_led import MockLEDController as LEDController
     from mock.mock_buzzer import MockBuzzerController as BuzzerController
     from mock.mock_luminosity import MockLuminositySensor as LuminositySensor
+    from mock.mock_soilmoisture import MockSoilMoistureSensor as SoilMoistureSensor
+    from mock.mock_waterlevel import MockWaterLevelSensor as WaterLevelSensor
 
 
 class DeviceController:

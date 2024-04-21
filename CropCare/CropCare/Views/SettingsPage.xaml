@@ -1,12 +1,61 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CropCare.Views.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Settings"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="CropCare.Views.SettingsPage">
+
+    <ScrollView>
+        <StackLayout Spacing="25" Padding="30">
+            <!-- Title -->
+            <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
+
+            <!-- User Profile Settings -->
+            <StackLayout Spacing="10">
+                <Label Text="User Profile" FontAttributes="Bold"/>
+                <StackLayout Spacing="5">
+                    <Label Text="Name:"/>
+                    <HorizontalStackLayout>
+                        <Entry x:Name="NameEntry"
+                           Placeholder="Enter your name"
+                           Text="{Binding Name}"
+                           TextChanged="Entry_TextChanged"
+                           MinimumWidthRequest="255"/>
+
+                        <!-- Update Name Button -->
+                        <Button Text="Update"
+                            x:Name="btn_update"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="EndAndExpand"
+                            IsEnabled="{Binding UpdateEnabled}"
+                            Clicked="Btn_Update_Clicked"
+                            MaximumHeightRequest="38"
+                            CornerRadius="15"
+                            BackgroundColor="{Binding UpdateButtonColor}" />
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Reset Password Button -->
+            <StackLayout Margin="0,15,0,0">
+                <Label Text="Reset Password" FontAttributes="Bold"/>
+                <Button Text="Reset"
+                        HorizontalOptions="End"
+                        Clicked="Btn_ChangePassword_Clicked"
+                        MaximumHeightRequest="38"
+                        CornerRadius="15"/>
+            </StackLayout>
+
+            <!-- Colour Theme Settings -->
+            <StackLayout Spacing="10">
+                <Label Text="Theme" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label Text="Light Theme" VerticalOptions="Center"/>
+                    <Switch x:Name="ThemeSwitch" 
+                            IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
+                            OnColor="LightGray" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="ThemeSwitch_Toggled"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
