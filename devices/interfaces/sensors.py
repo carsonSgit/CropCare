@@ -14,6 +14,9 @@ class AReading(ABC):
         TEMPERATURE = 'temperature'
         HUMIDITY = 'humidity'
         LUMINOSITY = 'luminosity'
+        NOISE = 'decibels'
+        MOISTURE = 'moisture' 
+        WATERLEVEL = 'water level'
         MOTION = 'motion'
 
     class Unit(str, Enum):
@@ -26,6 +29,8 @@ class AReading(ABC):
         HUMIDITY = '% HR'
         UNITLESS = 'unitless'
         LUX = 'nm'
+        OHMS = 'ohms'
+        WATERLEVEL = 'water level'
         NONE = ''
 
     # Class properties that must be defined in implementation classes
