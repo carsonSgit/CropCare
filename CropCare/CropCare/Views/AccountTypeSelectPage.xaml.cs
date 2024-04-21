@@ -1,7 +1,6 @@
 using Firebase.Auth;
 using CropCare.Services;
 using System.Windows;
-using static Java.Util.Jar.Attributes;
 
 namespace CropCare.Views;
 

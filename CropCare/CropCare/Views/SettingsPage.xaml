@@ -3,10 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.SettingsPage"
              Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Settings"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30"
+            VerticalOptions="Start"
+            HorizontalOptions="FillAndExpand">
+
+            <Label 
+                Text="Settings"
+                FontSize="Large"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <!-- User Name -->
+            <Label Text="Name:"/>
+            <Entry x:Name="NameEntry"
+                   Placeholder="Enter your name"
+                   Text="{Binding Name}"
+                   TextChanged="Entry_TextChanged"/>
+
+            <!-- User Password -->
+            <Button Text="Reset Password"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Clicked="Btn_ChangePassword_Clicked"
+                    />
+
+            <!-- Update Button -->
+            <Button Text="Update"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    IsVisible="false"
+                    x:Name="btn_update"
+                    Clicked="Btn_Update_Clicked"
+                    />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
