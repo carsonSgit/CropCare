@@ -1,55 +1,50 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.SettingsPage">
+
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30"
-            VerticalOptions="Start"
-            HorizontalOptions="FillAndExpand">
-            
+        <StackLayout Spacing="25" Padding="30">
 
-            <Label 
-                Text="SETTINGS"
-                FontSize="Title"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-            
+            <!-- Title -->
+            <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
 
-            <!-- User Name -->
-            <Label Text="Name:"/>
-            <Entry x:Name="NameEntry"
-                   Placeholder="Enter your name"
-                   Text="{Binding Name}"
-                   TextChanged="Entry_TextChanged"/>
+            <!-- User Profile Settings -->
+            <StackLayout Spacing="10">
+                <Label Text="User Profile" FontAttributes="Bold"/>
+                <StackLayout Spacing="5">
+                    <Label Text="Name:"/>
+                    <Entry x:Name="NameEntry"
+                           Placeholder="Enter your name"
+                           Text="{Binding Name}"
+                           TextChanged="Entry_TextChanged"/>
+                </StackLayout>
+                <Button Text="Reset Password"
+                        HorizontalOptions="Center"
+                        Clicked="Btn_ChangePassword_Clicked"/>
+            </StackLayout>
 
-            <!-- User Password -->
-            <Button Text="Reset Password"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Clicked="Btn_ChangePassword_Clicked"
-                    />
+            <!-- Theme Settings -->
+            <StackLayout Spacing="10">
+                <Label Text="Theme" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label Text="Light Theme" VerticalOptions="Center"/>
+                    <Switch x:Name="ThemeSwitch" 
+                            IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
+                            OnColor="LightGray" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="ThemeSwitch_Toggled"/>
+                </StackLayout>
+            </StackLayout>
 
             <!-- Update Button -->
             <Button Text="Update"
-                    VerticalOptions="Center"
+                    x:Name="btn_update"
+                    VerticalOptions="CenterAndExpand"
                     HorizontalOptions="Center"
                     IsVisible="false"
-                    x:Name="btn_update"
-                    Clicked="Btn_Update_Clicked"
-                    />
+                    Clicked="Btn_Update_Clicked"/>
 
-            <!-- Theme Switch -->
-            <StackLayout Spacing="15">
-                <Label Text="Light Theme" />
-                <Switch x:Name="ThemeSwitch" 
-                        IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
-                        OnColor="Yellow" 
-                        VerticalOptions="CenterAndExpand" 
-                        HorizontalOptions="CenterAndExpand" 
-                        Toggled="ThemeSwitch_Toggled" />
-            </StackLayout>
-        </VerticalStackLayout>
+        </StackLayout>
     </ScrollView>
 </ContentPage>
