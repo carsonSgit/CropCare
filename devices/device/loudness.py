@@ -1,6 +1,17 @@
 from grove.grove_loudness_sensor import GroveLoudnessSensor
+from grove.adc import ADC
+import grove.i2c
 from interfaces.sensors import ISensor, AReading
 import time
+
+
+class customADC(ADC):
+    """
+    A Class to create a custom ADC module to run our Loudness Sensor
+    """
+    def __init__(self, address=0x04, bus=1):
+        self.address=address
+        self.bus=grove.i2c.Bus(bus)
 
 class LoudnessSensor(ISensor):
     """
@@ -29,9 +40,10 @@ class LoudnessSensor(ISensor):
             None
 
         """
-        self.loudness_sensor = GroveLoudnessSensor(channel)
+        self.channel = channel
         self.model = model
         self.type = type
+        self.adc = customADC()
 
     def read_sensor(self) -> AReading:
         """
@@ -41,13 +53,15 @@ class LoudnessSensor(ISensor):
             AReading: An AReading object representing the loudness reading.
 
         """
-        loudness = self.loudness_sensor.value
-        return AReading(self.type, None, loudness)
+        loudness = self.adc.read(self.channel)
+        return [
+            AReading(AReading.Type.LOUDNESS, AReading.Unit.LOUDNESS, loudness)
+        ]
 
-loudness = LoudnessSensor(4, "LoudnessSensor", AReading.Type.LOUDNESS)
+loudness = LoudnessSensor(0, "LoudnessSensor", AReading.Type.LOUDNESS)
 
 if __name__ == "__main__":
     while True:
         loudness_reading = loudness.read_sensor()
-        print("Loudness value: {}".format(loudness_reading.value))
+        print(loudness_reading)
         time.sleep(1)
