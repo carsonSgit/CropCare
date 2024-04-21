@@ -1,9 +1,16 @@
 colorzero==2.0
 evdev==1.7.0
+future==1.0.0
 gpiozero==2.0.1
-grove.py @ git+https://github.com/Seeed-Studio/grove.py
+grove.py==0.6
+interfaces==0.0.4
+iso8601==2.1.0
 lgpio==0.2.2.0
+pynmea2==1.19.0
+pyserial==3.5
 python-dotenv==1.0.1
+PyYAML==6.0.1
 RPi.GPIO==0.7.1
-seeed-python-reterminal @ git+https://github.com/Seeed-Studio/Seeed_Python_ReTerminal
+seeed-python-reterminal==0.5
+serial==0.0.97
 smbus2==0.4.3
