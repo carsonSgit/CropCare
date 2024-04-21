@@ -15,6 +15,8 @@ class AReading(ABC):
         HUMIDITY = 'humidity'
         LUMINOSITY = 'luminosity'
         NOISE = 'decibels'
+        MOISTURE = 'moisture' 
+        WATERLEVEL = 'water level'
 
     class Unit(str, Enum):
         """Enum defining all possible units for sensor measuremens.
@@ -26,6 +28,8 @@ class AReading(ABC):
         HUMIDITY = '% HR'
         UNITLESS = 'unitless'
         LUX = 'nm'
+        OHMS = 'ohms'
+        WATERLEVEL = 'water level'
 
     # Class properties that must be defined in implementation classes
     reading_type: Type
