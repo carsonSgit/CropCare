@@ -77,8 +77,8 @@ class GPS(ISensor):
         return readings
 
 
-
 if __name__ == "__main__":
+    # Plug in GPS sensor into UART port on Base Hat
     gps = GPS('/dev/ttyS0', 9600, AReading.Type.GPS)
     while True:
         gps_reading = gps.read_sensor()
