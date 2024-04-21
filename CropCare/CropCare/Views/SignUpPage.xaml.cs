@@ -38,18 +38,6 @@ public partial class SignUpPage : ContentPage
 
             await Navigation.PushAsync(new AccountTypeSelectPage(this.Email, this.Password, this.Name));
 
-
-            //AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            //Models.User user = new Models.User(Email, Name);
-            //await App.Repo.UsersDb.AddItemAsync(user);
-            //App.CurrentUser = user;
-
-            //await DisplayAlert("Success", "User signed up! ", "OK");
-            //Email = string.Empty;
-            //Password = string.Empty;
-            //ConfirmPassword = string.Empty;
-            //await Shell.Current.GoToAsync($"//Index");
-
             OnPropertyChanged(nameof(Email));
             OnPropertyChanged(nameof(Password));
             OnPropertyChanged(nameof(ConfirmPassword));

@@ -32,7 +32,7 @@
                 Route="CropsPage" />
         <!-- Add the login page to be used to display account info and to logout-->
         <ShellContent Title="Logout" ContentTemplate="{DataTemplate views:LoginPage}"
-                      Icon="home.png"/>
+                      Icon="home.png" />
     </FlyoutItem>
 
 
