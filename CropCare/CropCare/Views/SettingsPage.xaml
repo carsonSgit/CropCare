@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CropCare.Views.SettingsPage"
-             Title="SettingsPage">
+             x:Class="CropCare.Views.SettingsPage">
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30"
             VerticalOptions="Start"
             HorizontalOptions="FillAndExpand">
+            
 
             <Label 
-                Text="Settings"
-                FontSize="Large"
+                Text="SETTINGS"
+                FontSize="Title"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
+            
 
             <!-- User Name -->
             <Label Text="Name:"/>
@@ -38,6 +39,17 @@
                     x:Name="btn_update"
                     Clicked="Btn_Update_Clicked"
                     />
+
+            <!-- Theme Switch -->
+            <StackLayout Spacing="15">
+                <Label Text="Light Theme" />
+                <Switch x:Name="ThemeSwitch" 
+                        IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
+                        OnColor="Yellow" 
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand" 
+                        Toggled="ThemeSwitch_Toggled" />
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

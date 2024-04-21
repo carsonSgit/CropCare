@@ -52,4 +52,17 @@ public partial class SettingsPage : ContentPage
         await DisplayAlert("Password Reset", "An email to reset password was sent to " + App.CurrentUser.Email, "OK");
     }
 
+    private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (ThemeSwitch.IsToggled)
+        {
+            App.Current.UserAppTheme = AppTheme.Light;
+        }
+        else
+        {
+            App.Current.UserAppTheme = AppTheme.Dark;
+        }
+        Preferences.Set("apptheme", ThemeSwitch.IsToggled);
+    }
+
 }
