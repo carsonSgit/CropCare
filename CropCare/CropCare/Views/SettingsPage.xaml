@@ -4,7 +4,6 @@
 
     <ScrollView>
         <StackLayout Spacing="25" Padding="30">
-
             <!-- Title -->
             <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
 
@@ -54,11 +53,9 @@
                             OnColor="LightGray" 
                             VerticalOptions="Center" 
                             HorizontalOptions="EndAndExpand"
-                            Toggled="ThemeSwitch_Toggled"
-                            />
+                            Toggled="ThemeSwitch_Toggled"/>
                 </StackLayout>
             </StackLayout>
-
         </StackLayout>
     </ScrollView>
 </ContentPage>
