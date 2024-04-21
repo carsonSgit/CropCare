@@ -15,8 +15,8 @@ class ACommand(ABC):
         LIGHT_PULSE = 'light-pulse'
         VIBRATION = "vibration"
         BUZZER = 'buzzer'
-
-
+        SERVO = 'servo'
+        
     # Class properties that must be defined in implementation classes
 
     def __init__(self, target: Type, value: str) -> None:

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:local="clr-namespace:CropCare.Converters"
+             x:Class="CropCare.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Title="LoginPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:NullToBooleanConverter x:Key="NullToBooleanConverter"/>
+            <local:NotNullToBooleanConverter x:Key="NotNullToBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="#538D22"/>
+    </Page.Behaviors>
+    
+    <VerticalStackLayout VerticalOptions="Center" Padding="0, 0, 0, 60">
+        <Frame x:Name="LoginView" Margin="10" BackgroundColor="Transparent" BorderColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}" >
+            <VerticalStackLayout>
+                <Image Source="loginhero.png" Margin="0, 0, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+                <Label Text="LOGIN" FontSize="35" Margin="0, 20, 0, 60" HorizontalOptions="Center" TextColor="#538D22"/>
+
+                <Label Text="Email" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Email" Text="{Binding Email}" Margin="0" FontSize="Medium"/>
+
+                <Label Text="Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Margin="0, 0, 0, 0" FontSize="Medium"/>
+                <Button Text="Login" Clicked="Btn_Login_Clicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <Frame  x:Name="LogoutView" Margin="10, 10, 0, 0" BackgroundColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NotNullToBooleanConverter}}">
+            <StackLayout>
+                <Label Text="User Details:" FontAttributes="Bold"/>
+                <Label x:Name="lblUser" FontAttributes="Italic" Margin="0,5,0,30"/>
+                <Button Text="Log Out" 
+                        SemanticProperties.Hint="Click to log out"
+                        Clicked="Btn_Logout_Clicked" 
+                        VerticalOptions="CenterAndExpand" 
+                        BackgroundColor="Black"/>
+                
+            </StackLayout>
+        </Frame>
+
+        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 00, 0, 0" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}">
+            <Label Text="Don't have an account? " VerticalOptions="Center" FontSize="Small"/>
+            <Label Text="Sign Up Here" 
+                   FontAttributes="Bold" 
+                   TextColor="#245501" 
+                   VerticalOptions="Center"
+                   FontSize="Small">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_SignUp_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

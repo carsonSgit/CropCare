@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="CropCare.Views.SignUpPage"
+             Shell.NavBarIsVisible="False"
+             Title="SignUpPage">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="#538D22"/>
+    </Page.Behaviors>
+
+    <VerticalStackLayout>
+        <Frame BackgroundColor="Transparent" BorderColor="Transparent">
+            <VerticalStackLayout>
+                <Image Source="loginhero.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+                <Label Text="REGISTER" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="#538D22"/>
+
+                <Label Text="Name" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Name" Text="{Binding Name}"/>
+
+                <Label Text="Email" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Email" Text="{Binding Email}"/>
+
+                <Label Text="Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+
+                <Label Text="Confirm Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
+                <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPassword}"/>
+
+                <Button Text="Register" Clicked="Btn_SignUp_Clicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+            </VerticalStackLayout>
+        </Frame>
+        
+        
+        
+        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 0, 0, 0">
+            <Label Text="Already have an account? " VerticalOptions="Center" />
+            <Label Text="Login Here" 
+                   FontAttributes="Bold" 
+                   TextColor="#3A5A40" 
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_Login_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
