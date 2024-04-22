@@ -123,3 +123,6 @@ By leveraging azure's cosmos database, we can store monitoring data long term. W
 
 ### Container Health Level
 We want to show the health of the farm of the user in the farm overview, allowing users to quickly assess which farms require attention at a glance. This feature will prevent users from having to click on each farm and go into them and see which need attention.
+
+# 🌐 Link to Our Document
+https://docs.google.com/document/d/1CgeMB0Ia7MkWsxPN-nKMrvUxbPpmW7MrcGwJhg-tKfA/edit?usp=sharing
