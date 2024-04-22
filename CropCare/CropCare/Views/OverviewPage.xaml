@@ -3,10 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.OverviewPage"
              Title="OverviewPage">
+
+    <!-- Main Layout -->
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to CropCare!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <!-- CollectionView for displaying farms -->
+            <CollectionView 
+                x:Name="farmsCollectionView"
+                ItemsSource="{Binding FarmsCollection}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" FontSize="Medium" />
+                            <!-- Add other farm properties as needed -->
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
     </VerticalStackLayout>
+
+    <!-- THIS SHOULD BE DISABLED IF NOT OWNER -->
+    <Button 
+        Text="Add Farm"
+        HorizontalOptions="End"
+        VerticalOptions="End"
+        Margin="20"
+        WidthRequest="100"
+        HeightRequest="50"
+        CornerRadius="25"
+        Clicked="Btn_Add_Farm"
+        BackgroundColor="DodgerBlue"
+        TextColor="White" />
+    </VerticalStackLayout>
+
 </ContentPage>

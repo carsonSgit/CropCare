@@ -11,5 +11,6 @@ namespace MauiFitness.Config
         public string FireBaseApiKey { get; set; }
         public string FirebaseAuthorizedDomain { get; set; }
         public string FireBaseDatabaseURL { get; set; }
+        public string IOTHubConnectionString { get; set; }
     }
 }

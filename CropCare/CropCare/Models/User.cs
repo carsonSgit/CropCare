@@ -18,11 +18,12 @@ namespace CropCare.Models
         public bool IsOwner { get; set; }
         public List<string> FarmKeys { get; set; }
 
-        public User(string email, string name, bool isOwner)
+        public User(string email, string name, bool isOwner, List<string> farmKeys)
         {
             Email = email;
             Name = name;
             IsOwner = isOwner;
+            FarmKeys = farmKeys;
         }
 
     }
