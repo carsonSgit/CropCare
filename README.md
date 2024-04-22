@@ -49,6 +49,69 @@ This page will contain settings for the account of our users. These settings may
 
 # 🛠️ App Features
 
+Hardware Features
+- Monitoring
+  - Measure relative water levels
+  - Measure soil moisture levels
+  - Read fan state (on/off)
+  - Read light state (on/off)
+  - Collect container GPS Location
+  - Read container pitch and roll angles
+  - Read vibration levels
+  - Read buzzer state (On/Off)
+  - Read noise levels
+  - Read luminosity levels
+  - Read motion sensor state (motion detected)
+  - Read door-lock state (servo open/closed)
+  - Read door state 
+
+- Remote Controls
+  - Control buzzer state (On/Off)
+  - Control door-lock state (servo open/closed)
+  - Control fan state (on/off)
+  - Control light state (on/off)
+
+Cloud Computing Features
+- Data Storage
+  - Create a Cosmos storage account
+  - Create a Cosmos Database to store the container information
+  - Create all necessary containers
+  - Create azure keyvault to store connection strings
+
+- Web App API
+  - Create endpoints to access logging information from Cosmos DB
+  - Create endpoints to control container functions remotely
+
+Mobile App Features
+- User Authentication
+  - Build a user login/signup page
+  - Create a user login system
+  - Create a user sign-up system (Considering the two account types)
+  - Implement a logout button
+  - Ensure app differentiates between account types
+
+- Supporting Infrastructure
+  - Create a navigation bar and nested flyout menus
+  - Create a logo for the application and company
+  - Access environment variables
+
+- Monitoring Page
+  - Display all the data relating to the plants, such as moisture, and water levels through an interactive page
+  - Alert fleet owner if there are security breaches/issues
+
+- Remote Control Page
+  - Display container state information, keeping in mind the current users authorization level, 
+  - Allow users to control systems of the container farm, like the door or lights. Only allowing the user to control systems their authorization will allow.
+
+- GPS Monitoring Page
+  - Fleet manager should see a map with all their farms
+  - A list of farms with their coordinates should be available
+  - Should have a button where fleet owners can register new farms
+
+- Settings Page
+  - Design Settings Page
+  - Allow user to change account details
+  - Allow users to change color theme
 
 
 # 🤩 Potential Showstoppers
