@@ -76,7 +76,7 @@ namespace CropCare.Services
 
         public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
         {
-            if (_realtimeDb.Database?.Count == 0)
+            if (_realtimeDb.Database?.Count == 0 || forceRefresh)
             {
                 try
                 {

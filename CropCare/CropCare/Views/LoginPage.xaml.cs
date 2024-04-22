@@ -34,7 +34,7 @@ public partial class LoginPage : ContentPage
         try
         {
             AuthService.UserCreds = await AuthService.Client.SignInWithEmailAndPasswordAsync(Email, Password);
-            App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync()).FirstOrDefault(u => u.Email == Email);
+            App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync(true)).FirstOrDefault(u => u.Email == Email);
             //LoginView.IsVisible = false;
             //LogoutView.IsVisible = true;
 
