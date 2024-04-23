@@ -1,6 +1,7 @@
-from gpiozero import PWMLED
 from interfaces.actuators import IActuator, ACommand
-
+from grove.grove_ws2813_rgb_led_strip import GroveWS2813RgbStrip
+from rpi_ws281x import Color
+import time
 
 class LEDController(IActuator):
     """
@@ -34,8 +35,9 @@ class LEDController(IActuator):
             None
 
         """
-        self.led = PWMLED(gpio)
+        self.led = GroveWS2813RgbStrip(gpio, 30)
         self.type = type
+        self.state = initial_state
         self.control_actuator(initial_state)
 
     def control_actuator(self, value: str) -> bool:
@@ -49,14 +51,12 @@ class LEDController(IActuator):
             bool: True if the state of the actuator has changed, False otherwise.
 
         """
-        old_state = self.led.is_active
+        old_state = self.state
 
-        if self.type == ACommand.Type.LIGHT_PULSE:
-            self.__pulse_mode(value)
-        elif self.type == ACommand.Type.LIGHT_ON_OFF:
+        if self.type == ACommand.Type.LIGHT_ON_OFF:
             self.__on_off(value)
 
-        return old_state != self.led.is_active
+        return old_state != value
 
     def __on_off(self, value: str) -> None:
         """
@@ -67,22 +67,13 @@ class LEDController(IActuator):
 
         """
         if value.upper() == "ON":
-            self.led.on()
+            for i in range(self.led.numPixels()):
+                self.led.setPixelColor(i, Color(255, 0, 0)) # Color is red
         elif value.upper() == "OFF":
-            self.led.off()
-
-    def __pulse_mode(self, value: str) -> None:
-        """
-        Sets the LED to pulse mode or turns it off based on the given value.
-
-        Args:
-            value (str): The value to set the LED to pulse mode or turn it off.
-
-        """
-        if value.upper() == "ON":
-            self.led.pulse()
-        elif value.upper() == "OFF":
-            self.led.off()
+            for i in range(self.led.numPixels()):
+                self.led.setPixelColor(i, Color(0,0,0))
+                
+        self.led.show()
 
     def validate_command(self, command: ACommand) -> bool:
         """
@@ -99,9 +90,8 @@ class LEDController(IActuator):
             return command.value.upper() in ["ON", "OFF"]
         return False
 
-
 if __name__ == "__main__":
-    led = LEDController(16, ACommand.Type.LIGHT_PULSE, "OFF")
+    led = LEDController(18, ACommand.Type.LIGHT_ON_OFF, "OFF")
     led.control_actuator("ON")
-    while True:
-        print(led.led.is_active)
+    time.sleep(1)
+    led.control_actuator("OFF")
