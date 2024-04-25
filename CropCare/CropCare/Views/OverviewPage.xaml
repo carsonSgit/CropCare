@@ -44,7 +44,7 @@
             Padding="10"
             CornerRadius="15"
             Clicked="Btn_Add_Farm"
-            BackgroundColor="#538D22" />
+            BackgroundColor="#73A942" />
     </Grid>
 
 </ContentPage>
