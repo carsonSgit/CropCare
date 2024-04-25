@@ -21,9 +21,10 @@
                 HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="5" BorderColor="#516250" BackgroundColor="#e1e6e1" CornerRadius="5" Margin="5">
+                        <Frame Padding="5" BorderColor="#516250" CornerRadius="5" Margin="5">
                             <StackLayout Padding="10">
                                 <Label Text="{Binding Name}" FontSize="Medium" />
+                                <Label Text="{Binding DeviceId}" FontSize="Small" />
                                 <!-- Add other farm properties as needed -->
                             </StackLayout>
                         </Frame>

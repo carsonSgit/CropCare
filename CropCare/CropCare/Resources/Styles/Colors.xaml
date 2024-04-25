@@ -8,6 +8,8 @@
     <Color x:Key="Secondary">#245501</Color>
     <Color x:Key="Tertiary">#1A4301</Color>
     <Color x:Key="quaternary">#73A942</Color>
+    <Color x:Key="Light_FrameBG">#e1e6e1</Color>
+    <Color x:Key="Dark_FrameBG">#8c9f8c</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
