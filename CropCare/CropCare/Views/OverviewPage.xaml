@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.OverviewPage"
-             Title="OverviewPage">
+             Title="Your Farms">
 
     <!-- Main Layout -->
-    <VerticalStackLayout>
-        <VerticalStackLayout Spacing="20" Padding="20">
+    <Grid>
+        <!-- Main content area -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="10,10,10,10"  HorizontalOptions="Center">
             <!-- CollectionView for displaying farms -->
             <CollectionView 
                 x:Name="farmsCollectionView"
@@ -18,26 +24,26 @@
                         <Frame Padding="5" BorderColor="#516250" BackgroundColor="#e1e6e1" CornerRadius="5" Margin="5">
                             <StackLayout Padding="10">
                                 <Label Text="{Binding Name}" FontSize="Medium" />
-                            <!-- Add other farm properties as needed -->
+                                <!-- Add other farm properties as needed -->
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
 
-    <!-- THIS SHOULD BE DISABLED IF NOT OWNER -->
-    <ImageButton 
-        Source="add.png"
-        HorizontalOptions="End"
-        VerticalOptions="End"
-        Margin="20"
-        MaximumHeightRequest="50"
-        MaximumWidthRequest="50"
-        Padding="9"
-        CornerRadius="15"
-        Clicked="Btn_Add_Farm"
-        BackgroundColor="#538D22" />
-    </VerticalStackLayout>
+        <ImageButton 
+            Grid.Row="1"
+            Source="add.png"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            Margin="20"
+            MaximumHeightRequest="60"
+            MaximumWidthRequest="60"
+            Padding="10"
+            CornerRadius="15"
+            Clicked="Btn_Add_Farm"
+            BackgroundColor="#538D22" />
+    </Grid>
 
 </ContentPage>
