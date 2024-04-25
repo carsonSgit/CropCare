@@ -25,17 +25,17 @@
     </VerticalStackLayout>
 
     <!-- THIS SHOULD BE DISABLED IF NOT OWNER -->
-    <Button 
-        Text="Add Farm"
+    <ImageButton 
+        Source="add.png"
         HorizontalOptions="End"
         VerticalOptions="End"
         Margin="20"
-        WidthRequest="100"
-        HeightRequest="50"
-        CornerRadius="25"
+        MaximumHeightRequest="50"
+        MaximumWidthRequest="50"
+        Padding="9"
+        CornerRadius="15"
         Clicked="Btn_Add_Farm"
-        BackgroundColor="DodgerBlue"
-        TextColor="White" />
+        BackgroundColor="#538D22" />
     </VerticalStackLayout>
 
 </ContentPage>
