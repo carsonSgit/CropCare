@@ -1,107 +1,77 @@
-from interfaces.sensors import ISensor, AReading
+from interfaces.actuators import ACommand
+from interfaces.sensors import AReading
+from interfaces.subsystem_controller import SubsystemController
+from subsystems.geolocation.geolocation_controller import GeolocationController
+from subsystems.plant.plant_controller import PlantController
+from subsystems.security.security_controller import SecurityController
 from time import sleep
-from interfaces.actuators import IActuator, ACommand
-from dotenv import load_dotenv
-import os
-
-load_dotenv(override=True)
-env = os.environ["ENVIRONMENT_MODE"]
-
-if env == "prod":
-    from device.temp import TempController
-    from device.fan import FanController
-    from device.led import LEDController
-    from device.buzzer import BuzzerController
-    from device.luminosity import LuminositySensor
-    from device.soilmoisture import SoilMoistureSensor
-    from device.waterlevel import WaterLevelSensor
-else:
-    from mock.mock_temp import (
-        MockTempController as TempController,
-    )
-    from mock.mock_fan import MockFanController as FanController
-    from mock.mock_led import MockLEDController as LEDController
-    from mock.mock_buzzer import MockBuzzerController as BuzzerController
-    from mock.mock_luminosity import MockLuminositySensor as LuminositySensor
-    from mock.mock_soilmoisture import MockSoilMoistureSensor as SoilMoistureSensor
-    from mock.mock_waterlevel import MockWaterLevelSensor as WaterLevelSensor
 
 
 class DeviceController:
+    """
+    The DeviceController class is responsible for managing the subsystem controllers and coordinating the reading of sensors
+    and control of actuators.
+
+    Attributes:
+        _controllers (list[SubsystemController]): A list of subsystem controllers.
+
+    Methods:
+        __init__(): Initializes the DeviceController object.
+        _initialize_controllers(): Initializes the subsystem controllers.
+        read_sensors(): Reads the sensors from all subsystem controllers.
+        control_actuators(commands: list[ACommand]): Controls the actuators of all subsystem controllers.
+    """
 
     def __init__(self) -> None:
-        self._sensors: list[ISensor] = self._initialize_sensors()
-        self._actuators: list[IActuator] = self._initialize_actuators()
+        self._controllers: list[SubsystemController] = self._initialize_controllers()
 
-    def _initialize_sensors(self) -> list[ISensor]:
-        """Initializes all sensors and returns them as a list. Intended to be used in class constructor.
-
-        :return List[ISensor]: List of initialized sensors.
+    def _initialize_controllers(self) -> list[SubsystemController]:
         """
+        Initializes the subsystem controllers.
 
-        return [
-            # Instantiate each sensor inside this list, separate items by comma.
-            TempController(4, "AHT20", AReading.Type.TEMPERATURE),
-            LuminositySensor(1, "awdw", AReading.Type.LUMINOSITY)
-        ]
-
-    def _initialize_actuators(self) -> list[IActuator]:
-        """Initializes all actuators and returns them as a list. Intended to be used in class constructor
-
-        :return list[IActuator]: List of initialized actuators.
+        Returns:
+            list[SubsystemController]: A list of initialized subsystem controllers.
         """
-
         return [
-            # Instantiate each actuator inside this list, separate items by comma.
-            FanController(12, ACommand.Type.FAN, "OFF"),
-            LEDController(16, ACommand.Type.LIGHT_ON_OFF, "OFF"),
-            BuzzerController(26, ACommand.Type.BUZZER, "OFF")
+            SecurityController(),
+            PlantController(),
+            GeolocationController()
         ]
-
+    
     def read_sensors(self) -> list[AReading]:
-        """Reads data from all initialized sensors.
-
-        :return list[AReading]: a list containing all readings collected from sensors.
         """
-        readings: list[AReading] = []
-        for sensor in self._sensors:
-            readings.extend(sensor.read_sensor())
+        Reads the sensors from all subsystem controllers.
 
+        Returns:
+            list[AReading]: A list of sensor readings.
+        """
+        readings = []
+        for controller in self._controllers:
+            readings.extend(controller.read_sensors())
         return readings
-
+    
     def control_actuators(self, commands: list[ACommand]) -> None:
-        """Controls actuators according to a list of commands. Each command is applied to it's respective actuator.
-
-        :param list[ACommand] commands: List of commands to be dispatched to corresponding actuators.
         """
-        for command in commands:
-            for actuator in self._actuators:
-                if actuator.validate_command(command):
-                    actuator.control_actuator(command.value)
-                    break
+        Controls the actuators of all subsystem controllers.
 
+        Args:
+            commands (list[ACommand]): A list of commands to control the actuators.
+        """
+        for controller in self._controllers:
+            controller.control_actuators(commands)
 
 if __name__ == "__main__":
-    """
-    This script is intented to be used as a module, however, code below can be used for testing.
-    """
     device_manager = DeviceController()
     TEST_SLEEP_TIME = 2
 
     while True:
         commands = [
-            ACommand(ACommand.Type.FAN, "ON"),
-            ACommand(ACommand.Type.LIGHT_ON_OFF, "ON"),
-            ACommand(ACommand.Type.BUZZER, "ON"),
+            ACommand(ACommand.Type.SERVO, "1"),
         ]
         device_manager.control_actuators(commands)
-        print(device_manager.read_sensors())
         sleep(TEST_SLEEP_TIME)
-
         commands = [
-            ACommand(ACommand.Type.FAN, "OFF"),
-            ACommand(ACommand.Type.LIGHT_ON_OFF, "OFF"),
-            ACommand(ACommand.Type.BUZZER, "OFF"),
+            ACommand(ACommand.Type.SERVO, "-1"),
         ]
         device_manager.control_actuators(commands)
         print(device_manager.read_sensors())

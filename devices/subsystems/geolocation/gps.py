@@ -68,7 +68,7 @@ class GPS(ISensor):
         if line.find('GGA') > 0:
             try:
                 msg = pynmea2.parse(line)
-                readings.append([
+                readings.extend([
                     AReading(AReading.Type.LATITUDE, AReading.Unit.DEGREE, msg.latitude),
                     AReading(AReading.Type.LONGITUDE, AReading.Unit.DEGREE, msg.longitude)
                 ])
