@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Views\AccountTypeSelectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\AddFarmPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ControlPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

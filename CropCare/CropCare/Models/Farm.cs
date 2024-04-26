@@ -1,11 +1,6 @@
 ﻿using CropCare.Interfaces;
 using Microsoft.Azure.Devices;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models
 {

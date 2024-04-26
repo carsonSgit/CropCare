@@ -79,5 +79,4 @@ public partial class SettingsPage : ContentPage
         // Save the app theme preference
         Preferences.Set("apptheme", ThemeSwitch.IsToggled);
     }
-
 }
