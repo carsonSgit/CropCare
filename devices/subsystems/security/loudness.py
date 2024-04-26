@@ -58,9 +58,9 @@ class LoudnessSensor(ISensor):
             AReading(AReading.Type.LOUDNESS, AReading.Unit.LOUDNESS, loudness)
         ]
 
-loudness = LoudnessSensor(0, "LoudnessSensor", AReading.Type.LOUDNESS)
 
 if __name__ == "__main__":
+    loudness = LoudnessSensor(0, "LoudnessSensor", AReading.Type.LOUDNESS)
     while True:
         loudness_reading = loudness.read_sensor()
         print(loudness_reading)

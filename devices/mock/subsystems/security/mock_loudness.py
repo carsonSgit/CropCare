@@ -15,7 +15,7 @@ class MockLoudnessSensor(ISensor):
 
     """
 
-    def __init__(self, model: str, type: AReading.Type):
+    def __init__(self, gpio: int, model: str, type: AReading.Type):
         """
         Initialize a MockLoudnessSensor object.
 
@@ -27,6 +27,7 @@ class MockLoudnessSensor(ISensor):
             None
 
         """
+        self.gpio = gpio
         self.model = model
         self.type = type
 
@@ -43,9 +44,8 @@ class MockLoudnessSensor(ISensor):
             AReading(AReading.Type.LOUDNESS, AReading.Unit.LOUDNESS, loudness)
         ]
 
-mock_loudness_sensor = MockLoudnessSensor("MockLoudnessSensor", AReading.Type.LOUDNESS)
-
 if __name__ == "__main__":
+    mock_loudness_sensor = MockLoudnessSensor(12, "MockLoudnessSensor", AReading.Type.LOUDNESS)
     while True:
         loudness_reading = mock_loudness_sensor.read_sensor()
         print(loudness_reading)

@@ -17,7 +17,7 @@ class MockGPSSensor(ISensor):
 
     """
 
-    def __init__(self, model: str, type: AReading.Type):
+    def __init__(self, port: str, baudrate: int, type: AReading.Type):
         """
         Initialize a GPSSensor object.
 
@@ -29,8 +29,9 @@ class MockGPSSensor(ISensor):
             None
 
         """
-        self.model = model
+        self.port = port
         self.type = type
+        self.baudrate = baudrate
         self.fixed_latitude = round(random.uniform(-90, 90), 6)
         self.fixed_longitude = round(random.uniform(-180, 180), 6)
 
@@ -47,10 +48,3 @@ class MockGPSSensor(ISensor):
             AReading(AReading.Type.LONGITUDE, AReading.Unit.DEGREE, self.fixed_longitude)
         ]
 
-gps = MockGPSSensor("Mock GPS", AReading.Type.GPS)
-
-if __name__ == "__main__":
-    while True:
-        gps_reading = gps.read_sensor()
-        print(gps_reading)
-        time.sleep(1)

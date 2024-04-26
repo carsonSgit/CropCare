@@ -50,9 +50,18 @@ class BuzzerController(IActuator):
         old_state = self.buzzer
 
         if value.upper() == "ON":
-            subprocess.run('echo 1 | sudo tee /sys/class/leds/usr_buzzer/brightness', shell=True)
+            subprocess.run(
+                'echo 1 | sudo tee /sys/class/leds/usr_buzzer/brightness', 
+                shell=True,
+                stdout=subprocess.DEVNULL
+            )
         elif value.upper() == "OFF":
-            subprocess.run('echo 0 | sudo tee /sys/class/leds/usr_buzzer/brightness', shell=True)
+            subprocess.run(
+                'echo 0 | sudo tee /sys/class/leds/usr_buzzer/brightness', 
+                shell=True,
+                stdout=subprocess.DEVNULL
+            )
+            
 
         return self.buzzer != old_state
 
