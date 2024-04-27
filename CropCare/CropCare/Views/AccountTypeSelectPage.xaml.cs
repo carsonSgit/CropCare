@@ -16,6 +16,7 @@ public partial class AccountTypeSelectPage : ContentPage
         this.Email = email;
         this.Password = password;
         this.Name = name;
+        AccountType = "Technician";
 
 		InitializeComponent();
 	}
@@ -58,7 +59,7 @@ public partial class AccountTypeSelectPage : ContentPage
     }
 
 
-    private async void OnTechnicienCardTapped(object sender, EventArgs e)
+    private void OnTechnicianCardTapped(object sender, EventArgs e)
     {
         technicianCard.BorderColor = Colors.Black;
         technicianShadow.Opacity = 1;
@@ -67,7 +68,7 @@ public partial class AccountTypeSelectPage : ContentPage
         this.AccountType = "Technician";
     }
 
-    private async void OnOwnerCardTapped(object sender, EventArgs e)
+    private void OnOwnerCardTapped(object sender, EventArgs e)
     {
         ownerCard.BorderColor = Colors.Black;
         ownerShadow.Opacity = 1;

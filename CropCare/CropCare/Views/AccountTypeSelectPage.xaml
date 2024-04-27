@@ -17,9 +17,9 @@
 
         <Label Text="Select An Account Type" FontSize="Large" HorizontalOptions="Center" Margin="0, 20, 0, 10"/>
 
-        <Frame x:Name="technicianCard" BackgroundColor="#73A942" Padding="0" CornerRadius="10" Margin="50, 10, 50, 20">
+        <Frame x:Name="technicianCard" BackgroundColor="#73A942" Padding="0" CornerRadius="10" Margin="50, 10, 50, 20" BorderColor="Black" HasShadow="True">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnTechnicienCardTapped"/>
+                <TapGestureRecognizer Tapped="OnTechnicianCardTapped"/>
             </Frame.GestureRecognizers>
             <Frame.Shadow >
                 <Shadow x:Name="technicianShadow" Brush="Black" Radius="40" Opacity="1"/>
@@ -30,7 +30,7 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Frame x:Name="ownerCard" BackgroundColor="#73A942" Padding="0" CornerRadius="10" Margin="50, 10, 50, 30"  BorderColor="Black" HasShadow="True">
+        <Frame x:Name="ownerCard" BackgroundColor="#73A942" Padding="0" CornerRadius="10" Margin="50, 10, 50, 30">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnOwnerCardTapped" />
             </Frame.GestureRecognizers>
