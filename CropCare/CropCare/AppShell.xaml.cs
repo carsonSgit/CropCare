@@ -27,6 +27,7 @@ namespace CropCare
             {
                 try
                 {
+                    Shell.Current.FlyoutIsPresented = false;
                     AuthService.Client.SignOut();
                     await Shell.Current.GoToAsync($"//Login");
                 }
