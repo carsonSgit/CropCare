@@ -26,9 +26,9 @@
                     <ColumnDefinition Width="1.25*"/>
                     <ColumnDefinition Width="2.5*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Add"/>
-                <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Name"/>
-                <Label Grid.Column="2" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
+                <Label Grid.Column="0" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Add"/>
+                <Label Grid.Column="1" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Name"/>
+                <Label Grid.Column="2" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
             </Grid>
             <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
                 <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
@@ -39,7 +39,6 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="1"/>
-                                        <!-- This row will be used for the divider -->
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0" Padding="5">
                                         <Grid.ColumnDefinitions>
@@ -47,7 +46,8 @@
                                             <ColumnDefinition Width="1.25*"/>
                                             <ColumnDefinition Width="2.5*"/>
                                         </Grid.ColumnDefinitions>
-                                        <ImageButton Grid.Column="0" Source="add.png" HeightRequest="20" WidthRequest="20" Clicked="OnPlusIconClicked" CommandParameter="{Binding .}"/>
+                                        <CheckBox Grid.Column="0" CheckedChanged="OnCheckBoxCheckedChanged" Margin="0" HeightRequest="20"/>
+                                        <!--<ImageButton Grid.Column="0" Source="add.png" HeightRequest="20" WidthRequest="20" Clicked="OnPlusIconClicked" CommandParameter="{Binding .}"/>-->
                                         <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Name}"/>
                                         <Label Grid.Column="2" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Email}"/>
                                     </Grid>
@@ -58,31 +58,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
-
-            <!--<StackLayout>
-                <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
-                    <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Orientation="Vertical">
-                                    <StackLayout Orientation="Horizontal">
-                                        <ImageButton Source="add.png" HeightRequest="20" WidthRequest="20" Clicked="OnPlusIconClicked" CommandParameter="{Binding .}"/>
-                                        <Label FontSize="20" HorizontalTextAlignment="Center" Margin="5, 0, 5, 0">
-                                            <Label.Text>
-                                                <MultiBinding StringFormat="{}{0} - {1}">
-                                                    <Binding Path="Name" />
-                                                    <Binding Path="Email" />
-                                                </MultiBinding>
-                                            </Label.Text>
-                                        </Label>
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </Frame>
-            </StackLayout>-->
-
             <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
         </VerticalStackLayout>
     </Frame>
