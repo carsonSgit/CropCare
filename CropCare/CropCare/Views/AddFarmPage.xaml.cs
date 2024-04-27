@@ -8,11 +8,13 @@ public partial class AddFarmPage : ContentPage
     public string FarmId { get; set; }
     public List<User> AssignedTechnicians { get; set; }
     public List<User> Technicians { get; set; }
-    public ObservableCollection<Farm> FarmsCollection { get; set; }
 
-    public AddFarmPage()
+    public delegate void UpdateFarmCollectionDelegate();
+    private UpdateFarmCollectionDelegate UpdateFarmCollectionList;
+
+    public AddFarmPage(UpdateFarmCollectionDelegate updateFarm)
 	{
-        FarmsCollection = App.Repo.FarmsDb.Items;
+        UpdateFarmCollectionList = updateFarm;
 
         InitializeComponent();
         PopulateTechnicianPicker();
@@ -46,12 +48,20 @@ public partial class AddFarmPage : ContentPage
 
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
     {
-        Farm newFarm = new Farm("test");
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            await DisplayAlert("No Internet", "Please check your internet connection", "OK");
+            return;
+        }
+        
+        Farm newFarm = new Farm(FarmName, FarmId);
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
-        App.CurrentUser.FarmKeys.Add(newFarm.Key);
-        await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
+        await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
 
         await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
+
+        UpdateFarmCollectionList();
+
         await Navigation.PopAsync();
     }
 }

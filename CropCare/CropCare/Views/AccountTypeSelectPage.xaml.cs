@@ -31,7 +31,7 @@ public partial class AccountTypeSelectPage : ContentPage
             }
 
             AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner", new List<string>());
+            Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner");
 
             await App.Repo.UsersDb.AddItemAsync(user);
             App.CurrentUser = user;
