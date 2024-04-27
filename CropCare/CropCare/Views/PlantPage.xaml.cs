@@ -63,12 +63,12 @@ public partial class PlantPage : ContentPage
 
     public void SetMeasurements()
     {
-        temperatureLbl.Text = Temperature;
-        humidityLbl.Text = Humidity;
-        moistureLbl.Text = Moisture;
-        waterlvlLbl.Text = WaterLevel;
+        temperature_measurementLbl.Text = Temperature;
+        humidity_measurementLbl.Text = Humidity;
+        moisture_measurementLbl.Text = Moisture;
+        waterlvl_measurementLbl.Text = WaterLevel;
 
-        ledLbl.Text = Led;
-        fanLbl.Text = Fan;
+        led_measurementLbl.Text = Led;
+        fan_measurementLbl.Text = Fan;
     }
 }
