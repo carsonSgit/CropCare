@@ -47,4 +47,10 @@ public partial class OverviewPage : ContentPage
     {
         await Navigation.PushAsync(new AddFarmPage(UpdateFarmCollectionList));
     }
+
+    private async void OnFarmTapped(object sender, EventArgs e)
+    {
+        var farm = (Farm)((TappedEventArgs)e).Parameter;
+        await Navigation.PushAsync(new DashboardPage(farm));
+    }
 }
