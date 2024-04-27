@@ -2,29 +2,61 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.DashboardPage"
-             Title="DashboardPage">
+             Title="Dashboard">
     <VerticalStackLayout>
-        <Label 
-            Text="Temp Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
         <VerticalStackLayout Spacing="10">
-            <Button
-                Text="Plants"
-                Clicked="PlantNavigate_Clicked"/>
+            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Padding="0, 5, 0, 0"/>
+            <Label Text="Status: PLACEHOLDER" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Padding="0"/>
 
-            <Button
-                Text="Loation"
-                Clicked="LocationNavigate_Clicked"/>
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PlantNavigate_Clicked"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="plant_LIGHT.png" HeightRequest="45"/>
+                    <Label Text="PLANTS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
 
-            <Button
-                Text="Security"
-                Clicked="SecurityNavigate_Clicked"/>
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="location_light.png" HeightRequest="45"/>
+                    <Label Text="LOCATION" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
 
-            <Button
-                Text="Controls"
-                Clicked="ControlsNavigate_Clicked"/>
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SecurityNavigate_Clicked"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="security_light.png" HeightRequest="45"/>
+                    <Label Text="SECURITY" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ControlsNavigate_Clicked"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="controls_light.png" HeightRequest="45"/>
+                    <Label Text="CONTROLS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+                <Frame.GestureRecognizers>
+                    <!--<TapGestureRecognizer Tapped="ControlsNavigate_Clicked"/>-->
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="farmer_light.png" HeightRequest="45"/>
+                    <Label Text="TECHNICIANS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

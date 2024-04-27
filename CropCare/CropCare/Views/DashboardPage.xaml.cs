@@ -8,8 +8,8 @@ public partial class DashboardPage : ContentPage
     public DashboardPage(Farm farm)
 	{
 		InitializeComponent();
-        Farm = farm;
-        BindingContext = farm;
+        this.Farm = farm;
+        BindingContext = this.Farm;
     }
 
     private void PlantNavigate_Clicked(object sender, EventArgs e)
@@ -25,6 +25,11 @@ public partial class DashboardPage : ContentPage
     private void SecurityNavigate_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new SecurityPage(Farm));
+    }
+
+    private void TechnicianNavigate_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new TechnicianPage(Farm));
     }
 
     private void ControlsNavigate_Clicked(object sender, EventArgs e)
