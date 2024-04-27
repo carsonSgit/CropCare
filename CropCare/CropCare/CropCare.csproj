@@ -49,6 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\logout.svg" />
+	  <None Remove="Resources\Images\overview.svg" />
+	  <None Remove="Resources\Images\settings.svg" />
 	  <None Remove="Views\appsettings.json" />
 	</ItemGroup>
 

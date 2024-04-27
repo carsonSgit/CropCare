@@ -32,7 +32,7 @@
             </VerticalStackLayout>
         </Frame>
 
-        <Frame  x:Name="LogoutView" Margin="10, 10, 0, 0" BackgroundColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NotNullToBooleanConverter}}">
+        <!--<Frame  x:Name="LogoutView" Margin="10, 10, 0, 0" BackgroundColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NotNullToBooleanConverter}}">
             <StackLayout>
                 <Label Text="User Details:" FontAttributes="Bold"/>
                 <Label x:Name="lblUser" FontAttributes="Italic" Margin="0,5,0,30"/>
@@ -43,7 +43,7 @@
                         BackgroundColor="Black"/>
                 
             </StackLayout>
-        </Frame>
+        </Frame>-->
 
         <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0, 00, 0, 0" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}">
             <Label Text="Don't have an account? " VerticalOptions="Center" FontSize="Small"/>

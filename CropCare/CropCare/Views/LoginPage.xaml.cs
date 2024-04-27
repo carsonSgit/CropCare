@@ -14,10 +14,20 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
         User = AuthService.UserCreds;
-		BindingContext = this;
+        BindingContext = this;
 	}
 
-	private async void Btn_Login_Clicked(object sender, EventArgs e)
+    // Logout
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Email = string.Empty;
+        Password = string.Empty;
+        OnPropertyChanged(nameof(Email));
+        OnPropertyChanged(nameof(Password));
+    }
+
+    private async void Btn_Login_Clicked(object sender, EventArgs e)
 	{
         if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
 		{
@@ -36,7 +46,6 @@ public partial class LoginPage : ContentPage
             AuthService.UserCreds = await AuthService.Client.SignInWithEmailAndPasswordAsync(Email, Password);
             App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync(true)).FirstOrDefault(u => u.Email == Email);
 
-            await DisplayAlert("Success", $"{App.CurrentUser.Name} logged in! ", "OK");
             await Shell.Current.GoToAsync($"//OverviewPage");
 
         }
@@ -50,6 +59,7 @@ public partial class LoginPage : ContentPage
         }
     }
 
+    /*
     private async void Btn_Logout_Clicked(object sender, EventArgs e)
     {
         try
@@ -68,7 +78,7 @@ public partial class LoginPage : ContentPage
 
         OnPropertyChanged(nameof(Email));
         OnPropertyChanged(nameof(Password));
-    }
+    }*/
 
     private async void Btn_SignUp_Clicked(object sender, EventArgs e)
     {
