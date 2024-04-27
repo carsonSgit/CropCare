@@ -4,11 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
+    FlyoutBackgroundColor="#04210b"
     Shell.TabBarIsVisible="False"
     Shell.FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <Label Text="CropCare" FontSize="Large" VerticalOptions="Center" Margin="20,20,0,20"/>
+        <Grid HeightRequest="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="loginhero.png" HeightRequest="35"  Grid.Column="0" Margin="13,0,0,0"/>
+            <Label Text="CropCare" FontSize="Large" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" Margin="15,20,0,20"  Grid.Column="1"/>
+        </Grid>
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
@@ -21,18 +29,22 @@
 
     <!-- App Flyout: note the use of FlyoutDisplayOptions="AsMultipleItems" -->
     <FlyoutItem Route="Index" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent
-                Title="Overview"
-                ContentTemplate="{DataTemplate views:OverviewPage}"
-                Route="OverviewPage" />
-        <ShellContent
-                Title="Settings"
-                ContentTemplate="{DataTemplate views:SettingsPage}"
-                Route="CropsPage" />
+        <ShellContent x:Name="OverviewShellContent"
+                 Icon="overview.svg"
+                 Title="Overview"
+                 ContentTemplate="{DataTemplate views:OverviewPage}"
+                 Route="OverviewPage" />
+        <ShellContent x:Name="SettingsShellContent"
+                 Icon="settings.svg" 
+                 Title="Settings"
+                 ContentTemplate="{DataTemplate views:SettingsPage}"
+                 Route="CropsPage" />
     </FlyoutItem>
 
     <!-- Allow the user to logout from Menu (Flyout) -->
-    <MenuItem Text="Logout"
+    <MenuItem x:Name="LogoutMenuItem"
+          IconImageSource="logout.svg"
+          Text="Logout"
           Clicked="Logout_Clicked"/>
 
 

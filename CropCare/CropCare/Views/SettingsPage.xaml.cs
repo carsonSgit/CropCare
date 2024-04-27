@@ -24,6 +24,7 @@ public partial class SettingsPage : ContentPage
         UpdateEnabled = Name != App.CurrentUser.Name;
         // Change the color of the update button to differentiate between enabled and disabled states
         UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
+        btn_update.SetAppThemeColor(Button.TextColorProperty, Colors.Black, Colors.Black);
     }
 
     private async void Btn_Update_Clicked(object sender, EventArgs e)
@@ -60,21 +61,13 @@ public partial class SettingsPage : ContentPage
         await DisplayAlert("Password Reset", "An email to reset password was sent to " + App.CurrentUser.Email, "OK");
     }
 
-    // Method to handle the app theme switch
     private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        // Set the app theme based on the switch state
         if (ThemeSwitch.IsToggled)
-        {
-            // Set the app theme to light
             App.Current.UserAppTheme = AppTheme.Light;
-        }
         else
-        {
-            // Set the app theme to dark
             App.Current.UserAppTheme = AppTheme.Dark;
-        }
-        // Save the app theme preference
+
         Preferences.Set("apptheme", ThemeSwitch.IsToggled);
     }
 
