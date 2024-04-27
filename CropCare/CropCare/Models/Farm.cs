@@ -25,9 +25,10 @@ namespace CropCare.Models
         public string Name { get; set; }
         public string DeviceId { get; set; }
 
-        public Farm(string farmName)
+        public Farm(string farmName, string deviceId)
         {
             Name = farmName;
+            DeviceId = deviceId;
         }
 
         public async Task InvokeMethodAsync(MethodName methodName, string parametersJSON)

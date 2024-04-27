@@ -27,6 +27,14 @@ namespace CropCare.DataRepos
                 return farmsDb ??= new DatabaseService<Farm>(AuthService.UserCreds.User, nameof(Farm), App.Settings.FireBaseDatabaseURL);
             }
         }
+        private DatabaseService<UserToFarm> userToFarmDb;
+        public DatabaseService<UserToFarm> UserToFarmDb
+        {
+            get
+            {
+                return userToFarmDb ??= new DatabaseService<UserToFarm>(AuthService.UserCreds.User, nameof(UserToFarm), App.Settings.FireBaseDatabaseURL);
+            }
+        }
         private IDeviceController deviceController;
         public IDeviceController DeviceController
         {

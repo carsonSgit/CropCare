@@ -31,14 +31,14 @@ public partial class AccountTypeSelectPage : ContentPage
             }
 
             AuthService.UserCreds = await AuthService.Client.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner", new List<string>());
+            Models.User user = new Models.User(Email, this.Name, this.AccountType == "Owner");
 
             await App.Repo.UsersDb.AddItemAsync(user);
             App.CurrentUser = user;
 
             Email = string.Empty;
             Password = string.Empty;
-            await Shell.Current.GoToAsync($"//Index");
+            await Shell.Current.GoToAsync($"//OverviewPage");
 
             await DisplayAlert("Success", "User signed up! ", "OK");
             

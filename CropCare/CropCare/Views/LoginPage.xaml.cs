@@ -35,8 +35,6 @@ public partial class LoginPage : ContentPage
         {
             AuthService.UserCreds = await AuthService.Client.SignInWithEmailAndPasswordAsync(Email, Password);
             App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync(true)).FirstOrDefault(u => u.Email == Email);
-            //LoginView.IsVisible = false;
-            //LogoutView.IsVisible = true;
 
             await DisplayAlert("Success", $"{App.CurrentUser.Name} logged in! ", "OK");
             await Shell.Current.GoToAsync($"//OverviewPage");
@@ -61,8 +59,6 @@ public partial class LoginPage : ContentPage
             Email = string.Empty;
             Password = string.Empty;
             lblUser.Text = string.Empty;
-            //LogoutView.IsVisible = false;
-            //LoginView.IsVisible = true;
             await Shell.Current.GoToAsync($"//Login");
         }
         catch (Exception ex)

@@ -91,6 +91,22 @@ namespace CropCare.Services
             return await Task.FromResult(result);
         }
 
+        public async Task<T> GetItemAsync(string key, bool forceRefresh = false)
+        {
+            if (_realtimeDb.Database?.Count == 0 || forceRefresh)
+            {
+                try
+                {
+                    await _realtimeDb.PullAsync();
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            var result = _realtimeDb.Once().FirstOrDefault(x => key == x.Key);
+            return await Task.FromResult(result.Object);
+        }   
 
         public async Task<bool> UpdateItemAsync(T item)
         {
