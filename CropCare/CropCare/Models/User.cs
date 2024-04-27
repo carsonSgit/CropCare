@@ -1,5 +1,6 @@
 ﻿using CropCare.Interfaces;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace CropCare.Models
 {
@@ -12,6 +13,20 @@ namespace CropCare.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public bool IsOwner { get; set; }
+        public List<string> FarmKeys 
+        {
+            get
+            {
+                return farmKeys ??= new List<string>();
+            }
+            set
+            {
+                if (value != null)
+                    farmKeys = value;
+            } 
+        }
+        [JsonIgnore]
+        public bool IsAssigned { get; set; }
 
         public User(string email, string name, bool isOwner)
         {

@@ -12,7 +12,10 @@
             <Label Text="Farm Name" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
             <Entry x:Name="FarmNameEntry" Placeholder="Enter Farm Name" Text="{Binding FarmName}"/>
 
-            <Label Text="Farm ID" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+            <HorizontalStackLayout Margin="5, 0, 0, 0">
+                <Label Text="Farm ID" FontSize="Small"  TextColor="#538D22"/>
+                <ImageButton Grid.Column="1" Source="info.png" WidthRequest="20" HeightRequest="20" Margin="5,0,0,0" Clicked="DisplayFarmIDInfo"/>
+            </HorizontalStackLayout>
             <Entry x:Name="FarmIdEntry" Placeholder="Enter Farm ID" Text="{Binding FarmId}"/>
 
             <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 10" />
@@ -46,7 +49,7 @@
                                             <ColumnDefinition Width="1.25*"/>
                                             <ColumnDefinition Width="2.5*"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox Grid.Column="0" CheckedChanged="OnCheckBoxCheckedChanged" Margin="0" HeightRequest="20"/>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding IsAssigned}" CheckedChanged="OnCheckBoxCheckedChanged" Margin="0" HeightRequest="20"/>
                                         <!--<ImageButton Grid.Column="0" Source="add.png" HeightRequest="20" WidthRequest="20" Clicked="OnPlusIconClicked" CommandParameter="{Binding .}"/>-->
                                         <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Name}"/>
                                         <Label Grid.Column="2" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Email}"/>

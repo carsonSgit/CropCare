@@ -54,11 +54,18 @@ public partial class AddFarmPage : ContentPage
         if (e.Value)
         {
             AssignedTechnicians.Add(user);
+            user.IsAssigned = true;
         }
         else
         {
             AssignedTechnicians.Remove(user);
+            user.IsAssigned = false;
         }
+    }
+
+    void DisplayFarmIDInfo(object sender, EventArgs e)
+    {
+        DisplayAlert("Information", "\"Farm ID\" is also referred to as the \"IOT device ID\".", "OK");
     }
 
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
@@ -78,6 +85,11 @@ public partial class AddFarmPage : ContentPage
             await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(technician.Key, newFarm.Key));
         }
 
+        foreach (User user in AssignedTechnicians)
+        {
+            user.IsAssigned = false;
+        }
+            
         await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
 
         UpdateFarmCollectionList();
