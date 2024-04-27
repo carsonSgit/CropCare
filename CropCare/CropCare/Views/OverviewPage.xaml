@@ -44,7 +44,9 @@
             Padding="10"
             CornerRadius="15"
             Clicked="Btn_Add_Farm"
-            BackgroundColor="#73A942" />
+            BackgroundColor="#73A942" 
+            IsVisible="{Binding IsOwner}"
+            />
     </Grid>
 
 </ContentPage>

@@ -28,12 +28,11 @@ namespace CropCare.Models
         [JsonIgnore]
         public bool IsAssigned { get; set; }
 
-        public User(string email, string name, bool isOwner, List<string> farmKeys)
+        public User(string email, string name, bool isOwner)
         {
             Email = email;
             Name = name;
             IsOwner = isOwner;
-            FarmKeys = farmKeys;
         }
     }
 }
