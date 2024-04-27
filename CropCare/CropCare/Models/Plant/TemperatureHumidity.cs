@@ -14,7 +14,7 @@ namespace CropCare.Models.Plant
             return new List<Reading>()
             {
                 new Reading(ReadingType.TEMPERATURE, ReadingUnit.CELCIUS, "20"),
-                new Reading(ReadingType.HUMIDITY, ReadingUnit.HUMIDITY, "50"),
+                new Reading(ReadingType.HUMIDITY, ReadingUnit.HUMIDITY, "10"),
             };
         }
     }

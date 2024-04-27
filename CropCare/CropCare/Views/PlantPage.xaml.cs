@@ -74,82 +74,32 @@ public partial class PlantPage : ContentPage
     }
     public void SetHealth()
     {
-        double temperatureValue;
-        if (double.TryParse(Temperature.Split('°')[0], out temperatureValue))
-        {
-            if (temperatureValue > 30)
-            {
-                temperature_healthLbl.Text = "High";
-                temperature_healthLbl.TextColor = Colors.Red;
-            }
-            else if(temperatureValue < 10)
-            {
-                temperature_healthLbl.Text = "Low";
-                temperature_healthLbl.TextColor = Colors.Red;
-            }
-            else
-            {
-                temperature_healthLbl.Text = "Normal";
-                temperature_healthLbl.TextColor = Colors.Green;
-            }
-        }
-        double humidityValue;
-        if (double.TryParse(Humidity.Split('%')[0], out humidityValue))
-        {
-            if (humidityValue > 70)
-            {
-                humidity_healthLbl.Text = "High";
-                humidity_healthLbl.TextColor = Colors.Red;
-            }
-            else if (humidityValue < 30)
-            {
-                humidity_healthLbl.Text = "Low";
-                humidity_healthLbl.TextColor = Colors.Red;
-            }
-            else
-            {
-                humidity_healthLbl.Text = "Normal";
-                humidity_healthLbl.TextColor = Colors.Green;
-            }
-        }
-        double moistureValue;
-        if (double.TryParse(Moisture.Split('o')[0], out moistureValue))
-        {
-            if (moistureValue > 700)
-            {
-                moisture_healthLbl.Text = "High";
-                moisture_healthLbl.TextColor = Colors.Red;
-            }
-            else if (moistureValue < 200)
-            {
-                moisture_healthLbl.Text = "Low";
-                moisture_healthLbl.TextColor = Colors.Red;
-            }
-            else
-            {
-                moisture_healthLbl.Text = "Normal";
-                moisture_healthLbl.TextColor = Colors.Green;
-            }
-        }
-        double waterLevelValue;
-        if (double.TryParse(WaterLevel.Split('w')[0], out waterLevelValue))
-        {
-            if (waterLevelValue > 70)
-            {
-                waterlvl_healthLbl.Text = "High";
-                waterlvl_healthLbl.TextColor = Colors.Red;
-            }
-            else if (waterLevelValue < 30)
-            {
-                waterlvl_healthLbl.Text = "Low";
-                waterlvl_healthLbl.TextColor = Colors.Red;
-            }
-            else
-            {
-                waterlvl_healthLbl.Text = "Normal";
-                waterlvl_healthLbl.TextColor = Colors.Green;
-            }
-        }
+        UpdateHealthLabel(Temperature, temperature_healthLbl, '°', 30, 10);
+        UpdateHealthLabel(Humidity, humidity_healthLbl, '%', 70, 30);
+        UpdateHealthLabel(Moisture, moisture_healthLbl, 'o', 700, 200);
+        UpdateHealthLabel(WaterLevel, waterlvl_healthLbl, 'w', 70, 30);
+    }
 
+    private void UpdateHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
+    {
+        double sensorValue;
+        if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
+        {
+            if (sensorValue > highThreshold)
+            {
+                healthLbl.Text = "High";
+                healthLbl.TextColor = Colors.Red;
+            }
+            else if (sensorValue < lowThreshold)
+            {
+                healthLbl.Text = "Low";
+                healthLbl.TextColor = Colors.Red;
+            }
+            else
+            {
+                healthLbl.Text = "Normal";
+                healthLbl.TextColor = Colors.Green;
+            }
+        }
     }
 }
