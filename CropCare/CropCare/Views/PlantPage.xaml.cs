@@ -7,50 +7,41 @@ public partial class PlantPage : ContentPage
 {
 	private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
-    public string Temperature
+    public string Temperature => GetSensorReading(PlantController.Temperature);
+    public string Humidity => GetSensorReading(PlantController.Temperature, 1);
+    public string Moisture => GetSensorReading(PlantController.SoilMoisture);
+    public string WaterLevel => GetSensorReading(PlantController.WaterLevel);
+
+    public string Led
     {
-        get
-        {
-            var reading = PlantController.Temperature.ReadSensor()[0];
-            return $"{reading.Value}{reading.Unit}";
-        }
+        get => PlantController.Led.State;
+        set => PlantController.Led.State = value;
     }
 
-    public string Humidity
-    {
-        get
-        {
-            var reading = PlantController.Temperature.ReadSensor()[1];
-            return $"{reading.Value}{reading.Unit}";
-        }
-    }
-
-    public string Moisture
-    {
-        get
-        {
-            var reading = PlantController.SoilMoisture.ReadSensor()[0];
-            return $"{reading.Value}{reading.Unit}";
-        }
-    }
-    public string WaterLevel
-    {
-        get
-        {
-            var reading = PlantController.WaterLevel.ReadSensor()[0];
-            return $"{reading.Value}{reading.Unit}";
-        }
-    }
-
-    public string Led { 
-        get { return PlantController.Led.State; }
-        set { PlantController.Led.State = value; }
-    }
     public string Fan
     {
-        get { return PlantController.Fan.State; }
-        set { PlantController.Fan.State = value; }
+        get => PlantController.Fan.State;
+        set => PlantController.Fan.State = value;
     }
+
+    private string GetSensorReading(TemperatureHumidity sensor, int index = 0)
+    {
+        var reading = sensor.ReadSensor()[index];
+        return $"{reading.Value}{reading.Unit}";
+    }
+
+    private string GetSensorReading(SoilMoisture sensor, int index = 0)
+    {
+        var reading = sensor.ReadSensor()[index];
+        return $"{reading.Value}{reading.Unit}";
+    }
+
+    private string GetSensorReading(WaterLevel sensor, int index = 0)
+    {
+        var reading = sensor.ReadSensor()[index];
+        return $"{reading.Value}{reading.Unit}";
+    }
+
     public PlantPage(Farm farm)
 	{
 		InitializeComponent();
