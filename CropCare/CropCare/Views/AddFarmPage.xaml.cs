@@ -80,12 +80,12 @@ public partial class AddFarmPage : ContentPage
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
         await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
 
-        foreach (var technician in AssignedTechnicians)
+        foreach (User technician in AssignedTechnicians.ToList())
         {
             await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(technician.Key, newFarm.Key));
         }
 
-        foreach (User user in AssignedTechnicians)
+        foreach (User user in AssignedTechnicians.ToList())
         {
             user.IsAssigned = false;
         }

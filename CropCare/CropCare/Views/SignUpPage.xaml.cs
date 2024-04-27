@@ -16,7 +16,20 @@ public partial class SignUpPage : ContentPage
 		BindingContext = this;
 	}
 
-	private async void Btn_SignUp_Clicked(object sender, EventArgs e)
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Email = string.Empty;
+        Name = string.Empty;
+        Password = string.Empty;
+        ConfirmPassword = string.Empty;
+        OnPropertyChanged(nameof(Email));
+        OnPropertyChanged(nameof(Name));
+        OnPropertyChanged(nameof(Password));
+        OnPropertyChanged(nameof(ConfirmPassword));
+    }
+
+    private async void Btn_SignUp_Clicked(object sender, EventArgs e)
 	{
         if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmPassword))
 		{
