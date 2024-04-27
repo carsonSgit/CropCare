@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using CropCare.Models;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace CropCare.Views;
 
@@ -8,14 +9,20 @@ public partial class OverviewPage : ContentPage
 {
 
     public ObservableCollection<Farm> FarmsCollection { get; set; }
+    public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
 
     public OverviewPage()
     {
         UpdateFarmCollectionList();
-
-
         InitializeComponent();
         BindingContext = this;
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        UpdateFarmCollectionList();
+        IsOwner = App.CurrentUser.IsOwner;
     }
 
     private void UpdateFarmCollectionList()

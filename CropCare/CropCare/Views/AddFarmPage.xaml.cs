@@ -46,22 +46,18 @@ public partial class AddFarmPage : ContentPage
         AssignedTechnicians.Add(user);
     }
 
-    private async void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+    private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkBox = (CheckBox)sender;
         var user = (User)checkBox.BindingContext;
 
         if (e.Value)
         {
-            // Add technician to the farm
             AssignedTechnicians.Add(user);
-            //await DisplayAlert("Technicien Added", $"{user.Name} was added", "OK");
         }
         else
         {
-            // Remove technician from the farm
             AssignedTechnicians.Remove(user);
-            //await DisplayAlert("Technicien Removed", $"{user.Name} was removed", "OK");
         }
     }
 
@@ -76,6 +72,11 @@ public partial class AddFarmPage : ContentPage
         Farm newFarm = new Farm(FarmName, FarmId);
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
         await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
+
+        foreach (var technician in AssignedTechnicians)
+        {
+            await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(technician.Key, newFarm.Key));
+        }
 
         await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
 

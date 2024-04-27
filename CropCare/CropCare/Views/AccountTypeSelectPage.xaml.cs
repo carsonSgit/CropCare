@@ -38,7 +38,7 @@ public partial class AccountTypeSelectPage : ContentPage
 
             Email = string.Empty;
             Password = string.Empty;
-            await Shell.Current.GoToAsync($"//Index");
+            await Shell.Current.GoToAsync($"//OverviewPage");
 
             await DisplayAlert("Success", "User signed up! ", "OK");
             
