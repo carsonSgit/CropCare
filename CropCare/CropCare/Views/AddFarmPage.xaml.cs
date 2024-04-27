@@ -44,23 +44,26 @@ public partial class AddFarmPage : ContentPage
         AssignedTechnicians.Add(user);
     }
 
-    private async void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+    private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkBox = (CheckBox)sender;
         var user = (User)checkBox.BindingContext;
 
         if (e.Value)
         {
-            // Add technician to the farm
             AssignedTechnicians.Add(user);
-            //await DisplayAlert("Technicien Added", $"{user.Name} was added", "OK");
+            user.IsAssigned = true;
         }
         else
         {
-            // Remove technician from the farm
             AssignedTechnicians.Remove(user);
-            //await DisplayAlert("Technicien Removed", $"{user.Name} was removed", "OK");
+            user.IsAssigned = false;
         }
+    }
+
+    void DisplayFarmIDInfo(object sender, EventArgs e)
+    {
+        DisplayAlert("Information", "\"Farm ID\" is also referred to as the \"IOT device ID\".", "OK");
     }
 
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
@@ -70,6 +73,11 @@ public partial class AddFarmPage : ContentPage
         App.CurrentUser.FarmKeys.Add(newFarm.Key);
         await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
 
+        foreach (User user in AssignedTechnicians)
+        {
+            user.IsAssigned = false;
+        }
+            
         await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
         await Navigation.PopAsync();
     }
