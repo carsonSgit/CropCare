@@ -51,7 +51,7 @@ public partial class OverviewPage : ContentPage
 
     private async void Farm_Tapped(object sender, TappedEventArgs e)
     {
-        var farm = (Farm)((TappedEventArgs)e).Parameter;
+        var farm = (sender as Frame)?.BindingContext as Farm;
         await Navigation.PushAsync(new DashboardPage(farm));
     }
 
