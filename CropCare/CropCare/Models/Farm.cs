@@ -1,38 +1,50 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
+using Microsoft.Azure.Devices;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models
 {
+    public enum MethodName
+    {
+        set_door_lock,
+        get_door_lock,
+        set_door_open,
+        get_door_open,
+        set_light,
+        get_light,
+        set_fan,
+        get_fan,
+        // Add more methods here
+    }
+
     public class Farm : INotifyPropertyChanged, IHasKey
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Key { get; set; }
         public string Name { get; set; }
-        public float SoilMoisture { get; set; }
-        public float WaterLevel { get; set; }
-        public float Luminosity { get; set; }
-        public bool Light { get; set; }
-        public bool DoorLocked { get; set; }
-        public bool DoorOpen { get; set; }
-        public float Pitch { get; set; } 
-        public float Roll { get; set; }
-        public string Location { get; set; }
-        public bool Vibration { get; set; }
-        public float Noise { get; set; }
-        public bool FanState { get; set; }
-        public bool BuzzerState { get; set; }
-        public float Temperature { get; set; }
-        public float Humidity { get; set; }
+        public string DeviceId { get; set; }
 
         public Farm(string farmName)
         {
             Name = farmName;
+        }
+
+        public async Task InvokeMethodAsync(MethodName methodName, string parametersJSON)
+        {
+            var methodInvocation = new CloudToDeviceMethod(nameof(methodName))
+            {
+                ResponseTimeout = TimeSpan.FromSeconds(30),
+            };
+            methodInvocation.SetPayloadJson(parametersJSON);
+
+            Console.WriteLine($"Invoking direct method for device: {DeviceId}");
+
+            // Invoke the direct method asynchronously and get the response from the simulated device.
+            CloudToDeviceMethodResult response = await App.IOTHubClient.InvokeDeviceMethodAsync(DeviceId, methodInvocation);
+
+            Console.WriteLine($"Response status: {response.Status}, payload:\n\t{response.GetPayloadAsJson()}");
+
         }
     }
 }

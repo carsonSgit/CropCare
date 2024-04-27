@@ -42,6 +42,8 @@ public partial class SettingsPage : ContentPage
                 await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
             }
 
+            UpdateEnabled = Name != App.CurrentUser.Name;
+            UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
             await DisplayAlert("Success", "User updated! ", "OK");
         }
         catch (FirebaseAuthException ex)
@@ -77,5 +79,4 @@ public partial class SettingsPage : ContentPage
         // Save the app theme preference
         Preferences.Set("apptheme", ThemeSwitch.IsToggled);
     }
-
 }

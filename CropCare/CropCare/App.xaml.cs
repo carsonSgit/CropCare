@@ -1,6 +1,7 @@
 ﻿using CropCare.DataRepos;
 using CropCare.Models;
 using MauiFitness.Config;
+using Microsoft.Azure.Devices;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
@@ -11,6 +12,14 @@ namespace CropCare
 
         public static Settings Settings { get; private set; }
         public static User CurrentUser { get; set; }
+        private static ServiceClient iotHubClient;
+        public static ServiceClient IOTHubClient
+        {
+            get
+            {
+                return iotHubClient ??= ServiceClient.CreateFromConnectionString(Settings.IOTHubConnectionString);
+            }
+        }
         private static CropCareRepo repo;
         public static CropCareRepo Repo
         {
@@ -19,6 +28,7 @@ namespace CropCare
                 return repo ??= new CropCareRepo();
             }
         }
+
         public App()
         {
             InitializeComponent();
