@@ -48,7 +48,6 @@ public partial class LoginPage : ContentPage
             //LoginView.IsVisible = false;
             //LogoutView.IsVisible = true;
 
-            await DisplayAlert("Success", $"{App.CurrentUser.Name} logged in! ", "OK");
             await Shell.Current.GoToAsync($"//OverviewPage");
 
         }
