@@ -46,6 +46,25 @@ public partial class AddFarmPage : ContentPage
         AssignedTechnicians.Add(user);
     }
 
+    private async void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        var user = (User)checkBox.BindingContext;
+
+        if (e.Value)
+        {
+            // Add technician to the farm
+            AssignedTechnicians.Add(user);
+            //await DisplayAlert("Technicien Added", $"{user.Name} was added", "OK");
+        }
+        else
+        {
+            // Remove technician from the farm
+            AssignedTechnicians.Remove(user);
+            //await DisplayAlert("Technicien Removed", $"{user.Name} was removed", "OK");
+        }
+    }
+
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
     {
         if (Connectivity.NetworkAccess != NetworkAccess.Internet)
