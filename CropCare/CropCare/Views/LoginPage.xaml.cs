@@ -14,7 +14,9 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
         User = AuthService.UserCreds;
-		BindingContext = this;
+        Email = string.Empty;
+        Password = string.Empty;
+        BindingContext = this;
 	}
 
 	private async void Btn_Login_Clicked(object sender, EventArgs e)

@@ -12,7 +12,7 @@
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
-        <Label Text="CropCare Inc. ©" Margin="20,20,0,20"/>
+        <Label Text="CropCare Edu." Margin="20,20,0,20"/>
     </Shell.FlyoutFooter>
 
     <!-- Landing Page -->
@@ -31,9 +31,9 @@
                 Route="CropsPage" />
     </FlyoutItem>
 
-    <!-- Logout MenuItem -->
+    <!-- Allow the user to logout from Menu (Flyout) -->
     <MenuItem Text="Logout"
-              IconImageSource="home.png"
-              Command="{Binding LogoutCommand}" />
+          Clicked="Logout_Clicked"/>
+
 
 </Shell>
