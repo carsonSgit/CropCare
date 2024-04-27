@@ -24,7 +24,7 @@ public partial class SettingsPage : ContentPage
         UpdateEnabled = Name != App.CurrentUser.Name;
         // Change the color of the update button to differentiate between enabled and disabled states
         UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
-        btn_update.SetAppThemeColor(Button.TextColorProperty, Colors.Black, Colors.Black);
+        btn_update.TextColor = UpdateEnabled ? Colors.White : Colors.Black;
     }
 
     private async void Btn_Update_Clicked(object sender, EventArgs e)
