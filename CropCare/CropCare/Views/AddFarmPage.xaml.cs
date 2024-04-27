@@ -75,6 +75,12 @@ public partial class AddFarmPage : ContentPage
             await DisplayAlert("No Internet", "Please check your internet connection", "OK");
             return;
         }
+
+        if(string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(FarmId))
+        {
+            await DisplayAlert("Error", "Please fill in all fields", "OK");
+            return;
+        }
         
         Farm newFarm = new Farm(FarmName, FarmId);
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
@@ -89,8 +95,6 @@ public partial class AddFarmPage : ContentPage
         {
             user.IsAssigned = false;
         }
-            
-        await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
 
         UpdateFarmCollectionList();
 
