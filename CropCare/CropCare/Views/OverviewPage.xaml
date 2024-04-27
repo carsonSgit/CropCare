@@ -19,6 +19,9 @@
                 ItemsSource="{Binding FarmsCollection}"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
+                <CollectionView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFarmTapped" />
+                </CollectionView.GestureRecognizers>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="5" BorderColor="#516250" CornerRadius="5" Margin="5">

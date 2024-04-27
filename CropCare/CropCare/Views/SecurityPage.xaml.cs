@@ -2,10 +2,10 @@ using CropCare.Models;
 
 namespace CropCare.Views;
 
-public partial class ControlPage : ContentPage
+public partial class SecurityPage : ContentPage
 {
     private Farm Farm { get; set; }
-    public ControlPage(Farm farm)
+    public SecurityPage(Farm farm)
 	{
 		InitializeComponent();
         Farm = farm;

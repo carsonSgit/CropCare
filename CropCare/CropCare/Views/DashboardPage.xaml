@@ -5,8 +5,26 @@
              Title="DashboardPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Temp Page"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <VerticalStackLayout Spacing="10">
+            <Button
+                Text="Plants"
+                Clicked="PlantNavigate_Clicked"/>
+
+            <Button
+                Text="Loation"
+                Clicked="LocationNavigate_Clicked"/>
+
+            <Button
+                Text="Security"
+                Clicked="SecurityNavigate_Clicked"/>
+
+            <Button
+                Text="Controls"
+                Clicked="ControlsNavigate_Clicked"/>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
