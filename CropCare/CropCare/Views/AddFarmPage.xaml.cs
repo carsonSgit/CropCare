@@ -46,16 +46,12 @@ public partial class AddFarmPage : ContentPage
 
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
     {
-        string farmName = FarmNameEntry.Text;
-        string farmId = FarmIdEntry.Text;
-        string selectedTechnician = TechnicianCollectionView.SelectedItem.ToString();
-
-        await DisplayAlert("Farm Added", $"Farm Name: {farmName}\nFarm ID: {farmId}\nTechnician: {selectedTechnician}", "OK");
-
         Farm newFarm = new Farm("test");
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
         App.CurrentUser.FarmKeys.Add(newFarm.Key);
         await App.Repo.UsersDb.UpdateItemAsync(App.CurrentUser);
+
+        await DisplayAlert("Farm Added", $"Farm Name: {this.FarmName}\nFarm ID: {this.FarmId}", "OK");
         await Navigation.PopAsync();
     }
 }

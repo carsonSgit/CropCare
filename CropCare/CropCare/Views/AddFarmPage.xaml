@@ -15,8 +15,51 @@
             <Label Text="Farm ID" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
             <Entry x:Name="FarmIdEntry" Placeholder="Enter Farm ID" Text="{Binding FarmId}"/>
 
-            <StackLayout>
-                <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 10" />
+            <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 10" />
+            
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1.25*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Add"/>
+                <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Name"/>
+                <Label Grid.Column="2" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
+            </Grid>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+                <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical">
+                                <Grid Padding="0, 5, 0, 5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="1"/>
+                                        <!-- This row will be used for the divider -->
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Padding="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="1.25*"/>
+                                            <ColumnDefinition Width="2.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ImageButton Grid.Column="0" Source="add.png" HeightRequest="20" WidthRequest="20" Clicked="OnPlusIconClicked" CommandParameter="{Binding .}"/>
+                                        <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Name}"/>
+                                        <Label Grid.Column="2" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding Email}"/>
+                                    </Grid>
+                                    <BoxView Grid.Row="1" Margin="0, 12.5, 0, 5" BackgroundColor="Gray" HeightRequest="1"/>
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+            <!--<StackLayout>
                 <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
                     <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
                         <CollectionView.ItemTemplate>
@@ -38,7 +81,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Frame>
-            </StackLayout>
+            </StackLayout>-->
 
             <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
         </VerticalStackLayout>
