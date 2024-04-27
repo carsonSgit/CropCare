@@ -1,3 +1,4 @@
+using CropCare.Interfaces;
 using CropCare.Models;
 using CropCare.Models.Plant;
 
@@ -7,10 +8,10 @@ public partial class PlantPage : ContentPage
 {
 	private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
-    public string Temperature => GetSensorReading(PlantController.Temperature);
-    public string Humidity => GetSensorReading(PlantController.Temperature, 1);
-    public string Moisture => GetSensorReading(PlantController.SoilMoisture);
-    public string WaterLevel => GetSensorReading(PlantController.WaterLevel);
+    public string Temperature => GetSensorReading(PlantController.Temperature, ReadingType.TEMPERATURE);
+    public string Humidity => GetSensorReading(PlantController.Temperature, ReadingType.HUMIDITY);
+    public string Moisture => GetSensorReading(PlantController.SoilMoisture, ReadingType.MOISTURE);
+    public string WaterLevel => GetSensorReading(PlantController.WaterLevel, ReadingType.WATERLEVEL);
 
     public string Led
     {
@@ -24,10 +25,10 @@ public partial class PlantPage : ContentPage
         set => PlantController.Fan.State = value;
     }
 
-    private string GetSensorReading(TemperatureHumidity sensor, int index = 0)
+    private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
     {
-        var reading = sensor.ReadSensor()[index];
-        return $"{reading.Value}{reading.Unit}";
+        var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
+        return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
     }
 
     private string GetSensorReading(SoilMoisture sensor, int index = 0)
