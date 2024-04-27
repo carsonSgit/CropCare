@@ -25,24 +25,6 @@ public partial class PlantPage : ContentPage
         set => PlantController.Fan.State = value;
     }
 
-    private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
-    {
-        var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
-        return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
-    }
-
-    private string GetSensorReading(SoilMoisture sensor, int index = 0)
-    {
-        var reading = sensor.ReadSensor()[index];
-        return $"{reading.Value}{reading.Unit}";
-    }
-
-    private string GetSensorReading(WaterLevel sensor, int index = 0)
-    {
-        var reading = sensor.ReadSensor()[index];
-        return $"{reading.Value}{reading.Unit}";
-    }
-
     public PlantPage(Farm farm)
 	{
 		InitializeComponent();
@@ -52,6 +34,12 @@ public partial class PlantPage : ContentPage
 
         SetMeasurements();
         SetHealth();
+    }
+
+    private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
+    {
+        var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
+        return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
     }
 
     public void SetMeasurements()
