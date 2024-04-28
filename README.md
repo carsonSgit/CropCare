@@ -71,16 +71,8 @@ classDiagram
         + UserId
         + FarmId
     }
-    class IHasKey {
-        <<interface>>
-        + Key
-    }
-
-    Farm ..|> IHasKey
-    User ..|> IHasKey
-    UserToFarm ..|> IHasKey
-    User -- Farm : Manages
-    User *-- Farm : Has
+    Farm -- UserToFarm : Has many
+    User -- UserToFarm : Has many
 ```
 
 ## Plant Controller 
