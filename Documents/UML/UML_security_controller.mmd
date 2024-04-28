@@ -1,0 +1,53 @@
+
+classDiagram
+    class DoorLock {
+        - State: string
+        + ControlActuator(command: Command): bool
+        + ReadSensor(): List
+        <Reading>
+    }
+    class DoorOpener {
+        - State: string
+        + ControlActuator(command: Command): bool
+    }
+    class Loudness {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class Luminosity {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class Motion {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class SecurityController {
+        + Loudness
+        + Motion
+        + Vibration
+        + DoorLock
+        + DoorOpener
+        + Luminosity
+    }
+    class Vibration {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class Reading {
+        - Type: string
+        - Unit: string
+        - Value: string
+    }
+    
+    SecurityController "1" -- "many" Loudness : Contains
+    SecurityController "1" -- "many" Motion : Contains
+    SecurityController "1" -- "many" Vibration : Contains
+    SecurityController "1" -- "many" DoorLock : Contains
+    SecurityController "1" -- "many" DoorOpener : Contains
+    SecurityController "1" -- "many" Luminosity : Contains
+    Loudness "1" -- "many" Reading : Generates
+    Luminosity "1" -- "many" Reading : Generates
+    Motion "1" -- "many" Reading : Generates
+    Vibration "1" -- "many" Reading : Generates
+    DoorLock "1" -- "many" Reading : Generates

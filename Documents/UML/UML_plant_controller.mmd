@@ -1,0 +1,43 @@
+
+classDiagram
+    class PlantController {
+        + Fan
+        + Led
+        + SoilMoisture
+        + TemperatureHumidity
+        + WaterLevel
+    }
+    class Fan {
+        - State: string
+        + ControlActuator(command: Command): bool
+    }
+    class Led {
+        - State: string
+        + ControlActuator(command: Command): bool
+    }
+    class SoilMoisture {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class TemperatureHumidity {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class WaterLevel {
+        + ReadSensor(): List
+        <Reading>
+    }
+    class Reading {
+        - Type: string
+        - Unit: string
+        - Value: string
+    }
+    
+    PlantController "1" -- "many" Fan : Contains
+    PlantController "1" -- "many" Led : Contains
+    PlantController "1" -- "many" SoilMoisture : Contains
+    PlantController "1" -- "many" TemperatureHumidity : Contains
+    PlantController "1" -- "many" WaterLevel : Contains
+    SoilMoisture "1" -- "many" Reading : Generates
+    TemperatureHumidity "1" -- "many" Reading : Generates
+    WaterLevel "1" -- "many" Reading : Generates
