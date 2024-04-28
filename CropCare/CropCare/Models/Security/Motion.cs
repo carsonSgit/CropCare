@@ -13,7 +13,7 @@ namespace CropCare.Models.Security
         {
             return new List<Reading>()
             {
-                new Reading(ReadingType.MOTION, ReadingUnit.NONE, "Movement Detected!"),
+                new Reading(ReadingType.MOTION, ReadingUnit.NONE, "Movement Detected"),
             };
         }
     }

@@ -56,8 +56,6 @@ namespace CropCare.Models.Plant
             }
         }
 
-
-
         public PlantController()
         {
             Fan = new Fan();

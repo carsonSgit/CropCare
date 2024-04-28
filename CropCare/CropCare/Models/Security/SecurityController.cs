@@ -74,8 +74,9 @@ namespace CropCare.Models.Security
         public string GetLoudnessReading() => GetSensorReading(Loudness, ReadingType.LOUDNESS);
         public string GetLuminosityReading() => GetSensorReading(Luminosity, ReadingType.LUMINOSITY);
         public string GetMotionReading() => GetSensorReading(Motion, ReadingType.MOTION);
-        public string GetVibrationReading() => GetSensorReading(Vibration, ReadingType.VIBRATION);
-        public string GetDoorLockReading() => GetSensorReading(DoorLock, ReadingType.DOORLOCK);
+        public string GetVibrationReading() => GetSensorReading(Vibration, ReadingType.VIBRATION); 
+        public string GetDoorLockReading() => DoorLock.ReadSensor().FirstOrDefault()?.Value;
+
 
         private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
         {
@@ -114,12 +115,12 @@ namespace CropCare.Models.Security
             string health = "";
             if (actuatorState.Equals(Command.ON.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                health = "On";
+                health = "Open";
                 //healthLbl.TextColor = Colors.Green;
             }
             else if (actuatorState.Equals(Command.OFF.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                health = "Off";
+                health = "Closed";
                 //healthLbl.TextColor = Colors.Red;
             }
             return health;

@@ -18,14 +18,14 @@ public partial class SecurityPage : ContentPage
     private void doorLockSwitch_Toggled(object sender, ToggledEventArgs e)
     {
         var command = doorLockSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        SecurityController.DoorLock.ControlActuator(command);
-        SecurityController.DoorLockState = SecurityController.UpdateStateHealthLabel(command.ToString());
+        var newState = SecurityController.DoorLock.ControlActuator(command) ? command.ToString() : SecurityController.DoorLock.State;
+        SecurityController.DoorLockState = SecurityController.UpdateStateHealthLabel(newState);
     }
 
     private void doorOpenSwitch_Toggled(object sender, ToggledEventArgs e)
     {
         var command = doorOpenSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        SecurityController.DoorOpener.ControlActuator(command);
-        SecurityController.DoorOpenerState = SecurityController.UpdateStateHealthLabel(command.ToString());
+        var newState = SecurityController.DoorOpener.ControlActuator(command) ? command.ToString() : SecurityController.DoorOpener.State;
+        SecurityController.DoorOpenerState = SecurityController.UpdateStateHealthLabel(newState);
     }
 }

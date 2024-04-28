@@ -31,7 +31,7 @@ namespace CropCare.Models.Security
         {
             return new List<Reading>
             {
-                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, (State == nameof(Command.ON)).ToString())
+                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, State)
             };
         }
     }
