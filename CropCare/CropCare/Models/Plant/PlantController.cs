@@ -35,5 +35,28 @@ namespace CropCare.Models.Plant
             var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
             return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
         }
+
+        public void UpdateHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
+        {
+            double sensorValue;
+            if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
+            {
+                if (sensorValue > highThreshold)
+                {
+                    healthLbl.Text = "High";
+                    healthLbl.TextColor = Colors.Red;
+                }
+                else if (sensorValue < lowThreshold)
+                {
+                    healthLbl.Text = "Low";
+                    healthLbl.TextColor = Colors.Red;
+                }
+                else
+                {
+                    healthLbl.Text = "Normal";
+                    healthLbl.TextColor = Colors.Green;
+                }
+            }
+        }
     }
 }

@@ -33,32 +33,9 @@ public partial class PlantPage : ContentPage
 
     public void SetHealth()
     {
-        UpdateHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
-        UpdateHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
-        UpdateHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
-        UpdateHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
-    }
-
-    private void UpdateHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
-    {
-        double sensorValue;
-        if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
-        {
-            if (sensorValue > highThreshold)
-            {
-                healthLbl.Text = "High";
-                healthLbl.TextColor = Colors.Red;
-            }
-            else if (sensorValue < lowThreshold)
-            {
-                healthLbl.Text = "Low";
-                healthLbl.TextColor = Colors.Red;
-            }
-            else
-            {
-                healthLbl.Text = "Normal";
-                healthLbl.TextColor = Colors.Green;
-            }
-        }
+        PlantController.UpdateHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
+        PlantController.UpdateHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
+        PlantController.UpdateHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
+        PlantController.UpdateHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
     }
 }
