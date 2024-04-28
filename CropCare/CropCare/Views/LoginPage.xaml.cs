@@ -47,7 +47,6 @@ public partial class LoginPage : ContentPage
             App.CurrentUser = (await App.Repo.UsersDb.GetItemsAsync(true)).FirstOrDefault(u => u.Email == Email);
 
             await Shell.Current.GoToAsync($"//OverviewPage");
-
         }
         catch (FirebaseAuthException ex)
         {
