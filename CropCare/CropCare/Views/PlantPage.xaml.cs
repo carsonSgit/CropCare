@@ -6,28 +6,12 @@ namespace CropCare.Views;
 
 public partial class PlantPage : ContentPage
 {
-	private Farm Farm { get; set; }
+    private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
-    public string Temperature => GetSensorReading(PlantController.Temperature, ReadingType.TEMPERATURE);
-    public string Humidity => GetSensorReading(PlantController.Temperature, ReadingType.HUMIDITY);
-    public string Moisture => GetSensorReading(PlantController.SoilMoisture, ReadingType.MOISTURE);
-    public string WaterLevel => GetSensorReading(PlantController.WaterLevel, ReadingType.WATERLEVEL);
-
-    public string Led
-    {
-        get => PlantController.Led.State;
-        set => PlantController.Led.State = value;
-    }
-
-    public string Fan
-    {
-        get => PlantController.Fan.State;
-        set => PlantController.Fan.State = value;
-    }
 
     public PlantPage(Farm farm)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Farm = farm;
         PlantController = new PlantController();
         BindingContext = farm;
@@ -36,28 +20,23 @@ public partial class PlantPage : ContentPage
         SetHealth();
     }
 
-    private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
-    {
-        var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
-        return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
-    }
-
     public void SetMeasurements()
     {
-        temperature_measurementLbl.Text = Temperature;
-        humidity_measurementLbl.Text = Humidity;
-        moisture_measurementLbl.Text = Moisture;
-        waterlvl_measurementLbl.Text = WaterLevel;
+        temperature_measurementLbl.Text = PlantController.GetTemperatureReading();
+        humidity_measurementLbl.Text = PlantController.GetHumidityReading();
+        moisture_measurementLbl.Text = PlantController.GetMoistureReading();
+        waterlvl_measurementLbl.Text = PlantController.GetWaterLevelReading();
 
-        led_measurementLbl.Text = Led;
-        fan_measurementLbl.Text = Fan;
+        led_measurementLbl.Text = PlantController.Led.State;
+        fan_measurementLbl.Text = PlantController.Fan.State;
     }
+
     public void SetHealth()
     {
-        UpdateHealthLabel(Temperature, temperature_healthLbl, '°', 30, 10);
-        UpdateHealthLabel(Humidity, humidity_healthLbl, '%', 70, 30);
-        UpdateHealthLabel(Moisture, moisture_healthLbl, 'o', 700, 200);
-        UpdateHealthLabel(WaterLevel, waterlvl_healthLbl, 'w', 70, 30);
+        UpdateHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
+        UpdateHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
+        UpdateHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
+        UpdateHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
     }
 
     private void UpdateHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
