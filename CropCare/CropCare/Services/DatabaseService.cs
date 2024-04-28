@@ -1,12 +1,7 @@
 ﻿using CropCare.Interfaces;
 using Firebase.Database;
 using Firebase.Database.Offline;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Services
 {

@@ -35,17 +35,6 @@ public partial class AddFarmPage : ContentPage
         TechnicianCollectionView.ItemsSource = filteredTechnicians;
     }
 
-    private async void OnPlusIconClicked(object sender, EventArgs e)
-    {
-        var button = (ImageButton)sender;
-        var user = (User)button.CommandParameter;
-
-        await DisplayAlert("Technicien Added ", $"{user} was added", "OK");
-        this.Technicians.Remove(user);
-        TechnicianCollectionView.ItemsSource = this.Technicians;
-        AssignedTechnicians.Add(user);
-    }
-
     private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkBox = (CheckBox)sender;

@@ -50,7 +50,7 @@
 
             <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
                 <Frame.GestureRecognizers>
-                    <!--<TapGestureRecognizer Tapped="ControlsNavigate_Clicked"/>-->
+                    <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
                 </Frame.GestureRecognizers>
                 <StackLayout>
                     <Image Source="farmer_light.png" HeightRequest="45"/>
