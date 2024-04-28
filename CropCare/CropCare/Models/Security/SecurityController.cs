@@ -22,6 +22,7 @@ namespace CropCare.Models.Security
         public DoorLock DoorLock { get; set; }
         public DoorOpener DoorOpener { get; set; }
         public Luminosity Luminosity { get; set; }
+        public string DeviceId { get; set; }
         public string LuminosityReading => GetLuminosityReading();
         public string LuminosityHealth => UpdateReadingHealthLabel(LuminosityReading, 'n', 1000, 500);
         public string LoudnessReading => GetLoudnessReading();
@@ -57,8 +58,7 @@ namespace CropCare.Models.Security
             }
         }
 
-
-        public SecurityController()
+        public SecurityController(string deviceId)
         {
             Loudness = new Loudness();
             Motion = new Motion();
@@ -66,6 +66,7 @@ namespace CropCare.Models.Security
             DoorLock = new DoorLock();
             DoorOpener = new DoorOpener();
             Luminosity = new Luminosity();
+            DeviceId = deviceId;
 
             DoorOpenerState = UpdateStateHealthLabel(DoorOpener.State);
             DoorLockState = UpdateStateHealthLabel(DoorLock.State);

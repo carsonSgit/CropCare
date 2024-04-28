@@ -54,5 +54,10 @@ namespace CropCare.Models
             Unit = unit;
             Value = value;
         }
+
+        public override string ToString()
+        {
+            return $"{Value} {Unit}";
+        }
     }
 }

@@ -13,8 +13,8 @@ namespace CropCare.Models.Geolocation
         {
             return new List<Reading>()
             {
-                new Reading(ReadingType.PITCH, ReadingUnit.DEGREE, "0"),
-                new Reading(ReadingType.ROLL, ReadingUnit.DEGREE, "70"),
+                new Reading(ReadingType.PITCH, ReadingUnit.DEGREE, "12.22334"),
+                new Reading(ReadingType.ROLL, ReadingUnit.DEGREE, "73.1232123"),
             };
         }
     }

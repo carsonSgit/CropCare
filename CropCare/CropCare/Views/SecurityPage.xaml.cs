@@ -11,7 +11,7 @@ public partial class SecurityPage : ContentPage
 	{
 		InitializeComponent();
         Farm = farm;
-        SecurityController = new SecurityController();
+        SecurityController = farm.SecurityController;
         BindingContext = SecurityController;
     }
 

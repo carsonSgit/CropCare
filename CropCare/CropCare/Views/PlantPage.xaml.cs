@@ -6,15 +6,13 @@ namespace CropCare.Views;
 
 public partial class PlantPage : ContentPage
 {
-    
     private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
 
     public PlantPage(Farm farm)
     {
         InitializeComponent();
-        Farm = farm;
-        PlantController = new PlantController();
+        PlantController = farm.PlantController;
         BindingContext = PlantController;
     }
 
