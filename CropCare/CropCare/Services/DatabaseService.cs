@@ -17,13 +17,14 @@ namespace CropCare.Services
         {
             get
             {
-                Task.Run(() => LoadItems()).Wait();
+                if (_items == null)
+                    Task.Run(() => LoadItems()).Wait();
                 return _items;
             }
         }
         private async Task LoadItems()
         {
-            _items = new ObservableCollection<T>(await GetItemsAsync(true));
+            _items = new ObservableCollection<T>(await GetItemsAsync());
         }
 
         private readonly RealtimeDatabase<T> _realtimeDb;
@@ -39,6 +40,8 @@ namespace CropCare.Services
             _realtimeDb =
                 client.Child(path)
                 .AsRealtimeDatabase<T>(customKey, "", StreamingOptions.LatestOnly, InitialPullStrategy.MissingOnly, true);
+
+
         }
 
         public async Task<bool> AddItemAsync(T item)
@@ -103,7 +106,7 @@ namespace CropCare.Services
             }
             var result = _realtimeDb.Once().FirstOrDefault(x => key == x.Key);
             return await Task.FromResult(result.Object);
-        }   
+        }
 
         public async Task<bool> UpdateItemAsync(T item)
         {
