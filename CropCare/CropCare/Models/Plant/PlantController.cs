@@ -36,7 +36,7 @@ namespace CropCare.Models.Plant
             return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
         }
 
-        public void UpdateHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
+        public void UpdateReadingHealthLabel(string sensorReading, Label healthLbl, char unitSymbol, double highThreshold, double lowThreshold)
         {
             double sensorValue;
             if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
@@ -56,6 +56,19 @@ namespace CropCare.Models.Plant
                     healthLbl.Text = "Normal";
                     healthLbl.TextColor = Colors.Green;
                 }
+            }
+        }
+        public void UpdateStateHealthLabel(string actuatorState, Label healthLbl)
+        {
+            if (actuatorState.Equals(Command.ON.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                healthLbl.Text = "On";
+                healthLbl.TextColor = Colors.Green;
+            }
+            else if (actuatorState.Equals(Command.OFF.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                healthLbl.Text = "Off";
+                healthLbl.TextColor = Colors.Red;
             }
         }
     }

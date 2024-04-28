@@ -33,9 +33,12 @@ public partial class PlantPage : ContentPage
 
     public void SetHealth()
     {
-        PlantController.UpdateHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
-        PlantController.UpdateHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
-        PlantController.UpdateHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
-        PlantController.UpdateHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
+        PlantController.UpdateReadingHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
+        PlantController.UpdateReadingHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
+        PlantController.UpdateReadingHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
+        PlantController.UpdateReadingHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
+
+        PlantController.UpdateStateHealthLabel(PlantController.Led.State, led_healthLbl);
+        PlantController.UpdateStateHealthLabel(PlantController.Fan.State, fan_healthLbl);
     }
 }
