@@ -10,14 +10,18 @@ namespace CropCare.Models.Security
     public class DoorOpener : IActuator
     {
         public string State { get; set; }
+        public DoorOpener(Command state = Command.OFF)
+        {
+            State = state.ToString();
+        }
 
         public bool ControlActuator(Command command)
         {
-            if (State == nameof(command))
+            if (State == command.ToString())
                 return false;
 
             // send command to iot hub
-            State = nameof(command);
+            State = command.ToString();
             // send command to iot hub
 
             return true;

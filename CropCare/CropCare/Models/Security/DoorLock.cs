@@ -10,14 +10,18 @@ namespace CropCare.Models.Security
     public class DoorLock : IActuator, ISensor
     {
         public string State { get; set; }
+        public DoorLock(Command state = Command.OFF)
+        {
+            State = state.ToString();
+        }
 
         public bool ControlActuator(Command command)
         {
-            if (State == nameof(command))
+            if (State == command.ToString())
                 return false;
 
             // send command to iot hub
-            State = nameof(command);
+            State = command.ToString();
             // send command to iot hub
 
             return true;
@@ -27,7 +31,7 @@ namespace CropCare.Models.Security
         {
             return new List<Reading>
             {
-                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, (State == nameof(Command.ON)).ToString())
+                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, State)
             };
         }
     }

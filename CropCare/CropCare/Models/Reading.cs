@@ -35,7 +35,7 @@ namespace CropCare.Models
         public const string UNITLESS = "unitless";
         public const string LUX = "nm";
         public const string LOUDNESS = "unitless"; //Unitless????
-        public const string OHMS = "ohms";
+        public const string OHMS = "Ω";
         public const string WATERLEVEL = "water level";
         public const string NONE = "";
         public const string DEGREE = "°";
