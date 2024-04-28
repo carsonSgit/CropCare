@@ -3,23 +3,23 @@
              x:Class="CropCare.Views.SettingsPage">
 
     <ScrollView>
-        <StackLayout Spacing="25" Padding="30">
-            <!-- Title -->
+        <StackLayout Spacing="25" Padding="20">
+            <Image Source="settings_icon_dark.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
             <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
 
             <!-- User Profile Settings -->
-            <StackLayout Spacing="10">
-                <Label Text="User Profile" FontAttributes="Bold"/>
-                <StackLayout Spacing="5">
-                    <Label Text="Name:"/>
-                    <HorizontalStackLayout>
+            <StackLayout>
+                <Label Text="User Profile" FontAttributes="Bold" />
+                <StackLayout Padding="0, 0, 0, 0">
+                    <HorizontalStackLayout Spacing="5" Padding="0, 0, 0, 0">
+                        <Label Text="Name:" Padding="0, 13, 0, 0"/>
+                        
                         <Entry x:Name="NameEntry"
                            Placeholder="Enter your name"
                            Text="{Binding Name}"
                            TextChanged="Entry_TextChanged"
-                           MinimumWidthRequest="255"/>
+                           MinimumWidthRequest="215"/>
 
-                        <!-- Update Name Button -->
                         <Button Text="Update"
                             x:Name="btn_update"
                             VerticalOptions="CenterAndExpand"
@@ -33,29 +33,29 @@
                 </StackLayout>
             </StackLayout>
 
+            <!-- Colour Theme Settings -->
+            <StackLayout>
+                <Label Text="Theme" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0, 0, 7.5, 0">
+                    <Label Text="Light Theme" VerticalOptions="Center"/>
+                    <Switch x:Name="ThemeSwitch" 
+                IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
+                OnColor="LightGray" 
+                VerticalOptions="Center" 
+                HorizontalOptions="EndAndExpand"
+                Toggled="ThemeSwitch_Toggled"/>
+                </StackLayout>
+            </StackLayout>
+
             <!-- Reset Password Button -->
-            <StackLayout Margin="0,15,0,0">
-                <Label Text="Reset Password" FontAttributes="Bold"/>
+            <HorizontalStackLayout Margin="0,0,0,0">
+                <Label Text="Reset Password" FontAttributes="Bold" Padding="0, 10, 180, 0"/>
                 <Button Text="Reset"
                         HorizontalOptions="End"
                         Clicked="Btn_ChangePassword_Clicked"
                         MaximumHeightRequest="38"
                         CornerRadius="15"/>
-            </StackLayout>
-
-            <!-- Colour Theme Settings -->
-            <StackLayout Spacing="10">
-                <Label Text="Theme" FontAttributes="Bold"/>
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                    <Label Text="Light Theme" VerticalOptions="Center"/>
-                    <Switch x:Name="ThemeSwitch" 
-                            IsToggled="{Binding IsLightTheme, Mode=TwoWay}" 
-                            OnColor="LightGray" 
-                            VerticalOptions="Center" 
-                            HorizontalOptions="EndAndExpand"
-                            Toggled="ThemeSwitch_Toggled"/>
-                </StackLayout>
-            </StackLayout>
+            </HorizontalStackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>
