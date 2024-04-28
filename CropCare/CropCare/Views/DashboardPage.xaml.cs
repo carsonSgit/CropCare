@@ -17,9 +17,9 @@ public partial class DashboardPage : ContentPage
         Navigation.PushAsync(new PlantPage(Farm));
     }
 
-    private void LocationNavigate_Clicked(object sender, EventArgs e)
+    private async void LocationNavigate_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LocationPage(Farm));
+        await Navigation.PushAsync(new LocationPage(Farm));
     }
 
     private void SecurityNavigate_Clicked(object sender, EventArgs e)

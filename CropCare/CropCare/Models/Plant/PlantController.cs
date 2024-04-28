@@ -12,14 +12,16 @@ namespace CropCare.Models.Plant
         public SoilMoisture SoilMoisture { get; }
         public TemperatureHumidity Temperature { get; }
         public WaterLevel WaterLevel { get; }
+        public string DeviceId { get; set; }
 
-        public PlantController()
+        public PlantController(string deviceId)
         {
             Fan = new Fan();
             Led = new Led();
             SoilMoisture = new SoilMoisture();
             Temperature = new TemperatureHumidity();
             WaterLevel = new WaterLevel();
+            DeviceId = deviceId;
         }
 
         public string GetTemperatureReading() => GetSensorReading(Temperature, ReadingType.TEMPERATURE);

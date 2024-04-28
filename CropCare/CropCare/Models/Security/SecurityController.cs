@@ -14,8 +14,9 @@ namespace CropCare.Models.Security
         public DoorLock DoorLock { get; set; }
         public DoorOpener DoorOpener { get; set; }
         public Luminosity Luminosity { get; set; }
+        public string DeviceId { get; set; }
 
-        public SecurityController()
+        public SecurityController(string deviceId)
         {
             Loudness = new Loudness();
             Motion = new Motion();
@@ -23,6 +24,7 @@ namespace CropCare.Models.Security
             DoorLock = new DoorLock();
             DoorOpener = new DoorOpener();
             Luminosity = new Luminosity();
+            DeviceId = deviceId;
         }
     }
 }
