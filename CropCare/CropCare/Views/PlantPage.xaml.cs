@@ -6,6 +6,7 @@ namespace CropCare.Views;
 
 public partial class PlantPage : ContentPage
 {
+    
     private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
 
@@ -14,7 +15,7 @@ public partial class PlantPage : ContentPage
         InitializeComponent();
         Farm = farm;
         PlantController = new PlantController();
-        BindingContext = farm;
+        BindingContext = Farm;
 
         SetMeasurements();
         SetHealth();
@@ -26,9 +27,6 @@ public partial class PlantPage : ContentPage
         humidity_measurementLbl.Text = PlantController.GetHumidityReading();
         moisture_measurementLbl.Text = PlantController.GetMoistureReading();
         waterlvl_measurementLbl.Text = PlantController.GetWaterLevelReading();
-
-        led_measurementLbl.Text = PlantController.Led.State;
-        fan_measurementLbl.Text = PlantController.Fan.State;
     }
 
     public void SetHealth()
@@ -39,6 +37,16 @@ public partial class PlantPage : ContentPage
         PlantController.UpdateReadingHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
 
         PlantController.UpdateStateHealthLabel(PlantController.Led.State, led_healthLbl);
+        PlantController.UpdateStateHealthLabel(PlantController.Fan.State, fan_healthLbl);
+    }
+
+    private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if(fanSwitch.IsToggled)
+            PlantController.Fan.ControlActuator(Models.Command.ON);
+        else
+            PlantController.Fan.ControlActuator(Models.Command.OFF);
+
         PlantController.UpdateStateHealthLabel(PlantController.Fan.State, fan_healthLbl);
     }
 }
