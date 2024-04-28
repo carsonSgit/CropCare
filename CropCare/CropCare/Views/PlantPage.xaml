@@ -87,7 +87,9 @@
                             OnColor="Green" 
                             ThumbColor="GhostWhite"
                             VerticalOptions="Center" 
-                            HorizontalOptions="EndAndExpand"/>
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="ledSwitch_Toggled"
+                            x:Name="ledSwitch"/>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="led_healthLbl"/>
                 </Grid>
             </Frame>

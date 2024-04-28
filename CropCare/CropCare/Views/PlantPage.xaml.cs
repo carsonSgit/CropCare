@@ -49,4 +49,14 @@ public partial class PlantPage : ContentPage
 
         PlantController.UpdateStateHealthLabel(PlantController.Fan.State, fan_healthLbl);
     }
+
+    private void ledSwitch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (ledSwitch.IsToggled)
+            PlantController.Led.ControlActuator(Models.Command.ON);
+        else
+            PlantController.Led.ControlActuator(Models.Command.OFF);
+
+        PlantController.UpdateStateHealthLabel(PlantController.Led.State, led_healthLbl);
+    }
 }

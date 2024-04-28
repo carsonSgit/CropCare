@@ -22,7 +22,6 @@ namespace CropCare.Models.Plant
 
             // send command to iot hub
             State = command.ToString();
-            // send command to iot hub
 
             return true;
         }
