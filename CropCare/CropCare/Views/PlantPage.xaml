@@ -18,8 +18,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Temperature"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="temperature_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="temperature_healthLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding TemperatureReading}" x:Name="temperature_measurementLbl"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding TemperatureHealth}" x:Name="temperature_healthLbl"/>
                 </Grid>
             </Frame>
 
@@ -34,8 +34,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Humidity"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="humidity_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="humidity_healthLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding HumidityReading}" x:Name="humidity_measurementLbl"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding HumidityHealth}" x:Name="humidity_healthLbl"/>
                 </Grid>
             </Frame>
 
@@ -50,8 +50,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Soil Moisture"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="moisture_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="moisture_healthLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding MoistureHealth}" x:Name="moisture_healthLbl"/>
                 </Grid>
             </Frame>
 
@@ -66,8 +66,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Water Level"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="waterlvl_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="waterlvl_healthLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding WaterLevelReading}" x:Name="waterlvl_measurementLbl"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding WaterLevelHealth}" x:Name="waterlvl_healthLbl"/>
                 </Grid>
             </Frame>
 
@@ -82,8 +82,15 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="LED"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="led_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="led_healthLbl"/>
+                    <Switch Grid.Column="1" Grid.Row="0" 
+                            Margin="0, -10, 0, 0" 
+                            OnColor="Green" 
+                            ThumbColor="GhostWhite"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="ledSwitch_Toggled"
+                            x:Name="ledSwitch"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding LedState}" x:Name="led_healthLbl"/>
                 </Grid>
             </Frame>
 
@@ -98,8 +105,15 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Fan"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Measurement" x:Name="fan_measurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Health" x:Name="fan_healthLbl"/>
+                    <Switch Grid.Column="1" Grid.Row="0" 
+                            Margin="0, -10, 0, 0" 
+                            OnColor="Green" 
+                            ThumbColor="GhostWhite"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="fanSwitch_Toggled"
+                            x:Name="fanSwitch"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding FanState}" x:Name="fan_healthLbl"/>
                 </Grid>
             </Frame>
 
