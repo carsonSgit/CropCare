@@ -1,0 +1,32 @@
+classDiagram
+    class Farm {
+        + Key
+        + Name
+        + DeviceId
+        + PropertyChanged
+        + InvokeMethodAsync(methodName: MethodName, parametersJSON: string): Task
+    }
+    class User {
+        + Key
+        + Email
+        + Name
+        + IsOwner
+        + FarmKeys
+        + IsAssigned
+        + PropertyChanged
+    }
+    class UserToFarm {
+        + Key
+        + UserId
+        + FarmId
+    }
+    class IHasKey {
+        <<interface>>
+        + Key
+    }
+
+    Farm ..|> IHasKey
+    User ..|> IHasKey
+    UserToFarm ..|> IHasKey
+    User -- Farm : Manages
+    User *-- Farm : Has
