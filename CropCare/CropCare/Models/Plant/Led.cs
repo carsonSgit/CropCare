@@ -10,6 +10,10 @@ namespace CropCare.Models.Plant
     public class Led : IActuator
     {
         public string State { get; set; }
+        public Led(Command state = Command.OFF)
+        {
+            State = state.ToString();
+        }
 
         public bool ControlActuator(Command command)
         {

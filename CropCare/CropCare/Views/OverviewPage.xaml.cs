@@ -1,7 +1,7 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using CropCare.Models;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.Windows.Input;
 
 namespace CropCare.Views;
 
@@ -13,10 +13,11 @@ public partial class OverviewPage : ContentPage
 
     public OverviewPage()
     {
-        UpdateFarmCollectionList();
         InitializeComponent();
         BindingContext = this;
+        UpdateFarmCollectionList();
     }
+
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
@@ -53,4 +54,5 @@ public partial class OverviewPage : ContentPage
         var farm = (sender as Frame)?.BindingContext as Farm;
         await Navigation.PushAsync(new DashboardPage(farm));
     }
+
 }

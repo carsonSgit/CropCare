@@ -10,6 +10,10 @@ namespace CropCare.Models.Plant
     public class Fan : IActuator
     {
         public string State { get; set; }
+        public Fan(Command state = Command.OFF)
+        {
+            State = state.ToString();
+        }
 
         public bool ControlActuator(Command command)
         {
