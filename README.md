@@ -207,10 +207,6 @@ classDiagram
         + ReadSensor(): List
         <Reading>
     }
-    class Command {
-        <<enumeration>>
-        - command
-    }
     class Reading {
         - Type: string
         - Unit: string
