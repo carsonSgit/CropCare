@@ -12,28 +12,23 @@ public partial class DashboardPage : ContentPage
         BindingContext = this.Farm;
     }
 
-    private void PlantNavigate_Clicked(object sender, EventArgs e)
+    private async void PlantNavigate_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new PlantPage(Farm));
+        await Navigation.PushAsync(new PlantPage(Farm));
     }
 
-    private void LocationNavigate_Clicked(object sender, EventArgs e)
+    private async void LocationNavigate_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LocationPage(Farm));
+        await Navigation.PushAsync(new LocationPage(Farm));
     }
 
-    private void SecurityNavigate_Clicked(object sender, EventArgs e)
+    private async void SecurityNavigate_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new SecurityPage(Farm));
+        await Navigation.PushAsync(new SecurityPage(Farm));
     }
 
-    private void TechnicianNavigate_Clicked(object sender, EventArgs e)
+    private async void TechnicianNavigate_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new TechnicianPage(Farm));
-    }
-
-    private void ControlsNavigate_Clicked(object sender, EventArgs e)
-    {
-        Navigation.PushAsync(new ControlPage(Farm));
+        await Navigation.PushAsync(new TechnicianPage(Farm));
     }
 }

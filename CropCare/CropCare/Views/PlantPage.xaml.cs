@@ -6,6 +6,7 @@ namespace CropCare.Views;
 
 public partial class PlantPage : ContentPage
 {
+    
     private Farm Farm { get; set; }
     public PlantController PlantController { get; set; }
 
@@ -14,31 +15,20 @@ public partial class PlantPage : ContentPage
         InitializeComponent();
         Farm = farm;
         PlantController = new PlantController();
-        BindingContext = farm;
-
-        SetMeasurements();
-        SetHealth();
+        BindingContext = PlantController;
     }
 
-    public void SetMeasurements()
+    private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        temperature_measurementLbl.Text = PlantController.GetTemperatureReading();
-        humidity_measurementLbl.Text = PlantController.GetHumidityReading();
-        moisture_measurementLbl.Text = PlantController.GetMoistureReading();
-        waterlvl_measurementLbl.Text = PlantController.GetWaterLevelReading();
-
-        led_measurementLbl.Text = PlantController.Led.State;
-        fan_measurementLbl.Text = PlantController.Fan.State;
+        var command = fanSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        PlantController.Fan.ControlActuator(command);
+        PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
     }
 
-    public void SetHealth()
+    private void ledSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        PlantController.UpdateReadingHealthLabel(PlantController.GetTemperatureReading(), temperature_healthLbl, '°', 30, 10);
-        PlantController.UpdateReadingHealthLabel(PlantController.GetHumidityReading(), humidity_healthLbl, '%', 70, 30);
-        PlantController.UpdateReadingHealthLabel(PlantController.GetMoistureReading(), moisture_healthLbl, 'o', 700, 200);
-        PlantController.UpdateReadingHealthLabel(PlantController.GetWaterLevelReading(), waterlvl_healthLbl, 'w', 70, 30);
-
-        PlantController.UpdateStateHealthLabel(PlantController.Led.State, led_healthLbl);
-        PlantController.UpdateStateHealthLabel(PlantController.Fan.State, fan_healthLbl);
+        var command = ledSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        PlantController.Led.ControlActuator(command);
+        PlantController.LedState = PlantController.UpdateStateHealthLabel(command.ToString());
     }
 }
