@@ -2,7 +2,6 @@ namespace CropCare.Views;
 
 using CropCare.Services;
 using System.Text.RegularExpressions;
-using static Java.Util.Jar.Attributes;
 
 public partial class ResetPasswordPage : ContentPage
 {
@@ -15,18 +14,8 @@ public partial class ResetPasswordPage : ContentPage
 		this.BindingContext = this;
 	}
 
-
-
     private void OnEmailTextChanged(object sender, TextChangedEventArgs e)
     {
-        /*
-        // Enable the update button if the name is different from the current saved user's name
-        UpdateEnabled = Name != App.CurrentUser.Name;
-        // Change the color of the update button to differentiate between enabled and disabled states
-        UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
-        btn_update.TextColor = UpdateEnabled ? Colors.White : Colors.Black;
-        */
-
         bool isValidEmail = IsValidEmail(e.NewTextValue);
         instructions_btn.IsEnabled = isValidEmail;
         if (isValidEmail)
