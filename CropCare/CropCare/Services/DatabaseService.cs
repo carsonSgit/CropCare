@@ -5,10 +5,11 @@ using System.Collections.ObjectModel;
 
 namespace CropCare.Services
 {
-    /// <summary>
-    /// Service for interacting with Firebase Realtime Database.
-    /// </summary>
-    /// <typeparam name="T">The type of data to be stored/retrieved.</typeparam>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Service for interacting with Firebase Realtime Database.
     public class DatabaseService<T> : IDataStore<T> where T : class, IHasKey
     {
         private ObservableCollection<T> _items;

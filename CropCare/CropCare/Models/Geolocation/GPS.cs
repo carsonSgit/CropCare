@@ -2,9 +2,11 @@
 
 namespace CropCare.Models.Geolocation
 {
-    /// <summary>
-    /// Represents a GPS sensor.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazim Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Represents a GPS sensor.
     public class GPS : ISensor
     {
         /// <summary>

@@ -8,9 +8,11 @@ using CropCare.Models.Geolocation;
 
 namespace CropCare.Models
 {
-    /// <summary>
-    /// Represents a farm entity.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Represents a farm entity.
     public class Farm : INotifyPropertyChanged, IHasKey
     {
         /// <summary>

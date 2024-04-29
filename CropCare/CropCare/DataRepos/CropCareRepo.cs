@@ -4,9 +4,11 @@ using CropCare.Services;
 
 namespace CropCare.DataRepos
 {
-    /// <summary>
-    /// Repository for accessing and managing CropCare data.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Repository for accessing and managing CropCare data.
     public class CropCareRepo
     {
         private DatabaseService<User> usersDb;

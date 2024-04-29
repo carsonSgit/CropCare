@@ -1,8 +1,10 @@
 ﻿namespace CropCare.Models
 {
-    /// <summary>
-    /// Provides constants for different types of sensor readings.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Provides constants for different types of sensor readings.
     public static class ReadingType
     {
         public const string TEMPERATURE = "temperature";
@@ -23,9 +25,11 @@
         public const string DOORLOCK = "doorlock";
     }
 
-    /// <summary>
-    /// Provides constants for different units of sensor readings.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Provides constants for different units of sensor readings.
     public static class ReadingUnit
     {
         public const string MILLIMITERS = "mm";
@@ -42,9 +46,11 @@
     }
 
 
-    /// <summary>
-    /// Represents a sensor reading.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Represents a sensor reading.
     public class Reading
     {
         /// <summary>

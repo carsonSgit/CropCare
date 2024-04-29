@@ -2,9 +2,11 @@
 
 namespace CropCare.Models
 {
-    /// <summary>
-    /// Represents the association between a user and a farm.
-    /// </summary>
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Represents the association between a user and a farm.
     public class UserToFarm : IHasKey
     {
         /// <summary>
