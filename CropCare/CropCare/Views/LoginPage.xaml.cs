@@ -1,16 +1,36 @@
 using CropCare.Services;
 using Firebase.Auth;
-using System.Linq;
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for user login.
+/// </summary>
 public partial class LoginPage : ContentPage
 {
+    /// <summary>
+    /// Gets or sets the name of the user.
+    /// </summary>
     public string Name { get; set; }
+
+    /// <summary>
+    /// Gets or sets the email of the user.
+    /// </summary>
     public string Email { get; set; }
-	public string Password { get; set; }
+
+    /// <summary>
+    /// Gets or sets the password of the user.
+    /// </summary>
+    public string Password { get; set; }
+
+    /// <summary>
+    /// Gets or sets the user credentials.
+    /// </summary>
     public UserCredential User { get; set; }
 
-	public LoginPage()
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LoginPage"/> class.
+    /// </summary>
+    public LoginPage()
 	{
 		InitializeComponent();
         User = AuthService.UserCreds;

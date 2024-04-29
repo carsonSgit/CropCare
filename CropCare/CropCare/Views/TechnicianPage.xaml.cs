@@ -1,18 +1,33 @@
-using CommunityToolkit.Maui.Core.Extensions;
 using CropCare.Models;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for managing technicians.
+/// </summary>
 public partial class TechnicianPage : ContentPage
 {
+    /// <summary>
+    /// Gets or sets the list of assigned technicians.
+    /// </summary>
     public List<User> AssignedTechnicians { get; set; }
-    public List<User> Technicians { get; set; }
-    public Farm Farm;
 
+    /// <summary>
+    /// Gets or sets the list of all technicians.
+    /// </summary>
+    public List<User> Technicians { get; set; }
+
+    /// <summary>
+    /// Gets the farm associated with the page.
+    /// </summary>
+    public Farm Farm { get; private set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TechnicianPage"/> class.
+    /// </summary>
+    /// <param name="farm">The farm associated with the page.</param>
     public TechnicianPage(Farm farm)
 	{
-        //UpdateFarmCollectionList = updateFarm;
-
         InitializeComponent();
         AssignedTechnicians = new List<User>();
         this.Farm = farm;
@@ -27,14 +42,14 @@ public partial class TechnicianPage : ContentPage
 
     async private void PopulateTechnicianPicker()
     {
+        //Retrieve all Technicians
         this.Technicians = new List<User>();
-        this.Technicians.AddRange((await App.Repo.UsersDb.GetItemsAsync(true)).Where(u => u.IsOwner == false));//Should I use get Items Async here?
-        //this.Technicians.AddRange(App.Repo.UsersDb.Items.Where(u => u.IsOwner == false));//Or is it better to use Items?
+        this.Technicians.AddRange((await App.Repo.UsersDb.GetItemsAsync(true)).Where(u => u.IsOwner == false));
 
         //Check users that are attachted to this farm
-        var UserKeys = App.Repo.UserToFarmDb.Items.Where(u => u.FarmId == this.Farm.Key).Select(u => u.UserId).ToList();//Select all Users that match the farm ID
-        this.AssignedTechnicians = App.Repo.UsersDb.Items.Where(u => UserKeys.Contains(u.Key) && u.IsOwner == false).ToList();//If the user is linked to the farm add them
-        this.Technicians.ForEach(u => u.IsAssigned = this.AssignedTechnicians.Any(t => t.Key == u.Key));//This is inefficient consider changing --> Use a for loop to add to the list and checkmark at the same time
+        var UserKeys = App.Repo.UserToFarmDb.Items.Where(u => u.FarmId == this.Farm.Key).Select(u => u.UserId).ToList();
+        this.AssignedTechnicians = App.Repo.UsersDb.Items.Where(u => UserKeys.Contains(u.Key) && u.IsOwner == false).ToList();
+        this.Technicians.ForEach(u => u.IsAssigned = this.AssignedTechnicians.Any(t => t.Key == u.Key));
     }
 
 
@@ -68,39 +83,5 @@ public partial class TechnicianPage : ContentPage
             await App.Repo.UserToFarmDb.DeleteItemAsync(connection);
             user.IsAssigned = false;
         }
-    }
-
-    void DisplayFarmIDInfo(object sender, EventArgs e)
-    {
-        DisplayAlert("Information", "\"Farm ID\" is also referred to as the \"IOT device ID\".", "OK");
-    }
-
-    private async void OnAddFarmButtonClicked(object sender, EventArgs e)
-    {
-        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-        {
-            await DisplayAlert("No Internet", "Please check your internet connection", "OK");
-            return;
-        }
-
-        /*
-        Farm newFarm = new Farm(FarmName, FarmId);
-        await App.Repo.FarmsDb.AddItemAsync(newFarm);
-        await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
-
-        foreach (User technician in AssignedTechnicians.ToList())
-        {
-            await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(technician.Key, newFarm.Key));
-        }
-
-        foreach (User user in AssignedTechnicians.ToList())
-        {
-            user.IsAssigned = false;
-        }
-
-        UpdateFarmCollectionList();
-
-        await Navigation.PopAsync();
-        */
     }
 }

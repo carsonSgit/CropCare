@@ -10,6 +10,11 @@ using Map = Microsoft.Maui.Controls.Maps.Map;
 
 namespace CropCare.Models
 {
+    // Team Name: CropCare
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
+    // Date: April 29th 2023, 6th Semester
+    // Course Name: Application Development and Connected Objects
+    // Description: Custom map used to display a farm location
     public class CustomMap : Map
     {
         [Obsolete]

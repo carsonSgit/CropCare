@@ -46,6 +46,4 @@
           IconImageSource="logout.svg"
           Text="Logout"
           Clicked="Logout_Clicked"/>
-
-
 </Shell>

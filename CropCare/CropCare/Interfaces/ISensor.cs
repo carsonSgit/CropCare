@@ -1,14 +1,16 @@
 ﻿using CropCare.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Interfaces
 {
+    /// <summary>
+    /// Interface for sensor objects.
+    /// </summary>
     public interface ISensor
     {
+        /// <summary>
+        /// Reads sensor data and returns a list of readings.
+        /// </summary>
+        /// <returns>A list of sensor readings.</returns>
         public List<Reading> ReadSensor();
     }
 }

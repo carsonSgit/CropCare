@@ -1,14 +1,24 @@
-using CropCare.Interfaces;
 using CropCare.Models;
 using CropCare.Models.Plant;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for managing plant-related controls.
+/// </summary>
 public partial class PlantPage : ContentPage
 {
     private Farm Farm { get; set; }
+
+    /// <summary>
+    /// Gets the plant controller associated with the page.
+    /// </summary>
     public PlantController PlantController { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlantPage"/> class.
+    /// </summary>
+    /// <param name="farm">The farm containing the plant controller.</param>
     public PlantPage(Farm farm)
     {
         InitializeComponent();

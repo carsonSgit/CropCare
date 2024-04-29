@@ -1,16 +1,27 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using CropCare.Models;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page providing an overview of farms.
+/// </summary>
 public partial class OverviewPage : ContentPage
 {
-
+    /// <summary>
+    /// Gets or sets the collection of farms.
+    /// </summary>
     public ObservableCollection<Farm> FarmsCollection { get; set; }
-    public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the current user is an owner.
+    /// </summary>
+    public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
+    
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OverviewPage"/> class.
+    /// </summary>
     public OverviewPage()
     {
         InitializeComponent();
@@ -54,5 +65,4 @@ public partial class OverviewPage : ContentPage
         var farm = (sender as Frame)?.BindingContext as Farm;
         await Navigation.PushAsync(new DashboardPage(farm));
     }
-
 }

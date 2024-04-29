@@ -3,11 +3,26 @@ namespace CropCare.Views;
 using CropCare.Services;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// Represents a page for resetting the user's password.
+/// </summary>
 public partial class ResetPasswordPage : ContentPage
 {
+    /// <summary>
+    /// Gets or sets the email associated with the password reset.
+    /// </summary>
     public string Email { get; set; }
-    public bool ModifyEmail {  get; set; }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the email can be modified.
+    /// </summary>
+    public bool ModifyEmail { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ResetPasswordPage"/> class.
+    /// </summary>
+    /// <param name="email">The email associated with the password reset.</param>
+    /// <param name="modifyEmail">A value indicating whether the email can be modified.</param>
     public ResetPasswordPage(string email, bool modifyEmail)
 	{
 		InitializeComponent();

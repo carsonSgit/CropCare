@@ -2,9 +2,17 @@ using CropCare.Models;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for adding a new farm.
+/// </summary>
 public partial class DashboardPage : ContentPage
 {
     private Farm Farm { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the DashboardPage class.
+    /// </summary>
+    /// <param name="farm">The farm to display on the dashboard.</param>
     public DashboardPage(Farm farm)
 	{
 		InitializeComponent();

@@ -1,19 +1,45 @@
 namespace CropCare.Views;
 using CropCare.Models;
-using System.Collections.ObjectModel;
 
+/// <summary>
+/// Represents a page for adding a new farm.
+/// </summary>
 public partial class AddFarmPage : ContentPage
 {
+    /// <summary>
+    /// Gets or sets the name of the farm.
+    /// </summary>
     public string FarmName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the ID of the farm.
+    /// </summary>
     public string FarmId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the list of assigned technicians for the farm.
+    /// </summary>
     public List<User> AssignedTechnicians { get; set; }
+
+    /// <summary>
+    /// Gets or sets the list of available technicians.
+    /// </summary>
     public List<User> Technicians { get; set; }
 
+    /// <summary>
+    /// Represents a delegate for updating the farm collection list.
+    /// </summary>
+    /// <returns>Returns void.</returns>
     public delegate void UpdateFarmCollectionDelegate();
+
     private UpdateFarmCollectionDelegate UpdateFarmCollectionList;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AddFarmPage"/> class.
+    /// </summary>
+    /// <param name="updateFarm">Delegate for updating the farm collection list.</param>
     public AddFarmPage(UpdateFarmCollectionDelegate updateFarm)
-	{
+    {
         UpdateFarmCollectionList = updateFarm;
 
         InitializeComponent();
@@ -22,12 +48,20 @@ public partial class AddFarmPage : ContentPage
         BindingContext = this;
     }
 
+    /// <summary>
+    /// Populates the technician picker with available technicians.
+    /// </summary>
     async private void PopulateTechnicianPicker()
     {
         this.Technicians = new List<User>();
         this.Technicians.AddRange((await App.Repo.UsersDb.GetItemsAsync(true)).Where(u => u.IsOwner == false));
     }
 
+    /// <summary>
+    /// Handles the event when the search bar text is changed.
+    /// </summary>
+    /// <param name="sender">The object that raised the event.</param>
+    /// <param name="e">The event arguments.</param>
     private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
     {
         var searchText = e.NewTextValue;
@@ -35,6 +69,11 @@ public partial class AddFarmPage : ContentPage
         TechnicianCollectionView.ItemsSource = filteredTechnicians;
     }
 
+    /// <summary>
+    /// Handles the event when the check box state is changed.
+    /// </summary>
+    /// <param name="sender">The object that raised the event.</param>
+    /// <param name="e">The event arguments.</param>
     private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkBox = (CheckBox)sender;
@@ -52,11 +91,21 @@ public partial class AddFarmPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Displays information about the farm ID when clicked.
+    /// </summary>
+    /// <param name="sender">The object that raised the event.</param>
+    /// <param name="e">The event arguments.</param>
     void DisplayFarmIDInfo(object sender, EventArgs e)
     {
         DisplayAlert("Information", "\"Farm ID\" is also referred to as the \"IOT device ID\".", "OK");
     }
 
+    /// <summary>
+    /// Handles the event when the add farm button is clicked.
+    /// </summary>
+    /// <param name="sender">The object that raised the event.</param>
+    /// <param name="e">The event arguments.</param>
     private async void OnAddFarmButtonClicked(object sender, EventArgs e)
     {
         if (Connectivity.NetworkAccess != NetworkAccess.Internet)
@@ -65,12 +114,12 @@ public partial class AddFarmPage : ContentPage
             return;
         }
 
-        if(string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(FarmId))
+        if (string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(FarmId))
         {
             await DisplayAlert("Error", "Please fill in all fields", "OK");
             return;
         }
-        
+
         Farm newFarm = new Farm(FarmName, FarmId);
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
         await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
