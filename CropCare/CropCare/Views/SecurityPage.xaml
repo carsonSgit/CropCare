@@ -6,7 +6,7 @@
     <ScrollView Margin="0,20,0,0">
         <VerticalStackLayout>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
+            <Frame x:Name="DoorLockFrame" BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -29,7 +29,7 @@
                 </Grid>
             </Frame>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
+            <Frame x:Name="DoorFrame" BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

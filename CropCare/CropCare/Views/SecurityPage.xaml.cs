@@ -25,6 +25,15 @@ public partial class SecurityPage : ContentPage
         Farm = farm;
         SecurityController = farm.SecurityController;
         BindingContext = SecurityController;
+        UpdateDoorLockAndDoorFramesVisibility();
+    }
+
+    private void UpdateDoorLockAndDoorFramesVisibility()
+    {
+        var doorLockFrame = this.FindByName<Frame>("DoorLockFrame");
+        var doorFrame = this.FindByName<Frame>("DoorFrame");
+        doorLockFrame.IsVisible = App.CurrentUser.IsOwner;
+        doorFrame.IsVisible = App.CurrentUser.IsOwner;
     }
 
     private void doorLockSwitch_Toggled(object sender, ToggledEventArgs e)

@@ -45,7 +45,7 @@
                 </Frame>
             </HorizontalStackLayout>
             <VerticalStackLayout>
-                <Frame BorderColor="#516250" CornerRadius="5" Margin="15,10,15,20">
+                <Frame x:Name="BuzzerFrame" BorderColor="#516250" CornerRadius="5" Margin="15,10,15,20">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

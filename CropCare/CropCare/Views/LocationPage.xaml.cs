@@ -22,7 +22,13 @@ public partial class LocationPage : ContentPage
         Farm = farm;
         GeolocationController = farm.GeolocationController;
         BindingContext = GeolocationController;
+        UpdateBuzzerFrameVisibility();
+    }
 
+    private void UpdateBuzzerFrameVisibility()
+    {
+        var buzzerFrame = this.FindByName<Frame>("BuzzerFrame");
+        buzzerFrame.IsVisible = App.CurrentUser.IsOwner;
     }
 
     [Obsolete]
