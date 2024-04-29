@@ -18,6 +18,13 @@ public partial class DashboardPage : ContentPage
 		InitializeComponent();
         this.Farm = farm;
         BindingContext = this.Farm;
+        UpdateTechniciansFrameVisibility();
+    }
+
+    private void UpdateTechniciansFrameVisibility()
+    {
+        var techniciansFrame = this.FindByName<Frame>("TechniciansFrame");
+        techniciansFrame.IsVisible = App.CurrentUser.IsOwner;
     }
 
     private async void PlantNavigate_Clicked(object sender, EventArgs e)

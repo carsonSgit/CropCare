@@ -38,7 +38,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+            <Frame x:Name="TechniciansFrame" Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
                 </Frame.GestureRecognizers>
