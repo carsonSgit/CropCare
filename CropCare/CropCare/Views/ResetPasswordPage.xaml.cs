@@ -6,13 +6,21 @@ using System.Text.RegularExpressions;
 public partial class ResetPasswordPage : ContentPage
 {
     public string Email { get; set; }
+    public bool ModifyEmail {  get; set; }
 
-    public ResetPasswordPage(string email)
+    public ResetPasswordPage(string email, bool modifyEmail)
 	{
 		InitializeComponent();
 		this.Email = email;
+        this.ModifyEmail = modifyEmail;
 		this.BindingContext = this;
+        SetEmailEntryState();
 	}
+
+    private void SetEmailEntryState()
+    {
+        email_entry.IsEnabled = this.ModifyEmail;
+    }
 
     private void OnEmailTextChanged(object sender, TextChangedEventArgs e)
     {

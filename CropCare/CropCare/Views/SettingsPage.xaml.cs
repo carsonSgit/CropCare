@@ -59,7 +59,7 @@ public partial class SettingsPage : ContentPage
 
     private async void Btn_Naviagte_To_ResetPasswordPage(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ResetPasswordPage(App.CurrentUser.Email));
+        await Navigation.PushAsync(new ResetPasswordPage(App.CurrentUser.Email, false));
     }
 
     private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)

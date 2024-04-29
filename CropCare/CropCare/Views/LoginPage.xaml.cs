@@ -60,7 +60,7 @@ public partial class LoginPage : ContentPage
 
     private async void Btn_Naviagte_To_ResetPasswordPage(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ResetPasswordPage(""));
+        await Navigation.PushAsync(new ResetPasswordPage("", true));
     }
 
     private async void Btn_SignUp_Clicked(object sender, EventArgs e)
