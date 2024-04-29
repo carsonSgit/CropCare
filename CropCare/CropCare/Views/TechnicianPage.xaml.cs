@@ -14,10 +14,15 @@ public partial class TechnicianPage : ContentPage
         //UpdateFarmCollectionList = updateFarm;
 
         InitializeComponent();
-        PopulateTechnicianPicker();
         AssignedTechnicians = new List<User>();
         this.Farm = farm;
         BindingContext = this;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        PopulateTechnicianPicker();
     }
 
     async private void PopulateTechnicianPicker()

@@ -24,7 +24,7 @@
                     <Label Grid.Column="2" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
                 </Grid>
                 <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
-                    <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
+                    <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="360">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Orientation="Vertical">

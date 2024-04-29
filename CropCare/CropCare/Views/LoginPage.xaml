@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.LoginPage"
              Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
              Title="LoginPage">
     <ContentPage.Resources>
         <ResourceDictionary>
