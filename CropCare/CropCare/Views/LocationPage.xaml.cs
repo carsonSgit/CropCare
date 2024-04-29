@@ -22,17 +22,18 @@ public partial class LocationPage : ContentPage
         Farm = farm;
         GeolocationController = farm.GeolocationController;
         BindingContext = GeolocationController;
-
     }
 
-    [Obsolete]
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        Device.BeginInvokeOnMainThread(async () =>
+
+        MainThread.BeginInvokeOnMainThread(async () =>
         {
-            await Task.Delay(200);
+            // Initialization issue, since we use map in a stack nav, for some
+            // reason there is a data race and the map wont change default location
+            await Task.Delay(1000);
 
             if (map.IsVisible)
             {
