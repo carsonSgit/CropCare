@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CropCare.Interfaces
+﻿namespace CropCare.Interfaces
 {
+    /// <summary>
+    /// Interface for controlling devices.
+    /// </summary>
     public interface IDeviceController
     {
+        // Methods to get sensor readings asynchronously
         public int GetSoilMoistureAsync();
         public int GetWaterLevelAsync();
         public int GetLuminosityAsync();
@@ -24,6 +22,7 @@ namespace CropCare.Interfaces
         public int GetTemperatureAsync();
         public int GetHumidityAsync();
 
+        // Methods to set actuator states asynchronously
         public void SetLightAsync(bool state);
         public void SetDoorLockedAsync(bool state);
         public void SetDoorOpenAsync(bool state);

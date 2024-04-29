@@ -1,16 +1,36 @@
-using CropCare.Services;
 using Firebase.Auth;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for user sign-up.
+/// </summary>
 public partial class SignUpPage : ContentPage
 {
-	public string Email { get; set; }
-	public string Password { get; set; }
-	public string ConfirmPassword { get; set; }
+    /// <summary>
+    /// Gets or sets the email for the sign-up.
+    /// </summary>
+    public string Email { get; set; }
+
+    /// <summary>
+    /// Gets or sets the password for the sign-up.
+    /// </summary>
+    public string Password { get; set; }
+
+    /// <summary>
+    /// Gets or sets the confirmation password for the sign-up.
+    /// </summary>
+    public string ConfirmPassword { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name for the sign-up.
+    /// </summary>
     public string Name { get; set; }
 
-	public SignUpPage()
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SignUpPage"/> class.
+    /// </summary>
+    public SignUpPage()
 	{
 		InitializeComponent();
 		BindingContext = this;

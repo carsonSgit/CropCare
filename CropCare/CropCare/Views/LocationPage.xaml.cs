@@ -1,15 +1,21 @@
 using CropCare.Models;
 using CropCare.Models.Geolocation;
 using Microsoft.Maui.Controls.Maps;
-using Microsoft.Maui.Devices.Sensors;
 using Microsoft.Maui.Maps;
-using Map = Microsoft.Maui.Controls.Maps.Map;
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for displaying the location of a farm.
+/// </summary>
 public partial class LocationPage : ContentPage
 {
     private GeolocationController GeolocationController { get; set; }
     private Farm Farm { get; set; }
+
+    /// <summary>
+    /// Initializea new instance of the LocationPage class.
+    /// </summary>
+    /// <param name="farm">The farm whose location is to be displayed.</param>
     public LocationPage(Farm farm)
 	{
 		InitializeComponent();

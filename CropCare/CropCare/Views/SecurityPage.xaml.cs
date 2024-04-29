@@ -5,8 +5,20 @@ namespace CropCare.Views;
 
 public partial class SecurityPage : ContentPage
 {
-    private Farm Farm { get; set; }
-    private SecurityController SecurityController { get; set; } 
+    /// <summary>
+    /// Gets the farm associated with the security controls.
+    /// </summary>
+    public Farm Farm { get; private set; }
+
+    /// <summary>
+    /// Gets the security controller associated with the page.
+    /// </summary>
+    public SecurityController SecurityController { get; private set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SecurityPage"/> class.
+    /// </summary>
+    /// <param name="farm">The farm associated with the security controls.</param>
     public SecurityPage(Farm farm)
 	{
 		InitializeComponent();
