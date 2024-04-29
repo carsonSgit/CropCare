@@ -12,6 +12,8 @@ namespace CropCare.Models
     // Description: Represents a user in the system.
     public class User : INotifyPropertyChanged, IHasKey
     {
+        private List<string> farmKeys;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -37,7 +39,18 @@ namespace CropCare.Models
         /// <summary>
         /// Gets or sets the keys of the farms associated with the user.
         /// </summary>
-        public List<string> FarmKeys { get; set; }
+        public List<string> FarmKeys
+        {
+            get
+            {
+                return farmKeys ??= new List<string>();
+            }
+            set
+            {
+                if (value != null)
+                    farmKeys = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the user is assigned.

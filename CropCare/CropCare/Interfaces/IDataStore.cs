@@ -11,7 +11,7 @@ namespace CropCare.Interfaces
         /// <summary>
         /// Gets the collection of items in the data store.
         /// </summary>
-        ObservableCollection<T> Items { get; }
+        public ObservableCollection<T> Items { get; }
 
         /// <summary>
         /// Adds an item to the data store asynchronously.

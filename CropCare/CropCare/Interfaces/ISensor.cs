@@ -11,6 +11,6 @@ namespace CropCare.Interfaces
         /// Reads sensor data and returns a list of readings.
         /// </summary>
         /// <returns>A list of sensor readings.</returns>
-        List<Reading> ReadSensor();
+        public List<Reading> ReadSensor();
     }
 }
