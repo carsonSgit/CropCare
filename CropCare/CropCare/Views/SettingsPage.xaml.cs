@@ -57,10 +57,17 @@ public partial class SettingsPage : ContentPage
         }
     }
 
+    /*
     private async void Btn_ChangePassword_Clicked(object sender, EventArgs e)
     {
         await AuthService.Client.ResetEmailPasswordAsync(App.CurrentUser.Email);
         await DisplayAlert("Password Reset", "An email to reset password was sent to " + App.CurrentUser.Email, "OK");
+    }
+    */
+
+    private async void Btn_Naviagte_To_ResetPasswordPage(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ResetPasswordPage(App.CurrentUser.Email));
     }
 
     private void ThemeSwitch_Toggled(object sender, ToggledEventArgs e)

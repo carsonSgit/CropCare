@@ -4,7 +4,7 @@
 
     <ScrollView>
         <StackLayout Spacing="25" Padding="20">
-            <Image Source="settings_icon_dark.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+            <Image Source="settings_icon_normal.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
             <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
 
             <!-- User Profile Settings -->
@@ -49,10 +49,10 @@
 
             <!-- Reset Password Button -->
             <HorizontalStackLayout Margin="0,0,0,0">
-                <Label Text="Reset Password" FontAttributes="Bold" Padding="0, 10, 180, 0"/>
-                <Button Text="Reset"
+                <Label Text="Forgot your password?" FontAttributes="Bold" Padding="0, 10, 75, 0"/>
+                <Button Text="Reset Password"
                         HorizontalOptions="End"
-                        Clicked="Btn_ChangePassword_Clicked"
+                        Clicked="Btn_Naviagte_To_ResetPasswordPage"
                         MaximumHeightRequest="38"
                         CornerRadius="15"/>
             </HorizontalStackLayout>
