@@ -58,26 +58,10 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    /*
-    private async void Btn_Logout_Clicked(object sender, EventArgs e)
+    private async void Btn_Naviagte_To_ResetPasswordPage(object sender, EventArgs e)
     {
-        try
-        {
-            //Update UI
-            AuthService.Client.SignOut();
-            Email = string.Empty;
-            Password = string.Empty;
-            lblUser.Text = string.Empty;
-            await Shell.Current.GoToAsync($"//Login");
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Alert", ex.Message, "OK");
-        }
-
-        OnPropertyChanged(nameof(Email));
-        OnPropertyChanged(nameof(Password));
-    }*/
+        await Navigation.PushAsync(new ResetPasswordPage("", true));
+    }
 
     private async void Btn_SignUp_Clicked(object sender, EventArgs e)
     {
