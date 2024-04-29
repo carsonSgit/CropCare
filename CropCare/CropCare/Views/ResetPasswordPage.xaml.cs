@@ -27,13 +27,9 @@ public partial class ResetPasswordPage : ContentPage
         bool isValidEmail = IsValidEmail(e.NewTextValue);
         instructions_btn.IsEnabled = isValidEmail;
         if (isValidEmail)
-        {
             instructions_btn.BackgroundColor = Color.FromArgb("#538D22");
-        }
         else
-        {
             instructions_btn.BackgroundColor = Colors.LightGray;
-        }
     }
 
     private bool IsValidEmail(string email)
