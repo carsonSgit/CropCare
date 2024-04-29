@@ -64,7 +64,8 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.49" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.101" />
+		<PackageReference Include="Microsoft.Maui.Maps" Version="7.0.101" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
 		<PackageReference Include="Syncfusion.Maui.Buttons" Version="25.1.40" />
