@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CropCare.Interfaces
+﻿namespace CropCare.Interfaces
 {
+    /// <summary>
+    /// Interface for objects that have a key.
+    /// </summary>
     public interface IHasKey
     {
-        public string Key { get; set; }
+        /// <summary>
+        /// The key of the object.
+        /// </summary>
+        string Key { get; set; }
     }
 }

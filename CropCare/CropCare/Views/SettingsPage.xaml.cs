@@ -1,17 +1,30 @@
-using CropCare.Services;
 using Firebase.Auth;
 
 namespace CropCare.Views;
 
+/// <summary>
+/// Represents a page for managing user settings.
+/// </summary>
 public partial class SettingsPage : ContentPage
 {
-    // Property to store the user's name
-	public string Name { get; set; } = App.CurrentUser.Name;
-    // Propterty to enable or disable the update button
+    /// <summary>
+    /// Gets or sets the user's name.
+    /// </summary>
+    public string Name { get; set; } = App.CurrentUser.Name;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the update button is enabled.
+    /// </summary>
     public bool UpdateEnabled { get; set; } = false;
-    // Property to change the color of the update button
+
+    /// <summary>
+    /// Gets or sets the color of the update button.
+    /// </summary>
     public Color UpdateButtonColor { get; set; } = Colors.White;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SettingsPage"/> class.
+    /// </summary>
     public SettingsPage()
 	{
 		InitializeComponent();

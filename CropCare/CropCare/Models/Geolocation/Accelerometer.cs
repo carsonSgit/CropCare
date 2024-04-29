@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Geolocation
 {
+    /// <summary>
+    /// Represents an accelerometer sensor.
+    /// </summary>
     public class Accelerometer : ISensor
     {
+        /// <summary>
+        /// Reads the accelerometer sensor.
+        /// </summary>
+        /// <returns>A list of readings from the accelerometer sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

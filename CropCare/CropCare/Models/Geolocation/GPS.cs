@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Geolocation
 {
+    /// <summary>
+    /// Represents a GPS sensor.
+    /// </summary>
     public class GPS : ISensor
     {
+        /// <summary>
+        /// Reads the GPS sensor.
+        /// </summary>
+        /// <returns>A list of readings from the GPS sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

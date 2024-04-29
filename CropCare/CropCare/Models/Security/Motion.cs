@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Security
 {
+    /// <summary>
+    /// Represents a motion sensor.
+    /// </summary>
     public class Motion : ISensor
     {
+        /// <summary>
+        /// Reads the motion sensor.
+        /// </summary>
+        /// <returns>A list of readings from the motion sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

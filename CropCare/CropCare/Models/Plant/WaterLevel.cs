@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Plant
 {
+    /// <summary>
+    /// Represents a water level sensor.
+    /// </summary>
     public class WaterLevel : ISensor
     {
+        /// <summary>
+        /// Reads the water level sensor.
+        /// </summary>
+        /// <returns>A list of readings from the water level sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

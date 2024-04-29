@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Plant
 {
+    /// <summary>
+    /// Represents a temperature and humidity sensor.
+    /// </summary>
     public class TemperatureHumidity : ISensor
     {
+        /// <summary>
+        /// Reads the temperature and humidity sensor.
+        /// </summary>
+        /// <returns>A list of readings from the temperature and humidity sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

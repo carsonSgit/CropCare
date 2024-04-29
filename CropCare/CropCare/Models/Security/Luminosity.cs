@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Security
 {
+    /// <summary>
+    /// Represents a luminosity sensor.
+    /// </summary>
     public class Luminosity : ISensor
     {
+        /// <summary>
+        /// Reads the luminosity sensor.
+        /// </summary>
+        /// <returns>A list of readings from the luminosity sensor.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()

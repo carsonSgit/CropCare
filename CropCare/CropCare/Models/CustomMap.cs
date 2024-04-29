@@ -10,6 +10,9 @@ using Map = Microsoft.Maui.Controls.Maps.Map;
 
 namespace CropCare.Models
 {
+    /// <summary>
+    /// Custom map used to display a farm location
+    /// </summary>
     public class CustomMap : Map
     {
         [Obsolete]

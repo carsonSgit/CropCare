@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CropCare.Models
+﻿namespace CropCare.Models
 {
+    /// <summary>
+    /// Provides constants for different types of sensor readings.
+    /// </summary>
     public static class ReadingType
     {
         public const string TEMPERATURE = "temperature";
@@ -26,6 +23,9 @@ namespace CropCare.Models
         public const string DOORLOCK = "doorlock";
     }
 
+    /// <summary>
+    /// Provides constants for different units of sensor readings.
+    /// </summary>
     public static class ReadingUnit
     {
         public const string MILLIMITERS = "mm";
@@ -42,12 +42,32 @@ namespace CropCare.Models
     }
 
 
+    /// <summary>
+    /// Represents a sensor reading.
+    /// </summary>
     public class Reading
     {
+        /// <summary>
+        /// Gets or sets the type of the reading.
+        /// </summary>
         public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unit of the reading.
+        /// </summary>
         public string Unit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the reading.
+        /// </summary>
         public string Value { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Reading"/> class with the specified type, unit, and value.
+        /// </summary>
+        /// <param name="type">The type of the reading.</param>
+        /// <param name="unit">The unit of the reading.</param>
+        /// <param name="value">The value of the reading.</param>
         public Reading(string type, string unit, string value)
         {
             Type = type;
@@ -55,6 +75,10 @@ namespace CropCare.Models
             Value = value;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return $"{Value} {Unit}";

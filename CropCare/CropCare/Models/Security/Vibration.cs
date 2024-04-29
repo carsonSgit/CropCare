@@ -1,14 +1,16 @@
 ﻿using CropCare.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Models.Security
 {
+    /// <summary>
+    /// Represents a sensor for detecting vibrations.
+    /// </summary>
     public class Vibration : ISensor
     {
+        /// <summary>
+        /// Reads the sensor to detect vibrations.
+        /// </summary>
+        /// <returns>A list of readings indicating vibration detection.</returns>
         public List<Reading> ReadSensor()
         {
             return new List<Reading>()
