@@ -45,13 +45,12 @@ namespace CropCare.Services
         {
             FirebaseOptions options = new FirebaseOptions()
             {
-                OfflineDatabaseFactory = (t, s) => new OfflineDatabase(t, s),
                 AuthTokenAsyncFactory = async () => await user.GetIdTokenAsync()
             };
             var client = new FirebaseClient(BaseUrl, options);
             _realtimeDb =
                 client.Child(path)
-                .AsRealtimeDatabase<T>(customKey, "", StreamingOptions.LatestOnly, InitialPullStrategy.MissingOnly, true);
+                .AsRealtimeDatabase<T>(customKey, "", StreamingOptions.LatestOnly, InitialPullStrategy.Everything, true);
         }
 
         /// <summary>
