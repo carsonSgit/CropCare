@@ -24,15 +24,6 @@ public partial class PlantPage : ContentPage
         InitializeComponent();
         PlantController = farm.PlantController;
         BindingContext = PlantController;
-        UpdateLedAndFanFramesVisibility();
-    }
-
-    private void UpdateLedAndFanFramesVisibility()
-    {
-        var ledFrame = this.FindByName<Frame>("LedFrame");
-        var fanFrame = this.FindByName<Frame>("FanFrame");
-        ledFrame.IsVisible = App.CurrentUser.IsOwner;
-        fanFrame.IsVisible = App.CurrentUser.IsOwner;
     }
 
     private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
