@@ -5,8 +5,8 @@
              Title="Dashboard">
     <VerticalStackLayout>
         <VerticalStackLayout Spacing="10">
-            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Padding="0, 5, 0, 0"/>
-            <Label Text="Status: PLACEHOLDER" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Padding="0"/>
+            <Label Text="{Binding Farm.Name}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Padding="0, 5, 0, 0"/>
+            <Label Text="Status: Critical" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Padding="0"/>
 
             <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
                 <Frame.GestureRecognizers>
@@ -18,7 +18,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250"  IsVisible="{Binding IsOwner}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
                 </Frame.GestureRecognizers>
@@ -38,7 +38,7 @@
                 </StackLayout>
             </Frame>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250" IsVisible="{Binding IsOwner}">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
                 </Frame.GestureRecognizers>

@@ -20,8 +20,8 @@ public partial class SecurityPage : ContentPage
     /// </summary>
     /// <param name="farm">The farm associated with the security controls.</param>
     public SecurityPage(Farm farm)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Farm = farm;
         SecurityController = farm.SecurityController;
         BindingContext = SecurityController;

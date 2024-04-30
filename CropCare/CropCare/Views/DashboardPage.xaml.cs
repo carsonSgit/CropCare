@@ -7,17 +7,18 @@ namespace CropCare.Views;
 /// </summary>
 public partial class DashboardPage : ContentPage
 {
-    private Farm Farm { get; set; }
+    public Farm Farm { get; set; }
+    public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
 
     /// <summary>
     /// Initializes a new instance of the DashboardPage class.
     /// </summary>
     /// <param name="farm">The farm to display on the dashboard.</param>
     public DashboardPage(Farm farm)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         this.Farm = farm;
-        BindingContext = this.Farm;
+        BindingContext = this;
     }
 
     private async void PlantNavigate_Clicked(object sender, EventArgs e)

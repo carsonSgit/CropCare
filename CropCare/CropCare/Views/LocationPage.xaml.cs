@@ -17,8 +17,8 @@ public partial class LocationPage : ContentPage
     /// </summary>
     /// <param name="farm">The farm whose location is to be displayed.</param>
     public LocationPage(Farm farm)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Farm = farm;
         GeolocationController = farm.GeolocationController;
         BindingContext = GeolocationController;
