@@ -25,11 +25,17 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Farm_Tapped" />
                             </Frame.GestureRecognizers>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Name}" FontSize="Medium" />
-                                <Label Text="{Binding DeviceId}" FontSize="Small" />
-                                <!-- Add other farm properties as needed -->
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Padding="10">
+                                    <Label Text="{Binding Name}" FontSize="Medium" />
+                                    <Label Text="{Binding DeviceId}" FontSize="Small" />
+                                </StackLayout>
+                                <Image Grid.Column="1" Source="{Binding IconPath}" HeightRequest="55" HorizontalOptions="End" Margin="0, 0, 10, 0"/>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
