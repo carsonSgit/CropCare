@@ -181,8 +181,7 @@ namespace CropCare.Models.Security
         /// <returns>The current door lock reading.</returns>
         public string GetDoorLockReading() => DoorLock.ReadSensor().FirstOrDefault()?.Value;
 
-
-        private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
+        private string GetSensorReading<T>(ISensor<T> sensor, string readingType)
         {
             var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
             return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";

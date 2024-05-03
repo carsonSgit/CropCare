@@ -7,18 +7,18 @@ namespace CropCare.Models.Geolocation
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a GPS sensor.
-    public class GPS : ISensor
+    public class GPS : ISensor<double>
     {
         /// <summary>
         /// Reads the GPS sensor.
         /// </summary>
         /// <returns>A list of readings from the GPS sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<double>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<double>>()
             {
-                new Reading(ReadingType.LATITUDE, ReadingUnit.DEGREE, "45.484056"),
-                new Reading(ReadingType.LONGITUDE, ReadingUnit.DEGREE, "-73.680421"),
+                new Reading<double>(ReadingType.LATITUDE, ReadingUnit.DEGREE, 45.484056),
+                new Reading<double>(ReadingType.LONGITUDE, ReadingUnit.DEGREE, -73.680421),
             };
         }
     }

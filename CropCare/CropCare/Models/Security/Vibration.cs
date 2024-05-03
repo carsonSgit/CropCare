@@ -7,17 +7,17 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a sensor for detecting vibrations.
-    public class Vibration : ISensor
+    public class Vibration : ISensor<string>
     {
         /// <summary>
         /// Reads the sensor to detect vibrations.
         /// </summary>
         /// <returns>A list of readings indicating vibration detection.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<string>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<string>>()
             {
-                new Reading(ReadingType.VIBRATION, ReadingUnit.NONE, "Vibration detected"),
+                new Reading<string>(ReadingType.VIBRATION, ReadingUnit.NONE, "Vibration detected"),
             };
         }
     }

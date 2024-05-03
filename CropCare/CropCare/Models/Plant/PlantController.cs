@@ -171,12 +171,12 @@ namespace CropCare.Models.Plant
         /// <returns>The water level reading.</returns>
         public string GetWaterLevelReading() => GetSensorReading(WaterLevel, ReadingType.WATERLEVEL);
 
-
-        private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
+        private string GetSensorReading<T>(ISensor<T> sensor, string readingType)
         {
             var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
             return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
         }
+
 
         /// <summary>
         /// Updates the health label based on the sensor reading and specified thresholds.

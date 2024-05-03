@@ -7,17 +7,17 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a luminosity sensor.
-    public class Luminosity : ISensor
+    public class Luminosity : ISensor<int>
     {
         /// <summary>
         /// Reads the luminosity sensor.
         /// </summary>
         /// <returns>A list of readings from the luminosity sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<int>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<int>>()
             {
-                new Reading(ReadingType.LUMINOSITY, ReadingUnit.LUX, "230"),
+                new Reading<int>(ReadingType.LUMINOSITY, ReadingUnit.LUX, 230),
             };
         }
     }

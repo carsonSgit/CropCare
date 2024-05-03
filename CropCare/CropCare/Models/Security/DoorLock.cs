@@ -7,7 +7,7 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a door lock actuator and sensor.
-    public class DoorLock : IActuator, ISensor
+    public class DoorLock : IActuator, ISensor<string>
     {
         /// <summary>
         /// Gets or sets the state of the door lock.
@@ -44,11 +44,11 @@ namespace CropCare.Models.Security
         /// Reads the state of the door lock sensor.
         /// </summary>
         /// <returns>A list of readings from the door lock sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<string>> ReadSensor()
         {
-            return new List<Reading>
+            return new List<Reading<string>>
             {
-                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, State)
+                new Reading<string>(ReadingType.DOORLOCK, ReadingUnit.NONE, State)
             };
         }
     }

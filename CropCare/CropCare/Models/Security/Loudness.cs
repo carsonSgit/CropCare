@@ -7,17 +7,17 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a loudness sensor.
-    public class Loudness : ISensor
+    public class Loudness : ISensor<int>
     {
         /// <summary>
         /// Reads the loudness sensor.
         /// </summary>
         /// <returns>A list of readings from the loudness sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<int>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<int>>()
             {
-                new Reading(ReadingType.LOUDNESS, ReadingUnit.LOUDNESS, "100"),
+                new Reading<int>(ReadingType.LOUDNESS, ReadingUnit.LOUDNESS, 100),
             };
         }
     }

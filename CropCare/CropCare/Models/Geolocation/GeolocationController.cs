@@ -30,12 +30,12 @@
         /// <summary>
         /// Gets the pitch value from the accelerometer sensor.
         /// </summary>
-        public double Pitch => Double.Parse(Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.PITCH == r.Type).Value);
+        public double Pitch => Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.PITCH == r.Type).Value;
 
         /// <summary>
         /// Gets the roll value from the accelerometer sensor.
         /// </summary>
-        public double Roll => Double.Parse(Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.ROLL == r.Type).Value);
+        public double Roll => Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.ROLL == r.Type).Value;
 
         /// <summary>
         /// Gets the unit for pitch and roll values.
@@ -58,12 +58,12 @@
         /// Gets the latitude value from the GPS sensor.
         /// </summary>
         /// <returns>The latitude value.</returns>
-        public double Latitude() => Double.Parse(GPS.ReadSensor().FirstOrDefault(r => ReadingType.LATITUDE == r.Type).Value);
+        public double Latitude() => GPS.ReadSensor().FirstOrDefault(r => ReadingType.LATITUDE == r.Type).Value;
 
         /// <summary>
         /// Gets the longitude value from the GPS sensor.
         /// </summary>
         /// <returns>The longitude value.</returns>
-        public double Longitude() => Double.Parse(GPS.ReadSensor().FirstOrDefault(r => ReadingType.LONGITUDE == r.Type).Value);
+        public double Longitude() => GPS.ReadSensor().FirstOrDefault(r => ReadingType.LONGITUDE == r.Type).Value;
     }
 }
