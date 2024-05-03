@@ -7,17 +7,17 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a motion sensor.
-    public class Motion : ISensor
+    public class Motion : ISensor<string>
     {
         /// <summary>
         /// Reads the motion sensor.
         /// </summary>
         /// <returns>A list of readings from the motion sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<string>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<string>>()
             {
-                new Reading(ReadingType.MOTION, ReadingUnit.NONE, "Movement Detected"),
+                new Reading<string>(ReadingType.MOTION, ReadingUnit.NONE, "Movement Detected"),
             };
         }
     }

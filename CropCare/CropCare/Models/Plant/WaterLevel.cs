@@ -7,17 +7,17 @@ namespace CropCare.Models.Plant
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a water level sensor.
-    public class WaterLevel : ISensor
+    public class WaterLevel : ISensor<int>
     {
         /// <summary>
         /// Reads the water level sensor.
         /// </summary>
         /// <returns>A list of readings from the water level sensor.</returns>
-        public List<Reading> ReadSensor()
+        public List<Reading<int>> ReadSensor()
         {
-            return new List<Reading>()
+            return new List<Reading<int>>()
             {
-                new Reading(ReadingType.WATERLEVEL, ReadingUnit.WATERLEVEL, "100"),
+                new Reading<int>(ReadingType.WATERLEVEL, ReadingUnit.WATERLEVEL, 100),
             };
         }
     }

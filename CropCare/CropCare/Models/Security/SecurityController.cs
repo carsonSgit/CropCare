@@ -167,13 +167,13 @@ namespace CropCare.Models.Security
         /// Gets the current reading of motion.
         /// </summary>
         /// <returns>The current motion reading.</returns>
-        public string GetMotionReading() => GetSensorReading(Motion, ReadingType.MOTION);
+        public string GetMotionReading() => GetSensorReadingReference(Motion, ReadingType.MOTION);
 
         /// <summary>
         /// Gets the current reading of vibration.
         /// </summary>
         /// <returns>The current vibration reading.</returns>
-        public string GetVibrationReading() => GetSensorReading(Vibration, ReadingType.VIBRATION);
+        public string GetVibrationReading() => GetSensorReadingReference(Vibration, ReadingType.VIBRATION);
 
         /// <summary>
         /// Gets the current reading of the door lock.
@@ -182,11 +182,18 @@ namespace CropCare.Models.Security
         public string GetDoorLockReading() => DoorLock.ReadSensor().FirstOrDefault()?.Value;
 
 
-        private string GetSensorReading<T>(T sensor, string readingType) where T : ISensor
+        private string GetSensorReading<T>(ISensor<T> sensor, string readingType) where T : struct
         {
             var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
             return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
         }
+
+        private string GetSensorReadingReference<T>(ISensor<T> sensor, string readingType) where T : class
+        {
+            var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
+            return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
+        }
+
 
         /// <summary>
         /// Updates the health label based on sensor readings.

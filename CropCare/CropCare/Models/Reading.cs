@@ -51,7 +51,7 @@
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a sensor reading.
-    public class Reading
+    public class Reading<T>
     {
         /// <summary>
         /// Gets or sets the type of the reading.
@@ -66,7 +66,7 @@
         /// <summary>
         /// Gets or sets the value of the reading.
         /// </summary>
-        public string Value { get; set; }
+        public T Value { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Reading"/> class with the specified type, unit, and value.
@@ -74,7 +74,7 @@
         /// <param name="type">The type of the reading.</param>
         /// <param name="unit">The unit of the reading.</param>
         /// <param name="value">The value of the reading.</param>
-        public Reading(string type, string unit, string value)
+        public Reading(string type, string unit, T value)
         {
             Type = type;
             Unit = unit;
