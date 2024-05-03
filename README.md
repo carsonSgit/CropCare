@@ -21,6 +21,9 @@
     - [Potential Showstoppers](#potential-showstoppers)
 6. [Document Link](#document-link)
 
+> [!IMPORTANT]
+> The README.md is subject to change as we progress through development.
+> Stay up to date to observe the changes!
 
 # 🌱 Functional Overview <a name="functional-overview"/>
 CropCare seeks to deliver timely delivery of relevant data, and allow users to remotely control key systems for containerized gardens. Leveraling build in hardware solutions, we can monitor the relevant plant data and control related hardware to ensure secure and efficient plant growth. Our mobile application will facilitate this remote control and will provide users with a visual interface with which to view the relevant data.
@@ -233,7 +236,7 @@ classDiagram
 
 # 🛠️ App Features <a name="app-features"/>
 
-Hardware Features <a name="hardware-features"/>
+### Hardware Features <a name="hardware-features"/>
 - Monitoring
   - Measure relative water levels
   - Measure soil moisture levels
@@ -255,7 +258,7 @@ Hardware Features <a name="hardware-features"/>
   - Control fan state (on/off)
   - Control light state (on/off)
 
-Cloud Computing Features <a name="cloud-computing-features"/>
+### Cloud Computing Features <a name="cloud-computing-features"/>
 - Data Storage
   - Create a Cosmos storage account
   - Create a Cosmos Database to store the container information
@@ -266,7 +269,7 @@ Cloud Computing Features <a name="cloud-computing-features"/>
   - Create endpoints to access logging information from Cosmos DB
   - Create endpoints to control container functions remotely
 
-Mobile App Features <a name="mobile-app-features"/>
+### Mobile App Features <a name="mobile-app-features"/>
 - User Authentication
   - Build a user login/signup page
   - Create a user login system
