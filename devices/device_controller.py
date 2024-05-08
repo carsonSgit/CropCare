@@ -1,4 +1,4 @@
-from azure.iot.device import IoTHubDeviceClient
+from azure.iot.device import IoTHubDeviceClient, MethodResponse, MethodRequest
 import os
 import json
 from interfaces.actuators import ACommand
@@ -11,7 +11,7 @@ from time import sleep
 import dotenv
 dotenv.load_dotenv(override=True)
 
-READING_RATE = 15
+READING_RATE = 5
 CONNECTION_STRING = os.environ.get("DEVICE_CONNTECTION_STRING")
 
 class DeviceController:
@@ -32,6 +32,21 @@ class DeviceController:
     def __init__(self) -> None:
         self.client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
         self._controllers: list[SubsystemController] = self._initialize_controllers()
+        self.client.on_method_request_received = self.handle_method_request
+
+    def handle_method_request(self, method_request: MethodRequest):
+        """Handles direct method requests from IoT Hub"""
+        if method_request.name == "is_online":
+            response_payload = {"response": "Device is online"}
+            response_status = 200
+        else:
+            response_payload = {"details": "method name unknown"}
+            response_status = 400
+
+        method_response = MethodResponse.create_from_method_request(
+            method_request, response_status, response_payload
+        )
+        self.client.send_method_response(method_response)
 
     def _initialize_controllers(self) -> list[SubsystemController]:
         """
