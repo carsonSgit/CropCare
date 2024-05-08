@@ -41,7 +41,7 @@ class PlantController(SubsystemController):
     def _initialize_actuators(self) -> list[IActuator]:
         return [
             FanController(12, ACommand.Type.FAN, "OFF"),
-            #LEDController(18, ACommand.Type.LIGHT_ON_OFF, 'OFF')
+            LEDController(18, ACommand.Type.LIGHT_ON_OFF, 'OFF')
         ]
 
 

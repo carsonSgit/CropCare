@@ -25,6 +25,7 @@ class AReading(ABC):
         PITCH = 'pitch'
         ROLL = 'roll'
         YAW = 'yaw'
+        LOCK = 'lock'
 
     class Unit(str, Enum):
         """Enum defining all possible units for sensor measuremens.

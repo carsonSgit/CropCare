@@ -1,3 +1,6 @@
+from azure.iot.device import IoTHubDeviceClient
+import os
+import json
 from interfaces.actuators import ACommand
 from interfaces.sensors import AReading
 from interfaces.subsystem_controller import SubsystemController
@@ -5,7 +8,11 @@ from subsystems.geolocation.geolocation_controller import GeolocationController
 from subsystems.plant.plant_controller import PlantController
 from subsystems.security.security_controller import SecurityController
 from time import sleep
+import dotenv
+dotenv.load_dotenv(override=True)
 
+READING_RATE = 15
+CONNECTION_STRING = os.environ.get("DEVICE_CONNTECTION_STRING")
 
 class DeviceController:
     """
@@ -23,6 +30,7 @@ class DeviceController:
     """
 
     def __init__(self) -> None:
+        self.client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
         self._controllers: list[SubsystemController] = self._initialize_controllers()
 
     def _initialize_controllers(self) -> list[SubsystemController]:
@@ -60,19 +68,22 @@ class DeviceController:
         for controller in self._controllers:
             controller.control_actuators(commands)
 
+    def run(self):
+        self.client.connect()
+        while True:
+            
+            readings = self.read_sensors()
+            payload_as_dict = {}
+
+            for reading in readings:
+                payload_as_dict[reading.reading_type] = reading.value
+
+            payload = json.dumps(payload_as_dict)
+            print(payload)
+            self.client.send_message(payload)
+
+            sleep(READING_RATE)
+
 if __name__ == "__main__":
     device_manager = DeviceController()
-    TEST_SLEEP_TIME = 2
-
-    while True:
-        commands = [
-            ACommand(ACommand.Type.SERVO, "1"),
-        ]
-        device_manager.control_actuators(commands)
-        sleep(TEST_SLEEP_TIME)
-        commands = [
-            ACommand(ACommand.Type.SERVO, "-1"),
-        ]
-        device_manager.control_actuators(commands)
-        print(device_manager.read_sensors())
-        sleep(TEST_SLEEP_TIME)
+    device_manager.run()

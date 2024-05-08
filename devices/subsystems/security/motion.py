@@ -1,7 +1,6 @@
 from interfaces.sensors import ISensor, AReading
-from gpiozero import MotionSensor
 from time import sleep
-
+from grove.grove_mini_pir_motion_sensor import GroveMiniPIRMotionSensor
 
 class MotionSensor(ISensor):
     """
@@ -35,7 +34,12 @@ class MotionSensor(ISensor):
         self.gpio = gpio
         self.model = model
         self.type = type
-        self.motion = MotionSensor(gpio)
+        self.motion = GroveMiniPIRMotionSensor(gpio)
+        self.detected = False
+        self.motion.on_detect = self.motion_detected
+
+    def motion_detected(self):
+        self.detected = True
 
     def read_sensor(self) -> list[AReading]:
         """
@@ -45,12 +49,14 @@ class MotionSensor(ISensor):
             list[AReading]: A list of motion readings.
 
         """
+        detected = self.detected
+        self.detected = False
         return [
-            AReading(AReading.Type.MOTION, AReading.Unit.NONE, self.motion.motion_detected),
+            AReading(AReading.Type.MOTION, AReading.Unit.NONE, detected),
         ]
     
 if __name__ == "__main__":
-    m = MotionSensor(12, "motion", AReading.Type.MOTION)
+    m = MotionSensor(22, "motion", AReading.Type.MOTION)
 
     while(True):
         print(m.read_sensor())
