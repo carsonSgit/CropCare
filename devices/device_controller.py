@@ -1,4 +1,5 @@
 from azure.iot.device import IoTHubDeviceClient, MethodResponse, MethodRequest
+from azure.iot.device.custom_typing import TwinPatch
 import os
 import json
 from interfaces.actuators import ACommand
@@ -33,9 +34,16 @@ class DeviceController:
         self.client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
         self._controllers: list[SubsystemController] = self._initialize_controllers()
         self.client.on_method_request_received = self.handle_method_request
+        self.client.on_twin_desired_properties_patch_received = self.handle_twin_patch
+        self.telemetry_interval = READING_RATE
 
-    def handle_method_request(self, method_request: MethodRequest):
-        """Handles direct method requests from IoT Hub"""
+    def handle_method_request(self, method_request: MethodRequest) -> None:
+        """
+        Handles direct method requests from IoT Hub
+
+        Args:
+            method_request (MethodRequest): The method request received.
+        """
         if method_request.name == "is_online":
             response_payload = {"response": "Device is online"}
             response_status = 200
@@ -47,6 +55,17 @@ class DeviceController:
             method_request, response_status, response_payload
         )
         self.client.send_method_response(method_response)
+
+    def handle_twin_patch(self, twin_patch: TwinPatch) -> None:
+        """
+        Handle updates to the device twin's desired properties.
+
+        Args:
+            twin_patch (TwinPatch): Received twin path to handle.
+        """
+        if 'telemetryInterval' in twin_patch:
+            new_interval = twin_patch['telemetryInterval']
+            self.telemetry_interval = new_interval
 
     def _initialize_controllers(self) -> list[SubsystemController]:
         """
