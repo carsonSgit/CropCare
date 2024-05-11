@@ -40,4 +40,9 @@ public partial class DashboardPage : ContentPage
     {
         await Navigation.PushAsync(new TechnicianPage(Farm));
     }
+
+    private async void FarmSettingsNavigate_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new FarmSettingsPage(Farm));
+    }
 }

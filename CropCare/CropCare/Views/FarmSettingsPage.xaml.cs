@@ -1,0 +1,66 @@
+using CropCare.Models;
+using CropCare.Constants;
+using System.Reflection.Metadata;
+
+namespace CropCare.Views;
+
+public partial class FarmSettingsPage : ContentPage
+{
+    /// <summary>
+    /// Gets or sets the name of the farm.
+    /// </summary>
+    public string FarmName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the icon of the farm.
+    /// </summary>
+    public string Icon { get; set; }
+
+    /// <summary>
+    /// Gets or sets the farm
+    /// </summary>
+    public Farm Farm { get; set; }
+
+    public FarmSettingsPage(Farm farm)
+	{
+		InitializeComponent();
+        this.Farm = farm;
+        this.Icon = farm.IconPath;
+        this.FarmName = farm.Name;
+        PopulateIconPicker();
+        //IconPicker.SelectedItem = farm.IconPath;
+        BindingContext = this;
+    }
+
+    private void PopulateIconPicker()
+    {
+        foreach (var key in Constants.Constants.Icons.Keys)
+        {
+            IconPicker.Items.Add(key);
+
+            if (this.Icon == Constants.Constants.GetIconPath(key))
+                IconPicker.SelectedItem = key;
+        }
+    }
+
+    private async void OnSaveChangesButtonClicked(object sender, EventArgs e)
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            await DisplayAlert("No Internet", "Please check your internet connection", "OK");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(IconPicker.SelectedItem as string))
+        {
+            await DisplayAlert("Error", "Please fill in all fields", "OK");
+            return;
+        }
+
+        this.Farm.IconPath = Constants.Constants.GetIconPath(IconPicker.SelectedItem as string);
+        this.Farm.Name = this.FarmName;
+        await App.Repo.FarmsDb.UpdateItemAsync(this.Farm);
+
+        await Navigation.PopAsync();
+    }
+}

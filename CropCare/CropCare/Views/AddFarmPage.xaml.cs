@@ -1,5 +1,6 @@
 namespace CropCare.Views;
 using CropCare.Models;
+using CropCare.Constants;
 
 /// <summary>
 /// Represents a page for adding a new farm.
@@ -44,6 +45,7 @@ public partial class AddFarmPage : ContentPage
 
         InitializeComponent();
         PopulateTechnicianPicker();
+        PopulateIconPicker();
         AssignedTechnicians = new List<User>();
         BindingContext = this;
     }
@@ -101,6 +103,15 @@ public partial class AddFarmPage : ContentPage
         DisplayAlert("Information", "\"Farm ID\" is also referred to as the \"IOT device ID\".", "OK");
     }
 
+    private void PopulateIconPicker()
+    {
+        // Populate the IconPicker with the keys from Constants.Icons
+        foreach (var key in Constants.Icons.Keys)
+        {
+            IconPicker.Items.Add(key);
+        }
+    }
+
     /// <summary>
     /// Handles the event when the add farm button is clicked.
     /// </summary>
@@ -114,13 +125,14 @@ public partial class AddFarmPage : ContentPage
             return;
         }
 
-        if (string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(FarmId))
+        if (string.IsNullOrEmpty(FarmName) || string.IsNullOrEmpty(FarmId) || string.IsNullOrEmpty(IconPicker.SelectedItem as string))
         {
             await DisplayAlert("Error", "Please fill in all fields", "OK");
             return;
         }
 
-        Farm newFarm = new Farm(FarmName, FarmId);
+        string selectedIconPath = Constants.GetIconPath(IconPicker.SelectedItem as string);
+        Farm newFarm = new Farm(FarmName, FarmId, selectedIconPath);
         await App.Repo.FarmsDb.AddItemAsync(newFarm);
         await App.Repo.UserToFarmDb.AddItemAsync(new UserToFarm(App.CurrentUser.Key, newFarm.Key));
 

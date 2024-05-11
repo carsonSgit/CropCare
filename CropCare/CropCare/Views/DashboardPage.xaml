@@ -47,6 +47,16 @@
                     <Label Text="TECHNICIANS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
                 </StackLayout>
             </Frame>
+
+            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250" IsVisible="{Binding IsOwner}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="FarmSettingsNavigate_Clicked"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image Source="controls_light.png" HeightRequest="45"/>
+                    <Label Text="SETTINGS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
+                </StackLayout>
+            </Frame>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
