@@ -38,7 +38,7 @@ class AReading(ABC):
         UNITLESS = "unitless"
         LUX = "nm"
         LOUDNESS = "unitless"
-        OHMS = "ohms"
+        OHMS = "Ω"
         WATERLEVEL = "water level"
         NONE = ""
         DEGREE = "°"

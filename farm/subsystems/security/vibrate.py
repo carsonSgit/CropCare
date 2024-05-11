@@ -18,7 +18,6 @@ class VibrationController(IActuator):
             Validates the given command for the vibration sensor.
         set_callback(self, callback: function):
             Assigns a callback function for detecting vibrations.
-
     """
 
     def __init__(self, pin: int, type: ACommand.Type, callback=None) -> None:
