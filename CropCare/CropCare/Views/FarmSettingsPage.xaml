@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CropCare.Views.FarmSettingsPage"
+             Title="FarmSettingsPage">
+    <VerticalStackLayout>
+        <!-- Hero Icon and Label -->
+        <Image Source="fallfarm_circular_icon.png" Margin="0, 70, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+        <Label Text="Modify Farm" FontSize="35" Margin="0, 5, 0, 60" HorizontalOptions="Center" TextColor="#538D22"/>
+
+        <!-- Farm Name Entry -->
+        <Label Text="Farm Name" FontSize="Small" Margin="25, 0, 0, 0" TextColor="#538D22"/>
+        <Entry x:Name="FarmNameEntry" Placeholder="Enter Farm Name" Text="{Binding FarmName}" Margin="20, 0, 20, 0"/>
+
+        <!-- Farm Icon Picker -->
+        <Label Text="Modify Farm Icon" FontSize="Small" Margin="25, 20, 0, 0" TextColor="#538D22"/>
+        <Picker x:Name="IconPicker" Title="Select Icon" Margin="20, 0, 20, 0"/>
+
+        <!-- Save Changes Button -->
+        <Button x:Name="AddFarmButton" Text="Save Changes" Clicked="OnSaveChangesButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+    </VerticalStackLayout>
+</ContentPage>
