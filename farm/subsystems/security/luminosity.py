@@ -5,7 +5,7 @@ from time import sleep
 
 class LuminositySensor(ISensor):
     """
-    A sensor class for reading Temperature and/or Humidity
+    A sensor class for reading Luminosity levels from the reTerminal.
 
     Implements the ISensor interface
 
@@ -15,7 +15,7 @@ class LuminositySensor(ISensor):
         type (AReading.Type): The type of the sensor reading.
 
     Methods:
-        read_sensor(): Reads the temperature and humidity from the sensor.
+        read_sensor(): Reads the luminosity level from the reTerminal.
 
     """
 
@@ -24,9 +24,9 @@ class LuminositySensor(ISensor):
         Initialize a reTerminal sensor object.
 
         Args:
-            gpio (int): The GPIO pin number.
-            model (str): The model of the temperature and humidity sensor.
-            type (AReading.Type): The type of reading (e.g., temperature or humidity).
+            gpio (int): The GPIO pin number (as this is internal, it is actually the bus).
+            model (str): The model of the luminosity sensor.
+            type (AReading.Type): The type of reading (e.g., luminosity).
 
         Returns:
             None
@@ -38,12 +38,12 @@ class LuminositySensor(ISensor):
 
     def read_sensor(self) -> list[AReading]:
         """
-        Takes a reading from the temperature and humidity sensor.
+        Takes a reading from the luminosity sensor.
 
         Args: none
 
         Returns:
-            list[AReading]: a list of temperature and humidity readings.
+            list[AReading]: a list of luminosity readings.
 
         """
         luminosity = rt.illuminance
