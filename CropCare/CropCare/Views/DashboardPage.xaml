@@ -2,61 +2,143 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.DashboardPage"
-             Title="Dashboard">
-    <VerticalStackLayout>
-        <VerticalStackLayout Spacing="10">
-            <Label Text="{Binding Farm.Name}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" Padding="0, 5, 0, 0"/>
-            <Label Text="Status: Critical" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Padding="0"/>
+             Title="{Binding Farm.Name}">
+    <VerticalStackLayout Background="#ECECEC">
+        <VerticalStackLayout Spacing="0">
+            <HorizontalStackLayout>
+                <Label Text="Welcome Back" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" Padding="15, 15, 0, 0"/>
+                <Label Text="{Binding CurrentUser.Name}" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" Padding="5, 15, 0, 0"/>
+            </HorizontalStackLayout>
+            <Label Text="Thank you for using CropCare" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PlantNavigate_Clicked"/>
-                </Frame.GestureRecognizers>
-                <StackLayout>
-                    <Image Source="plant_LIGHT.png" HeightRequest="45"/>
-                    <Label Text="PLANTS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
-                </StackLayout>
-            </Frame>
+            <HorizontalStackLayout>
+                <HorizontalStackLayout Margin="15, 0, 10, 20">
+                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Label Text="Health" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
+                                <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
+                                <Label Text="Critical" FontSize="14" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </HorizontalStackLayout>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250"  IsVisible="{Binding IsOwner}">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
-                </Frame.GestureRecognizers>
-                <StackLayout>
-                    <Image Source="location_light.png" HeightRequest="45"/>
-                    <Label Text="LOCATION" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
-                </StackLayout>
-            </Frame>
+                <HorizontalStackLayout Margin="15, 0, 10, 20">
+                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Label Text="Security" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
+                            <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
+                                <BoxView Color="Green" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
+                                <Label Text="Healthy" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </HorizontalStackLayout>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SecurityNavigate_Clicked"/>
-                </Frame.GestureRecognizers>
-                <StackLayout>
-                    <Image Source="security_light.png" HeightRequest="45"/>
-                    <Label Text="SECURITY" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
-                </StackLayout>
-            </Frame>
+                <HorizontalStackLayout Margin="15, 0, 10, 20">
+                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Label Text="Health" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
+                            <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
+                                <BoxView Color="Orange" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
+                                <Label Text="Caution" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+            
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250" IsVisible="{Binding IsOwner}">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
-                </Frame.GestureRecognizers>
-                <StackLayout>
-                    <Image Source="farmer_light.png" HeightRequest="45"/>
-                    <Label Text="TECHNICIANS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
-                </StackLayout>
-            </Frame>
+            <Frame BackgroundColor="White" Margin="15, 0, 15, 0" BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PlantNavigate_Clicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="PLANTS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor plant center" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1" Source="plant_LIGHT.png" HeightRequest="35"/>
+                        </Grid>
+                    </Frame>
 
-            <Frame Margin="20, 0, 20, 0" BackgroundColor="#CFD6CE" CornerRadius="20" BorderColor="#516250" IsVisible="{Binding IsOwner}">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="FarmSettingsNavigate_Clicked"/>
-                </Frame.GestureRecognizers>
-                <StackLayout>
-                    <Image Source="controls_light.png" HeightRequest="45"/>
-                    <Label Text="SETTINGS" TextColor="Black" FontSize="20" HorizontalTextAlignment="Center" Margin="0, 10, 0, 0"/>
-                </StackLayout>
+                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="LOCATION" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor location information" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1" Source="location_light.png" HeightRequest="35"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SecurityNavigate_Clicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="SECURITY" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor security hardware" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1" Source="security_light.png" HeightRequest="35"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="TECHNICIANS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Modify assigned technicians" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1" Source="farmer_light.png" HeightRequest="35"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Margin="0, 0, 0, 0" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FarmSettingsNavigate_Clicked"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="SETTINGS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Modify farm details" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1" Source="controls_light.png" HeightRequest="35"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
             </Frame>
+            
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

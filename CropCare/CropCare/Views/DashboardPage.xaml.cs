@@ -9,6 +9,7 @@ public partial class DashboardPage : ContentPage
 {
     public Farm Farm { get; set; }
     public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
+    public User CurrentUser { get; set; } = App.CurrentUser;
 
     /// <summary>
     /// Initializes a new instance of the DashboardPage class.
