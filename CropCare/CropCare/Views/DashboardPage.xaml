@@ -63,7 +63,7 @@
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Grid.Column="0">
                                 <Label Text="PLANTS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor plant center" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                                <Label Text="Monitor plant center" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="plant_LIGHT.png" HeightRequest="35"/>
                         </Grid>
@@ -80,7 +80,7 @@
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Grid.Column="0">
                                 <Label Text="LOCATION" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor location information" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                                <Label Text="Monitor location information" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="location_light.png" HeightRequest="35"/>
                         </Grid>
@@ -97,7 +97,7 @@
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Grid.Column="0">
                                 <Label Text="SECURITY" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor security hardware" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                                <Label Text="Monitor security hardware" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="security_light.png" HeightRequest="35"/>
                         </Grid>
@@ -116,7 +116,7 @@
                                 <Label Text="TECHNICIANS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
                                 <Label Text="Modify assigned technicians" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
-                            <Image Grid.Column="1" Source="farmer_light.png" HeightRequest="35"/>
+                            <Image Grid.Column="1" Source="farmer_light.png" HeightRequest="35"/> 
                         </Grid>
                     </Frame>
 
@@ -131,7 +131,7 @@
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Grid.Column="0">
                                 <Label Text="SETTINGS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Modify farm details" TextColor="Black" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                                <Label Text="Modify farm details" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="controls_light.png" HeightRequest="35"/>
                         </Grid>
