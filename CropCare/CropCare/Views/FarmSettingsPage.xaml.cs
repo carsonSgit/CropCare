@@ -63,4 +63,16 @@ public partial class FarmSettingsPage : ContentPage
 
         await Navigation.PopAsync();
     }
+
+    private async void OnDeleteFarmButtonClicked(object sender, EventArgs e)
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            await DisplayAlert("No Internet", "Please check your internet connection", "OK");
+            return;
+        }
+
+        await App.Repo.FarmsDb.DeleteItemAsync(this.Farm);
+        await Navigation.PopAsync();
+    }
 }
