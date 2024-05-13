@@ -1,0 +1,25 @@
+classDiagram
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary&lt;string, ObservableCollection&lt;Reading>> Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
+    }
+
+    class SecurityController {
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Loudness
+        + Reading Motion
+        + Reading Vibration
+        + Reading Luminosity
+        + void ToggleDoorLock()
+        + void ToggleDoorOpen()
+        + void AddReading(Reading reading)
+        + SecurityController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
+    }
+
+    BaseController <|-- SecurityController

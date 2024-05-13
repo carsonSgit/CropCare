@@ -1,0 +1,54 @@
+classDiagram
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary&lt;string, ObservableCollection&lt;Reading&gt;&gt; Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
+    }
+
+    class PlantController {
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Temperature
+        + Reading Humidity
+        + Reading Moisture
+        + Reading WaterLevel
+        + void ToggleFan()
+        + void ToggleLed()
+        + void AddReading(Reading reading)
+        + PlantController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
+    }
+
+    class SecurityController {
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Loudness
+        + Reading Motion
+        + Reading Vibration
+        + Reading Luminosity
+        + void ToggleDoorLock()
+        + void ToggleDoorOpen()
+        + void AddReading(Reading reading)
+        + SecurityController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
+    }
+
+    class GeolocationController {
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Latitude
+        + Reading Longitude
+        + Reading Pitch
+        + Reading Roll
+        + void ToggleBuzzer()
+        + void AddReading(Reading reading)
+        + GeolocationController()
+    }
+
+    BaseController <|-- PlantController
+    BaseController <|-- SecurityController
+    BaseController <|-- GeolocationController
