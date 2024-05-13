@@ -11,7 +11,7 @@
 3. [App Prototype](#app-prototype)
 4. [App UML Diagrams](#uml-diagrams)
     - [User & Farm](#user-farm-uml)
-    - [Base Controller](#controllers-uml)
+    - [Controllers](#controllers-uml)
 5. [App Features](#app-features)
     - [Hardware Features](#hardware-features)
     - [Cloud Computing Features](#cloud-computing-features)
