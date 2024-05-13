@@ -12,6 +12,7 @@
 4. [App UML Diagrams](#uml-diagrams)
     - [User & Farm](#user-farm-uml)
     - [Base Controller](#base-controller-uml)
+    - [Plant Controller](#plant-controller-uml)
     - [Security Controller](#security-controller-uml)
     - [Geolocation Controller](#geolocation-controller-uml)
 5. [App Features](#app-features)
@@ -106,6 +107,37 @@ classDiagram
         + virtual void AddReading(Reading reading)
         + BaseController(string[] readingTypes)
     }
+```
+
+## Plant Controller <a name="plant-controller-uml"/>
+
+```mermaid
+classDiagram
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary<string, ObservableCollection<Reading>> Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
+    }
+
+    class PlantController {
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Temperature
+        + Reading Humidity
+        + Reading Moisture
+        + Reading WaterLevel
+        + void ToggleFan()
+        + void ToggleLed()
+        + void AddReading(Reading reading)
+        + PlantController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
+    }
+
+    BaseController <|-- PlantController
+
 ```
 
 ## Security Controller <a name="security-controller-uml"/>
