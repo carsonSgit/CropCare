@@ -6,12 +6,15 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:local="clr-namespace:CropCare.Converters"
              Title="Location">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
+    
+    <Grid BackgroundColor="#ECECEC">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -21,60 +24,90 @@
             <maps:Map x:Name="map">
             </maps:Map>
         </StackLayout>
-        <StackLayout Grid.Row="1" Margin="30">
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Frame Padding="10" CornerRadius="10"  BorderColor="#516250" WidthRequest="140" Margin="10">
-                    <StackLayout HorizontalOptions="Center">
-                        <Label Text="Pitch" FontAttributes="Bold"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
-                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Pitch.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
-                                    <Span Text="{Binding Pitch.Unit}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" CornerRadius="10"  BorderColor="#516250" WidthRequest="140" HeightRequest="120" Margin="10">
-                    <StackLayout HorizontalOptions="Center">
-                        <Label Text="Roll" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
-                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Roll.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
-                                    <Span Text="{Binding Roll.Unit}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-                </Frame>
-            </HorizontalStackLayout>
-            <VerticalStackLayout>
-                <Frame BorderColor="#516250" CornerRadius="5" Margin="15,10,15,20">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+     
+        <StackLayout Grid.Row="1" Margin="10">
+            <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Grid Margin="0, 0, 0, 10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Buzzer"/>
-                        <Switch Grid.Column="1" Grid.Row="0" 
-                            Margin="0, -10, 0, 0" 
-                            OnColor="Green" 
-                            ThumbColor="GhostWhite"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="EndAndExpand"
-                            IsToggled="{Binding BuzzerState}"
-                            Toggled="buzzer_Toggled"
-                            x:Name="buzzer"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding Buzzer.State}" x:Name="led_healthLbl"/>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -2.5" Text="Pitch"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="Caution" x:Name="pitch_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#E08551" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="80">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
+                                <Label.FormattedText>
+                                  <FormattedString>
+                                      <Span Text="{Binding Pitch.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                      <Span Text="{Binding Pitch.Unit}" />
+                                  </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Frame>
                     </Grid>
-                </Frame>
-            </VerticalStackLayout>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Roll"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="Unhealty" x:Name="roll_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="80">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
+                                <Label.FormattedText>
+                                  <FormattedString>
+                                      <Span Text="{Binding Roll.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                      <Span Text="{Binding Roll.Unit}" />
+                                  </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Frame>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" Margin="0,0,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, -5, 5, -5" Text="Buzzer"/>
+                            <Switch Grid.Column="1" Grid.Row="0"
+                                Margin="0,-10,0,0"
+                                OnColor="Green"
+                                ThumbColor="GhostWhite"
+                                VerticalOptions="Center"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="{Binding BuzzerState}"
+                                Toggled="buzzer_Toggled"
+                                x:Name="buzzer"/>
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
+                                <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="buzzer_status_circle"/>
+                                <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding Buzzer.State}" x:Name="buzzer_healthLbl"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
         </StackLayout>
     </Grid>
 </ContentPage>

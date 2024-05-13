@@ -35,6 +35,11 @@ namespace CropCare.Models
         public EventHubConsumerClient Consumer { get; set; }
 
         /// <summary>
+        /// Path to the icon used to represent this farm
+        /// </summary>
+        public string IconPath { get; set; }
+
+        /// <summary>
         /// Gets or sets the plant controller associated with the farm.
         /// </summary>
         [JsonIgnore]
@@ -57,7 +62,7 @@ namespace CropCare.Models
         /// </summary>
         /// <param name="farmName">The name of the farm.</param>
         /// <param name="deviceId">The device ID of the farm.</param>
-        public Farm(string farmName, string deviceId)
+        public Farm(string farmName, string deviceId, string iconPath)
         {
             Name = farmName;
             DeviceId = deviceId;
@@ -109,6 +114,7 @@ namespace CropCare.Models
                 Console.WriteLine($"Could not deserialize {json} to Reading Class: {ex.Message}");
             }
             return null;
+            IconPath = iconPath;
         }
     }
 }

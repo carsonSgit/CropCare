@@ -29,7 +29,6 @@ public partial class LocationPage : ContentPage
     {
         base.OnAppearing();
 
-
         MainThread.BeginInvokeOnMainThread(async () =>
         {
             // Initialization issue, since we use map in a stack nav, for some
@@ -54,14 +53,18 @@ public partial class LocationPage : ContentPage
     private void buzzer_Toggled(object sender, ToggledEventArgs e)
     {
         //var state = (Switch)sender;
-
+        
         //if (state.IsToggled)
         //{
         //    GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
+        //    buzzer_status_circle.Color = Color.FromArgb("#1DBD40");
         //}
         //else
         //{
         //    GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
+        //    buzzer_status_circle.Color = Color.FromArgb("#DC2C2C");
         //}
     }
+
+
 }

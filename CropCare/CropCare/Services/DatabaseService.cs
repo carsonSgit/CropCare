@@ -63,12 +63,13 @@ namespace CropCare.Services
             try
             {
                 item.Key = _realtimeDb.Post(item);
-
                 _realtimeDb.Put(item.Key, item);
+
                 Items.Add(item);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Failed to add item: {ex.Message}");
                 return await Task.FromResult(false);
             }
             return await Task.FromResult(true);

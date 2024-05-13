@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.LoginPage"
              Shell.NavBarIsVisible="False"
@@ -14,10 +13,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Page.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="#538D22"/>
-    </Page.Behaviors>
-    
     <VerticalStackLayout VerticalOptions="Center" Padding="0, 0, 0, 60">
         <Frame x:Name="LoginView" Margin="10" BackgroundColor="Transparent" BorderColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}" >
             <VerticalStackLayout>

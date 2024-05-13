@@ -43,6 +43,11 @@ public partial class SecurityPage : ContentPage, INotifyPropertyChanged
         //var command = doorLockSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
         //var newState = SecurityController.DoorLock.ControlActuator(command) ? command.ToString() : SecurityController.DoorLock.State;
         //SecurityController.DoorLockState = SecurityController.UpdateStateHealthLabel(newState);
+
+//         if (command == Models.Command.ON)
+//             doorlock_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             doorlock_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 
     private void doorOpenSwitch_Toggled(object sender, ToggledEventArgs e)
@@ -50,5 +55,11 @@ public partial class SecurityPage : ContentPage, INotifyPropertyChanged
         //var command = doorOpenSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
         //var newState = SecurityController.DoorOpener.ControlActuator(command) ? command.ToString() : SecurityController.DoorOpener.State;
         //SecurityController.DoorOpenerState = SecurityController.UpdateStateHealthLabel(newState);
+
+//         if (command == Models.Command.ON)
+//             door_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             door_status_circle.Color = Color.FromArgb("#DC2C2C");
+
     }
 }

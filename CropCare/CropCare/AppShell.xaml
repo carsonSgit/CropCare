@@ -4,9 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     FlyoutBackgroundColor="#04210b"
     Shell.TabBarIsVisible="False"
     Shell.FlyoutBehavior="Flyout">
+
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="#2D7245" />
+    </Page.Behaviors>
 
     <Shell.FlyoutHeader>
         <Grid HeightRequest="100">
