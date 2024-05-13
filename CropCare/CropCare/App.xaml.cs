@@ -13,14 +13,6 @@ namespace CropCare
 
         public static Settings Settings { get; private set; }
         public static User CurrentUser { get; set; }
-        private static ServiceClient iotHubClient;
-        public static ServiceClient IOTHubClient
-        {
-            get
-            {
-                return iotHubClient ??= ServiceClient.CreateFromConnectionString(Settings.IOTHubConnectionString);
-            }
-        }
         private static CropCareRepo repo;
         public static CropCareRepo Repo
         {
