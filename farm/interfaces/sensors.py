@@ -36,10 +36,9 @@ class AReading(ABC):
         FAHRENHEIT = "°F"
         HUMIDITY = "% HR"
         UNITLESS = "unitless"
-        LUX = "nm"
-        LOUDNESS = "unitless"
+        LUX = "lux"
+        LOUDNESS = "pKa"
         OHMS = "Ω"
-        WATERLEVEL = "water level"
         NONE = ""
         DEGREE = "°"
 
@@ -64,7 +63,7 @@ class AReading(ABC):
         """
         return {
             "reading_type": self.reading_type.name,
-            "value": self.value,
+            "value": str(self.value) if type(self.value) is bool else self.value,
             "unit": self.reading_unit.value,
         }.__str__()
 

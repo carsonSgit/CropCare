@@ -57,7 +57,7 @@ class WaterLevelSensor(ISensor):
         water_level = self.adc.read(self.gpio)
 
         return [
-            AReading(AReading.Type.WATERLEVEL, AReading.Unit.WATERLEVEL, water_level)
+            AReading(AReading.Type.WATERLEVEL, AReading.Unit.OHMS, water_level)
         ]
 
 

@@ -48,5 +48,5 @@ class MockWaterLevelSensor(ISensor):
         """
         water_level = random() * 100
         return [
-            AReading(AReading.Type.WATERLEVEL, AReading.Unit.WATERLEVEL, water_level)
+            AReading(AReading.Type.WATERLEVEL, AReading.Unit.OHMS, water_level)
         ]
