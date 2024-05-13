@@ -12,7 +12,7 @@
             <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid>
+    
     
     <Grid BackgroundColor="#ECECEC">
         <Grid.RowDefinitions>

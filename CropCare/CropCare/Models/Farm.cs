@@ -69,6 +69,7 @@ namespace CropCare.Models
             PlantController = new PlantController();
             SecurityController = new SecurityController();
             GeolocationController = new GeolocationController();
+            IconPath = iconPath;
             App.IOTService.MessageReceived += IOTService_MessageReceived;
         }
 
@@ -114,7 +115,6 @@ namespace CropCare.Models
                 Console.WriteLine($"Could not deserialize {json} to Reading Class: {ex.Message}");
             }
             return null;
-            IconPath = iconPath;
         }
     }
 }

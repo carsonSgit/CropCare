@@ -32,14 +32,14 @@
 
                         <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                             <!-- Change the font once the correct unit is provided -->
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White"x:Name="loudnessMeasurementLbl" >
-                                   <Label.FormattedText>
-                                      <FormattedString>
-                                          <Span Text="{Binding Loudness.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
-                                          <Span Text="{Binding Loudness.Unit}" />
-                                      </FormattedString>
-                                  </Label.FormattedText>
-                              </Label>
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White" x:Name="loudnessMeasurementLbl" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Loudness.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                        <Span Text="{Binding Loudness.Unit}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                             </Label>
                         </Frame>
                     </Grid>
                 </Frame>
@@ -53,7 +53,7 @@
                         <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Luminosity"/>
-                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" x:Name="luminosityHealthLbl">
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" x:Name="luminosityHealthLbl"/>
                             </VerticalStackLayout>
                         </Frame>
 
@@ -65,7 +65,7 @@
                                       <Span Text="{Binding Luminosity.Unit}" />
                                   </FormattedString>
                               </Label.FormattedText>
-                          </Label>
+                            </Label>
                         </Frame>
                     </Grid>
                 </Frame>
