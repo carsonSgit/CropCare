@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="10,10,10,10"  HorizontalOptions="Center">
-            <Frame BackgroundColor="#F4F4F4" BorderColor="Transparent">
+            <Frame BackgroundColor="#F4F4F4" BorderColor="Transparent" IsVisible="{Binding hasFarms}">
                 <!-- CollectionView for displaying farms -->
                 <CollectionView 
                     x:Name="farmsCollectionView"

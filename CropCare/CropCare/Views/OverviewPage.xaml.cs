@@ -18,6 +18,7 @@ public partial class OverviewPage : ContentPage
     /// Gets or sets a value indicating whether the current user is an owner.
     /// </summary>
     public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
+    public bool hasFarms => FarmsCollection?.Count > 0;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OverviewPage"/> class.
