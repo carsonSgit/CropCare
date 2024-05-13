@@ -11,10 +11,7 @@
 3. [App Prototype](#app-prototype)
 4. [App UML Diagrams](#uml-diagrams)
     - [User & Farm](#user-farm-uml)
-    - [Base Controller](#base-controller-uml)
-    - [Plant Controller](#plant-controller-uml)
-    - [Security Controller](#security-controller-uml)
-    - [Geolocation Controller](#geolocation-controller-uml)
+    - [Base Controller](#controllers-uml)
 5. [App Features](#app-features)
     - [Hardware Features](#hardware-features)
     - [Cloud Computing Features](#cloud-computing-features)
@@ -106,20 +103,7 @@ classDiagram
     Farm "1" --> "0..*" UserToFarm
 ```
 
-## Base Controller <a name="base-controller-uml"/>
-
-```mermaid
-classDiagram
-    class BaseController {
-        - string[] _readingTypes
-        + Dictionary&lt;string, ObservableCollection&lt;Reading&gt;&gt; Readings
-        + bool ValidateReading(Reading reading)
-        + virtual void AddReading(Reading reading)
-        + BaseController(string[] readingTypes)
-    }
-```
-
-## Plant Controller <a name="plant-controller-uml"/>
+## Controllers <a name="controllers-uml"/>
 
 ```mermaid
 classDiagram
@@ -146,22 +130,6 @@ classDiagram
         + string UpdateStateHealthLabel(string actuatorState)
     }
 
-    BaseController <|-- PlantController
-
-```
-
-## Security Controller <a name="security-controller-uml"/>
-
-```mermaid
-classDiagram
-    class BaseController {
-        - string[] _readingTypes
-        + Dictionary<string, ObservableCollection<Reading>> Readings
-        + bool ValidateReading(Reading reading)
-        + virtual void AddReading(Reading reading)
-        + BaseController(string[] readingTypes)
-    }
-
     class SecurityController {
         - static readonly string[] _readingTypes
         + PropertyChangedEventHandler PropertyChanged
@@ -177,21 +145,6 @@ classDiagram
         + string UpdateStateHealthLabel(string actuatorState)
     }
 
-    BaseController <|-- SecurityController
-
-```
-
-## Geolocation Controller <a name="geolocation-controller-uml"/>
-```mermaid
-classDiagram
-    class BaseController {
-        - string[] _readingTypes
-        + Dictionary<string, ObservableCollection<Reading>> Readings
-        + bool ValidateReading(Reading reading)
-        + virtual void AddReading(Reading reading)
-        + BaseController(string[] readingTypes)
-    }
-
     class GeolocationController {
         - static readonly string[] _readingTypes
         + PropertyChangedEventHandler PropertyChanged
@@ -204,6 +157,8 @@ classDiagram
         + GeolocationController()
     }
 
+    BaseController <|-- PlantController
+    BaseController <|-- SecurityController
     BaseController <|-- GeolocationController
 ```
 
