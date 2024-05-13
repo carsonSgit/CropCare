@@ -10,6 +10,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+            <local:PitchColorConverter x:Key="PitchColorConverter"/>
+            <local:RollColorConverter x:Key="RollColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -40,7 +42,7 @@
                             </VerticalStackLayout>
                         </Frame>
 
-                        <Frame Grid.Column="1" BackgroundColor="#E08551" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="80">
+                        <Frame Grid.Column="1" BackgroundColor="{Binding Pitch.Value, Converter={StaticResource PitchColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="80">
                             <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
                                 <Label.FormattedText>
                                   <FormattedString>
@@ -64,7 +66,7 @@
                             </VerticalStackLayout>
                         </Frame>
 
-                        <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="80">
+                        <Frame Grid.Column="1" BackgroundColor="{Binding Pitch.Value, Converter={StaticResource RollColorConverter}}" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="80">
                             <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
                                 <Label.FormattedText>
                                   <FormattedString>
