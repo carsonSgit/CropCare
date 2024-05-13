@@ -1,4 +1,6 @@
 ﻿using CropCare.Interfaces;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace CropCare.Models.Geolocation
 {
@@ -7,39 +9,59 @@ namespace CropCare.Models.Geolocation
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a controller for geolocation-related sensors and actuators.
-    public class GeolocationController
+
+    public class GeolocationController : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Gets or sets the buzzer actuator.
-        /// </summary>
-        public Buzzer Buzzer { get; set; }
+        private string[] _readingTypes = new string[] { ReadingType.LATITUDE, ReadingType.LONGITUDE, ReadingType.PITCH, ReadingType.ROLL };
 
-        /// <summary>
-        /// Gets or sets the GPS sensor.
-        /// </summary>
-        public GPS GPS { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Gets or sets the accelerometer sensor.
-        /// </summary>
-        public Accelerometer Accelerometer { get; set; }
+        public ObservableCollection<Reading> LatitudeReadings {get; set;}
 
-        public List<ISensor> Sensors {get; set;}
+        public ObservableCollection<Reading> LongitudeReadings { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GeolocationController"/> class.
-        /// </summary>
+        public ObservableCollection<Reading> PitchReadings { get; set; }
+
+        public ObservableCollection<Reading> RollReadings { get; set; }
+
+        public Reading Latitude { get; set; }
+
+        public Reading Longitude { get; set; }
+
+        public Reading Pitch { get; set; }
+
+        public Reading Roll { get; set; }
+
+        public void ToggleBuzzer()
+        {
+            //Call command for buzzer
+            return;
+        }
+
+        public bool ValidateReading(Reading reading)
+        {
+            if (reading == null)
+            {
+                return false;
+            }
+            if(!_readingTypes.Contains(reading.Type))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void AddReading(Reading reading)
+        {
+            if (ValidateReading(reading))
+            {
+                Readings.Add(reading);
+            }
+        }
+
         public GeolocationController()
         {
-            Buzzer = new Buzzer();
-            GPS = new GPS();
-            Accelerometer = new Accelerometer();
-
-            Sensors = new List<ISensor>()
-            {
-                GPS,
-                Accelerometer,
-            };
+            Readings = new ObservableCollection<Reading>();
         }
     }
 }
