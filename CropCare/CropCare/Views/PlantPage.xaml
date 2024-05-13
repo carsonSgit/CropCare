@@ -5,72 +5,84 @@
              Title="Plants">
 
     <VerticalStackLayout BackgroundColor="#ECECEC">
-        <Label Text="Monitor your container farm" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 15, 0, 0"/>
-        <Label Text="Your all in one plant-hub" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 10"/>
+        <Label Text="Monitor your container farm" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
+        <Label Text="Your all in one plant-hub" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
 
         <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="Transparent">
             <VerticalStackLayout>
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" CornerRadius="5" Margin="0,0,0,10">
+                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Temperature"/>
-                        <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding TemperatureReading}" x:Name="temperature_measurementLbl"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding TemperatureHealth}" x:Name="temperature_healthLbl"/>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Temperature"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding TemperatureHealth}" x:Name="temperature_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" Text="{Binding TemperatureReading}" x:Name="temperature_measurementLbl" />
+                        </Frame>
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" CornerRadius="5" Margin="0,0,0,10">
+                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Humidity"/>
-                        <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding HumidityReading}" x:Name="humidity_measurementLbl"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding HumidityHealth}" x:Name="humidity_healthLbl"/>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Humidity"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding HumidityHealth}" x:Name="humidity_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" Text="{Binding HumidityReading}" x:Name="humidity_measurementLbl" />
+                        </Frame>
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" CornerRadius="5" Margin="0,0,0,10">
+                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Soil Moisture"/>
-                        <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding MoistureHealth}" x:Name="moisture_healthLbl"/>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Soil Moisture"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding MoistureHealth}" x:Name="moisture_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl" />
+                        </Frame>
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" CornerRadius="5" Margin="0,0,0,0">
+                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Water Level"/>
-                        <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding WaterLevelReading}" x:Name="waterlvl_measurementLbl"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding WaterLevelHealth}" x:Name="waterlvl_healthLbl"/>
+                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                            <VerticalStackLayout>
+                                <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Water Level"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding WaterLevelHealth}" x:Name="waterlvl_healthLbl"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1" BackgroundColor="#E08551" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding WaterLevelReading}" x:Name="waterlvl_measurementLbl" />
+                        </Frame>
                     </Grid>
                 </Frame>
             </VerticalStackLayout>
@@ -89,7 +101,7 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="LED"/>
+                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, -5, 5, -5" Text="LED"/>
                         <Switch Grid.Column="1" Grid.Row="0" 
                             Margin="0, -10, 0, 0" 
                             OnColor="Green" 
@@ -98,7 +110,11 @@
                             HorizontalOptions="EndAndExpand"
                             Toggled="ledSwitch_Toggled"
                             x:Name="ledSwitch"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, -10, 5, 0" Text="{Binding LedState}" x:Name="led_healthLbl"/>
+
+                        <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
+                            <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="led_status_circle"/>
+                            <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding LedState}" x:Name="led_healthLbl"/>
+                        </HorizontalStackLayout>
                     </Grid>
                 </Frame>
 
@@ -112,7 +128,7 @@
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Fan"/>
+                        <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, -5, 5, -5" Text="Fan"/>
                         <Switch Grid.Column="1" Grid.Row="0" 
                             Margin="0, -10, 0, 0" 
                             OnColor="Green" 
@@ -121,7 +137,10 @@
                             HorizontalOptions="EndAndExpand"
                             Toggled="fanSwitch_Toggled"
                             x:Name="fanSwitch"/>
-                        <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, -10, 5, 0" Text="{Binding FanState}" x:Name="fan_healthLbl"/>
+                        <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
+                            <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="fan_status_circle"/>
+                            <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding FanState}" x:Name="fan_healthLbl"/>
+                        </HorizontalStackLayout>
                     </Grid>
                 </Frame>
             </VerticalStackLayout>

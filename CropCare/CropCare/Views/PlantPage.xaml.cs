@@ -31,6 +31,11 @@ public partial class PlantPage : ContentPage
         var command = fanSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
         PlantController.Fan.ControlActuator(command);
         PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
+
+        if (command == Models.Command.ON)
+            fan_status_circle.Color = Color.FromArgb("#1DBD40");
+        else
+            fan_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 
     private void ledSwitch_Toggled(object sender, ToggledEventArgs e)
@@ -38,5 +43,10 @@ public partial class PlantPage : ContentPage
         var command = ledSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
         PlantController.Led.ControlActuator(command);
         PlantController.LedState = PlantController.UpdateStateHealthLabel(command.ToString());
+
+        if (command == Models.Command.ON)
+            led_status_circle.Color = Color.FromArgb("#1DBD40");
+        else
+            led_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 }
