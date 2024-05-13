@@ -71,8 +71,16 @@ public partial class FarmSettingsPage : ContentPage
             await DisplayAlert("No Internet", "Please check your internet connection", "OK");
             return;
         }
-
-        await App.Repo.FarmsDb.DeleteItemAsync(this.Farm);
-        await Navigation.PopAsync();
+        try
+        {
+            await App.Repo.UserToFarmDb.DeleteItemAsync(new UserToFarm(App.CurrentUser.Key, this.Farm.Key));
+            await App.Repo.FarmsDb.DeleteItemAsync(this.Farm);
+            // as this page is only accessible from a farm dashboard, we pop to root since the farm no longer exists
+            await Navigation.PopToRootAsync();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 }

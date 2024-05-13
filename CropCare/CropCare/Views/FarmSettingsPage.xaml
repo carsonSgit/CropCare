@@ -19,6 +19,7 @@
         <!-- Save Changes Button -->
         <Button x:Name="AddFarmButton" Text="Save Changes" Clicked="OnSaveChangesButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
 
+        <!-- Delete Changes Button -->
         <Button x:Name="DeleteFarmButton" Text="Delete Farm" Clicked="OnDeleteFarmButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="Red"/>
     </VerticalStackLayout>
 </ContentPage>
