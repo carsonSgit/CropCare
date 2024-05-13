@@ -11,9 +11,7 @@
 3. [App Prototype](#app-prototype)
 4. [App UML Diagrams](#uml-diagrams)
     - [User & Farm](#user-farm-uml)
-    - [Plant Controller](#plant-controller-uml)
-    - [Security Controller](#security-controller-uml)
-    - [Geolocation Controller](#geolocation-controller-uml)
+    - [Controllers](#controllers-uml)
 5. [App Features](#app-features)
     - [Hardware Features](#hardware-features)
     - [Cloud Computing Features](#cloud-computing-features)
@@ -70,167 +68,98 @@ This page will contain settings for the account of our users. These settings may
 
 ```mermaid
 classDiagram
-    class Farm {
-        + Key
-        + Name
-        + DeviceId
-        + PropertyChanged
-        + InvokeMethodAsync(methodName: MethodName, parametersJSON: string): Task
-    }
     class User {
-        + Key
-        + Email
-        + Name
-        + IsOwner
-        + FarmKeys
-        + IsAssigned
-        + PropertyChanged
+        - List<string> farmKeys
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Email
+        + string Name
+        + bool IsOwner
+        + List<string> FarmKeys
+        + bool IsAssigned
+        + User(string email, string name, bool isOwner)
     }
+
+    class Farm {
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Name
+        + string DeviceId
+        + EventHubConsumerClient Consumer
+        - PlantController PlantController
+        - SecurityController SecurityController
+        - GeolocationController GeolocationController
+        + Farm(string farmName, string deviceId)
+    }
+
     class UserToFarm {
-        + Key
-        + UserId
-        + FarmId
+        + string Key
+        + string UserId
+        + string FarmId
+        + UserToFarm(string userId, string farmId)
     }
-    Farm -- UserToFarm : Has many
-    User -- UserToFarm : Has many
+
+    User "1" --> "0..*" UserToFarm
+    Farm "1" --> "0..*" UserToFarm
 ```
 
-## Plant Controller <a name="plant-controller-uml"/>
+## Controllers <a name="controllers-uml"/>
 
 ```mermaid
 classDiagram
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary<string, ObservableCollection<Reading>> Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
+    }
+
     class PlantController {
-        + Fan
-        + Led
-        + SoilMoisture
-        + TemperatureHumidity
-        + WaterLevel
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Temperature
+        + Reading Humidity
+        + Reading Moisture
+        + Reading WaterLevel
+        + void ToggleFan()
+        + void ToggleLed()
+        + void AddReading(Reading reading)
+        + PlantController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
     }
-    class Fan {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class Led {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class SoilMoisture {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class TemperatureHumidity {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class WaterLevel {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    PlantController "1" -- "many" Fan : Contains
-    PlantController "1" -- "many" Led : Contains
-    PlantController "1" -- "many" SoilMoisture : Contains
-    PlantController "1" -- "many" TemperatureHumidity : Contains
-    PlantController "1" -- "many" WaterLevel : Contains
-    SoilMoisture "1" -- "many" Reading : Generates
-    TemperatureHumidity "1" -- "many" Reading : Generates
-    WaterLevel "1" -- "many" Reading : Generates
-```
 
-## Security Controller <a name="security-controller-uml"/>
-
-```mermaid
-classDiagram
-    class DoorLock {
-        - State: string
-        + ControlActuator(command: Command): bool
-        + ReadSensor(): List
-        <Reading>
-    }
-    class DoorOpener {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class Loudness {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Luminosity {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Motion {
-        + ReadSensor(): List
-        <Reading>
-    }
     class SecurityController {
-        + Loudness
-        + Motion
-        + Vibration
-        + DoorLock
-        + DoorOpener
-        + Luminosity
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Loudness
+        + Reading Motion
+        + Reading Vibration
+        + Reading Luminosity
+        + void ToggleDoorLock()
+        + void ToggleDoorOpen()
+        + void AddReading(Reading reading)
+        + SecurityController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
     }
-    class Vibration {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    SecurityController "1" -- "many" Loudness : Contains
-    SecurityController "1" -- "many" Motion : Contains
-    SecurityController "1" -- "many" Vibration : Contains
-    SecurityController "1" -- "many" DoorLock : Contains
-    SecurityController "1" -- "many" DoorOpener : Contains
-    SecurityController "1" -- "many" Luminosity : Contains
-    Loudness "1" -- "many" Reading : Generates
-    Luminosity "1" -- "many" Reading : Generates
-    Motion "1" -- "many" Reading : Generates
-    Vibration "1" -- "many" Reading : Generates
-    DoorLock "1" -- "many" Reading : Generates
-```
 
-## Geolocation Controller <a name="geolocation-controller-uml"/>
-```mermaid
-classDiagram
-    class Accelerometer {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Buzzer {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
     class GeolocationController {
-        + Buzzer
-        + GPS
-        + Accelerometer
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Latitude
+        + Reading Longitude
+        + Reading Pitch
+        + Reading Roll
+        + void ToggleBuzzer()
+        + void AddReading(Reading reading)
+        + GeolocationController()
     }
-    class GPS {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    GeolocationController "1" -- "many" Buzzer : Contains
-    GeolocationController "1" -- "many" GPS : Contains
-    GeolocationController "1" -- "many" Accelerometer : Contains
-    Accelerometer "1" -- "many" Reading : Generates
-    GPS "1" -- "many" Reading : Generates
-    Buzzer "1" -- "many" Reading : Generates
+
+    BaseController <|-- PlantController
+    BaseController <|-- SecurityController
+    BaseController <|-- GeolocationController
 ```
 
 
