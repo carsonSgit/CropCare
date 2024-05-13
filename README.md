@@ -11,7 +11,7 @@
 3. [App Prototype](#app-prototype)
 4. [App UML Diagrams](#uml-diagrams)
     - [User & Farm](#user-farm-uml)
-    - [Plant Controller](#plant-controller-uml)
+    - [Base Controller](#base-controller-uml)
     - [Security Controller](#security-controller-uml)
     - [Geolocation Controller](#geolocation-controller-uml)
 5. [App Features](#app-features)
@@ -95,51 +95,17 @@ classDiagram
     User -- UserToFarm : Has many
 ```
 
-## Plant Controller <a name="plant-controller-uml"/>
+## Base Controller <a name="base-controller-uml"/>
 
 ```mermaid
 classDiagram
-    class PlantController {
-        + Fan
-        + Led
-        + SoilMoisture
-        + TemperatureHumidity
-        + WaterLevel
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary&lt;string, ObservableCollection&lt;Reading&gt;&gt; Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
     }
-    class Fan {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class Led {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class SoilMoisture {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class TemperatureHumidity {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class WaterLevel {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    PlantController "1" -- "many" Fan : Contains
-    PlantController "1" -- "many" Led : Contains
-    PlantController "1" -- "many" SoilMoisture : Contains
-    PlantController "1" -- "many" TemperatureHumidity : Contains
-    PlantController "1" -- "many" WaterLevel : Contains
-    SoilMoisture "1" -- "many" Reading : Generates
-    TemperatureHumidity "1" -- "many" Reading : Generates
-    WaterLevel "1" -- "many" Reading : Generates
 ```
 
 ## Security Controller <a name="security-controller-uml"/>
