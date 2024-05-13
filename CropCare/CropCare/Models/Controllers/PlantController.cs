@@ -14,12 +14,24 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Represents latest temperature reading
+        /// </summary>
         public Reading Temperature { get; set; }
 
+        /// <summary>
+        /// Represents latest humidity reading
+        /// </summary>
         public Reading Humidity { get; set; }
 
+        /// <summary>
+        /// Represents latest moisture reading
+        /// </summary>
         public Reading Moisture { get; set; }
 
+        /// <summary>
+        /// Represents latest water level reading
+        /// </summary>
         public Reading WaterLevel { get; set; }
 
         public void ToggleFan()
@@ -39,6 +51,10 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public PlantController() : base(_readingTypes) { }
 
+        /// <summary>
+        /// Adds a reading to the corrosponding property based on the reading type and updates list.
+        /// </summary>
+        /// <param name="reading">The reading to add</param>
         public override void AddReading(Reading reading)
         {
             base.AddReading(reading);

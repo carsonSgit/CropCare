@@ -54,6 +54,10 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public SecurityController() : base(_readingTypes) { }
 
+        /// <summary>
+        /// Adds a reading to the corrosponding property based on the reading type and updates list.
+        /// </summary>
+        /// <param name="reading">The reading to add</param>
         public override void AddReading(Reading reading)
         {
             base.AddReading(reading);

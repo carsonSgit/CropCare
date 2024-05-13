@@ -16,12 +16,24 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Represents latest latitude reading
+        /// </summary>
         public Reading Latitude { get; set; }
 
+        /// <summary>
+        /// Represents latest longitude reading
+        /// </summary>
         public Reading Longitude { get; set; }
 
+        /// <summary>
+        /// Represents latest pitch reading
+        /// </summary>
         public Reading Pitch { get; set; }
 
+        /// <summary>
+        /// Represents latest roll reading
+        /// </summary>
         public Reading Roll { get; set; }
 
         public void ToggleBuzzer()
@@ -30,6 +42,10 @@ namespace CropCare.Models.Controllers
             return;
         }
 
+        /// <summary>
+        /// Adds a reading to the corrosponding property based on the reading type and updates list.
+        /// </summary>
+        /// <param name="reading">The reading to add</param>
         public override void AddReading(Reading reading)
         {
             base.AddReading(reading);

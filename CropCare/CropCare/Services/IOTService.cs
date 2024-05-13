@@ -9,7 +9,6 @@ namespace CropCare.Services
 {
     public class IOTService
     {
-        // Define an event that other classes can subscribe to
         public event Action<string, string> MessageReceived;
 
         public IOTService()
