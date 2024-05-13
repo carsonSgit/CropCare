@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.SecurityPage"
              Title="Security">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout BackgroundColor="#ECECEC">
         <Label Text="Monitor your farm security" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
         <Label Text="Your security control center" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
@@ -24,7 +32,14 @@
 
                         <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                             <!-- Change the font once the correct unit is provided -->
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White" Text="{Binding LoudnessReading}" x:Name="loudnessMeasurementLbl" />
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White"x:Name="loudnessMeasurementLbl" >
+                                   <Label.FormattedText>
+                                      <FormattedString>
+                                          <Span Text="{Binding Loudness.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                          <Span Text="{Binding Loudness.Unit}" />
+                                      </FormattedString>
+                                  </Label.FormattedText>
+                              </Label>
                         </Frame>
                     </Grid>
                 </Frame>
@@ -38,12 +53,19 @@
                         <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Luminosity"/>
-                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding LuminosityHealth}" x:Name="luminosityHealthLbl"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" x:Name="luminosityHealthLbl">
                             </VerticalStackLayout>
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding LuminosityReading}" x:Name="luminosityMeasurementLbl"/>
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding LuminosityReading}" x:Name="luminosityMeasurementLbl">
+                               <Label.FormattedText>
+                                  <FormattedString>
+                                      <Span Text="{Binding Luminosity.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                      <Span Text="{Binding Luminosity.Unit}" />
+                                  </FormattedString>
+                              </Label.FormattedText>
+                          </Label>
                         </Frame>
                     </Grid>
                 </Frame>
@@ -62,7 +84,7 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding MotionReading}" x:Name="motionMeasurementLbl" />
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding Motion.Value}" x:Name="motionMeasurementLbl" />
                         </Frame>
                     </Grid>
                 </Frame>
@@ -81,7 +103,7 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding VibrationReading}" x:Name="vibrationMeasurementLbl"/>
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding Vibration.Value}" x:Name="vibrationMeasurementLbl"/>
                         </Frame>
                     </Grid>
                 </Frame>

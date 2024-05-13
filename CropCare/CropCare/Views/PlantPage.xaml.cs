@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Plant;
+using CropCare.Models.Controllers;
 
 namespace CropCare.Views;
 
@@ -8,8 +8,6 @@ namespace CropCare.Views;
 /// </summary>
 public partial class PlantPage : ContentPage
 {
-    private Farm Farm { get; set; }
-
     /// <summary>
     /// Gets the plant controller associated with the page.
     /// </summary>
@@ -28,25 +26,26 @@ public partial class PlantPage : ContentPage
 
     private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        var command = fanSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        PlantController.Fan.ControlActuator(command);
-        PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
 
-        if (command == Models.Command.ON)
-            fan_status_circle.Color = Color.FromArgb("#1DBD40");
-        else
-            fan_status_circle.Color = Color.FromArgb("#DC2C2C");
+        //var command = fanSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        //PlantController.Fan.ControlActuator(command);
+        //PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
+
+
+//         if (command == Models.Command.ON)
+//             fan_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             fan_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 
     private void ledSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        var command = ledSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        PlantController.Led.ControlActuator(command);
-        PlantController.LedState = PlantController.UpdateStateHealthLabel(command.ToString());
-
-        if (command == Models.Command.ON)
-            led_status_circle.Color = Color.FromArgb("#1DBD40");
-        else
-            led_status_circle.Color = Color.FromArgb("#DC2C2C");
+        //var command = ledSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        //PlantController.Led.ControlActuator(command);
+        //PlantController.LedState = PlantController.UpdateStateHealthLabel(command.ToString());
+//         if (command == Models.Command.ON)
+//             led_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             led_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 }

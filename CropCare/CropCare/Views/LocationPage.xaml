@@ -4,7 +4,15 @@
              x:Class="CropCare.Views.LocationPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:local="clr-namespace:CropCare.Converters"
              Title="Location">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
     
     <Grid BackgroundColor="#ECECEC">
         <Grid.RowDefinitions>
@@ -16,7 +24,7 @@
             <maps:Map x:Name="map">
             </maps:Map>
         </StackLayout>
-        
+     
         <StackLayout Grid.Row="1" Margin="10">
             <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="Transparent">
                 <VerticalStackLayout>
@@ -35,10 +43,10 @@
                         <Frame Grid.Column="1" BackgroundColor="#E08551" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="80">
                             <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
                                 <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Pitch, StringFormat='{0:F0}'}" FontSize="18"/>
-                                        <Span Text="{Binding PitchRollUnit}" FontSize="18" />
-                                    </FormattedString>
+                                  <FormattedString>
+                                      <Span Text="{Binding Pitch.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                      <Span Text="{Binding Pitch.Unit}" />
+                                  </FormattedString>
                                 </Label.FormattedText>
                             </Label>
                         </Frame>
@@ -59,10 +67,10 @@
                         <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="80">
                             <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="-5, 5, -5, 5" TextColor="White" >
                                 <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Roll, StringFormat='{0:F0}'}" FontSize="18"/>
-                                        <Span Text="{Binding PitchRollUnit}" FontSize="18"/>
-                                    </FormattedString>
+                                  <FormattedString>
+                                      <Span Text="{Binding Roll.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                      <Span Text="{Binding Roll.Unit}" />
+                                  </FormattedString>
                                 </Label.FormattedText>
                             </Label>
                         </Frame>

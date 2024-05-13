@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.PlantPage"
              Title="Plants">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <VerticalStackLayout BackgroundColor="#ECECEC">
         <Label Text="Monitor your container farm" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
@@ -24,7 +31,14 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" Text="{Binding TemperatureReading}" x:Name="temperature_measurementLbl" />
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" x:Name="temperature_measurementLbl">
+                              <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Temperature.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                    <Span Text="{Binding Temperature.Unit}" />
+                                </FormattedString>
+                              </Label.FormattedText>  
+                            </Label>
                         </Frame>
                     </Grid>
                 </Frame>
@@ -43,8 +57,15 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#EA5757" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" Text="{Binding HumidityReading}" x:Name="humidity_measurementLbl" />
-                        </Frame>
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" x:Name="humidity_measurementLbl">
+                             <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Humidity.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                    <Span Text="{Binding Humidity.Unit}" />
+                                </FormattedString>
+                              </Label.FormattedText>
+                            </Label>  
+                      </Frame>
                     </Grid>
                 </Frame>
 
@@ -62,8 +83,15 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl" />
-                        </Frame>
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl">
+                              <Label.FormattedText>
+                                  <FormattedString>
+                                      <Span Text="{Binding Moisture.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                      <Span Text="{Binding Moisture.Unit}" />
+                                  </FormattedString>
+                              </Label.FormattedText>
+                          </Label>
+                      </Frame>
                     </Grid>
                 </Frame>
 
@@ -81,7 +109,14 @@
                         </Frame>
 
                         <Frame Grid.Column="1" BackgroundColor="#E08551" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
-                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding WaterLevelReading}" x:Name="waterlvl_measurementLbl" />
+                            <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" x:Name="waterlvl_measurementLbl" >
+                               <Label.FormattedText>
+                                  <FormattedString>
+                                      <Span Text="{Binding WaterLevel.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                      <Span Text="{Binding WaterLevel.Unit}" />
+                                  </FormattedString>
+                              </Label.FormattedText>
+                          </Label>
                         </Frame>
                     </Grid>
                 </Frame>

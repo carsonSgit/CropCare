@@ -1,9 +1,10 @@
 using CropCare.Models;
-using CropCare.Models.Security;
+using CropCare.Models.Controllers;
+using PropertyChanged;
+using System.ComponentModel;
 
 namespace CropCare.Views;
-
-public partial class SecurityPage : ContentPage
+public partial class SecurityPage : ContentPage, INotifyPropertyChanged
 {
     /// <summary>
     /// Gets the farm associated with the security controls.
@@ -14,6 +15,16 @@ public partial class SecurityPage : ContentPage
     /// Gets the security controller associated with the page.
     /// </summary>
     public SecurityController SecurityController { get; private set; }
+
+    public bool MotionReading { get; set; }
+
+    public double LoudnessReading { get; set; }
+    public string LoudnessUnit { get; set; }
+
+    public bool VibrationReading { get; set; }
+
+    public double LuminosityReading { get; set; }
+    public string LuminosityUnit { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SecurityPage"/> class.
@@ -29,26 +40,26 @@ public partial class SecurityPage : ContentPage
 
     private void doorLockSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        var command = doorLockSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        var newState = SecurityController.DoorLock.ControlActuator(command) ? command.ToString() : SecurityController.DoorLock.State;
-        SecurityController.DoorLockState = SecurityController.UpdateStateHealthLabel(newState);
+        //var command = doorLockSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        //var newState = SecurityController.DoorLock.ControlActuator(command) ? command.ToString() : SecurityController.DoorLock.State;
+        //SecurityController.DoorLockState = SecurityController.UpdateStateHealthLabel(newState);
 
-        if (command == Models.Command.ON)
-            doorlock_status_circle.Color = Color.FromArgb("#1DBD40");
-        else
-            doorlock_status_circle.Color = Color.FromArgb("#DC2C2C");
+//         if (command == Models.Command.ON)
+//             doorlock_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             doorlock_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 
     private void doorOpenSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        var command = doorOpenSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        var newState = SecurityController.DoorOpener.ControlActuator(command) ? command.ToString() : SecurityController.DoorOpener.State;
-        SecurityController.DoorOpenerState = SecurityController.UpdateStateHealthLabel(newState);
+        //var command = doorOpenSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
+        //var newState = SecurityController.DoorOpener.ControlActuator(command) ? command.ToString() : SecurityController.DoorOpener.State;
+        //SecurityController.DoorOpenerState = SecurityController.UpdateStateHealthLabel(newState);
 
-        if (command == Models.Command.ON)
-            door_status_circle.Color = Color.FromArgb("#1DBD40");
-        else
-            door_status_circle.Color = Color.FromArgb("#DC2C2C");
+//         if (command == Models.Command.ON)
+//             door_status_circle.Color = Color.FromArgb("#1DBD40");
+//         else
+//             door_status_circle.Color = Color.FromArgb("#DC2C2C");
 
     }
 }

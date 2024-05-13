@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Geolocation;
+using CropCare.Models.Controllers;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 namespace CropCare.Views;
@@ -11,7 +11,8 @@ public partial class LocationPage : ContentPage
 {
     private GeolocationController GeolocationController { get; set; }
     private Farm Farm { get; set; }
-
+    public double Pitch { get; set; }
+    public double Roll { get; set; }
     /// <summary>
     /// Initializea new instance of the LocationPage class.
     /// </summary>
@@ -19,8 +20,8 @@ public partial class LocationPage : ContentPage
     public LocationPage(Farm farm)
     {
         InitializeComponent();
-        Farm = farm;
         GeolocationController = farm.GeolocationController;
+        Farm = farm;
         BindingContext = GeolocationController;
     }
 
@@ -36,7 +37,7 @@ public partial class LocationPage : ContentPage
 
             if (map.IsVisible)
             {
-                Location location = new Location(GeolocationController.Latitude(), GeolocationController.Longitude());
+                Location location = new Location(double.Parse(GeolocationController.Latitude.Value), double.Parse(GeolocationController.Longitude.Value));
                 MapSpan mapSpan = new MapSpan(location, 0.01, 0.01);
                 map.MoveToRegion(mapSpan);
                 map.Pins.Add(new Pin
@@ -51,18 +52,18 @@ public partial class LocationPage : ContentPage
 
     private void buzzer_Toggled(object sender, ToggledEventArgs e)
     {
-        var state = (Switch)sender;
-
-        if (state.IsToggled)
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
-            buzzer_status_circle.Color = Color.FromArgb("#1DBD40");
-        }
-        else
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
-            buzzer_status_circle.Color = Color.FromArgb("#DC2C2C");
-        }
+        //var state = (Switch)sender;
+        
+        //if (state.IsToggled)
+        //{
+        //    GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
+        //    buzzer_status_circle.Color = Color.FromArgb("#1DBD40");
+        //}
+        //else
+        //{
+        //    GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
+        //    buzzer_status_circle.Color = Color.FromArgb("#DC2C2C");
+        //}
     }
 
 
