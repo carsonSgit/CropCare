@@ -71,29 +71,39 @@ This page will contain settings for the account of our users. These settings may
 
 ```mermaid
 classDiagram
-    class Farm {
-        + Key
-        + Name
-        + DeviceId
-        + PropertyChanged
-        + InvokeMethodAsync(methodName: MethodName, parametersJSON: string): Task
-    }
     class User {
-        + Key
-        + Email
-        + Name
-        + IsOwner
-        + FarmKeys
-        + IsAssigned
-        + PropertyChanged
+        - List<string> farmKeys
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Email
+        + string Name
+        + bool IsOwner
+        + List<string> FarmKeys
+        + bool IsAssigned
+        + User(string email, string name, bool isOwner)
     }
+
+    class Farm {
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Name
+        + string DeviceId
+        + EventHubConsumerClient Consumer
+        - PlantController PlantController
+        - SecurityController SecurityController
+        - GeolocationController GeolocationController
+        + Farm(string farmName, string deviceId)
+    }
+
     class UserToFarm {
-        + Key
-        + UserId
-        + FarmId
+        + string Key
+        + string UserId
+        + string FarmId
+        + UserToFarm(string userId, string farmId)
     }
-    Farm -- UserToFarm : Has many
-    User -- UserToFarm : Has many
+
+    User "1" --> "0..*" UserToFarm
+    Farm "1" --> "0..*" UserToFarm
 ```
 
 ## Base Controller <a name="base-controller-uml"/>
@@ -144,57 +154,31 @@ classDiagram
 
 ```mermaid
 classDiagram
-    class DoorLock {
-        - State: string
-        + ControlActuator(command: Command): bool
-        + ReadSensor(): List
-        <Reading>
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary<string, ObservableCollection<Reading>> Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
     }
-    class DoorOpener {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
-    class Loudness {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Luminosity {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Motion {
-        + ReadSensor(): List
-        <Reading>
-    }
+
     class SecurityController {
-        + Loudness
-        + Motion
-        + Vibration
-        + DoorLock
-        + DoorOpener
-        + Luminosity
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Loudness
+        + Reading Motion
+        + Reading Vibration
+        + Reading Luminosity
+        + void ToggleDoorLock()
+        + void ToggleDoorOpen()
+        + void AddReading(Reading reading)
+        + SecurityController()
+        + string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        + string UpdateStateHealthLabel(string actuatorState)
     }
-    class Vibration {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    SecurityController "1" -- "many" Loudness : Contains
-    SecurityController "1" -- "many" Motion : Contains
-    SecurityController "1" -- "many" Vibration : Contains
-    SecurityController "1" -- "many" DoorLock : Contains
-    SecurityController "1" -- "many" DoorOpener : Contains
-    SecurityController "1" -- "many" Luminosity : Contains
-    Loudness "1" -- "many" Reading : Generates
-    Luminosity "1" -- "many" Reading : Generates
-    Motion "1" -- "many" Reading : Generates
-    Vibration "1" -- "many" Reading : Generates
-    DoorLock "1" -- "many" Reading : Generates
+
+    BaseController <|-- SecurityController
+
 ```
 
 ## Geolocation Controller <a name="geolocation-controller-uml"/>
@@ -221,7 +205,6 @@ classDiagram
     }
 
     BaseController <|-- GeolocationController
-
 ```
 
 
