@@ -1,10 +1,7 @@
 ﻿using Azure.Messaging.EventHubs.Consumer;
 using CropCare.Interfaces;
-using CropCare.Models.Geolocation;
-using CropCare.Models.Plant;
-using CropCare.Models.Security;
+using CropCare.Models.Controllers;
 using Newtonsoft.Json;
-using Org.Json;
 using System.ComponentModel;
 namespace CropCare.Models
 {
@@ -77,52 +74,17 @@ namespace CropCare.Models
                 return;
             }
             Console.WriteLine($"{data}");
-            Dictionary<string, string> dictionary = null;
-            try
-            {
-                data = data.Replace('\'', '"');
-                dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Could not deserialize data: {ex.Message}");
-            }
+
+            Reading reading = JSONToReading(data);
 
             try
             {
-                foreach (var sensor in PlantController.Sensors)
+                var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
+                foreach (var controller in controllers)
                 {
-                    foreach (var reading in sensor.Readings)
+                    if(controller.ValidateReading(reading))
                     {
-                        if (data.Contains(reading.Type))
-                        {
-                            reading.Value = dictionary["value"];
-                            sensor.Refresh();
-                        }
-                    }
-                }
-
-                foreach (var sensor in SecurityController.Sensors)
-                {
-                    foreach (var reading in sensor.Readings)
-                    {
-                        if (data.Contains(reading.Type))
-                        {
-                            reading.Value = dictionary["value"];
-                            sensor.Refresh();
-                        }
-                    }
-                }
-
-                foreach (var sensor in GeolocationController.Sensors)
-                {
-                    foreach (var reading in sensor.Readings)
-                    {
-                        if (data.Contains(reading.Type))
-                        {
-                            reading.Value = dictionary["value"];
-                            sensor.Refresh();
-                        }
+                        controller.AddReading(reading);
                     }
                 }
             }
@@ -130,6 +92,23 @@ namespace CropCare.Models
             {
                 Console.WriteLine($"Could not update sensor readings: {ex.Message}");
             }
+        }
+
+        private Reading JSONToReading(string json)
+        {
+            Dictionary<string, string> dictionary = null;
+            try
+            {
+                json = json.Replace('\'', '"');
+                dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                return new Reading(dictionary["reading_type"], dictionary["unit"], dictionary["value"]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize {json} to Reading Class: {ex.Message}");
+            }
+            return null;
         }
     }
 }

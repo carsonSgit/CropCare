@@ -12,8 +12,8 @@
         public const string LUMINOSITY = "LUMINOSITY";
         public const string LOUDNESS = "LOUDNESS";
         public const string NOISE = "DECIBELS";
-        public const string MOISTURE = "MOISUTRE";
-        public const string WATERLEVEL = "water level";
+        public const string MOISTURE = "MOISTURE";
+        public const string WATERLEVEL = "WATERLEVEL";
         public const string MOTION = "MOTION";
         public const string LATITUDE = "LATITUDE";
         public const string LONGITUDE = "LONGITUDE";
@@ -22,27 +22,6 @@
         public const string VIBRATION = "VIBRATION";
         public const string DOORLOCK = "DOORLOCK";
     }
-
-    // Team Name: CropCare
-    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
-    // Date: April 29th 2023, 6th Semester
-    // Course Name: Application Development and Connected Objects
-    // Description: Provides constants for different units of sensor readings.
-    public static class ReadingUnit
-    {
-        public const string MILLIMITERS = "mm";
-        public const string CELCIUS = "°C";
-        public const string FAHRENHEIT = "°F";
-        public const string HUMIDITY = "% HR";
-        public const string UNITLESS = "unitless";
-        public const string LUX = "nm";
-        public const string LOUDNESS = "unitless"; //Unitless????
-        public const string OHMS = "Ω";
-        public const string WATERLEVEL = "water level";
-        public const string NONE = "";
-        public const string DEGREE = "°";
-    }
-
 
     // Team Name: CropCare
     // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
@@ -67,7 +46,7 @@
         public dynamic Value { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Reading"/> class with the specified type, unit, and value.
+        /// Initializes a new instance of the <see cref="Reading<typeparamref name="T"/>"/> class with the specified type, unit, and value.
         /// </summary>
         /// <param name="type">The type of the reading.</param>
         /// <param name="unit">The unit of the reading.</param>

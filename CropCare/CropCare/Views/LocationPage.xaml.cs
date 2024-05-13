@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Geolocation;
+using CropCare.Models.Controllers;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 namespace CropCare.Views;
@@ -22,9 +22,7 @@ public partial class LocationPage : ContentPage
         InitializeComponent();
         GeolocationController = farm.GeolocationController;
         Farm = farm;
-        Pitch = GeolocationController.Accelerometer.Pitch;
-        Roll = GeolocationController.Accelerometer.Roll;
-        BindingContext = this;
+        BindingContext = GeolocationController;
     }
 
     protected override void OnAppearing()
@@ -40,7 +38,7 @@ public partial class LocationPage : ContentPage
 
             if (map.IsVisible)
             {
-                Location location = new Location(GeolocationController.GPS.Latitude, GeolocationController.GPS.Longitude);
+                Location location = new Location(double.Parse(GeolocationController.Latitude.Value), double.Parse(GeolocationController.Longitude.Value));
                 MapSpan mapSpan = new MapSpan(location, 0.01, 0.01);
                 map.MoveToRegion(mapSpan);
                 map.Pins.Add(new Pin
@@ -55,15 +53,15 @@ public partial class LocationPage : ContentPage
 
     private void buzzer_Toggled(object sender, ToggledEventArgs e)
     {
-        var state = (Switch)sender;
+        //var state = (Switch)sender;
 
-        if (state.IsToggled)
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
-        }
-        else
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
-        }
+        //if (state.IsToggled)
+        //{
+        //    GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
+        //}
+        //else
+        //{
+        //    GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
+        //}
     }
 }

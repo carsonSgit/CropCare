@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Plant;
+using CropCare.Models.Controllers;
 
 namespace CropCare.Views;
 
@@ -13,15 +13,6 @@ public partial class PlantPage : ContentPage
     /// </summary>
     public PlantController PlantController { get; set; }
 
-    public double WaterLevel { get; set; }
-    public string WaterLevelUnit { get; set; }
-    public double Temperature { get; set; }
-    public string TemperatureUnit { get; set; }
-    public double Humidity { get; set; }
-    public string HumidityUnit { get; set; }
-    public double SoilMoisture { get; set; }
-    public string SoilMoistureUnit { get; set; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="PlantPage"/> class.
     /// </summary>
@@ -30,15 +21,7 @@ public partial class PlantPage : ContentPage
     {
         InitializeComponent();
         PlantController = farm.PlantController;
-        WaterLevel = PlantController.WaterLevelSensor.WaterLevel;
-        WaterLevelUnit = PlantController.WaterLevelSensor.WaterLevelUnit;
-        Temperature = PlantController.TemperatureSensor.Temperature;
-        TemperatureUnit = PlantController.TemperatureSensor.TemperatureUnit;
-        Humidity = PlantController.TemperatureSensor.Humidity;
-        HumidityUnit = PlantController.TemperatureSensor.HumidityUnit;
-        SoilMoisture = PlantController.SoilMoistureSensor.Moisture;
-        SoilMoistureUnit = PlantController.SoilMoistureSensor.MoistureUnit;
-        BindingContext = this;
+        BindingContext = PlantController;
     }
 
     private void fanSwitch_Toggled(object sender, ToggledEventArgs e)

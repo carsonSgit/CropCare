@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Security;
+using CropCare.Models.Controllers;
 using PropertyChanged;
 using System.ComponentModel;
 
@@ -35,13 +35,7 @@ public partial class SecurityPage : ContentPage, INotifyPropertyChanged
         InitializeComponent();
         Farm = farm;
         SecurityController = farm.SecurityController;
-        MotionReading = SecurityController.MotionSensor.Motion;
-        LoudnessReading = SecurityController.LoudnessSensor.Loudness;
-        LoudnessUnit = SecurityController.LoudnessSensor.LoudnessUnit;
-        VibrationReading = SecurityController.VibrationSensor.Vibration;
-        LuminosityReading = SecurityController.LuminositySensor.Luminosity;
-        LuminosityUnit = SecurityController.LuminositySensor.LuminosityUnit;
-        BindingContext = this;
+        BindingContext = SecurityController;
     }
 
     private void doorLockSwitch_Toggled(object sender, ToggledEventArgs e)

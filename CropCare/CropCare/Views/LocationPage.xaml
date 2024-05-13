@@ -4,7 +4,13 @@
              x:Class="CropCare.Views.LocationPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:local="clr-namespace:CropCare.Converters"
              Title="Location">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -23,7 +29,8 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding Pitch, StringFormat='{0:F0}°'}" />
+                                    <Span Text="{Binding Pitch.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                    <Span Text="{Binding Pitch.Unit}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -35,7 +42,8 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding Roll, StringFormat='{0:F0}°'}" />
+                                    <Span Text="{Binding Roll.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F0'}" />
+                                    <Span Text="{Binding Roll.Unit}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

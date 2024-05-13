@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CropCare.Converters"
              x:Class="CropCare.Views.PlantPage"
              Title="Plants">
-    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Margin="0,20,0,0">
         <VerticalStackLayout>
 
@@ -21,8 +26,8 @@
                     <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="temperature_measurementLbl">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding Temperature, StringFormat='{0:F2}'}" />
-                                <Span Text="{Binding TemperatureUnit}" />
+                                <Span Text="{Binding Temperature.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                <Span Text="{Binding Temperature.Unit}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -43,8 +48,8 @@
                     <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="humidity_measurementLbl">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding Humidity, StringFormat='{0:F2}'}" />
-                                <Span Text="{Binding HumidityUnit}" />
+                                <Span Text="{Binding Humidity.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                <Span Text="{Binding Humidity.Unit}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -65,8 +70,8 @@
                     <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="moisture_measurementLbl">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding SoilMoisture, StringFormat='{0:F2}'}" />
-                                <Span Text="{Binding SoilMoistureUnit}" />
+                                <Span Text="{Binding Moisture.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                <Span Text="{Binding Moisture.Unit}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -88,8 +93,8 @@
                     <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="waterlvl_measurementLbl">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding WaterLevel, StringFormat='{0:F2}'}" />
-                                <Span Text="{Binding WaterLevelUnit}" />
+                                <Span Text="{Binding WaterLevel.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                <Span Text="{Binding WaterLevel.Unit}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

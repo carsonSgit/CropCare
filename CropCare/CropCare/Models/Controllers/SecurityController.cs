@@ -1,99 +1,77 @@
 ﻿using CropCare.Interfaces;
 using System.ComponentModel;
 
-namespace CropCare.Models.Security
+namespace CropCare.Models.Controllers
 {
     // Team Name: CropCare
     // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Controller for security-related devices and sensors.
-    public class SecurityController : INotifyPropertyChanged
+    public class SecurityController : BaseController, INotifyPropertyChanged
     {
+
+        private static readonly string[] _readingTypes = new string[] { ReadingType.LOUDNESS, ReadingType.MOTION, ReadingType.VIBRATION, ReadingType.LUMINOSITY };
         /// <summary>
         /// Event raised when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Raises the PropertyChanged event.
+        /// Represents latest loudness reading
         /// </summary>
-        /// <param name="propertyName">The name of the property that changed.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
+        public Reading Loudness { get; set; }
+
+        /// <summary>
+        /// Represents latest motion reading
+        /// </summary>
+        public Reading Motion { get; set; }
+
+        /// <summary>
+        /// Represents latest vibration reading
+        /// </summary>
+        public Reading Vibration { get; set; }
+
+        /// <summary>
+        /// Reperesents latest luminosity reading
+        /// </summary>
+        public Reading Luminosity { get; set; }
+
+        public void ToggleDoorLock()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            //Call command for door lock
+            return;
         }
 
-        /// <summary>
-        /// The loudness sensor.
-        /// </summary>
-        public LoudnessSensor LoudnessSensor { get; set; }
-
-        /// <summary>
-        /// The motion sensor.
-        /// </summary>
-        public MotionSensor MotionSensor { get; set; }
-
-        /// <summary>
-        /// The vibration sensor.
-        /// </summary>
-        public VibrationSensor VibrationSensor { get; set; }
-
-        /// <summary>
-        /// The door lock actuator and sensor.
-        /// </summary>
-        public DoorLock DoorLock { get; set; }
-
-        /// <summary>
-        /// The door opener actuator.
-        /// </summary>
-        public DoorOpener DoorOpener { get; set; }
-
-        /// <summary>
-        /// The luminosity sensor.
-        /// </summary>
-        public LuminositySensor LuminositySensor { get; set; }
-
-        /// <summary>
-        /// The state of the door opener.
-        /// </summary>
-        private string _doorOpenerState;
-        public string DoorOpenerState
+        public void ToggleDoorOpen()
         {
-            get => _doorOpenerState;
-            set
-            {
-                if (_doorOpenerState != value)
-                {
-                    _doorOpenerState = value;
-                    OnPropertyChanged(nameof(DoorOpenerState));
-                }
-            }
+            //Call command for door open
+            return;
         }
-
-        public List<ISensor> Sensors { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityController"/> class.
         /// </summary>
-        public SecurityController()
+        public SecurityController() : base(_readingTypes) { }
+
+        public override void AddReading(Reading reading)
         {
-            LoudnessSensor = new LoudnessSensor();
-            MotionSensor = new MotionSensor();
-            VibrationSensor = new VibrationSensor();
-            DoorLock = new DoorLock();
-            DoorOpener = new DoorOpener();
-            LuminositySensor = new LuminositySensor();
-
-            DoorOpenerState = UpdateStateHealthLabel(DoorOpener.State);
-
-            Sensors = new List<ISensor>()
+            base.AddReading(reading);
+            switch (reading.Type)
             {
-                LoudnessSensor,
-                MotionSensor,
-                VibrationSensor,
-                LuminositySensor,
-            };
+                case ReadingType.LOUDNESS:
+                    Loudness = reading;
+                    break;
+                case ReadingType.MOTION:
+                    Motion = reading;
+                    break;
+                case ReadingType.VIBRATION:
+                    Vibration = reading;
+                    break;
+                case ReadingType.LUMINOSITY:
+                    Luminosity = reading;
+                    break;
+            }
         }
 
         /// <summary>
