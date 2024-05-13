@@ -37,7 +37,7 @@ class AReading(ABC):
         HUMIDITY = "% HR"
         UNITLESS = "unitless"
         LUX = "lux"
-        LOUDNESS = "pKa"
+        LOUDNESS = "kPa"
         OHMS = "Ω"
         NONE = ""
         DEGREE = "°"
