@@ -27,17 +27,17 @@ namespace CropCare.Models.Security
         /// <summary>
         /// The loudness sensor.
         /// </summary>
-        public Loudness Loudness { get; set; }
+        public LoudnessSensor LoudnessSensor { get; set; }
 
         /// <summary>
         /// The motion sensor.
         /// </summary>
-        public Motion Motion { get; set; }
+        public MotionSensor MotionSensor { get; set; }
 
         /// <summary>
         /// The vibration sensor.
         /// </summary>
-        public Vibration Vibration { get; set; }
+        public VibrationSensor VibrationSensor { get; set; }
 
         /// <summary>
         /// The door lock actuator and sensor.
@@ -52,68 +52,7 @@ namespace CropCare.Models.Security
         /// <summary>
         /// The luminosity sensor.
         /// </summary>
-        public Luminosity Luminosity { get; set; }
-
-        /// <summary>
-        /// The ID of the security controller's device.
-        /// </summary>
-        public string DeviceId { get; set; }
-
-        /// <summary>
-        /// The current reading of luminosity.
-        /// </summary>
-        public string LuminosityReading => GetLuminosityReading();
-
-        /// <summary>
-        /// The health status of luminosity.
-        /// </summary>
-        public string LuminosityHealth => UpdateReadingHealthLabel(LuminosityReading, 'n', 1000, 500);
-
-        /// <summary>
-        /// The current reading of loudness.
-        /// </summary>
-        public string LoudnessReading => GetLoudnessReading();
-
-        /// <summary>
-        /// The health status of loudness.
-        /// </summary>
-        public string LoudnessHealth => UpdateReadingHealthLabel(LoudnessReading, 'u', 1000, 500);
-
-        /// <summary>
-        /// The current reading of motion.
-        /// </summary>
-        public string MotionReading => GetMotionReading();
-
-        /// <summary>
-        /// The health status of motion.
-        /// </summary>
-        public string MotionHealth => UpdateReadingHealthLabel(MotionReading, ' ', 1000, 500);
-
-        /// <summary>
-        /// The current reading of vibration.
-        /// </summary>
-        public string VibrationReading => GetVibrationReading();
-
-        /// <summary>
-        /// The health status of vibration.
-        /// </summary>
-        public string VibrationHealth => UpdateReadingHealthLabel(VibrationReading, ' ', 1000, 500);
-
-        /// <summary>
-        /// The state of the door lock.
-        /// </summary>
-        public string DoorLockState
-        {
-            get => GetDoorLockReading();
-            set
-            {
-                if (DoorLock.State != value)
-                {
-                    DoorLock.State = value;
-                    OnPropertyChanged(nameof(DoorLockState));
-                }
-            }
-        }
+        public LuminositySensor LuminositySensor { get; set; }
 
         /// <summary>
         /// The state of the door opener.
@@ -132,59 +71,29 @@ namespace CropCare.Models.Security
             }
         }
 
+        public List<ISensor> Sensors { get; set; }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="SecurityController"/> class with the specified device ID.
+        /// Initializes a new instance of the <see cref="SecurityController"/> class.
         /// </summary>
-        /// <param name="deviceId">The ID of the security controller's device.</param>
-        public SecurityController(string deviceId)
+        public SecurityController()
         {
-            Loudness = new Loudness();
-            Motion = new Motion();
-            Vibration = new Vibration();
+            LoudnessSensor = new LoudnessSensor();
+            MotionSensor = new MotionSensor();
+            VibrationSensor = new VibrationSensor();
             DoorLock = new DoorLock();
             DoorOpener = new DoorOpener();
-            Luminosity = new Luminosity();
-            DeviceId = deviceId;
+            LuminositySensor = new LuminositySensor();
 
             DoorOpenerState = UpdateStateHealthLabel(DoorOpener.State);
-            DoorLockState = UpdateStateHealthLabel(DoorLock.State);
-        }
 
-
-        /// <summary>
-        /// Gets the current reading of loudness.
-        /// </summary>
-        /// <returns>The current loudness reading.</returns>
-        public string GetLoudnessReading() => GetSensorReading(Loudness, ReadingType.LOUDNESS);
-
-        /// <summary>
-        /// Gets the current reading of luminosity.
-        /// </summary>
-        /// <returns>The current luminosity reading.</returns>
-        public string GetLuminosityReading() => GetSensorReading(Luminosity, ReadingType.LUMINOSITY);
-
-        /// <summary>
-        /// Gets the current reading of motion.
-        /// </summary>
-        /// <returns>The current motion reading.</returns>
-        public string GetMotionReading() => GetSensorReading(Motion, ReadingType.MOTION);
-
-        /// <summary>
-        /// Gets the current reading of vibration.
-        /// </summary>
-        /// <returns>The current vibration reading.</returns>
-        public string GetVibrationReading() => GetSensorReading(Vibration, ReadingType.VIBRATION);
-
-        /// <summary>
-        /// Gets the current reading of the door lock.
-        /// </summary>
-        /// <returns>The current door lock reading.</returns>
-        public string GetDoorLockReading() => DoorLock.ReadSensor().FirstOrDefault()?.Value;
-
-        private string GetSensorReading<T>(ISensor<T> sensor, string readingType)
-        {
-            var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
-            return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
+            Sensors = new List<ISensor>()
+            {
+                LoudnessSensor,
+                MotionSensor,
+                VibrationSensor,
+                LuminositySensor,
+            };
         }
 
         /// <summary>

@@ -37,7 +37,7 @@ public partial class TechnicianPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        PopulateTechnicianPicker();
+        Task.Run(PopulateTechnicianPicker).Wait();
     }
 
     async private void PopulateTechnicianPicker()

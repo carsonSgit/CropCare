@@ -18,11 +18,17 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Temperature"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding TemperatureReading}" x:Name="temperature_measurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="temperature_measurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Temperature, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding TemperatureUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding TemperatureHealth}" x:Name="temperature_healthLbl"/>
                 </Grid>
             </Frame>
-
             <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -34,11 +40,17 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Humidity"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding HumidityReading}" x:Name="humidity_measurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="humidity_measurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Humidity, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding HumidityUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding HumidityHealth}" x:Name="humidity_healthLbl"/>
                 </Grid>
             </Frame>
-
             <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -50,7 +62,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Soil Moisture"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="moisture_measurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding SoilMoisture, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding SoilMoistureUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding MoistureHealth}" x:Name="moisture_healthLbl"/>
                 </Grid>
             </Frame>
@@ -66,7 +85,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Water Level"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding WaterLevelReading}" x:Name="waterlvl_measurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="waterlvl_measurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding WaterLevel, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding WaterLevelUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding WaterLevelHealth}" x:Name="waterlvl_healthLbl"/>
                 </Grid>
             </Frame>

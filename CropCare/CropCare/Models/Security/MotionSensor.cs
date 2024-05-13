@@ -1,34 +1,27 @@
 ﻿using CropCare.Interfaces;
 using System.Collections.ObjectModel;
 
-namespace CropCare.Models.Geolocation
+namespace CropCare.Models.Security
 {
     // Team Name: CropCare
-    // Team Members: Kevin Baggott, Cristiano Fazim Carson Spriggs-Audet
+    // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
-    // Description: Represents a GPS sensor.
-    public class GPS : ISensor
+    // Description: Represents a motion sensor.
+    public class MotionSensor : ISensor
     {
         private ObservableCollection<Reading> _readings;
 
         public ObservableCollection<Reading> Readings { get => _readings; }
 
-        public double Latitude
-        {
-            get => _readings[0].Value;
-        }
-        public double Longitude
-        {
-            get => _readings[1].Value;
-        }
+        public bool Motion { get => _readings[0].Value; }
 
-        public GPS()
+
+        public MotionSensor()
         {
             _readings = new ObservableCollection<Reading>()
             {
-                new Reading(ReadingType.LATITUDE, ReadingUnit.NONE, 0),
-                new Reading(ReadingType.LONGITUDE, ReadingUnit.NONE, 0),
+                new Reading(ReadingType.MOTION, ReadingUnit.NONE, false),
             };
         }
 

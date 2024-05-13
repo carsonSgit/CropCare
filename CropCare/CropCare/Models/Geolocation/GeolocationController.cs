@@ -1,4 +1,6 @@
-﻿namespace CropCare.Models.Geolocation
+﻿using CropCare.Interfaces;
+
+namespace CropCare.Models.Geolocation
 {
     // Team Name: CropCare
     // Team Members: Kevin Baggott, Cristiano Fazi and Carson Spriggs-Audet
@@ -22,48 +24,22 @@
         /// </summary>
         public Accelerometer Accelerometer { get; set; }
 
-        /// <summary>
-        /// Gets or sets the device ID.
-        /// </summary>
-        public string DeviceId { get; set; }
+        public List<ISensor> Sensors {get; set;}
 
         /// <summary>
-        /// Gets the pitch value from the accelerometer sensor.
+        /// Initializes a new instance of the <see cref="GeolocationController"/> class.
         /// </summary>
-        public double Pitch => Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.PITCH == r.Type).Value;
-
-        /// <summary>
-        /// Gets the roll value from the accelerometer sensor.
-        /// </summary>
-        public double Roll => Accelerometer.ReadSensor().FirstOrDefault(r => ReadingType.ROLL == r.Type).Value;
-
-        /// <summary>
-        /// Gets the unit for pitch and roll values.
-        /// </summary>
-        public string PitchRollUnit => ReadingUnit.DEGREE;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GeolocationController"/> class with the specified device ID.
-        /// </summary>
-        /// <param name="deviceId">The device ID.</param>
-        public GeolocationController(string deviceId)
+        public GeolocationController()
         {
             Buzzer = new Buzzer();
             GPS = new GPS();
             Accelerometer = new Accelerometer();
-            DeviceId = deviceId;
+
+            Sensors = new List<ISensor>()
+            {
+                GPS,
+                Accelerometer,
+            };
         }
-
-        /// <summary>
-        /// Gets the latitude value from the GPS sensor.
-        /// </summary>
-        /// <returns>The latitude value.</returns>
-        public double Latitude() => GPS.ReadSensor().FirstOrDefault(r => ReadingType.LATITUDE == r.Type).Value;
-
-        /// <summary>
-        /// Gets the longitude value from the GPS sensor.
-        /// </summary>
-        /// <returns>The longitude value.</returns>
-        public double Longitude() => GPS.ReadSensor().FirstOrDefault(r => ReadingType.LONGITUDE == r.Type).Value;
     }
 }

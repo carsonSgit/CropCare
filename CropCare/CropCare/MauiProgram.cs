@@ -1,6 +1,7 @@
 ﻿using CropCare.Views;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using CropCare.Services;
 
 namespace CropCare
 {
@@ -20,7 +21,7 @@ namespace CropCare
                 });
             builder.Services.AddSingleton<SignUpPage>();
             builder.Services.AddSingleton<OverviewPage>();
-
+            builder.Services.AddSingleton<IOTService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

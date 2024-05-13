@@ -63,7 +63,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Loudness"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding LoudnessReading}" x:Name="loudnessMeasurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="loudnessMeasurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding LoudnessReading, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding LoudnessUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding LoudnessHealth}" x:Name="loudnessHealthLbl"/>
                 </Grid>
             </Frame>
@@ -79,7 +86,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Luminosity"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding LuminosityReading}" x:Name="luminosityMeasurementLbl"/>
+                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" x:Name="luminosityMeasurementLbl">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding LuminosityReading, StringFormat='{0:F2}'}" />
+                                <Span Text="{Binding LuminosityUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding LuminosityHealth}" x:Name="luminosityHealthLbl"/>
                 </Grid>
             </Frame>

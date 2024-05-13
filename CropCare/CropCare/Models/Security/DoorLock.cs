@@ -1,4 +1,5 @@
 ﻿using CropCare.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace CropCare.Models.Security
 {
@@ -7,12 +8,22 @@ namespace CropCare.Models.Security
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a door lock actuator and sensor.
-    public class DoorLock : IActuator, ISensor<string>
+    public class DoorLock : IActuator, ISensor
     {
         /// <summary>
         /// Gets or sets the state of the door lock.
         /// </summary>
         public string State { get; set; }
+
+        public ObservableCollection<Reading> Readings { get; }
+
+        public DoorLock()
+        {
+            Readings = new ObservableCollection<Reading>()
+            {
+                new Reading(ReadingType.DOORLOCK, ReadingUnit.NONE, 0),
+            };
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorLock"/> class with the specified initial state.
@@ -40,16 +51,9 @@ namespace CropCare.Models.Security
             return true;
         }
 
-        /// <summary>
-        /// Reads the state of the door lock sensor.
-        /// </summary>
-        /// <returns>A list of readings from the door lock sensor.</returns>
-        public List<Reading<string>> ReadSensor()
+        public void Refresh()
         {
-            return new List<Reading<string>>
-            {
-                new Reading<string>(ReadingType.DOORLOCK, ReadingUnit.NONE, State)
-            };
+            return;
         }
     }
 }

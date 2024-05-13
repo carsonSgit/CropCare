@@ -11,7 +11,8 @@ public partial class LocationPage : ContentPage
 {
     private GeolocationController GeolocationController { get; set; }
     private Farm Farm { get; set; }
-
+    public double Pitch { get; set; }
+    public double Roll { get; set; }
     /// <summary>
     /// Initializea new instance of the LocationPage class.
     /// </summary>
@@ -19,9 +20,11 @@ public partial class LocationPage : ContentPage
     public LocationPage(Farm farm)
     {
         InitializeComponent();
-        Farm = farm;
         GeolocationController = farm.GeolocationController;
-        BindingContext = GeolocationController;
+        Farm = farm;
+        Pitch = GeolocationController.Accelerometer.Pitch;
+        Roll = GeolocationController.Accelerometer.Roll;
+        BindingContext = this;
     }
 
     protected override void OnAppearing()
@@ -37,7 +40,7 @@ public partial class LocationPage : ContentPage
 
             if (map.IsVisible)
             {
-                Location location = new Location(GeolocationController.Latitude(), GeolocationController.Longitude());
+                Location location = new Location(GeolocationController.GPS.Latitude, GeolocationController.GPS.Longitude);
                 MapSpan mapSpan = new MapSpan(location, 0.01, 0.01);
                 map.MoveToRegion(mapSpan);
                 map.Pins.Add(new Pin

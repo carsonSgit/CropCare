@@ -1,5 +1,6 @@
 ﻿using CropCare.DataRepos;
 using CropCare.Models;
+using CropCare.Services;
 using MauiFitness.Config;
 using Microsoft.Azure.Devices;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,14 @@ namespace CropCare
             get
             {
                 return repo ??= new CropCareRepo();
+            }
+        }
+        private static IOTService iotService;
+        public static IOTService IOTService
+        {
+            get
+            {
+                return iotService ??= new IOTService();
             }
         }
 

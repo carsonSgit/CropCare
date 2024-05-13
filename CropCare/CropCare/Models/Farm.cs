@@ -1,11 +1,11 @@
-﻿using CropCare.Interfaces;
-using Microsoft.Azure.Devices;
-using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Azure.Messaging.EventHubs.Consumer;
+using CropCare.Interfaces;
+using CropCare.Models.Geolocation;
 using CropCare.Models.Plant;
 using CropCare.Models.Security;
-using CropCare.Models.Geolocation;
-
+using Newtonsoft.Json;
+using Org.Json;
+using System.ComponentModel;
 namespace CropCare.Models
 {
     // Team Name: CropCare
@@ -35,6 +35,8 @@ namespace CropCare.Models
         /// </summary>
         public string DeviceId { get; set; }
 
+        public EventHubConsumerClient Consumer { get; set; }
+
         /// <summary>
         /// Gets or sets the plant controller associated with the farm.
         /// </summary>
@@ -62,9 +64,73 @@ namespace CropCare.Models
         {
             Name = farmName;
             DeviceId = deviceId;
-            PlantController = new PlantController(deviceId);
-            SecurityController = new SecurityController(deviceId);
-            GeolocationController = new GeolocationController(deviceId);
+            PlantController = new PlantController();
+            SecurityController = new SecurityController();
+            GeolocationController = new GeolocationController();
+            App.IOTService.MessageReceived += IOTService_MessageReceived;
+        }
+
+        private void IOTService_MessageReceived(string deviceId, string data)
+        {
+            if (deviceId != DeviceId)
+            {
+                return;
+            }
+            Console.WriteLine($"{data}");
+            Dictionary<string, string> dictionary = null;
+            try
+            {
+                data = data.Replace('\'', '"');
+                dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize data: {ex.Message}");
+            }
+
+            try
+            {
+                foreach (var sensor in PlantController.Sensors)
+                {
+                    foreach (var reading in sensor.Readings)
+                    {
+                        if (data.Contains(reading.Type))
+                        {
+                            reading.Value = dictionary["value"];
+                            sensor.Refresh();
+                        }
+                    }
+                }
+
+                foreach (var sensor in SecurityController.Sensors)
+                {
+                    foreach (var reading in sensor.Readings)
+                    {
+                        if (data.Contains(reading.Type))
+                        {
+                            reading.Value = dictionary["value"];
+                            sensor.Refresh();
+                        }
+                    }
+                }
+
+                foreach (var sensor in GeolocationController.Sensors)
+                {
+                    foreach (var reading in sensor.Readings)
+                    {
+                        if (data.Contains(reading.Type))
+                        {
+                            reading.Value = dictionary["value"];
+                            sensor.Refresh();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not update sensor readings: {ex.Message}");
+            }
         }
     }
 }
+

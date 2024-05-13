@@ -37,62 +37,17 @@ namespace CropCare.Models.Plant
         /// <summary>
         /// Gets the soil moisture sensor associated with the plant controller.
         /// </summary>
-        public SoilMoisture SoilMoisture { get; }
+        public SoilMoistureSensor SoilMoistureSensor { get; }
 
         /// <summary>
         /// Gets the temperature and humidity sensor associated with the plant controller.
         /// </summary>
-        public TemperatureHumidity Temperature { get; }
+        public TemperatureHumiditySensor TemperatureSensor { get; }
 
         /// <summary>
         /// Gets the water level sensor associated with the plant controller.
         /// </summary>
-        public WaterLevel WaterLevel { get; }
-
-        /// <summary>
-        /// Gets or sets the device ID associated with the plant controller.
-        /// </summary>
-        public string DeviceId { get; set; }
-
-        /// <summary>
-        /// Gets the temperature reading from the temperature and humidity sensor.
-        /// </summary>
-        public string TemperatureReading => GetTemperatureReading();
-
-        /// <summary>
-        /// Gets the health status of the temperature reading.
-        /// </summary>
-        public string TemperatureHealth => UpdateReadingHealthLabel(TemperatureReading, '°', 30, 10);
-
-        /// <summary>
-        /// Gets the humidity reading from the temperature and humidity sensor.
-        /// </summary>
-        public string HumidityReading => GetHumidityReading();
-
-        /// <summary>
-        /// Gets the health status of the humidity reading.
-        /// </summary>
-        public string HumidityHealth => UpdateReadingHealthLabel(HumidityReading, '%', 80, 20);
-
-        /// <summary>
-        /// Gets the moisture reading from the soil moisture sensor.
-        /// </summary>
-        public string MoistureReading => GetMoistureReading();
-
-        /// <summary>
-        /// Gets the health status of the moisture reading.
-        /// </summary>
-        public string MoistureHealth => UpdateReadingHealthLabel(MoistureReading, 'Ω', 500, 200);
-
-        /// <summary>
-        /// Gets the water level reading from the water level sensor.
-        /// </summary>
-        public string WaterLevelReading => GetWaterLevelReading();
-
-        /// <summary>
-        /// Gets the health status of the water level reading.
-        /// </summary>
-        public string WaterLevelHealth => UpdateReadingHealthLabel(WaterLevelReading, 'w', 80, 20);
+        public WaterLevelSensor WaterLevelSensor { get; }
 
         private string _ledState;
 
@@ -129,54 +84,27 @@ namespace CropCare.Models.Plant
                 }
             }
         }
-
+        public List<ISensor> Sensors { get; set; }  
         /// <summary>
         /// Initializes a new instance of the <see cref="PlantController"/> class.
         /// </summary>
-        /// <param name="deviceId">The device ID associated with the controller.</param>
-        public PlantController(string deviceId)
+        public PlantController()
         {
             Fan = new Fan();
             Led = new Led();
-            SoilMoisture = new SoilMoisture();
-            Temperature = new TemperatureHumidity();
-            WaterLevel = new WaterLevel();
-            DeviceId = deviceId;
+            SoilMoistureSensor = new SoilMoistureSensor();
+            TemperatureSensor = new TemperatureHumiditySensor();
+            WaterLevelSensor = new WaterLevelSensor();
             FanState = UpdateStateHealthLabel(Fan.State);
             LedState = UpdateStateHealthLabel(Led.State);
+
+            Sensors = new List<ISensor>()
+            {
+                SoilMoistureSensor,
+                TemperatureSensor,
+                WaterLevelSensor
+            };
         }
-
-
-        /// <summary>
-        /// Gets the temperature reading from the temperature and humidity sensor.
-        /// </summary>
-        /// <returns>The temperature reading.</returns>
-        public string GetTemperatureReading() => GetSensorReading(Temperature, ReadingType.TEMPERATURE);
-
-        /// <summary>
-        /// Gets the humidity reading from the temperature and humidity sensor.
-        /// </summary>
-        /// <returns>The humidity reading.</returns>
-        public string GetHumidityReading() => GetSensorReading(Temperature, ReadingType.HUMIDITY);
-
-        /// <summary>
-        /// Gets the moisture reading from the soil moisture sensor.
-        /// </summary>
-        /// <returns>The moisture reading.</returns>
-        public string GetMoistureReading() => GetSensorReading(SoilMoisture, ReadingType.MOISTURE);
-
-        /// <summary>
-        /// Gets the water level reading from the water level sensor.
-        /// </summary>
-        /// <returns>The water level reading.</returns>
-        public string GetWaterLevelReading() => GetSensorReading(WaterLevel, ReadingType.WATERLEVEL);
-
-        private string GetSensorReading<T>(ISensor<T> sensor, string readingType)
-        {
-            var reading = sensor.ReadSensor().FirstOrDefault(r => r.Type.Equals(readingType, StringComparison.OrdinalIgnoreCase));
-            return reading != null ? $"{reading.Value}{reading.Unit}" : "N/A";
-        }
-
 
         /// <summary>
         /// Updates the health label based on the sensor reading and specified thresholds.

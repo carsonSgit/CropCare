@@ -23,8 +23,7 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding Pitch, StringFormat='{0:F0}'}" />
-                                    <Span Text="{Binding PitchRollUnit}" />
+                                    <Span Text="{Binding Pitch, StringFormat='{0:F0}°'}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -36,8 +35,7 @@
                         <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding Roll, StringFormat='{0:F0}'}" />
-                                    <Span Text="{Binding PitchRollUnit}" />
+                                    <Span Text="{Binding Roll, StringFormat='{0:F0}°'}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

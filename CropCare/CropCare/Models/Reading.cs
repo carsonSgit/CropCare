@@ -7,22 +7,20 @@
     // Description: Provides constants for different types of sensor readings.
     public static class ReadingType
     {
-        public const string TEMPERATURE = "temperature";
-        public const string HUMIDITY = "humidity";
-        public const string LUMINOSITY = "luminosity";
-        public const string LOUDNESS = "loudness";
-        public const string NOISE = "decibels";
-        public const string MOISTURE = "moisture";
+        public const string TEMPERATURE = "TEMPERATURE";
+        public const string HUMIDITY = "HUMIDITY";
+        public const string LUMINOSITY = "LUMINOSITY";
+        public const string LOUDNESS = "LOUDNESS";
+        public const string NOISE = "DECIBELS";
+        public const string MOISTURE = "MOISUTRE";
         public const string WATERLEVEL = "water level";
-        public const string MOTION = "motion";
-        public const string LATITUDE = "latitude";
-        public const string LONGITUDE = "longitude";
-        public const string GPS = "gps";
-        public const string PITCH = "pitch";
-        public const string ROLL = "roll";
-        public const string YAW = "yaw";
-        public const string VIBRATION = "vibration";
-        public const string DOORLOCK = "doorlock";
+        public const string MOTION = "MOTION";
+        public const string LATITUDE = "LATITUDE";
+        public const string LONGITUDE = "LONGITUDE";
+        public const string PITCH = "PITCH";
+        public const string ROLL = "ROLL";
+        public const string VIBRATION = "VIBRATION";
+        public const string DOORLOCK = "DOORLOCK";
     }
 
     // Team Name: CropCare
@@ -51,7 +49,7 @@
     // Date: April 29th 2023, 6th Semester
     // Course Name: Application Development and Connected Objects
     // Description: Represents a sensor reading.
-    public class Reading<T>
+    public class Reading
     {
         /// <summary>
         /// Gets or sets the type of the reading.
@@ -66,7 +64,7 @@
         /// <summary>
         /// Gets or sets the value of the reading.
         /// </summary>
-        public T Value { get; set; }
+        public dynamic Value { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Reading"/> class with the specified type, unit, and value.
@@ -74,7 +72,7 @@
         /// <param name="type">The type of the reading.</param>
         /// <param name="unit">The unit of the reading.</param>
         /// <param name="value">The value of the reading.</param>
-        public Reading(string type, string unit, T value)
+        public Reading(string type, string unit, dynamic value)
         {
             Type = type;
             Unit = unit;
