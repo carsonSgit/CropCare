@@ -168,35 +168,28 @@ classDiagram
 ## Geolocation Controller <a name="geolocation-controller-uml"/>
 ```mermaid
 classDiagram
-    class Accelerometer {
-        + ReadSensor(): List
-        <Reading>
+    class BaseController {
+        - string[] _readingTypes
+        + Dictionary<string, ObservableCollection<Reading>> Readings
+        + bool ValidateReading(Reading reading)
+        + virtual void AddReading(Reading reading)
+        + BaseController(string[] readingTypes)
     }
-    class Buzzer {
-        - State: string
-        + ControlActuator(command: Command): bool
-    }
+
     class GeolocationController {
-        + Buzzer
-        + GPS
-        + Accelerometer
+        - static readonly string[] _readingTypes
+        + PropertyChangedEventHandler PropertyChanged
+        + Reading Latitude
+        + Reading Longitude
+        + Reading Pitch
+        + Reading Roll
+        + void ToggleBuzzer()
+        + void AddReading(Reading reading)
+        + GeolocationController()
     }
-    class GPS {
-        + ReadSensor(): List
-        <Reading>
-    }
-    class Reading {
-        - Type: string
-        - Unit: string
-        - Value: string
-    }
-    
-    GeolocationController "1" -- "many" Buzzer : Contains
-    GeolocationController "1" -- "many" GPS : Contains
-    GeolocationController "1" -- "many" Accelerometer : Contains
-    Accelerometer "1" -- "many" Reading : Generates
-    GPS "1" -- "many" Reading : Generates
-    Buzzer "1" -- "many" Reading : Generates
+
+    BaseController <|-- GeolocationController
+
 ```
 
 
