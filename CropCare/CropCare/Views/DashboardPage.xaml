@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.DashboardPage"
              Title="{Binding Farm.Name}">
+    
     <VerticalStackLayout Background="#ECECEC">
         <VerticalStackLayout Spacing="0">
             <HorizontalStackLayout>

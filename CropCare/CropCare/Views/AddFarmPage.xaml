@@ -4,7 +4,7 @@
              x:Class="CropCare.Views.AddFarmPage"
              Title="">
     
-    <Frame BackgroundColor="Transparent" BorderColor="Transparent">
+    <Frame BackgroundColor="{StaticResource Frame_Border}" BorderColor="{StaticResource Frame_Border}">
         <VerticalStackLayout>
             <!-- Hero Icon and Label -->
             <Image Source="farmicon.png" Margin="0, 0, 0, 0" WidthRequest="130"  HeightRequest="130"/>

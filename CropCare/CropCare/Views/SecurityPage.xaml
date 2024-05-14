@@ -18,15 +18,15 @@
         <Label Text="Monitor your farm security" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
         <Label Text="Your security control center" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
 
-        <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="Transparent">
+        <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="{StaticResource Frame_Border}">
             <VerticalStackLayout>
-                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                <Frame BorderColor="{StaticResource Frame_Border}" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Loudness"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding LoudnessHealth}" x:Name="loudnessHealthLbl"/>
@@ -47,13 +47,13 @@
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                <Frame BorderColor="{StaticResource Frame_Border}" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Luminosity"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" x:Name="luminosityHealthLbl"/>
@@ -73,13 +73,13 @@
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                <Frame BorderColor="{StaticResource Frame_Border}" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Motion"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Motion.Value, Converter={StaticResource MotionHealthTextConverter}}" x:Name="motionHealthLbl"/>
@@ -92,13 +92,13 @@
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
+                <Frame BorderColor="{StaticResource Frame_Border}" BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Vibration"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Vibration.Value, Converter={StaticResource VibrationHealthTextConverter}}" x:Name="vibrationHealthLbl"/>
@@ -113,9 +113,9 @@
             </VerticalStackLayout>
         </Frame>
 
-        <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="Transparent">
+        <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="{StaticResource Frame_Border}">
             <VerticalStackLayout>
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" Margin="0,0,0,10">
+                <Frame BorderColor="{StaticResource Frame_Border}" Margin="0,0,0,10">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -141,7 +141,7 @@
                     </Grid>
                 </Frame>
 
-                <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" CornerRadius="5" Margin="0,0,0,0">
+                <Frame BorderColor="{StaticResource Frame_Border}" CornerRadius="5" Margin="0,0,0,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

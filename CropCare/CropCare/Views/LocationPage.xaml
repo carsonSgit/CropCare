@@ -29,14 +29,14 @@
         </StackLayout>
      
         <StackLayout Grid.Row="1" Margin="10">
-            <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="Transparent">
+            <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="{StaticResource Frame_Border}">
                 <VerticalStackLayout>
                     <Grid Margin="0, 0, 0, 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -2.5" Text="Pitch"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Pitch.Value, Converter={StaticResource PitchAndRollHealthTextConverter}}" x:Name="pitch_healthLbl"/>
@@ -60,7 +60,7 @@
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
+                        <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Roll"/>
                                 <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Roll.Value, Converter={StaticResource PitchAndRollHealthTextConverter}}" x:Name="roll_healthLbl"/>
@@ -81,9 +81,9 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="Transparent">
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="{StaticResource Frame_Border}">
                 <VerticalStackLayout>
-                    <Frame BorderColor="Transparent" BackgroundColor="#C6D5C4" Margin="0,0,0,0">
+                    <Frame BorderColor="{StaticResource Frame_Border}" Margin="0,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
