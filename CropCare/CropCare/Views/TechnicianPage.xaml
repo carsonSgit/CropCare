@@ -6,7 +6,7 @@
     <Frame BackgroundColor="Transparent" BorderColor="Transparent">
         <VerticalStackLayout>
             <Image Source="farmer_circular_icon.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
-            <Label Text="Modify Technicians" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="#538D22"/>
+            <Label Text="Modify Technicians" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>
 
             <VerticalStackLayout>
                 <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-2.5, 5, 5, 10" />

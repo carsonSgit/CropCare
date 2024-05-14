@@ -17,12 +17,12 @@
         <Frame x:Name="LoginView" Margin="10" BackgroundColor="Transparent" BorderColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}" >
             <VerticalStackLayout>
                 <Image Source="loginhero.png" Margin="0, 0, 0, 0" WidthRequest="130"  HeightRequest="130"/>
-                <Label Text="LOGIN" FontSize="35" Margin="0, 20, 0, 60" HorizontalOptions="Center" TextColor="#538D22"/>
+                <Label Text="LOGIN" FontSize="35" Margin="0, 20, 0, 60" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>
 
-                <Label Text="Email" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+                <Label Text="Email" FontSize="Small" Margin="5, 0, 0, 0" TextColor="{StaticResource GreenText}"/>
                 <Entry Placeholder="Email" Text="{Binding Email}" Margin="0" FontSize="Medium"/>
 
-                <Label Text="Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="#538D22"/>
+                <Label Text="Password" FontSize="Small" Margin="5, 20, 0, 0" TextColor="{StaticResource GreenText}"/>
                 <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Margin="0, 0, 0, 0" FontSize="Medium"/>
                 <Label Text="Forgot Password? " VerticalOptions="Center" FontSize="13" Margin="5, 0, 0, 0" TextColor="#245501">
                     <Label.GestureRecognizers>
@@ -30,7 +30,7 @@
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Button Text="Login" Clicked="Btn_Login_Clicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+                <Button Text="Login" Clicked="Btn_Login_Clicked" Margin="70, 30, 70, 30" FontSize="Large" TextColor="{StaticResource GreenText}"/>
             </VerticalStackLayout>
         </Frame>
 

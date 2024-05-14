@@ -13,7 +13,7 @@
 
             <HorizontalStackLayout>
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                    <Frame BackgroundColor="White">
                         <VerticalStackLayout>
                             <Label Text="Health" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
@@ -25,7 +25,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                    <Frame BackgroundColor="White">
                         <VerticalStackLayout>
                             <Label Text="Security" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
@@ -37,7 +37,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                    <Frame BackgroundColor="White">
                         <VerticalStackLayout>
                             <Label Text="Health" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
@@ -50,9 +50,9 @@
             </HorizontalStackLayout>
             
 
-            <Frame BackgroundColor="White" Margin="15, 0, 15, 0" BorderColor="Transparent">
+            <Frame BackgroundColor="White" Margin="15, 0, 15, 0">
                 <VerticalStackLayout>
-                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent">
+                    <Frame Margin="0, 0, 0, 15" CornerRadius="10">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="PlantNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
@@ -69,7 +69,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                    <Frame Margin="0, 0, 0, 15" CornerRadius="10" IsVisible="{Binding IsOwner}">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
@@ -86,7 +86,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent">
+                    <Frame Margin="0, 0, 0, 15" CornerRadius="10">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="SecurityNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
@@ -103,7 +103,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Margin="0, 0, 0, 15" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                    <Frame Margin="0, 0, 0, 15" CornerRadius="10" IsVisible="{Binding IsOwner}">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
@@ -120,7 +120,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Margin="0, 0, 0, 0" BackgroundColor="#C6D5C4" CornerRadius="10" BorderColor="Transparent" IsVisible="{Binding IsOwner}">
+                    <Frame Margin="0, 0, 0, 0" CornerRadius="10" IsVisible="{Binding IsOwner}">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="FarmSettingsNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
