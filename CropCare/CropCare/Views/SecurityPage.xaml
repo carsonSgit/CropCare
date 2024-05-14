@@ -11,6 +11,8 @@
             <local:MotionColorConverter x:Key="MotionColorConverter"/>
             <local:MotionHealthTextConverter x:Key="MotionHealthTextConverter"/>
             <local:VibrationHealthTextConverter x:Key="VibrationHealthTextConverter"/>
+            <local:LoudnessColorConverter x:Key="LoudnessColorConverter"/>
+            <local:LoudnessHealthTextConverter x:Key="LoudnessHealthTextConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -29,11 +31,11 @@
                         <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Loudness"/>
-                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding LoudnessHealth}" x:Name="loudnessHealthLbl"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Loudness.Value, Converter={StaticResource TemperatureHealthTextConverter}}" x:Name="loudnessHealthLbl"/>
                             </VerticalStackLayout>
                         </Frame>
 
-                        <Frame Grid.Column="1" BackgroundColor="#42A765" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                        <Frame Grid.Column="1" BackgroundColor="{Binding Loudness.Value, Converter={StaticResource LoudnessColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                             <!-- Change the font once the correct unit is provided -->
                             <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White" x:Name="loudnessMeasurementLbl" >
                                 <Label.FormattedText>
