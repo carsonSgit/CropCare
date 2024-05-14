@@ -17,7 +17,7 @@ namespace CropCare.Converters
                     color = Color.FromArgb("#EA5757");// Unhealthy
             }
             else
-                color = Color.FromArgb("#808080");// Unkown
+                color = Color.FromArgb("#A9A9A9");// Unkown
 
             return color;
         }
