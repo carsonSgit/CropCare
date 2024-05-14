@@ -31,7 +31,7 @@
                         <Frame Grid.Column="0" BackgroundColor="#C6D5C4" Margin="0, 0, 10, 0" >
                             <VerticalStackLayout>
                                 <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Loudness"/>
-                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Loudness.Value, Converter={StaticResource TemperatureHealthTextConverter}}" x:Name="loudnessHealthLbl"/>
+                                <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Loudness.Value, Converter={StaticResource LoudnessHealthTextConverter}}" x:Name="loudnessHealthLbl"/>
                             </VerticalStackLayout>
                         </Frame>
 

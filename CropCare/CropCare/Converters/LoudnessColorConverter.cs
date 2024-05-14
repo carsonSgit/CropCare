@@ -12,9 +12,9 @@ namespace CropCare.Converters
                 if (value.ToString() == "Quiet")
                     color = Color.FromArgb("#42A765");// Healthy
                 else if (value.ToString() == "Noisy")
-                    color = Color.FromArgb("#EA5757");// Caution
+                    color = Color.FromArgb("#E08551");// Caution
                 else if (value.ToString() == "Loud")
-                    color = Color.FromArgb("#A9A9A9");// Unhealthy
+                    color = Color.FromArgb("#EA5757");// Unhealthy
                 else
                     color = Color.FromArgb("#A9A9A9");// Unknown
             }
