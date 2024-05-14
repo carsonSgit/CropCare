@@ -2,7 +2,7 @@
 
 namespace CropCare.Converters
 {
-    public class VibrationHealthTextConverter
+    public class VibrationHealthTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
