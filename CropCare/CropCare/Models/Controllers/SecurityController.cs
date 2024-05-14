@@ -52,7 +52,13 @@ namespace CropCare.Models.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityController"/> class.
         /// </summary>
-        public SecurityController() : base(_readingTypes) { }
+        public SecurityController() : base(_readingTypes)
+        {
+            Loudness = NO_READING;
+            Motion = NO_READING;
+            Vibration = NO_READING;
+            Luminosity = NO_READING;
+        }
 
         /// <summary>
         /// Adds a reading to the corrosponding property based on the reading type and updates list.
@@ -135,11 +141,10 @@ namespace CropCare.Models.Controllers
 
         public override void IOTService_ConnectionStopped()
         {
-            var stubReading = new Reading(ReadingType.CONNECTION_INTERRUPTED, String.Empty, "NO DATA");
-            Loudness = stubReading;
-            Motion = stubReading;
-            Vibration = stubReading;
-            Luminosity = stubReading;
+            Loudness = NO_READING;
+            Motion = NO_READING;
+            Vibration = NO_READING;
+            Luminosity = NO_READING;
         }
     }
 }

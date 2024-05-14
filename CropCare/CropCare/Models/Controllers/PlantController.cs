@@ -49,7 +49,13 @@ namespace CropCare.Models.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="PlantController"/> class.
         /// </summary>
-        public PlantController() : base(_readingTypes) { }
+        public PlantController() : base(_readingTypes)
+        {
+            Temperature = NO_READING;
+            Humidity = NO_READING;
+            Moisture = NO_READING;
+            WaterLevel = NO_READING;
+        }
 
         /// <summary>
         /// Adds a reading to the corrosponding property based on the reading type and updates list.
@@ -132,11 +138,10 @@ namespace CropCare.Models.Controllers
 
         public override void IOTService_ConnectionStopped()
         {
-            var stubReading = new Reading(ReadingType.CONNECTION_INTERRUPTED, String.Empty, "NO DATA");
-            Temperature = stubReading;
-            Humidity = stubReading;
-            Moisture = stubReading;
-            WaterLevel = stubReading;
+            Temperature = NO_READING;
+            Humidity = NO_READING;
+            Moisture = NO_READING;
+            WaterLevel = NO_READING;
         }
     }
 }

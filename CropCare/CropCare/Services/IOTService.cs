@@ -28,6 +28,7 @@ namespace CropCare.Services
             {
                 try
                 {
+                    
                     await foreach (PartitionEvent partitionEvent in consumer.ReadEventsAsync(false))
                     {
                         string data = Encoding.UTF8.GetString(partitionEvent.Data.Body.ToArray());

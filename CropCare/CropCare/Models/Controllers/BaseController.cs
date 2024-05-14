@@ -11,6 +11,8 @@ namespace CropCare.Models.Controllers
     {
         private string[] _readingTypes;
 
+        protected readonly Reading NO_READING = new Reading(ReadingType.NODATA, String.Empty, "NO DATA");
+
         public Dictionary<string, ObservableCollection<Reading>> Readings { get; set; }
 
         public bool ValidateReading(Reading reading)
