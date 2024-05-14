@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.FarmSettingsPage"
-             Title="FarmSettingsPage">
+             Title="Farm Settings">
     <VerticalStackLayout>
         <!-- Hero Icon and Label -->
         <Image Source="fallfarm_circular_icon.png" Margin="0, 70, 0, 0" WidthRequest="130"  HeightRequest="130"/>

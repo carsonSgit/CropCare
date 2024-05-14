@@ -29,7 +29,7 @@
         </StackLayout>
      
         <StackLayout Grid.Row="1" Margin="10">
-            <Frame BackgroundColor="White" Margin="10, 0, 10, 0" BorderColor="{StaticResource Frame_Border}">
+            <Frame BackgroundColor="White" Margin="10, 0, 10, 0">
                 <VerticalStackLayout>
                     <Grid Margin="0, 0, 0, 10">
                         <Grid.ColumnDefinitions>
@@ -81,9 +81,9 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 0" BorderColor="{StaticResource Frame_Border}">
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
                 <VerticalStackLayout>
-                    <Frame BorderColor="{StaticResource Frame_Border}" Margin="0,0,0,0">
+                    <Frame Margin="0,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>

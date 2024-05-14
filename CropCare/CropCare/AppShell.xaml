@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:CropCare"
     xmlns:views="clr-namespace:CropCare.Views"
     xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-    FlyoutBackgroundColor="#04210b"
+    FlyoutBackgroundColor="{StaticResource Primary}"
     Shell.TabBarIsVisible="False"
     Shell.FlyoutBehavior="Flyout">
 

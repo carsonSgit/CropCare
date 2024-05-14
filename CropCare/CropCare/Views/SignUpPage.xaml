@@ -5,7 +5,7 @@
              Shell.NavBarIsVisible="False"
              Title="SignUpPage">
     <VerticalStackLayout>
-        <Frame BackgroundColor="{StaticResource Frame_Border}" BorderColor="{StaticResource Frame_Border}">
+        <Frame BackgroundColor="{StaticResource Frame_Border}">
             <VerticalStackLayout>
                 <Image Source="loginhero.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
                 <Label Text="REGISTER" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>

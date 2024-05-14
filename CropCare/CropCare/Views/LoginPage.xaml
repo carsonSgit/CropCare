@@ -14,7 +14,7 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout VerticalOptions="Center" Padding="0, 0, 0, 60">
-        <Frame x:Name="LoginView" Margin="10" BackgroundColor="Transparent" BorderColor="Transparent" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}" >
+        <Frame x:Name="LoginView" Margin="10" BackgroundColor="{StaticResource Frame_Border}" IsVisible="{Binding User, Converter={StaticResource NullToBooleanConverter}}" >
             <VerticalStackLayout>
                 <Image Source="loginhero.png" Margin="0, 0, 0, 0" WidthRequest="130"  HeightRequest="130"/>
                 <Label Text="LOGIN" FontSize="35" Margin="0, 20, 0, 60" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>
