@@ -3,7 +3,7 @@ from grove.adc import ADC
 import grove.i2c
 from interfaces.sensors import ISensor, AReading
 import time
-
+import math
 
 class customADC(ADC):
     """
@@ -55,9 +55,29 @@ class LoudnessSensor(ISensor):
             AReading: An AReading object representing the loudness reading.
 
         """
-        loudness = self.adc.read(self.channel)
-        return [AReading(AReading.Type.LOUDNESS, AReading.Unit.LOUDNESS, loudness)]
+        analog = self.adc.read(self.channel)
+        level = self._analog_to_string(analog)
 
+        return [AReading(AReading.Type.LOUDNESS, AReading.Unit.NONE, level)]
+
+    def _analog_to_string(self, analog: int) -> str:
+        """
+        Converts an analog value to a corresponding loudness level.
+
+        Args:
+            analog (int): The analog value to be converted.
+
+        Returns:
+            str: The corresponding loudness level based on the analog value.
+        """
+        level = ""
+        if analog > 682:
+            level = "Quiet"
+        elif analog > 341:
+            level = "Noisy"
+        else:
+            level = "Loud"
+        return level
 
 if __name__ == "__main__":
     loudness = LoudnessSensor(0, "LoudnessSensor", AReading.Type.LOUDNESS)
