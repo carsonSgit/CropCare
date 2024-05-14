@@ -16,10 +16,13 @@
         <Label Text="Modify Farm Icon" FontSize="Small" Margin="25, 20, 0, 0" TextColor="{StaticResource GreenText}"/>
         <Picker x:Name="IconPicker" Title="Select Icon" Margin="20, 0, 20, 0"/>
 
-        <!-- Save Changes Button -->
-        <Button x:Name="AddFarmButton" Text="Save Changes" Clicked="OnSaveChangesButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" TextColor="{StaticResource GreenText}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,30,0,0">
+            <!-- Save Changes Button -->
+            <Button x:Name="AddFarmButton" Text="Save Changes" Clicked="OnSaveChangesButtonClicked" Margin="0, 0, 0, 0" FontSize="Medium" WidthRequest="120"/>
 
-        <!-- Delete Changes Button -->
-        <Button x:Name="DeleteFarmButton" Text="Delete Farm" Clicked="OnDeleteFarmButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="Red"/>
+            <!-- Delete Changes Button -->
+            <Button x:Name="DeleteFarmButton" Text="Delete Farm" Clicked="OnDeleteFarmButtonClicked" Margin="0, 0, 0, 0" FontSize="Medium" BackgroundColor="#d23e2d" WidthRequest="120"/>
+        </StackLayout>
+
     </VerticalStackLayout>
 </ContentPage>

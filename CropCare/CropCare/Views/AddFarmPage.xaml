@@ -67,7 +67,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
-            <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 10, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+            <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 10, 70, 30" FontSize="Large" BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
     </Frame>
 </ContentPage>
