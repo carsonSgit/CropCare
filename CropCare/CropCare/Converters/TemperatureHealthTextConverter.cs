@@ -15,7 +15,7 @@ namespace CropCare.Converters
                 else if (temperatureValue >= 30 && temperatureValue <= 32 || temperatureValue >= 24 && temperatureValue <= 26)
                     healthStatus = "Caution";
                 else
-                    healthStatus = "Unhealthy";
+                    healthStatus = "Critical";
             }
             else
                 healthStatus = "Unkown";

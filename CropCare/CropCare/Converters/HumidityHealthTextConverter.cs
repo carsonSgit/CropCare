@@ -16,7 +16,7 @@ namespace CropCare.Converters
                 else if (humidityValue >= 65 && humidityValue <= 75 || humidityValue >= 85 && humidityValue <= 95)
                     healthStatus = "Caution";
                 else
-                    healthStatus = "Unhealthy";
+                    healthStatus = "Critical";
             }
             else
                 healthStatus = "Unkown";
