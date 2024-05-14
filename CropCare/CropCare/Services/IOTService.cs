@@ -10,6 +10,8 @@ namespace CropCare.Services
     public class IOTService
     {
         public event Action<string, string> MessageReceived;
+        public event Action ConnectionStopped;
+
         private int retryDelay = 5000;
 
         public IOTService()
@@ -21,11 +23,11 @@ namespace CropCare.Services
         {
             string connectionString = App.Settings.EventHubConnectionString;
             string eventHubName = App.Settings.EventHubName;
-            while(true)
+            await using var consumer = new EventHubConsumerClient(EventHubConsumerClient.DefaultConsumerGroupName, connectionString, eventHubName);
+            while (true)
             {
                 try
                 {
-                    await using var consumer = new EventHubConsumerClient(EventHubConsumerClient.DefaultConsumerGroupName, connectionString, eventHubName);
                     await foreach (PartitionEvent partitionEvent in consumer.ReadEventsAsync(false))
                     {
                         string data = Encoding.UTF8.GetString(partitionEvent.Data.Body.ToArray());
@@ -36,6 +38,7 @@ namespace CropCare.Services
                 catch (Exception ex)
                 {
                     Console.WriteLine($"An error occurred: {ex.Message}");
+                    ConnectionStopped?.Invoke();
                     await Task.Delay(retryDelay);
                 }
             }

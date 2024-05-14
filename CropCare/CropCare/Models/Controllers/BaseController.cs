@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CropCare.Models.Controllers
 {
-    public class BaseController
+    public abstract class BaseController
     {
         private string[] _readingTypes;
 
@@ -39,6 +39,12 @@ namespace CropCare.Models.Controllers
             {
                 Readings.Add(type, new ObservableCollection<Reading>());
             }
+            App.IOTService.ConnectionStopped += IOTService_ConnectionStopped;
         }
+
+        /// <summary>
+        /// This handler is called when the IOTService connection is stopped.
+        /// </summary>
+        public abstract void IOTService_ConnectionStopped();
     }
 }

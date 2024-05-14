@@ -14,11 +14,11 @@ namespace CropCare.Converters
                 else if (value.ToString() == "True")
                     message = "Vibration Detected";// Unhealthy
                 else
-                    message = "Status Unkown";// Unkown
+                    message = "Status Unknown";// Unkown
             }
             catch
             {
-                message = "Status Unkown";// Unkown
+                message = "Status Unknown";// Unkown
             }
 
             return message;

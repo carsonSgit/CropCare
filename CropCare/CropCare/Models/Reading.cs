@@ -21,6 +21,7 @@
         public const string ROLL = "ROLL";
         public const string VIBRATION = "VIBRATION";
         public const string DOORLOCK = "DOORLOCK";
+        public const string CONNECTION_INTERRUPTED = "CONNECTION_INTERRUPTED";
     }
 
     // Team Name: CropCare

@@ -14,11 +14,11 @@ namespace CropCare.Converters
                 else if (value.ToString() == "True")
                     color = Color.FromArgb("#EA5757");// Unhealthy
                 else
-                    color = Color.FromArgb("#A9A9A9");// Unkown
+                    color = Color.FromArgb("#A9A9A9");// Unknown
             }
             catch
             {
-                color = Color.FromArgb("#A9A9A9");// Unkown
+                color = Color.FromArgb("#A9A9A9");// Unknown
             }
                
             return color;

@@ -66,6 +66,13 @@ namespace CropCare.Models.Controllers
             }
         }
 
+        public override void IOTService_ConnectionStopped()
+        {
+            var stubReading = new Reading(ReadingType.CONNECTION_INTERRUPTED, String.Empty, "NO DATA");
+            Pitch = stubReading;
+            Roll = stubReading;
+        }
+
         public GeolocationController(): base(_readingTypes) { }
     }
 }

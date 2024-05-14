@@ -132,5 +132,14 @@ namespace CropCare.Models.Controllers
             }
             return health;
         }
+
+        public override void IOTService_ConnectionStopped()
+        {
+            var stubReading = new Reading(ReadingType.CONNECTION_INTERRUPTED, String.Empty, "NO DATA");
+            Loudness = stubReading;
+            Motion = stubReading;
+            Vibration = stubReading;
+            Luminosity = stubReading;
+        }
     }
 }
