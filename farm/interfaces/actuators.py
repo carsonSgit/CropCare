@@ -27,6 +27,7 @@ class ACommand(ABC):
         """
         self.target_type = target
         self.value: str = value
+        self.state: str = self.value
 
     def __repr__(self) -> str:
         return f"Command setting {self.target_type} to {self.value}"

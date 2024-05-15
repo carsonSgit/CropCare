@@ -56,9 +56,7 @@ class WaterLevelSensor(ISensor):
         """
         water_level = self.adc.read(self.gpio)
 
-        return [
-            AReading(AReading.Type.WATERLEVEL, AReading.Unit.OHMS, water_level)
-        ]
+        return [AReading(AReading.Type.WATERLEVEL, AReading.Unit.OHMS, water_level)]
 
 
 temp = WaterLevelSensor(5, "Grove Moisuture Reader", AReading.Type.TEMPERATURE)

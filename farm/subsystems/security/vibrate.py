@@ -19,7 +19,7 @@ class VibrationSensor(ISensor):
         start_detection(): Starts the vibration detection.
     """
 
-    def __init__(self, pin: int, model: str, type: AReading.Type, callback=None) -> None:
+    def __init__(self, pin: int, model: str, type: AReading.Type) -> None:
         """
         Initializes the VibrationSensor object.
 
@@ -78,8 +78,11 @@ class VibrationSensor(ISensor):
 
 
 if __name__ == "__main__":
+
     def callback():
         print("Alert: Vibration detected")
 
-    vibration_sensor = VibrationSensor(26, "VibrationSensor", AReading.Type.MOTION, callback)
+    vibration_sensor = VibrationSensor(
+        26, "VibrationSensor", AReading.Type.MOTION, callback
+    )
     vibration_sensor.start_detection()

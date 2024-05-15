@@ -21,7 +21,7 @@ class MockBuzzerController(IActuator):
         """
         self.buzzer = f"mock_buzzer_pin_{gpio}"
         self.type = type
-        self.__state = initial_state
+        self.state = initial_state
 
     def control_actuator(self, value: str) -> bool:
         """
@@ -33,12 +33,12 @@ class MockBuzzerController(IActuator):
         Returns:
             bool: True if the state of the buzzer actuator changed, False otherwise.
         """
-        old_state = self.__state
+        old_state = self.state
 
-        self.__state = value.upper()
-        print(f"{self.buzzer}: {self.__state}")
+        self.state = value.upper()
+        print(f"{self.buzzer}: {self.state}")
 
-        return self.__state != old_state
+        return self.state != old_state
 
     def validate_command(self, command: ACommand) -> bool:
         """

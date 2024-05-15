@@ -56,6 +56,7 @@ class LEDController(IActuator):
 
         if self.type == ACommand.Type.LIGHT_ON_OFF:
             self.__on_off(value)
+        self.state = value.upper()
 
         return old_state != value
 

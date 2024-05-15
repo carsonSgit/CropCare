@@ -3,6 +3,7 @@ import time
 from interfaces.sensors import ISensor, AReading
 import math
 
+
 class MockLoudnessSensor(ISensor):
     """
     A mock class representing a loudness sensor.
@@ -62,6 +63,7 @@ class MockLoudnessSensor(ISensor):
         else:
             level = "Loud"
         return level
+
 
 if __name__ == "__main__":
     mock_loudness_sensor = MockLoudnessSensor(

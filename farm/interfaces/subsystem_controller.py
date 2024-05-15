@@ -49,3 +49,9 @@ class SubsystemController(ABC):
                 if actuator.validate_command(command):
                     actuator.control_actuator(command.value)
                     break
+
+    def get_actuator_states(self) -> list[dict]:
+        actuators = []
+        for actuator in self._actuators:
+            actuators.append({"target": actuator.type.value, "value": actuator.state})
+        return actuators

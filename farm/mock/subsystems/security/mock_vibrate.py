@@ -1,6 +1,7 @@
 import random
 from interfaces.sensors import ISensor, AReading
 from time import sleep
+from typing import List
 
 
 class MockVibrationSensor(ISensor):
@@ -18,7 +19,7 @@ class MockVibrationSensor(ISensor):
         start_detection(): Starts the vibration detection.
     """
 
-    def __init__(self, model: str, type: AReading.Type, callback=None) -> None:
+    def __init__(self, gpio: int, model: str, type: AReading.Type) -> None:
         """
         Initializes the MockVibrationSensor.
 
@@ -29,9 +30,8 @@ class MockVibrationSensor(ISensor):
         """
         self.model = model
         self.type = type
-        self.callback = callback
 
-    def read_sensor(self) -> bool:
+    def read_sensor(self) -> List[AReading]:
         """
         Reads the vibration value from the sensor.
 
@@ -40,44 +40,10 @@ class MockVibrationSensor(ISensor):
         """
         # Simulate a vibration reading with a 70% chance of detecting vibration
         detected = random.random() > 0.7
-        print(detected)  # Print True or False
-        return detected
-
-    def set_callback(self, callback):
-        """
-        Sets the controller's callback function that will be called upon vibration detection.
-
-        Args:
-            callback: The callback function.
-        """
-        self.callback = callback
-
-    def _handle_vibration(self):
-        """
-        Handles the vibration detection by calling the given callback function.
-        """
-        if self.callback:
-            self.callback()
-
-    def start_detection(self):
-        """
-        Starts the vibration detection.
-
-        As this is mock, vibration will be determined as "detected" on a random chance.
-        """
-        while True:
-            try:
-                if self.read_sensor():
-                    self._handle_vibration()
-                sleep(2)
-            except KeyboardInterrupt:
-                break
+        return [AReading(AReading.Type.VIBRATION, AReading.Unit.NONE, detected)]
 
 
 if __name__ == "__main__":
-
-    def callback():
-        print("Alert: Vibration detected")
-
-    mock_vibration_sensor = MockVibrationSensor("MockVibrationSensor", AReading.Type.MOTION, callback)
-    mock_vibration_sensor.start_detection()
+    mock_vibration_sensor = MockVibrationSensor(
+        26, "MockVibrationSensor", AReading.Type.MOTION
+    )

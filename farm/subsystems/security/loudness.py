@@ -5,6 +5,7 @@ from interfaces.sensors import ISensor, AReading
 import time
 import math
 
+
 class customADC(ADC):
     """
     A Class to create a custom ADC module to run our Loudness Sensor
@@ -78,6 +79,7 @@ class LoudnessSensor(ISensor):
         else:
             level = "Loud"
         return level
+
 
 if __name__ == "__main__":
     loudness = LoudnessSensor(0, "LoudnessSensor", AReading.Type.LOUDNESS)

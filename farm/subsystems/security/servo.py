@@ -15,7 +15,7 @@ class ServoController(IActuator):
     def __init__(self, gpio: int, type: ACommand.Type, initial_state: str) -> None:
         self.servo = Servo(gpio)
         self.type = type
-        self.value = initial_state
+        self.state = initial_state
         self.control_actuator(initial_state)
 
     def control_actuator(self, value: str) -> bool:
@@ -29,10 +29,10 @@ class ServoController(IActuator):
             bool: True if the value was successfully set, False otherwise.
         """
         old_state = self.servo.value
-        self.value = float(value)
+        self.state = float(value)
         self.servo.value = float(value)
 
-        return old_state != self.servo.value
+        return old_state != self.state
 
     def validate_command(self, command: ACommand) -> bool:
         """

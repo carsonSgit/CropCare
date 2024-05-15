@@ -35,6 +35,7 @@ class BuzzerController(IActuator):
         """
         self.buzzer = rt.buzzer
         self.type = type
+        self.state = initial_state
         self.control_actuator(initial_state)
 
     def control_actuator(self, value: str) -> bool:
@@ -48,7 +49,7 @@ class BuzzerController(IActuator):
             bool: True if the state of the buzzer actuator was changed, False otherwise.
 
         """
-        old_state = self.buzzer
+        old_state = self.state
 
         if value.upper() == "ON":
             subprocess.run(
@@ -62,8 +63,8 @@ class BuzzerController(IActuator):
                 shell=True,
                 stdout=subprocess.DEVNULL,
             )
-
-        return self.buzzer != old_state
+        self.state = value.upper()
+        return self.state != old_state
 
     def validate_command(self, command: ACommand) -> bool:
         """

@@ -19,6 +19,7 @@ class AReading(ABC):
         MOISTURE = "moisture"
         WATERLEVEL = "water level"
         MOTION = "motion"
+        VIBRATION = "vibration"
         LATITUDE = "latitude"
         LONGITUDE = "longitude"
         GPS = "gps"
