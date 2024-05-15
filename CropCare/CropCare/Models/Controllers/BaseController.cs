@@ -23,6 +23,7 @@ namespace CropCare.Models.Controllers
         protected readonly Reading NO_READING = new Reading(ReadingType.NODATA, String.Empty, "NO DATA");
 
         public Dictionary<string, ObservableCollection<Reading>> Readings { get; set; }
+        public Dictionary<string, CartesianChart> Charts { get; set; }
 
         public bool ValidateReading(Reading reading)
         {
@@ -46,9 +47,11 @@ namespace CropCare.Models.Controllers
         {
             _readingTypes = readingTypes;
             Readings = new Dictionary<string, ObservableCollection<Reading>>();
+            Charts = new Dictionary<string, CartesianChart>();
             foreach (string type in readingTypes)
             {
                 Readings.Add(type, new ObservableCollection<Reading>());
+                Charts.Add(type, new CartesianChart());
             }
             App.IOTService.ConnectionStopped += IOTService_ConnectionStopped;
         }
@@ -58,14 +61,14 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public abstract void IOTService_ConnectionStopped();
 
-        public virtual CartesianChart GetChart(string readingType, string title, string xTitle, string yTitle)
+        public virtual CartesianChart GetChart(string readingType)
         {
             LineSeries<DateTimePoint>[] series =
             {
                 new LineSeries<DateTimePoint>
                 {
                     Values = this.Readings[readingType].Select(x => new DateTimePoint(x.TimeStamp, double.Parse(x.Value))),
-                    Name = title,
+                    Name = this.Readings[readingType][0].Type + " Over Time",
                     Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 3 },
                     GeometrySize = 0,
                     GeometryStroke = null,
@@ -77,8 +80,8 @@ namespace CropCare.Models.Controllers
                 new Axis
                 {
                     MinLimit = 0,
-                    MaxLimit = 100,
-                    Name = yTitle
+                    MaxLimit = (int)(this.Readings[readingType].Select(x => double.Parse(x.Value)).Max()),
+                    Name = this.Readings[readingType][0].Type + " (" + this.Readings[readingType][0].Unit + ")"
                 }
             };
 
@@ -90,13 +93,13 @@ namespace CropCare.Models.Controllers
                     value => value.ToString("MM-dd")
                 )
                 {
-                    Name = xTitle
+                    Name = "Time"
                 }
             };
 
             LabelVisual chartTitle = new LabelVisual
             {
-                Text = title,
+                Text = this.Readings[readingType][0].Type + " Over Time",
                 TextSize = 18,
                 Padding = new LiveChartsCore.Drawing.Padding(15),
                 Paint = new SolidColorPaint(SKColors.DarkSlateGray)

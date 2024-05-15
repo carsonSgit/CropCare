@@ -15,6 +15,8 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string[] ReadingTypes { get => _readingTypes; }
+
         /// <summary>
         /// Represents latest temperature reading
         /// </summary>
@@ -143,11 +145,6 @@ namespace CropCare.Models.Controllers
             Humidity = NO_READING;
             Moisture = NO_READING;
             WaterLevel = NO_READING;
-        }
-
-        public override CartesianChart GetChart(string readingType, string title, string xTitle, string yTitle)
-        {
-            return base.GetChart(readingType, title, xTitle, yTitle);
         }
     }
 }

@@ -91,6 +91,7 @@ namespace CropCare.Models
                     if(controller.ValidateReading(reading))
                     {
                         controller.AddReading(reading);
+                        controller.GetChart(reading.Type);
                     }
                 }
             }

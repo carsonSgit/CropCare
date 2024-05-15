@@ -12,6 +12,7 @@ namespace CropCare.Models.Controllers
     {
 
         private static readonly string[] _readingTypes = new string[] { ReadingType.LOUDNESS, ReadingType.MOTION, ReadingType.VIBRATION, ReadingType.LUMINOSITY };
+        public string[] ReadingTypes { get => _readingTypes; }
         /// <summary>
         /// Event raised when a property value changes.
         /// </summary>
