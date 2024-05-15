@@ -34,22 +34,24 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading WaterLevel { get; set; }
 
-        public void ToggleFan()
+        public bool IsFanOn { get; set; }
+
+        public bool IsLedOn { get; set; }
+
+        public async void ToggleFan()
         {
-            //Call command for fan
-            return;
+            IsFanOn = await UpdateActuatorState(Actuator.FAN, !IsFanOn);
         }
 
-        public void ToggleLed()
+        public async void ToggleLed()
         {
-            //Call command for led
-            return;
+            IsLedOn = await UpdateActuatorState(Actuator.LED, !IsLedOn);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlantController"/> class.
         /// </summary>
-        public PlantController() : base(_readingTypes)
+        public PlantController(string deviceId) : base(deviceId, _readingTypes)
         {
             Temperature = NO_READING;
             Humidity = NO_READING;
@@ -142,6 +144,12 @@ namespace CropCare.Models.Controllers
             Humidity = NO_READING;
             Moisture = NO_READING;
             WaterLevel = NO_READING;
+        }
+
+        public override async Task GetInitialActuatorStates()
+        {
+            IsFanOn = await GetActuatorState(Actuator.FAN);
+            IsLedOn = await GetActuatorState(Actuator.LED);
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CropCare.Models
+{
+    public static class Actuator
+    {
+        public static string FAN = "fan";
+        public static string LED = "light-on-off";
+        public static string BUZZER = "buzzer";
+        public static string SERVO = "servo";
+
+        public static bool StringToBool(string value)
+        {
+            return value == "1" || value.ToUpper() == "ON";
+        }
+    }
+}

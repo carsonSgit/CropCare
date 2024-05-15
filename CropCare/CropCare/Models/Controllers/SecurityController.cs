@@ -37,22 +37,26 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading Luminosity { get; set; }
 
-        public void ToggleDoorLock()
-        {
-            //Call command for door lock
-            return;
-        }
+        // public bool IsDoorLocked { get; set; }
 
-        public void ToggleDoorOpen()
+        public bool IsDoorOpen { get; set; }
+
+        // Sensor?
+        //public async void ToggleDoorLock()
+        //{
+        //    IsDoorLocked = await UpdateActuatorState(Actuator.SERVO, !IsFanOn);
+        //    return;
+        //}
+
+        public async void ToggleDoorOpen()
         {
-            //Call command for door open
-            return;
+            IsDoorOpen = await UpdateActuatorState(Actuator.SERVO, !IsDoorOpen);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityController"/> class.
         /// </summary>
-        public SecurityController() : base(_readingTypes)
+        public SecurityController(string deviceId) : base(deviceId, _readingTypes)
         {
             Loudness = NO_READING;
             Motion = NO_READING;
@@ -145,6 +149,11 @@ namespace CropCare.Models.Controllers
             Motion = NO_READING;
             Vibration = NO_READING;
             Luminosity = NO_READING;
+        }
+
+        public override async Task GetInitialActuatorStates()
+        {
+            IsDoorOpen = await GetActuatorState(Actuator.SERVO);
         }
     }
 }

@@ -37,5 +37,7 @@ namespace MauiFitness.Config
         /// The Eventhub name
         /// </summary>
         public string EventHubName { get; set; }
+
+        public string IOTHubConnectionString { get; set; }
     }
 }
