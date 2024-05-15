@@ -61,7 +61,11 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public abstract void IOTService_ConnectionStopped();
 
-        public virtual CartesianChart GetChart(string readingType)
+        /// <summary>
+        /// This method updates the chart for the given reading type.
+        /// </summary>
+        /// <param name="readingType"></param>
+        public virtual void UpdateChart(string readingType)
         {
             LineSeries<DateTimePoint>[] series =
             {
@@ -80,7 +84,7 @@ namespace CropCare.Models.Controllers
                 new Axis
                 {
                     MinLimit = 0,
-                    MaxLimit = (int)(this.Readings[readingType].Select(x => double.Parse(x.Value)).Max()),
+                    MaxLimit = (int)(this.Readings[readingType].Select(x => double.Parse(x.Value)).Max() + 10),
                     Name = this.Readings[readingType][0].Type + " (" + this.Readings[readingType][0].Unit + ")"
                 }
             };
@@ -113,7 +117,7 @@ namespace CropCare.Models.Controllers
                 Title = chartTitle
             };
 
-            return cartesianChart;
+            Charts[readingType] = cartesianChart;
         }
     }
 }

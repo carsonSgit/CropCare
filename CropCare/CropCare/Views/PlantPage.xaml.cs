@@ -22,7 +22,15 @@ public partial class PlantPage : ContentPage
         InitializeComponent();
         PlantController = farm.PlantController;
         Chart1.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
+        Chart2.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = PlantController;
+    }
+
+    private void UpdateCharts(string s, string s2)
+    {
+        Chart1.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
+        Chart2.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
     }
 
     private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
@@ -33,10 +41,10 @@ public partial class PlantPage : ContentPage
         //PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
 
 
-//         if (command == Models.Command.ON)
-//             fan_status_circle.Color = Color.FromArgb("#1DBD40");
-//         else
-//             fan_status_circle.Color = Color.FromArgb("#DC2C2C");
+        //         if (command == Models.Command.ON)
+        //             fan_status_circle.Color = Color.FromArgb("#1DBD40");
+        //         else
+        //             fan_status_circle.Color = Color.FromArgb("#DC2C2C");
     }
 
     private void ledSwitch_Toggled(object sender, ToggledEventArgs e)

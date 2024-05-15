@@ -195,7 +195,10 @@
                                    HeightRequest="280"
                                    ZoomMode="ZoomX"/>
                 <charts:CartesianChart x:Name="Chart2"
-                           IsVisible="false"
+                                   Series="{Binding Series}" 
+                                   XAxes="{Binding XAxes}" 
+                                   YAxes="{Binding YAxes}"
+                                   Title="{Binding Title}" 
                            ZoomMode="PanX" HeightRequest="280"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
