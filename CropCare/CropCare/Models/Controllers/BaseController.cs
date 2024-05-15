@@ -1,4 +1,12 @@
-﻿using System;
+﻿using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Maui;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.VisualElements;
+using LiveChartsCore.VisualElements;
+using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -48,5 +56,61 @@ namespace CropCare.Models.Controllers
         /// This handler is called when the IOTService connection is stopped.
         /// </summary>
         public abstract void IOTService_ConnectionStopped();
+
+        public virtual CartesianChart GetChart(string readingType, string title, string xTitle, string yTitle)
+        {
+            LineSeries<DateTimePoint>[] series =
+            {
+                new LineSeries<DateTimePoint>
+                {
+                    Values = new ObservableCollection<DateTimePoint>(this.Readings[readingType].Select(x => new DateTimePoint(x.TimeStamp, x.Value))),
+                    Name = title,
+                    Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 3 },
+                    GeometrySize = 0,
+                    GeometryStroke = null,
+                    LineSmoothness = 0.95
+                }
+            };
+
+            Axis[] yAxis = {
+                new Axis
+                {
+                    MinLimit = 0,
+                    MaxLimit = 100,
+                    Name = yTitle
+                }
+            };
+
+            Axis[] xAxis =
+            {
+                new DateTimeAxis
+                (
+                    TimeSpan.FromDays(1),
+                    value => value.ToString("MM-dd")
+                )
+                {
+                    Name = xTitle
+                }
+            };
+
+
+            LabelVisual chartTitle = new LabelVisual
+            {
+                Text = title,
+                TextSize = 18,
+                Padding = new LiveChartsCore.Drawing.Padding(15),
+                Paint = new SolidColorPaint(SKColors.DarkSlateGray)
+            };
+
+            var cartesianChart = new CartesianChart
+            {
+                Series = series,
+                YAxes = yAxis,
+                XAxes = xAxis,
+                Title = chartTitle
+            };
+
+            return cartesianChart;
+        }
     }
 }

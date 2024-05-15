@@ -21,6 +21,7 @@ public partial class PlantPage : ContentPage
     {
         InitializeComponent();
         PlantController = farm.PlantController;
+        //Chart1.BindingContext = PlantController.GetChart(ReadingType.TEMPERATURE, "Temperature", "Time", "Temperature (°C)");
         BindingContext = PlantController;
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using CropCare.Interfaces;
+using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace CropCare.Models.Controllers
 {
@@ -142,6 +143,11 @@ namespace CropCare.Models.Controllers
             Humidity = NO_READING;
             Moisture = NO_READING;
             WaterLevel = NO_READING;
+        }
+
+        public override CartesianChart GetChart(string readingType, string title, string xTitle, string yTitle)
+        {
+            return base.GetChart(readingType, title, xTitle, yTitle);
         }
     }
 }
