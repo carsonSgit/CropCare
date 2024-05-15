@@ -21,16 +21,21 @@ public partial class PlantPage : ContentPage
     {
         InitializeComponent();
         PlantController = farm.PlantController;
-        Chart1.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
-        Chart2.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        //TempChart.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
+        //HumiChart.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        //SoilChart.BindingContext = PlantController.Charts[ReadingType.MOISTURE];
+        //WaterChart.BindingContext = PlantController.Charts[ReadingType.WATERLEVEL];
+
         App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = PlantController;
     }
 
     private void UpdateCharts(string s, string s2)
     {
-        Chart1.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
-        Chart2.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        TempChart.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
+        HumiChart.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        SoilChart.BindingContext = PlantController.Charts[ReadingType.MOISTURE];
+        WaterChart.BindingContext = PlantController.Charts[ReadingType.WATERLEVEL];
     }
 
     private void fanSwitch_Toggled(object sender, ToggledEventArgs e)

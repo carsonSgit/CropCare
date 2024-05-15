@@ -188,14 +188,26 @@
 
             <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
                 <VerticalStackLayout VerticalOptions="Start">
-                    <charts:CartesianChart x:Name="Chart1" 
+                    <charts:CartesianChart x:Name="TempChart" 
                                        Series="{Binding Series}" 
                                        XAxes="{Binding XAxes}" 
                                        YAxes="{Binding YAxes}"
                                        Title="{Binding Title}" 
                                        HeightRequest="280"
                                        ZoomMode="ZoomX"/>
-                    <charts:CartesianChart x:Name="Chart2"
+                    <charts:CartesianChart x:Name="HumiChart"
+                                       Series="{Binding Series}" 
+                                       XAxes="{Binding XAxes}" 
+                                       YAxes="{Binding YAxes}"
+                                       Title="{Binding Title}" 
+                               ZoomMode="PanX" HeightRequest="280"/>
+                    <charts:CartesianChart x:Name="SoilChart"
+                                       Series="{Binding Series}" 
+                                       XAxes="{Binding XAxes}" 
+                                       YAxes="{Binding YAxes}"
+                                       Title="{Binding Title}" 
+                               ZoomMode="PanX" HeightRequest="280"/>
+                    <charts:CartesianChart x:Name="WaterChart"
                                        Series="{Binding Series}" 
                                        XAxes="{Binding XAxes}" 
                                        YAxes="{Binding YAxes}"
