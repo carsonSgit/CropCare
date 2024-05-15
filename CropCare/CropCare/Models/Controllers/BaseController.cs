@@ -9,6 +9,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace CropCare.Models.Controllers
             {
                 new LineSeries<DateTimePoint>
                 {
-                    Values = new ObservableCollection<DateTimePoint>(this.Readings[readingType].Select(x => new DateTimePoint(x.TimeStamp, x.Value))),
+                    Values = this.Readings[readingType].Select(x => new DateTimePoint(x.TimeStamp, double.Parse(x.Value))),
                     Name = title,
                     Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 3 },
                     GeometrySize = 0,
@@ -85,14 +86,13 @@ namespace CropCare.Models.Controllers
             {
                 new DateTimeAxis
                 (
-                    TimeSpan.FromDays(1),
+                    TimeSpan.FromSeconds(5),
                     value => value.ToString("MM-dd")
                 )
                 {
                     Name = xTitle
                 }
             };
-
 
             LabelVisual chartTitle = new LabelVisual
             {
