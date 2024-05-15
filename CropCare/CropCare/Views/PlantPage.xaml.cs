@@ -21,10 +21,6 @@ public partial class PlantPage : ContentPage
     {
         InitializeComponent();
         PlantController = farm.PlantController;
-        //TempChart.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
-        //HumiChart.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
-        //SoilChart.BindingContext = PlantController.Charts[ReadingType.MOISTURE];
-        //WaterChart.BindingContext = PlantController.Charts[ReadingType.WATERLEVEL];
 
         App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = PlantController;

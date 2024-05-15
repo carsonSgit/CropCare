@@ -22,9 +22,14 @@ public partial class LocationPage : ContentPage
         InitializeComponent();
         GeolocationController = farm.GeolocationController;
         Farm = farm;
+        App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = GeolocationController;
     }
-
+    private void UpdateCharts(string s, string s2)
+    {
+        PitchChart.BindingContext = GeolocationController.Charts[ReadingType.PITCH];
+        RollChart.BindingContext = GeolocationController.Charts[ReadingType.ROLL];
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();

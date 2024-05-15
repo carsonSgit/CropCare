@@ -128,8 +128,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
                 <VerticalStackLayout>
                     <Frame Margin="0,0,0,10">
                         <Grid>
