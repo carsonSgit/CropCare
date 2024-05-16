@@ -189,7 +189,8 @@
 
             <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
                 <VerticalStackLayout>
-                    <Picker SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged" x:Name="ChartPicker">
+                    <Label Text="Pick your Chart" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
+                    <Picker SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged" x:Name="ChartPicker" Margin="10,5,10,0">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Temperature</x:String>
