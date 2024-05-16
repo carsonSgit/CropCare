@@ -23,6 +23,7 @@
                 <RowDefinition Height="325" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0">
@@ -30,8 +31,8 @@
                 </maps:Map>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Margin="10">
-                <Frame BackgroundColor="White" Margin="10, 0, 10, 0">
+            <StackLayout Grid.Row="1">
+                <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
                     <VerticalStackLayout>
                         <Grid Margin="0, 0, 0, 10">
                             <Grid.ColumnDefinitions>
@@ -116,20 +117,31 @@
 
 
             </StackLayout>
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 10" Grid.Row="2">
-                <VerticalStackLayout VerticalOptions="Start">
-                    <charts:CartesianChart x:Name="PitchChart"
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 10" Grid.Row="3">
+                <VerticalStackLayout>
+                    <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
+                    <Picker SelectedIndex="0" SelectedIndexChanged="ChartPicker_SelectedIndexChanged" x:Name="ChartPicker" Margin="10,5,10,0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Pitch</x:String>
+                                <x:String>Roll</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <charts:CartesianChart x:Name="PitchChart"
                            Series="{Binding Series}" 
                            XAxes="{Binding XAxes}" 
                            YAxes="{Binding YAxes}"
                            Title="{Binding Title}" 
                    ZoomMode="PanX" HeightRequest="280"/>
-                    <charts:CartesianChart x:Name="RollChart"
+                        <charts:CartesianChart x:Name="RollChart"
                            Series="{Binding Series}" 
                            XAxes="{Binding XAxes}" 
                            YAxes="{Binding YAxes}"
                            Title="{Binding Title}" 
                    ZoomMode="PanX" HeightRequest="280"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Frame>
         </Grid>

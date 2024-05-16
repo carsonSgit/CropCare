@@ -174,13 +174,16 @@
 
 
             <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
-                <VerticalStackLayout VerticalOptions="Start">
-                    <charts:CartesianChart x:Name="LumiChart"
+                <VerticalStackLayout>
+                    <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <charts:CartesianChart x:Name="LumiChart"
                                        Series="{Binding Series}" 
                                        XAxes="{Binding XAxes}" 
                                        YAxes="{Binding YAxes}"
                                        Title="{Binding Title}" 
                                ZoomMode="PanX" HeightRequest="280"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>

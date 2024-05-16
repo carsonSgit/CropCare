@@ -25,7 +25,7 @@ public partial class LocationPage : ContentPage
         App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = GeolocationController;
     }
-    private void UpdateCharts(string s, string s2)
+    private void UpdateCharts(string s = null, string s2 = null)
     {
         PitchChart.BindingContext = GeolocationController.Charts[ReadingType.PITCH];
         RollChart.BindingContext = GeolocationController.Charts[ReadingType.ROLL];
@@ -33,6 +33,8 @@ public partial class LocationPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        ChartPicker.SelectedIndex = 0;
+        UpdateCharts();
 
         MainThread.BeginInvokeOnMainThread(async () =>
         {
@@ -71,5 +73,12 @@ public partial class LocationPage : ContentPage
         //}
     }
 
+    private void ChartPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
 
+        PitchChart.IsVisible = selectedIndex == 0;
+        RollChart.IsVisible = selectedIndex == 1;
+    }
 }

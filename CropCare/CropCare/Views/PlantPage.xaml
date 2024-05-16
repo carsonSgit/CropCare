@@ -187,9 +187,9 @@
 
 
 
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
                 <VerticalStackLayout>
-                    <Label Text="Pick your Chart" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
+                    <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
                     <Picker SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged" x:Name="ChartPicker" Margin="10,5,10,0">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
