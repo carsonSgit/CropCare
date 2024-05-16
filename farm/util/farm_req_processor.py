@@ -42,7 +42,7 @@ class RequestProcessor:
             self.control_actuators(
                 [ACommand(command.get("target"), command.get("value"))]
             )
-            response_payload = {"response": "Device is online"}
+            response_payload = {"response": f"{command.get("target")} was set to {command.get("value")}"}
             status = StatusCode.SUCCESS
         except Exception as e:
             print(e)
