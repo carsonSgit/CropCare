@@ -47,6 +47,11 @@
         public dynamic Value { get; set; }
 
         /// <summary>
+        /// Gets or sets the timestamp of the reading.
+        /// </summary>
+        public DateTime TimeStamp { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Reading<typeparamref name="T"/>"/> class with the specified type, unit, and value.
         /// </summary>
         /// <param name="type">The type of the reading.</param>
@@ -57,6 +62,7 @@
             Type = type;
             Unit = unit;
             Value = value;
+            TimeStamp = DateTime.Now;
         }
 
         /// <summary>

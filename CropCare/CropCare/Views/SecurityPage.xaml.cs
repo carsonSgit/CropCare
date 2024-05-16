@@ -35,7 +35,16 @@ public partial class SecurityPage : ContentPage, INotifyPropertyChanged
         InitializeComponent();
         Farm = farm;
         SecurityController = farm.SecurityController;
+        App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = SecurityController;
+    }
+
+    private void UpdateCharts(string s, string s2)
+    {
+        //LoudChart.BindingContext = SecurityController.Charts[ReadingType.LOUDNESS];
+        LumiChart.BindingContext = SecurityController.Charts[ReadingType.LUMINOSITY];
+        //MotionChart.BindingContext = SecurityController.Charts[ReadingType.MOTION];
+        //VibrationChart.BindingContext = SecurityController.Charts[ReadingType.VIBRATION];
     }
 
     private void doorLockSwitch_Toggled(object sender, ToggledEventArgs e)

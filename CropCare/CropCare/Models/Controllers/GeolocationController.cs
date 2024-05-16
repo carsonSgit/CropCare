@@ -16,6 +16,8 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string[] ReadingTypes { get => _readingTypes; }
+
         /// <summary>
         /// Represents latest latitude reading
         /// </summary>

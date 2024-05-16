@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using CropCare.Interfaces;
+using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace CropCare.Models.Controllers
 {
@@ -13,6 +14,8 @@ namespace CropCare.Models.Controllers
         private static readonly string[] _readingTypes = new string[] { ReadingType.TEMPERATURE, ReadingType.HUMIDITY, ReadingType.MOISTURE, ReadingType.WATERLEVEL };
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string[] ReadingTypes { get => _readingTypes; }
 
         /// <summary>
         /// Represents latest temperature reading
