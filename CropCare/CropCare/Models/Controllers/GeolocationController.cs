@@ -38,10 +38,11 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading Roll { get; set; }
 
-        public void ToggleBuzzer()
+        public bool IsBuzzerOn { get; set; }
+
+        public async void ToggleBuzzer()
         {
-            //Call command for buzzer
-            return;
+            IsBuzzerOn = await UpdateActuatorState(Actuator.BUZZER, !IsBuzzerOn);
         }
 
         /// <summary>
@@ -74,12 +75,17 @@ namespace CropCare.Models.Controllers
             Roll = NO_READING;
         }
 
-        public GeolocationController(): base(_readingTypes)
+        public GeolocationController(string deviceId): base(deviceId, _readingTypes)
         {
             Latitude = new Reading(ReadingType.LATITUDE, "°", "0");
             Longitude = new Reading(ReadingType.LONGITUDE, "°", "0");
             Pitch = NO_READING;
-            Roll = NO_READING;
+            Roll = NO_READING;     
+        }
+
+        public async override Task GetInitialActuatorStates()
+        {
+            IsBuzzerOn = await GetActuatorState(Actuator.BUZZER);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.EventHubs.Consumer;
 using CropCare.Interfaces;
 using CropCare.Models.Controllers;
+using Microsoft.Maui;
 using Newtonsoft.Json;
 using System.ComponentModel;
 namespace CropCare.Models
@@ -12,6 +13,8 @@ namespace CropCare.Models
     // Description: Represents a farm entity.
     public class Farm : INotifyPropertyChanged, IHasKey
     {
+
+        private bool _isListening = false;
         /// <summary>
         /// Event that is raised when a property value changes.
         /// </summary>
@@ -66,11 +69,37 @@ namespace CropCare.Models
         {
             Name = farmName;
             DeviceId = deviceId;
-            PlantController = new PlantController();
-            SecurityController = new SecurityController();
-            GeolocationController = new GeolocationController();
+            PlantController = new PlantController(DeviceId);
+            SecurityController = new SecurityController(DeviceId);
+            GeolocationController = new GeolocationController(DeviceId);
             IconPath = iconPath;
+        }
+
+        public void StopListeningToHub()
+        {
+            if (!_isListening)
+            {
+                return;
+            }
+
+            App.IOTService.MessageReceived -= IOTService_MessageReceived;
+            _isListening = false;
+        }
+
+        public async void StartListeningToHub()
+        {
+            if (_isListening)
+            {
+                return;
+            }
+
             App.IOTService.MessageReceived += IOTService_MessageReceived;
+            var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
+            foreach (var controller in controllers)
+            {
+                await controller.GetInitialActuatorStates();
+            }
+            _isListening = true;
         }
 
         private void IOTService_MessageReceived(string deviceId, string data)

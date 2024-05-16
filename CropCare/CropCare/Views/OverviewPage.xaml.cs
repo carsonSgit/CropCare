@@ -47,8 +47,19 @@ public partial class OverviewPage : ContentPage
         }
         try
         {
+            if(FarmsCollection != null)
+            {
+                foreach(Farm f in FarmsCollection)
+                {
+                    f.StopListeningToHub();
+                }
+            }
             var FarmKeys = App.Repo.UserToFarmDb.Items.Where(u => u.UserId == App.CurrentUser.Key).Select(u => u.FarmId).ToList();
             FarmsCollection = App.Repo.FarmsDb.Items.Where(f => FarmKeys.Contains(f.Key)).ToObservableCollection();
+            foreach(Farm f in FarmsCollection)
+            {
+                Task.Run(() => f.StartListeningToHub());
+            }
         }
         catch (Exception ex)
         {
