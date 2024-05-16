@@ -20,7 +20,7 @@
     <ScrollView>
         <Grid BackgroundColor="#ECECEC">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="325" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
