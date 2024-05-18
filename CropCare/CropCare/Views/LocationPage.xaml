@@ -14,6 +14,7 @@
             <local:DynamicValueConverter x:Key="DynamicValueConverter" />
             <local:NumericToColorConverter x:Key="NumericToColorConverter" />
             <local:NumericToStringConverter x:Key="NumericToStringConverter" />
+            <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
             <model:HealthyRange x:Key="PitchRange" LowerHealthyLimit="-2.5" UpperHealthyLimit="2.5" LowerCautionLimit="5" UpperCautionLimit="5"/>
             <model:HealthyRange x:Key="RollRange" LowerHealthyLimit="-2.5" UpperHealthyLimit="2.5" LowerCautionLimit="5" UpperCautionLimit="5"/>
         </ResourceDictionary>
@@ -105,11 +106,10 @@
                                 ThumbColor="GhostWhite"
                                 VerticalOptions="Center"
                                 HorizontalOptions="EndAndExpand"
-                                IsToggled="{Binding BuzzerState}"
-                                Toggled="buzzer_Toggled"
+                                IsToggled="{Binding IsBuzzerOn}"
                                 x:Name="buzzer"/>
                                 <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
-                                    <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="buzzer_status_circle"/>
+                                    <BoxView Color="{Binding IsBuzzerOn, Converter={StaticResource BooleanToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="buzzer_status_circle"/>
                                     <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding Buzzer.State}" x:Name="buzzer_healthLbl"/>
                                 </HorizontalStackLayout>
                             </Grid>

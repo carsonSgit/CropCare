@@ -12,6 +12,7 @@
             <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
             <local:NumericToColorConverter x:Key="NumericToColorConverter" />
             <local:NumericToStringConverter x:Key="NumericToStringConverter" />
+            <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
             <model:HealthyRange x:Key="HumidityRange" LowerHealthyLimit="75" UpperHealthyLimit="95" LowerCautionLimit="65" UpperCautionLimit="95" />
             <model:HealthyRange x:Key="TemperatureRange" LowerHealthyLimit="26" UpperHealthyLimit="29" LowerCautionLimit="24" UpperCautionLimit="32" />
             <model:HealthyRange x:Key="MoistureRange" LowerHealthyLimit="26" UpperHealthyLimit="29" LowerCautionLimit="24" UpperCautionLimit="32" /> <!-- Make this accurate -->
@@ -150,11 +151,10 @@
                             ThumbColor="GhostWhite"
                             VerticalOptions="Center" 
                             HorizontalOptions="EndAndExpand"
-                            Toggled="ledSwitch_Toggled"
-                            x:Name="ledSwitch"/>
-
+                            x:Name="ledSwitch"
+                            IsToggled="{Binding IsLedOn}"/>
                             <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
-                                <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="led_status_circle"/>
+                                <BoxView Color="{Binding IsLedOn, Converter={StaticResource BooleanToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="led_status_circle"/>
                                 <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding LedState}" x:Name="led_healthLbl"/>
                             </HorizontalStackLayout>
                         </Grid>
@@ -177,10 +177,11 @@
                             ThumbColor="GhostWhite"
                             VerticalOptions="Center" 
                             HorizontalOptions="EndAndExpand"
-                            Toggled="fanSwitch_Toggled"
-                            x:Name="fanSwitch"/>
+                            x:Name="fanSwitch"
+                            IsToggled="{Binding IsFanOn}"/>
+                            
                             <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
-                                <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="fan_status_circle"/>
+                                <BoxView Color="{Binding IsFanOn, Converter={StaticResource BooleanToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="fan_status_circle"/>
                                 <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding FanState}" x:Name="fan_healthLbl"/>
                             </HorizontalStackLayout>
                         </Grid>

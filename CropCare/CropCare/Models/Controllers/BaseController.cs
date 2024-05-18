@@ -168,7 +168,7 @@ namespace CropCare.Models.Controllers
             string payload = $"{{\"target\":\"{actuatorType}\", \"value\":\"{stateString}\"}}";
 
             var result = await App.IOTService.InvokeDirectMethod(DeviceId, METHOD, payload);
-            return result.Status == 200;
+            return state;
         }
     }
 }

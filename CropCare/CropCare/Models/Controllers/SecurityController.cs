@@ -40,7 +40,19 @@ namespace CropCare.Models.Controllers
 
         // public bool IsDoorLocked { get; set; }
 
-        public bool IsDoorOpen { get; set; }
+        private bool _isDoorLocked;
+        public bool IsDoorLocked 
+        {
+            get
+            {
+                return this._isDoorLocked;
+            }
+            set
+            {
+                Task.Run(async () => await UpdateActuatorState(Actuator.SERVO, value));
+                this._isDoorLocked = value;
+            }
+        }
 
         // Sensor?
         //public async void ToggleDoorLock()
@@ -49,9 +61,9 @@ namespace CropCare.Models.Controllers
         //    return;
         //}
 
-        public async void ToggleDoorOpen()
+        public async void ToggleDoorLock()
         {
-            IsDoorOpen = await UpdateActuatorState(Actuator.SERVO, !IsDoorOpen);
+            IsDoorLocked = await UpdateActuatorState(Actuator.SERVO, !IsDoorLocked);
         }
 
         /// <summary>
@@ -154,7 +166,7 @@ namespace CropCare.Models.Controllers
 
         public override async Task GetInitialActuatorStates()
         {
-            IsDoorOpen = await GetActuatorState(Actuator.SERVO);
+            IsDoorLocked = await GetActuatorState(Actuator.SERVO);
         }
     }
 }

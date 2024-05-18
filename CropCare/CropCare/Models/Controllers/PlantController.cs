@@ -37,9 +37,33 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading WaterLevel { get; set; }
 
-        public bool IsFanOn { get; set; }
+        private bool _isFanOn;
+        public bool IsFanOn 
+        {
+            get
+            {
+                return this._isFanOn;
+            }
+            set
+            {
+                Task.Run(async () => await UpdateActuatorState(Actuator.FAN, value));
+                this._isFanOn = value;
+            }
+        }
 
-        public bool IsLedOn { get; set; }
+        private bool _isLedOn;
+        public bool IsLedOn 
+        {
+            get
+            {
+                return this._isLedOn;
+            }
+            set
+            {
+                Task.Run(async () => await UpdateActuatorState(Actuator.LED, value));
+                this._isLedOn = value;
+            }
+        }
 
         public async void ToggleFan()
         {

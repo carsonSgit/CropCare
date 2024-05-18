@@ -38,7 +38,19 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading Roll { get; set; }
 
-        public bool IsBuzzerOn { get; set; }
+        private bool _isBuzzerOn;
+        public bool IsBuzzerOn 
+        {
+            get
+            {
+                return this._isBuzzerOn;
+            }
+            set
+            {
+                Task.Run(async () => await UpdateActuatorState(Actuator.BUZZER, value));
+                this._isBuzzerOn = value;
+            }
+        }
 
         public async void ToggleBuzzer()
         {
