@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CropCare.Models;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CropCare.Converters
 {
-    public class PitchAndRollHealthTextConverter : IValueConverter
+    public class NumericToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (parameter is not HealthyRange range)
+                throw new ArgumentException("Parameter must be of type HealthyRange");
+
             string healthStatus;
-            if (double.TryParse(value.ToString(), out double pitchValue))
+            if (double.TryParse(value.ToString(), out double numericValue))
             {
-                if (pitchValue >= -2.5 && pitchValue <= 2.5)
+                if (numericValue >= range.LowerHealthyLimit && numericValue <= range.UpperHealthyLimit)
                     healthStatus = "Healthy";// Healthy
-                else if (pitchValue >= -5 && pitchValue <= -2.5 || pitchValue >= 2.5 && pitchValue <= 5)
+                else if ((numericValue >= range.LowerCautionLimit && numericValue < range.LowerHealthyLimit) || (numericValue > range.UpperHealthyLimit && numericValue <= range.UpperCautionLimit))
                     healthStatus = "Caution";// Caution
                 else
                     healthStatus = "Critical";// Unhealthy
@@ -24,7 +23,7 @@ namespace CropCare.Converters
             else
                 healthStatus = "Unkown";// Unkown
 
-           return healthStatus;
+            return healthStatus;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

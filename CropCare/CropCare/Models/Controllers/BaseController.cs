@@ -132,15 +132,22 @@ namespace CropCare.Models.Controllers
 
         protected async Task<bool> GetActuatorState(string actuatorType)
         {
-            const string METHOD = "get_single_actuator_state";
+            try
+            {
+                const string METHOD = "get_single_actuator_state";
 
-            string payload = $"{{\"target\":\"{actuatorType}\"}}";
-            var result = (await App.IOTService.InvokeDirectMethod(DeviceId, METHOD, payload)).GetPayloadAsJson();
-            
-            var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
-            result = dict["value"].ToString();
+                string payload = $"{{\"target\":\"{actuatorType}\"}}";
+                var result = (await App.IOTService.InvokeDirectMethod(DeviceId, METHOD, payload)).GetPayloadAsJson();
 
-            return Actuator.StringToBool(result);
+                var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+                result = dict["value"].ToString();
+
+                return Actuator.StringToBool(result);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
