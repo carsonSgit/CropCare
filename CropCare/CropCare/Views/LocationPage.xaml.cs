@@ -25,11 +25,13 @@ public partial class LocationPage : ContentPage
         App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = GeolocationController;
     }
+
     private void UpdateCharts(string s = null, string s2 = null)
     {
         PitchChart.BindingContext = GeolocationController.Charts[ReadingType.PITCH];
         RollChart.BindingContext = GeolocationController.Charts[ReadingType.ROLL];
     }
+
     protected override void OnAppearing()
     {
         base.OnAppearing();

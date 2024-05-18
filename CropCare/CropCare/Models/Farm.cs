@@ -1,9 +1,9 @@
 ﻿using Azure.Messaging.EventHubs.Consumer;
 using CropCare.Interfaces;
 using CropCare.Models.Controllers;
-using Microsoft.Maui;
 using Newtonsoft.Json;
 using System.ComponentModel;
+
 namespace CropCare.Models
 {
     // Team Name: CropCare

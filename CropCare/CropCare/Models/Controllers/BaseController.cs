@@ -1,20 +1,10 @@
-﻿using LiveChartsCore;
-using LiveChartsCore.Defaults;
+﻿using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Maui;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
-using LiveChartsCore.VisualElements;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using LiteDB;
 using Newtonsoft.Json;
 
 namespace CropCare.Models.Controllers

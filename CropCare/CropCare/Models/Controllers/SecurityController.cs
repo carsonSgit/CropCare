@@ -1,5 +1,4 @@
-﻿using CropCare.Interfaces;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace CropCare.Models.Controllers
 {
@@ -45,6 +44,9 @@ namespace CropCare.Models.Controllers
         {
             get
             {
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                    return false;
+
                 return this._isDoorLocked;
             }
             set

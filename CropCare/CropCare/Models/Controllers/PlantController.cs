@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using CropCare.Interfaces;
-using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace CropCare.Models.Controllers
 {
@@ -42,6 +40,9 @@ namespace CropCare.Models.Controllers
         {
             get
             {
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                    return false;
+
                 return this._isFanOn;
             }
             set
@@ -56,6 +57,9 @@ namespace CropCare.Models.Controllers
         {
             get
             {
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                    return false;
+
                 return this._isLedOn;
             }
             set
