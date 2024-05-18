@@ -22,6 +22,7 @@ class AReading(ABC):
         VIBRATION = "vibration"
         LATITUDE = "latitude"
         LONGITUDE = "longitude"
+        MAGNET = "magnet"
         GPS = "gps"
         PITCH = "pitch"
         ROLL = "roll"

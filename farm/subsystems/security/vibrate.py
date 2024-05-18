@@ -1,88 +1,123 @@
-from grove import grovepi
 from interfaces.sensors import ISensor, AReading
-from time import sleep
+import seeed_python_reterminal.acceleration as rt_accel
+import seeed_python_reterminal.core as rt
+import math
+import collections
+import time
 
 
 class VibrationSensor(ISensor):
     """
-    A class representing a vibration sensor.
+    Represents an accelerometer sensor for detecting vibrations.
+
+    Args:
+        gpio (int): The GPIO pin number.
+        model (str): The model of the accelerometer sensor.
+        type (AReading.Type): The type of the accelerometer reading.
 
     Attributes:
-        pin (int): The pin number that the vibration sensor is associated with.
-        model (str): The model of the vibration sensor.
-        type (AReading.Type): The type of the sensor reading.
-        callback (function): A function to execute when vibration is detected.
-
-    Methods:
-        read_sensor(): Reads the vibration value from the sensor.
-        set_callback(callback): Assigns a callback function for detecting vibrations.
-        start_detection(): Starts the vibration detection.
+        gpio (int): The GPIO pin number.
+        model (str): The model of the accelerometer sensor.
+        type (AReading.Type): The type of the accelerometer reading.
+        threshold (float): The acceleration change threshold to detect vibration.
+        window_size (int): The number of recent acceleration readings to store.
+        accel_readings (collections.deque): A deque storing recent acceleration readings.
+        baseline (float): The baseline magnitude to compare against for vibration detection.
     """
 
-    def __init__(self, pin: int, model: str, type: AReading.Type) -> None:
-        """
-        Initializes the VibrationSensor object.
-
-        Args:
-            pin (int): The pin number that the vibration sensor is associated with.
-            model (str): The model of the vibration sensor.
-            type (AReading.Type): The type of the sensor reading.
-            callback (function): The function that will be called upon vibration detection.
-        """
-        self.pin = pin
+    def __init__(
+        self,
+        gpio: int,
+        model: str,
+        type: AReading.Type,
+        threshold: float = 10.0,
+        window_size: int = 10,
+    ):
+        self.gpio = gpio
         self.model = model
         self.type = type
-        self.callback = callback
-        grovepi.pinMode(self.pin, "INPUT")
+        self.xyz = [None, None, None]
+        self.device = rt.get_acceleration_device()
+        self.threshold = threshold
+        self.window_size = window_size
+        self.accel_readings = collections.deque(maxlen=window_size)
+        self.baseline = self.calibrate_baseline()
+        self.vibration_counter = 0
+        self.vibration_sustained_threshold = 3  # Number of consecutive readings indicating vibration to confirm vibration
 
-    def read_sensor(self) -> bool:
+    def calibrate_baseline(self) -> float:
         """
-        Reads the vibration value from the sensor.
+        Calibrates the baseline magnitude for the sensor.
 
         Returns:
-            bool: True if vibration is detected, False otherwise.
+            float: The baseline magnitude.
         """
-        try:
-            value = grovepi.digitalRead(self.pin)
-            detected = bool(value)
-            print(detected)  # Print True or False
-            return detected
-        except IOError:
-            print("Error reading from vibration sensor")
-            return False
+        baseline_readings = []
+        for _ in range(self.window_size):
+            for event in self.device.read_loop():
+                accelEvent = rt_accel.AccelerationEvent(event)
+                if accelEvent.name is not None:
+                    if "X" in str(accelEvent.name).upper():
+                        self.xyz[0] = accelEvent.value
+                    if "Y" in str(accelEvent.name).upper():
+                        self.xyz[1] = accelEvent.value
+                    if "Z" in str(accelEvent.name).upper():
+                        self.xyz[2] = accelEvent.value
+                if None not in self.xyz:
+                    break
+            magnitude = math.sqrt(
+                self.xyz[0] ** 2 + self.xyz[1] ** 2 + self.xyz[2] ** 2
+            )
+            baseline_readings.append(magnitude)
+            self.xyz = [None, None, None]
+        return sum(baseline_readings) / len(baseline_readings)
 
-    def set_callback(self, callback):
+    def read_sensor(self) -> list[AReading]:
         """
-        Sets a callback function for the vibration detection.
+        Reads the accelerometer sensor and returns a list of accelerometer readings.
 
-        Args:
-            callback: The function that will be called upon vibration detection.
+        Returns:
+            list[AReading]: A list of accelerometer readings.
         """
-        self.callback = callback
+        for event in self.device.read_loop():
+            accelEvent = rt_accel.AccelerationEvent(event)
+            if accelEvent.name is not None:
+                if "X" in str(accelEvent.name).upper():
+                    self.xyz[0] = accelEvent.value
+                if "Y" in str(accelEvent.name).upper():
+                    self.xyz[1] = accelEvent.value
+                if "Z" in str(accelEvent.name).upper():
+                    self.xyz[2] = accelEvent.value
+            if None not in self.xyz:
+                break
 
-    def _handle_vibration(self):
-        """
-        Internal function to handle the vibration detection.
-        """
-        if self.callback:
-            self.callback()
+        magnitude = math.sqrt(self.xyz[0] ** 2 + self.xyz[1] ** 2 + self.xyz[2] ** 2)
 
-    def start_detection(self):
-        """
-        Starts the vibration detection.
-        """
-        while True:
-            if self.read_sensor():
-                self._handle_vibration()
-            sleep(2)
+        self.accel_readings.append(magnitude)
+
+        vibration_detected = False
+        if len(self.accel_readings) == self.window_size:
+            avg_magnitude = sum(self.accel_readings) / self.window_size
+            if abs(avg_magnitude - self.baseline) > self.threshold:
+                self.vibration_counter += 1
+            else:
+                self.vibration_counter = 0
+
+            if self.vibration_counter >= self.vibration_sustained_threshold:
+                vibration_detected = True
+            else:
+                vibration_detected = False
+
+        self.xyz = [None, None, None]
+
+        return [
+            AReading(AReading.Type.VIBRATION, AReading.Unit.NONE, vibration_detected),
+        ]
 
 
 if __name__ == "__main__":
-
-    def callback():
-        print("Alert: Vibration detected")
-
-    vibration_sensor = VibrationSensor(
-        26, "VibrationSensor", AReading.Type.MOTION, callback
-    )
-    vibration_sensor.start_detection()
+    sensor = VibrationSensor(0, "accel", AReading.Type.PITCH)
+    while True:
+        readings = sensor.read_sensor()
+        print("vibration detected: " + str(readings[0]))
+        time.sleep(0.1)
