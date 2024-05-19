@@ -35,15 +35,6 @@ public partial class TechnicianPage : ContentPage
         BindingContext = this;
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        //MainThread.BeginInvokeOnMainThread(async () =>
-        //{
-        //    await PopulateTechnicianPicker();
-        //});
-    }
-
     private void PopulateTechnicianPicker()
     {
         //Retrieve all Technicians
