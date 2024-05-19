@@ -103,7 +103,7 @@
                             </Frame>
                         </Grid>
                     </Frame>
-                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
@@ -123,13 +123,13 @@
                     </Frame>
 
                     <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Door"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding DoorOpen.Value, Converter={StaticResource DoorOpenHealthTextConverter}}" x:Name="dooropenHealthLbl"/>
                                 </VerticalStackLayout>
