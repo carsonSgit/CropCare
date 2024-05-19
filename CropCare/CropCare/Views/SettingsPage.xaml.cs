@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Microsoft.Maui.Controls;
 
 namespace CropCare.Views;
 
@@ -7,43 +8,39 @@ namespace CropCare.Views;
 /// </summary>
 public partial class SettingsPage : ContentPage
 {
-    /// <summary>
-    /// Gets or sets the user's name.
-    /// </summary>
     public string Name { get; set; } = App.CurrentUser.Name;
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the update button is enabled.
-    /// </summary>
     public bool UpdateEnabled { get; set; } = false;
-
-    /// <summary>
-    /// Gets or sets the color of the update button.
-    /// </summary>
     public Color UpdateButtonColor { get; set; } = Colors.White;
+    public bool IsLightTheme { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SettingsPage"/> class.
     /// </summary>
     public SettingsPage()
-	{
-		InitializeComponent();
-		BindingContext = this;
-	}
+    {
+        InitializeComponent();
+        BindingContext = this;
+        InitializeTheme();
+    }
+
+    private void InitializeTheme()
+    {
+        IsLightTheme = App.Current.RequestedTheme == AppTheme.Light;
+    }
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        // Enable the update button if the name is different from the current saved user's name
+        // Enables the update button if the name is different from the current saved user's name
         UpdateEnabled = Name != App.CurrentUser.Name;
-        // Change the color of the update button to differentiate between enabled and disabled states
+        // Changes the color of the update button to differentiate between enabled and disabled states
         UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#2D7245") : Colors.LightGray;
         btn_update.TextColor = UpdateEnabled ? Colors.White : Colors.Black;
     }
 
     private async void Btn_Update_Clicked(object sender, EventArgs e)
-	{
-        if(Connectivity.NetworkAccess != NetworkAccess.Internet)
-		{
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
             await DisplayAlert("Alert", "No internet connection", "OK");
             return;
         }

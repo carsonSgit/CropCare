@@ -14,7 +14,7 @@
     </Page.Behaviors>
 
     <Shell.FlyoutHeader>
-        <Grid HeightRequest="100">
+        <Grid HeightRequest="100" BackgroundColor="{StaticResource Primary}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

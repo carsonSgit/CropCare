@@ -27,7 +27,7 @@
 
             <!-- Technician Picker -->
             <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 0"/>
-            <Grid Padding="5">
+            <Grid Padding="5" BackgroundColor="{StaticResource Frame_Border}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -41,16 +41,16 @@
                 <Label Grid.Column="2" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
             </Grid>
             <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
-                <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
+                <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Vertical">
-                                <Grid Padding="0, 5, 0, 5">
+                                <Grid Padding="0, 5, 0, 5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="1"/>
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Padding="5">
+                                    <Grid Grid.Row="0" Padding="5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="0.5*"/>
                                             <ColumnDefinition Width="1.25*"/>
