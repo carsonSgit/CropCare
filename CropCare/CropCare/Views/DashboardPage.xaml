@@ -4,7 +4,7 @@
              x:Class="CropCare.Views.DashboardPage"
              Title="{Binding Farm.Name}">
     
-    <VerticalStackLayout Background="#ECECEC">
+    <VerticalStackLayout>
         <VerticalStackLayout Spacing="0">
             <HorizontalStackLayout>
                 <Label Text="Welcome Back" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" Padding="15, 15, 0, 0"/>
@@ -14,8 +14,8 @@
 
             <HorizontalStackLayout>
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White">
-                        <VerticalStackLayout>
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                        <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Health" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
@@ -26,8 +26,8 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White">
-                        <VerticalStackLayout>
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                        <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Security" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="Green" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
@@ -38,8 +38,8 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="White">
-                        <VerticalStackLayout>
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                        <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Health" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="Orange" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
@@ -49,22 +49,22 @@
                     </Frame>
                 </HorizontalStackLayout>
             </HorizontalStackLayout>
-            
 
-            <Frame BackgroundColor="White" Margin="15, 0, 15, 0">
-                <VerticalStackLayout>
-                    <Frame Margin="0, 0, 0, 15" CornerRadius="10">
+
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="15, 0, 15, 0">
+                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
+                    <Frame Margin="0, 0, 0, 15" CornerRadius="10" >
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="PlantNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="PLANTS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor plant center" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            <VerticalStackLayout Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Label Text="PLANTS" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor plant center" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray900}}" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="plant_LIGHT.png" HeightRequest="35"/>
                         </Grid>
@@ -74,14 +74,14 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="LocationNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="LOCATION" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor location information" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            <VerticalStackLayout Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Label Text="LOCATION" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor location information" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray900}}" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="location_light.png" HeightRequest="35"/>
                         </Grid>
@@ -91,14 +91,14 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="SecurityNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="SECURITY" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Monitor security hardware" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            <VerticalStackLayout Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Label Text="SECURITY" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Monitor security hardware" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray900}}" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="security_light.png" HeightRequest="35"/>
                         </Grid>
@@ -108,14 +108,14 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="TechnicianNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="TECHNICIANS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Modify assigned technicians" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            <VerticalStackLayout Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Label Text="TECHNICIANS" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Modify assigned technicians" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray900}}" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="farmer_light.png" HeightRequest="35"/> 
                         </Grid>
@@ -125,14 +125,14 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="FarmSettingsNavigate_Clicked"/>
                         </Frame.GestureRecognizers>
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <VerticalStackLayout Grid.Column="0">
-                                <Label Text="SETTINGS" TextColor="Black" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
-                                <Label Text="Modify farm details" TextColor="#676767" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
+                            <VerticalStackLayout Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Label Text="SETTINGS" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, 0, 0, 0"/>
+                                <Label Text="Modify farm details" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray900}}" FontSize="12" HorizontalTextAlignment="Start" Margin="0, 5, 0, 0"/>
                             </VerticalStackLayout>
                             <Image Grid.Column="1" Source="controls_light.png" HeightRequest="35"/>
                         </Grid>

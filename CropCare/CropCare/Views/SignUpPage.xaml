@@ -4,9 +4,9 @@
              x:Class="CropCare.Views.SignUpPage"
              Shell.NavBarIsVisible="False"
              Title="SignUpPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
         <Frame BackgroundColor="{StaticResource Frame_Border}">
-            <VerticalStackLayout>
+            <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
                 <Image Source="loginhero.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
                 <Label Text="REGISTER" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>
 
