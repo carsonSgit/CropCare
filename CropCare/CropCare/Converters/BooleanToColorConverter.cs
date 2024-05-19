@@ -8,6 +8,8 @@ namespace CropCare.Converters
         {
             if(value is double)
                 value = (double)value == 1 ? true : (double)value == -1 ? false : throw new ArgumentException("Invalid value");
+            if(value is string)
+                value = value.ToString().ToLower() == "true" ? true : value.ToString().ToLower() == "false" ? false : throw new ArgumentException("Invalid value");
 
             if ((bool)value)
                 return Color.FromArgb("#42A765");// Healthy
