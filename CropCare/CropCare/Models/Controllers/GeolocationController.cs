@@ -41,21 +41,20 @@ namespace CropCare.Models.Controllers
         {
             get
             {
-                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                    return false;
-
                 return this._isBuzzerOn;
             }
             set
             {
-                Task.Run(async () => await UpdateActuatorState(Actuator.BUZZER, value));
-                this._isBuzzerOn = value;
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    Console.WriteLine("No Internet Connection");
+                }
+                else
+                {
+                    Task.Run(async () => await UpdateActuatorState(Actuator.BUZZER, value));
+                    this._isBuzzerOn = value;
+                }
             }
-        }
-
-        public async void ToggleBuzzer()
-        {
-            IsBuzzerOn = await UpdateActuatorState(Actuator.BUZZER, !IsBuzzerOn);
         }
 
         /// <summary>

@@ -40,15 +40,19 @@ namespace CropCare.Models.Controllers
         {
             get
             {
-                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                    return false;
-
                 return this._isFanOn;
             }
             set
             {
-                Task.Run(async () => await UpdateActuatorState(Actuator.FAN, value));
-                this._isFanOn = value;
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    Console.WriteLine("No Internet Connection");
+                }
+                else
+                {
+                    Task.Run(async () => await UpdateActuatorState(Actuator.FAN, value));
+                    this._isFanOn = value;
+                }
             }
         }
 
@@ -57,26 +61,20 @@ namespace CropCare.Models.Controllers
         {
             get
             {
-                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                    return false;
-
                 return this._isLedOn;
             }
             set
             {
-                Task.Run(async () => await UpdateActuatorState(Actuator.LED, value));
-                this._isLedOn = value;
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    Console.WriteLine("No Internet Connection");
+                }
+                else
+                {
+                    Task.Run(async () => await UpdateActuatorState(Actuator.LED, value));
+                    this._isLedOn = value;
+                }
             }
-        }
-
-        public async void ToggleFan()
-        {
-            IsFanOn = await UpdateActuatorState(Actuator.FAN, !IsFanOn);
-        }
-
-        public async void ToggleLed()
-        {
-            IsLedOn = await UpdateActuatorState(Actuator.LED, !IsLedOn);
         }
 
         /// <summary>

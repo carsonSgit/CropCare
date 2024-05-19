@@ -44,28 +44,20 @@ namespace CropCare.Models.Controllers
         {
             get
             {
-                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                    return false;
-
                 return this._isDoorLocked;
             }
             set
             {
-                Task.Run(async () => await UpdateActuatorState(Actuator.SERVO, value));
-                this._isDoorLocked = value;
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    Console.WriteLine("No Internet Connection");
+                }
+                else
+                {
+                    Task.Run(async () => await UpdateActuatorState(Actuator.SERVO, value));
+                    this._isDoorLocked = value;
+                }
             }
-        }
-
-        // Sensor?
-        //public async void ToggleDoorLock()
-        //{
-        //    IsDoorLocked = await UpdateActuatorState(Actuator.SERVO, !IsFanOn);
-        //    return;
-        //}
-
-        public async void ToggleDoorLock()
-        {
-            IsDoorLocked = await UpdateActuatorState(Actuator.SERVO, !IsDoorLocked);
         }
 
         /// <summary>
