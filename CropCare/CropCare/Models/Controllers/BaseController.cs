@@ -95,7 +95,8 @@ namespace CropCare.Models.Controllers
                     value => value.ToString("MM-dd")
                 )
                 {
-                    Name = "Time"
+                    Name = "Time",
+                    MinLimit = Readings[readingType][Math.Max(Readings[readingType].Count - 10, 0)].TimeStamp.Ticks
                 }
             };
 
