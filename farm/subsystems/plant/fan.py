@@ -32,6 +32,7 @@ class FanController(IActuator):
         """
         self.fan = output_devices.OutputDevice(gpio)
         self.type = type
+        self.state = initial_state
         self.control_actuator(initial_state)
 
     def control_actuator(self, value: str) -> bool:
@@ -46,13 +47,13 @@ class FanController(IActuator):
 
         """
         old_state = self.fan.is_active
-
         if value.upper() == "ON":
             self.fan.on()
         elif value.upper() == "OFF":
             self.fan.off()
+        self.state = value.upper()
 
-        return self.fan.is_active != old_state
+        return self.state != old_state
 
     def validate_command(self, command: ACommand) -> bool:
         """

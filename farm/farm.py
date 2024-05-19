@@ -3,6 +3,8 @@ from azure.iot.device import MethodResponse, MethodRequest, Message
 from azure.iot.device.aio import IoTHubDeviceClient
 from azure.iot.device.custom_typing import TwinPatch
 import os
+import json
+from util.farm_req_processor import RequestProcessor
 from interfaces.actuators import ACommand
 from interfaces.sensors import AReading
 from interfaces.subsystem_controller import SubsystemController
@@ -40,24 +42,18 @@ class Farm:
         self.client.on_method_request_received = self.handle_method_request
         self.client.on_twin_desired_properties_patch_received = self.handle_twin_patch
         self.telemetry_interval = READING_RATE
+        self.request_processor = RequestProcessor(
+            self.control_actuators, self.get_actuator_states
+        )
 
     async def handle_method_request(self, method_request: MethodRequest) -> None:
         """
-        Handles direct method requests from IoT Hub
+        Handles direct method requests from IoT Hub by passing it to the request processor.
 
         Args:
             method_request (MethodRequest): The method request received.
         """
-        if method_request.name == "is_online":
-            response_payload = {"response": "Device is online"}
-            response_status = 200
-        else:
-            response_payload = {"details": "method name unknown"}
-            response_status = 400
-
-        method_response = MethodResponse.create_from_method_request(
-            method_request, response_status, response_payload
-        )
+        method_response = self.request_processor(method_request)
         await self.client.send_method_response(method_response)
 
     def handle_twin_patch(self, twin_patch: TwinPatch) -> None:
@@ -91,6 +87,12 @@ class Farm:
         for controller in self._controllers:
             readings.extend(controller.read_sensors())
         return readings
+
+    def get_actuator_states(self) -> list[dict]:
+        states = []
+        for controller in self._controllers:
+            states.extend(controller.get_actuator_states())
+        return states
 
     def control_actuators(self, commands: list[ACommand]) -> None:
         """

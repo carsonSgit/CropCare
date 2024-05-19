@@ -1,99 +1,49 @@
 import random
-from interfaces.actuators import IActuator, ACommand
+from interfaces.sensors import ISensor, AReading
 from time import sleep
+from typing import List
 
 
-class MockVibrationController(IActuator):
+class MockVibrationSensor(ISensor):
     """
-    A class representing a simulation of a vibration sensor controller.
+    A class representing a simulation of a vibration sensor.
 
     Attributes:
-        type (ACommand.Type): The type of command supported by the simulated vibration sensor.
+        model (str): The model of the vibration sensor.
+        type (AReading.Type): The type of the sensor reading.
         callback (function): A function to execute when vibration is detected.
 
     Methods:
-        control_actuator(self, value: str) -> bool:
-            Controls the simulated vibration sensor based on the provided value. Not utilized.
-        validate_command(self, command: ACommand) -> bool:
-            Validates the given command for the simulated vibration sensor.
-        set_callback(self, callback: function):
-            Assigns a callback function for detecting simulated vibrations.
-
+        read_sensor(): Reads the vibration value from the sensor.
+        set_callback(callback): Assigns a callback function for detecting simulated vibrations.
+        start_detection(): Starts the vibration detection.
     """
 
-    def __init__(self, type: ACommand.Type, callback=None) -> None:
+    def __init__(self, gpio: int, model: str, type: AReading.Type) -> None:
         """
-        Initializes the MockVibrationController.
+        Initializes the MockVibrationSensor.
 
         Args:
-            type (ACommand.Type): The type of command the controller will handle.
+            model (str): The model of the vibration sensor.
+            type (AReading.Type): The type of reading the sensor produces.
             callback (optional): A callback function that will be called when a vibration is detected.
         """
+        self.model = model
         self.type = type
-        self.callback = callback
 
-    def control_actuator(self, value: str) -> bool:
+    def read_sensor(self) -> List[AReading]:
         """
-        Controls the actuator based on the provided value.
-
-        Args:
-            value (str): The value to control the actuator.
+        Reads the vibration value from the sensor.
 
         Returns:
-            bool: True as there is no control for the vibration sensor.
+            bool: True if vibration is detected, False otherwise.
         """
-        return True
-
-    def validate_command(self, command: ACommand) -> bool:
-        """
-        Validates the command based on its target type and value.
-
-        Args:
-            command (ACommand): The command that will be validated.
-
-        Returns:
-            bool: True if given a valid command, False otherwise.
-        """
-        return command.target_type == self.type and command.value.upper() in [
-            "ON",
-            "OFF",
-        ]
-
-    def set_callback(self, callback):
-        """
-        Sets the controller's callback function that will be called upon vibration detection.
-
-        Args:
-            callback: The callback function.
-        """
-        self.callback = callback
-
-    def _handle_vibration(self):
-        """
-        Handles the vibration detection by calling the given callback function.
-        """
-        if self.callback:
-            self.callback()
-
-    def start_detection(self):
-        """
-        Starts the vibration detection.
-
-        As this is mock, it be determined as "detected" on random chance.
-        """
-        while True:
-            try:
-                if random.random() > 0.7:  # 70% chance
-                    self._handle_vibration()
-                sleep(2)
-            except KeyboardInterrupt:
-                break
+        # Simulate a vibration reading with a 70% chance of detecting vibration
+        detected = random.random() > 0.7
+        return [AReading(AReading.Type.VIBRATION, AReading.Unit.NONE, detected)]
 
 
 if __name__ == "__main__":
-
-    def callback():
-        print("Alert: Vibration detected")
-
-    mock_vibration_sensor = MockVibrationController(ACommand.Type.VIBRATION, callback)
-    mock_vibration_sensor.start_detection()
+    mock_vibration_sensor = MockVibrationSensor(
+        26, "MockVibrationSensor", AReading.Type.MOTION
+    )

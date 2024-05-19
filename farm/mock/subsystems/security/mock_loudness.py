@@ -1,6 +1,7 @@
 import random
 import time
 from interfaces.sensors import ISensor, AReading
+import math
 
 
 class MockLoudnessSensor(ISensor):
@@ -40,8 +41,28 @@ class MockLoudnessSensor(ISensor):
             AReading: An AReading object representing the mock loudness reading.
 
         """
-        loudness = random.randint(0, 500)
-        return [AReading(AReading.Type.LOUDNESS, AReading.Unit.LOUDNESS, loudness)]
+        analog = random.randint(0, 1023)
+        level = self._analog_to_string(analog)
+        return [AReading(AReading.Type.LOUDNESS, AReading.Unit.NONE, level)]
+
+    def _analog_to_string(self, analog: int) -> str:
+        """
+        Converts an analog value to a corresponding loudness level.
+
+        Args:
+            analog (int): The analog value to be converted.
+
+        Returns:
+            str: The corresponding loudness level based on the analog value.
+        """
+        level = ""
+        if analog > 682:
+            level = "Quiet"
+        elif analog > 341:
+            level = "Noisy"
+        else:
+            level = "Loud"
+        return level
 
 
 if __name__ == "__main__":

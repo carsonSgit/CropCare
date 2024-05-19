@@ -19,8 +19,10 @@ class AReading(ABC):
         MOISTURE = "moisture"
         WATERLEVEL = "water level"
         MOTION = "motion"
+        VIBRATION = "vibration"
         LATITUDE = "latitude"
         LONGITUDE = "longitude"
+        MAGNET = "magnet"
         GPS = "gps"
         PITCH = "pitch"
         ROLL = "roll"
@@ -35,11 +37,9 @@ class AReading(ABC):
         CELCIUS = "°C"
         FAHRENHEIT = "°F"
         HUMIDITY = "% HR"
-        UNITLESS = "unitless"
-        LUX = "nm"
-        LOUDNESS = "unitless"
+        LUX = "lux"
+        DECIBELS = "Db"
         OHMS = "Ω"
-        WATERLEVEL = "water level"
         NONE = ""
         DEGREE = "°"
 
@@ -64,7 +64,7 @@ class AReading(ABC):
         """
         return {
             "reading_type": self.reading_type.name,
-            "value": self.value,
+            "value": str(self.value) if type(self.value) is bool else self.value,
             "unit": self.reading_unit.value,
         }.__str__()
 

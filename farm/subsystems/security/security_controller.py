@@ -12,7 +12,9 @@ if env == "prod":
     from subsystems.security.loudness import LoudnessSensor
     from subsystems.security.luminosity import LuminositySensor
     from subsystems.security.motion import MotionSensor
+    from subsystems.security.vibrate import VibrationSensor
     from subsystems.security.servo import ServoController
+    from subsystems.security.magnet_sensor import MagnetSensor
 else:
     from mock.subsystems.security.mock_loudness import (
         MockLoudnessSensor as LoudnessSensor,
@@ -21,9 +23,13 @@ else:
         MockLuminositySensor as LuminositySensor,
     )
     from mock.subsystems.security.mock_motion import MockMotionSensor as MotionSensor
+    from mock.subsystems.security.mock_vibrate import (
+        MockVibrationSensor as VibrationSensor,
+    )
     from mock.subsystems.security.mock_servo import (
         MockServoController as ServoController,
     )
+    from mock.subsystems.security.mock_magnet import MockMagnetSensor as MagnetSensor
 
 
 class SecurityController(SubsystemController):
@@ -42,6 +48,8 @@ class SecurityController(SubsystemController):
             LoudnessSensor(2, "LoudnessSensor", AReading.Type.LOUDNESS),
             LuminositySensor(-1, "light", AReading.Type.LUMINOSITY),
             MotionSensor(22, "motion", AReading.Type.MOTION),
+            VibrationSensor(-1, "vibration", AReading.Type.VIBRATION),
+            MagnetSensor(24, "magnet", AReading.Type.MAGNET),
         ]
 
     def _initialize_actuators(self) -> list[IActuator]:

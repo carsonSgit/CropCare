@@ -14,7 +14,7 @@ class MockServoController(IActuator):
     def __init__(self, gpio: int, type: ACommand.Type, initial_state: str) -> None:
         self.servo = gpio
         self.type = type
-        self.value = initial_state
+        self.state = initial_state
         self.control_actuator(initial_state)
 
     def control_actuator(self, value: str) -> bool:
@@ -27,10 +27,10 @@ class MockServoController(IActuator):
         Returns:
             bool: True if the value was successfully set, False otherwise.
         """
-        old_state = self.value
-        self.value = float(value)
+        old_state = self.state
+        self.state = float(value)
         print(f"servo moved to value: {value}")
-        return old_state != self.value
+        return old_state != self.state
 
     def validate_command(self, command: ACommand) -> bool:
         """
@@ -50,7 +50,7 @@ class MockServoController(IActuator):
 if __name__ == "__main__":
     servo = MockServoController(16, ACommand.Type.SERVO, "-1")
     while True:
-        print(servo.value)
+        print(servo.state)
         servo.control_actuator("-1")
         sleep(1)
         servo.control_actuator(0)
