@@ -7,7 +7,7 @@
        
     
     <!-- Main Layout -->
-    <Grid BackgroundColor="#ECECEC">
+    <Grid>
         <!-- Main content area -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="10,10,10,10"  HorizontalOptions="Center">
-            <Frame BackgroundColor="#F4F4F4" IsVisible="{Binding hasFarms}">
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" IsVisible="{Binding hasFarms}">
                 <!-- CollectionView for displaying farms -->
                 <CollectionView 
                     x:Name="farmsCollectionView"
@@ -24,11 +24,11 @@
                     HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="5" CornerRadius="5" Margin="0, 7.5, 0, 7.5">
+                            <Frame Padding="5" CornerRadius="5" Margin="0, 7.5, 0, 7.5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Farm_Tapped" />
                                 </Frame.GestureRecognizers>
-                                <Grid>
+                                <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />

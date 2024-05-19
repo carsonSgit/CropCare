@@ -23,6 +23,14 @@
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    <Style TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Light_GridBG}, Dark={StaticResource Dark_GridBG}}" />
+    </Style>
+
+    <Style TargetType="VerticalStackLayout">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Light_GridBG}, Dark={StaticResource Dark_GridBG}}" />
+    </Style>
+
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />

@@ -4,7 +4,7 @@
              x:Class="CropCare.Views.AccountTypeSelectPage"
              Title="Select Account Type">
 
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
         <Image Source="loginhero.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130">
         </Image>
         <Label Text="SETUP" FontSize="35" Margin="0, 20, 0, 10" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>

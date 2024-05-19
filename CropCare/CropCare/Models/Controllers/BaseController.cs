@@ -71,7 +71,8 @@ namespace CropCare.Models.Controllers
                 {
                     Values = this.Readings[readingType].Select(x => new DateTimePoint(x.TimeStamp, double.Parse(x.Value))),
                     Name = this.Readings[readingType][0].Type + " Over Time",
-                    Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 3 },
+                    Stroke = new SolidColorPaint(SKColor.Parse("#123c1f")) { StrokeThickness = 3 },
+                    Fill = new SolidColorPaint(SKColor.Parse("#d8e2d6")),
                     GeometrySize = 0,
                     GeometryStroke = null,
                     LineSmoothness = 0.95
@@ -83,7 +84,10 @@ namespace CropCare.Models.Controllers
                 {
                     MinLimit = 0,
                     MaxLimit = (int)(this.Readings[readingType].Select(x => double.Parse(x.Value)).Max() + 10),
-                    Name = this.Readings[readingType][0].Type + " (" + this.Readings[readingType][0].Unit + ")"
+                    Name = this.Readings[readingType][0].Type + " (" + this.Readings[readingType][0].Unit + ")",
+                    NamePaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
+                    TicksPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
+                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49"))
                 }
             };
 
@@ -96,6 +100,9 @@ namespace CropCare.Models.Controllers
                 )
                 {
                     Name = "Time",
+                    NamePaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
+                    TicksPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
+                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49"))
                     MinLimit = Readings[readingType][Math.Max(Readings[readingType].Count - 10, 0)].TimeStamp.Ticks
                 }
             };
@@ -105,7 +112,7 @@ namespace CropCare.Models.Controllers
                 Text = this.Readings[readingType][0].Type + " Over Time",
                 TextSize = 18,
                 Padding = new LiveChartsCore.Drawing.Padding(15),
-                Paint = new SolidColorPaint(SKColors.DarkSlateGray)
+                Paint = new SolidColorPaint(SKColor.Parse("#4a8e49"))
             };
 
             var cartesianChart = new CartesianChart

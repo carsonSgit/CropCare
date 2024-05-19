@@ -21,7 +21,7 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <Grid BackgroundColor="#ECECEC">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="325" />
                 <RowDefinition Height="Auto" />
@@ -35,15 +35,15 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1">
-                <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
-                    <VerticalStackLayout>
-                        <Grid Margin="0, 0, 0, 10">
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 10, 10, 0">
+                    <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
+                        <Grid Margin="0, 0, 0, 10" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0">
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -2.5" Text="Pitch"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Pitch.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource PitchRange}}" x:Name="pitch_healthLbl"/>
                                 </VerticalStackLayout>
@@ -61,13 +61,13 @@
                             </Frame>
                         </Grid>
 
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Roll"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Roll.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource RollRange}}" x:Name="roll_healthLbl"/>
                                 </VerticalStackLayout>
@@ -87,10 +87,10 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
-                    <VerticalStackLayout>
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 10, 10, 0">
+                    <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                         <Frame Margin="0,0,0,0">
-                            <Grid>
+                            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
@@ -119,8 +119,8 @@
 
 
             </StackLayout>
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 10" Grid.Row="3">
-                <VerticalStackLayout>
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 10, 10, 10" Grid.Row="3">
+                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                     <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
                     <Picker SelectedIndex="0" SelectedIndexChanged="ChartPicker_SelectedIndexChanged" x:Name="ChartPicker" Margin="10,5,10,0">
                         <Picker.ItemsSource>
@@ -130,7 +130,7 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
-                    <VerticalStackLayout VerticalOptions="Start">
+                    <VerticalStackLayout VerticalOptions="Start" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                         <charts:CartesianChart x:Name="PitchChart"
                            Series="{Binding Series}" 
                            XAxes="{Binding XAxes}" 

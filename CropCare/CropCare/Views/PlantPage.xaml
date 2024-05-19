@@ -20,20 +20,20 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-        <VerticalStackLayout BackgroundColor="#ECECEC">
+        <VerticalStackLayout>
             <Label Text="Monitor your container farm" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
             <Label Text="Your all in one plant-hub" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
 
-            <Frame BackgroundColor="White" Margin="10, 0, 10, 0">
-                <VerticalStackLayout>
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 0, 10, 0">
+                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                     <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0">
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Temperature"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Temperature.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource TemperatureRange}}" x:Name="temperature_healthLbl"/>
                                 </VerticalStackLayout>
@@ -52,14 +52,14 @@
                         </Grid>
                     </Frame>
 
-                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
-                        <Grid>
+                    <Frame CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Humidity"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Humidity.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource HumidityRange}}" x:Name="humidity_healthLbl"/>
                                 </VerticalStackLayout>
@@ -78,14 +78,14 @@
                         </Grid>
                     </Frame>
 
-                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
-                        <Grid>
+                    <Frame CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Soil Moisture"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Moisture.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource MoistureRange}}" x:Name="moisture_healthLbl"/>
                                 </VerticalStackLayout>
@@ -104,14 +104,14 @@
                         </Grid>
                     </Frame>
 
-                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
-                        <Grid>
+                    <Frame CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
-                                <VerticalStackLayout>
+                                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Water Level"/>
                                     <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding WaterLevel.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource WaterLevelRange}}" x:Name="waterlvl_healthLbl"/>
                                 </VerticalStackLayout>
@@ -132,10 +132,10 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
-                <VerticalStackLayout>
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 10, 10, 10">
+                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                     <Frame Margin="0,0,0,10">
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}"> 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -153,7 +153,7 @@
                             HorizontalOptions="EndAndExpand"
                             x:Name="ledSwitch"
                             IsToggled="{Binding IsLedOn}"/>
-                            <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start" >
                                 <BoxView Color="{Binding IsLedOn, Converter={StaticResource BooleanToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="led_status_circle"/>
                                 <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding LedState}" x:Name="led_healthLbl"/>
                             </HorizontalStackLayout>
@@ -161,7 +161,7 @@
                     </Frame>
 
                     <Frame CornerRadius="5" Margin="0,0,0,0">
-                        <Grid>
+                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
@@ -191,8 +191,8 @@
 
 
 
-            <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
-                <VerticalStackLayout>
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="10, 10, 10, 10">
+                <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                     <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
                     <Picker SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged" x:Name="ChartPicker" Margin="10,5,10,0">
                         <Picker.ItemsSource>
@@ -204,7 +204,7 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
-                    <VerticalStackLayout VerticalOptions="Start">
+                    <VerticalStackLayout VerticalOptions="Start" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
                         <charts:CartesianChart x:Name="TempChart" 
                                        Series="{Binding Series}" 
                                        XAxes="{Binding XAxes}" 
@@ -212,7 +212,8 @@
                                        Title="{Binding Title}" 
                                        HeightRequest="280"
                                        IsVisible="True"
-                                       ZoomMode="ZoomX"/>
+                                       ZoomMode="ZoomX"
+                                       />
                         <charts:CartesianChart x:Name="HumiChart"
                                        Series="{Binding Series}" 
                                        XAxes="{Binding XAxes}" 

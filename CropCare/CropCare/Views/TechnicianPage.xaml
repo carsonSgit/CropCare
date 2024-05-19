@@ -28,12 +28,12 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Orientation="Vertical">
-                                    <Grid Padding="0, 5, 0, 5">
+                                    <Grid Padding="0, 5, 0, 5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="1"/>
                                         </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Padding="5">
+                                        <Grid Grid.Row="0" Padding="5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.5*"/>
                                                 <ColumnDefinition Width="1.25*"/>
