@@ -36,7 +36,7 @@ public partial class SettingsPage : ContentPage
         // Enable the update button if the name is different from the current saved user's name
         UpdateEnabled = Name != App.CurrentUser.Name;
         // Change the color of the update button to differentiate between enabled and disabled states
-        UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
+        UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#2D7245") : Colors.LightGray;
         btn_update.TextColor = UpdateEnabled ? Colors.White : Colors.Black;
     }
 
@@ -57,7 +57,7 @@ public partial class SettingsPage : ContentPage
             }
 
             UpdateEnabled = Name != App.CurrentUser.Name;
-            UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#538D22") : Colors.LightGray;
+            UpdateButtonColor = UpdateEnabled ? Color.FromArgb("#2D7245") : Colors.LightGray;
             await DisplayAlert("Success", "User updated! ", "OK");
         }
         catch (FirebaseAuthException ex)

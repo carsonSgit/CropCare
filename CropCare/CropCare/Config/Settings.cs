@@ -29,8 +29,15 @@ namespace MauiFitness.Config
         public string FireBaseDatabaseURL { get; set; }
 
         /// <summary>
-        /// The IOT Hub Connection string
+        /// The Eventhub Connection string
         /// </summary>
+        public string EventHubConnectionString { get; set; }
+
+        /// <summary>
+        /// The Eventhub name
+        /// </summary>
+        public string EventHubName { get; set; }
+
         public string IOTHubConnectionString { get; set; }
     }
 }

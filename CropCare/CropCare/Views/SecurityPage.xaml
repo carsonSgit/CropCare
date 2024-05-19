@@ -1,119 +1,174 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:local="clr-namespace:CropCare.Converters"
+             xmlns:model="clr-namespace:CropCare.Models"
              x:Class="CropCare.Views.SecurityPage"
              Title="Security">
-    <ScrollView Margin="0,20,0,0">
-        <VerticalStackLayout>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Door Lock"/>
-                    <Switch Grid.Column="1" Grid.Row="0" 
-                        Margin="0, -10, 0, 0" 
-                        OnColor="Green" 
-                        ThumbColor="GhostWhite"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="EndAndExpand"
-                        Toggled="doorLockSwitch_Toggled"
-                        x:Name="doorLockSwitch"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding DoorLockState}" x:Name="doorLockStateLbl"/>
-                </Grid>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
+            <local:MotionColorConverter x:Key="MotionColorConverter"/>
+            <local:MotionHealthTextConverter x:Key="MotionHealthTextConverter"/>
+            <local:VibrationHealthTextConverter x:Key="VibrationHealthTextConverter"/>
+            
+            <local:LoudnessColorConverter x:Key="LoudnessColorConverter"/>
+            <local:LoudnessHealthTextConverter x:Key="LoudnessHealthTextConverter"/>
+
+            <local:NumericToColorConverter x:Key="NumericToColorConverter"/>
+            <local:NumericToStringConverter x:Key="NumericToStringConverter" />
+            <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <model:HealthyRange x:Key="LuminosityRange" LowerHealthyLimit="75" UpperHealthyLimit="95" LowerCautionLimit="65" UpperCautionLimit="95" /> <!-- Make this accurate -->
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="#ECECEC">
+            <Label Text="Monitor your farm security" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Padding="15, 20, 0, 0"/>
+            <Label Text="Your security control center" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
+
+            <Frame BackgroundColor="White" Margin="10, 0, 10, 0">
+                <VerticalStackLayout>
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
+                                <VerticalStackLayout>
+                                    <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Loudness"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Loudness.Value, Converter={StaticResource LoudnessHealthTextConverter}}" x:Name="loudnessHealthLbl"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding Loudness.Value, Converter={StaticResource LoudnessColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                                <!-- Change the font once the correct unit is provided -->
+                                <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0" TextColor="White" x:Name="loudnessMeasurementLbl" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Loudness.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                            <Span Text="{Binding Loudness.Unit}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
+                                <VerticalStackLayout>
+                                    <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Luminosity"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Luminosity.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource LuminosityRange}}" x:Name="luminosityHealthLbl"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding Luminosity.Value, Converter={StaticResource NumericToColorConverter}, ConverterParameter={StaticResource LuminosityRange}}" HorizontalOptions="End"  Padding="5,0,5,0" WidthRequest="85">
+                                <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding LuminosityReading}" x:Name="luminosityMeasurementLbl">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Luminosity.Value, Converter={StaticResource DynamicValueConverter}, ConverterParameter='F2'}" />
+                                            <Span Text="{Binding Luminosity.Unit}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
+                                <VerticalStackLayout>
+                                    <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Motion"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Motion.Value, Converter={StaticResource MotionHealthTextConverter}}" x:Name="motionHealthLbl"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding Motion.Value, Converter={StaticResource MotionColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                                <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding Motion.Value}" x:Name="motionMeasurementLbl" />
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
+                                <VerticalStackLayout>
+                                    <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Vibration"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Vibration.Value, Converter={StaticResource VibrationHealthTextConverter}}" x:Name="vibrationHealthLbl"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding Vibration.Value, Converter={StaticResource MotionColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                                <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding Vibration.Value}" x:Name="vibrationMeasurementLbl"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                    
+                    
+                </VerticalStackLayout>
             </Frame>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Door"/>
-                    <Switch Grid.Column="1" Grid.Row="0" 
-                        Margin="0, -10, 0, 0" 
-                        OnColor="Green" 
-                        ThumbColor="GhostWhite"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="EndAndExpand"
-                            Toggled="doorOpenSwitch_Toggled"  
-                        x:Name="doorOpenSwitch"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding DoorOpenerState}" x:Name="doorStateLbl"/>
-                </Grid>
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
+                <VerticalStackLayout>
+                    <Frame Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, -5, 5, -5" Text="Door Lock"/>
+                            <Switch Grid.Column="1" Grid.Row="0" 
+                            Margin="0, -10, 0, 0"                           
+                            OnColor="Green" 
+                            ThumbColor="GhostWhite"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            x:Name="doorLockSwitch"
+                            IsToggled="{Binding IsDoorLocked}"/>
+                            <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5, -5, 5, 0" HorizontalOptions="Start">
+                                <BoxView Color="{Binding IsDoorLocked, Converter={StaticResource BooleanToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"  Margin="0, -5, 0, 0" x:Name="doorlock_status_circle"/>
+                                <Label Grid.Column="0" Grid.Row="1" FontSize="15" Margin="5, -5, 5, 0" HorizontalTextAlignment="Start"  Text="{Binding DoorLockState}" x:Name="doorLockStateLbl"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
             </Frame>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Loudness"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding LoudnessReading}" x:Name="loudnessMeasurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding LoudnessHealth}" x:Name="loudnessHealthLbl"/>
-                </Grid>
-            </Frame>
 
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Luminosity"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding LuminosityReading}" x:Name="luminosityMeasurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding LuminosityHealth}" x:Name="luminosityHealthLbl"/>
-                </Grid>
-            </Frame>
-
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Motion"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding MotionReading}" x:Name="motionMeasurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding MotionHealth}" x:Name="motionHealthLbl"/>
-                </Grid>
-            </Frame>
-
-            <Frame BorderColor="#516250" CornerRadius="5" Margin="15,0,15,20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="Vibration"/>
-                    <Label Grid.Column="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 0, 5, 0" Text="{Binding VibrationReading}" x:Name="vibrationMeasurementLbl"/>
-                    <Label Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="{Binding VibrationHealth}" x:Name="vibrationHealthLbl"/>
-                </Grid>
+            <Frame BackgroundColor="White" Margin="10, 10, 10, 10">
+                <VerticalStackLayout>
+                    <Label Text="Reading Analytics" FontAttributes="Bold" FontSize="20" HorizontalOptions="Start" Margin="10,10,10,0"/>
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <charts:CartesianChart x:Name="LumiChart"
+                                       Series="{Binding Series}" 
+                                       XAxes="{Binding XAxes}" 
+                                       YAxes="{Binding YAxes}"
+                                       Title="{Binding Title}" 
+                               ZoomMode="PanX" HeightRequest="280"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
     </ScrollView>

@@ -57,10 +57,41 @@ public partial class FarmSettingsPage : ContentPage
             return;
         }
 
+        bool answer = await DisplayAlert("Confirm Update", "Are you sure you want to update this farm?", "Yes", "No");
+
+        if (!answer)
+            return;
+
         this.Farm.IconPath = Constants.Constants.GetIconPath(IconPicker.SelectedItem as string);
         this.Farm.Name = this.FarmName;
         await App.Repo.FarmsDb.UpdateItemAsync(this.Farm);
 
         await Navigation.PopAsync();
+    }
+
+    private async void OnDeleteFarmButtonClicked(object sender, EventArgs e)
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            await DisplayAlert("No Internet", "Please check your internet connection", "OK");
+            return;
+        }
+
+        bool answer = await DisplayAlert("Confirm Deletion", "Are you sure you want to delete this farm?", "Yes", "No");
+
+        if (!answer)
+            return;
+
+        try
+        {
+            await App.Repo.UserToFarmDb.DeleteItemAsync(new UserToFarm(App.CurrentUser.Key, this.Farm.Key));
+            await App.Repo.FarmsDb.DeleteItemAsync(this.Farm);
+            // as this page is only accessible from a farm dashboard, we pop to root since the farm no longer exists
+            await Navigation.PopToRootAsync();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 }

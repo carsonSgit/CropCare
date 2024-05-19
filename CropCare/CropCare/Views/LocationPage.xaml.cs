@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Geolocation;
+using CropCare.Models.Controllers;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 namespace CropCare.Views;
@@ -11,7 +11,8 @@ public partial class LocationPage : ContentPage
 {
     private GeolocationController GeolocationController { get; set; }
     private Farm Farm { get; set; }
-
+    public double Pitch { get; set; }
+    public double Roll { get; set; }
     /// <summary>
     /// Initializea new instance of the LocationPage class.
     /// </summary>
@@ -19,15 +20,23 @@ public partial class LocationPage : ContentPage
     public LocationPage(Farm farm)
     {
         InitializeComponent();
-        Farm = farm;
         GeolocationController = farm.GeolocationController;
+        Farm = farm;
+        App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = GeolocationController;
+    }
+
+    private void UpdateCharts(string s = null, string s2 = null)
+    {
+        PitchChart.BindingContext = GeolocationController.Charts[ReadingType.PITCH];
+        RollChart.BindingContext = GeolocationController.Charts[ReadingType.ROLL];
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-
+        ChartPicker.SelectedIndex = 0;
+        UpdateCharts();
 
         MainThread.BeginInvokeOnMainThread(async () =>
         {
@@ -37,7 +46,7 @@ public partial class LocationPage : ContentPage
 
             if (map.IsVisible)
             {
-                Location location = new Location(GeolocationController.Latitude(), GeolocationController.Longitude());
+                Location location = new Location(double.Parse(GeolocationController.Latitude.Value), double.Parse(GeolocationController.Longitude.Value));
                 MapSpan mapSpan = new MapSpan(location, 0.01, 0.01);
                 map.MoveToRegion(mapSpan);
                 map.Pins.Add(new Pin
@@ -50,17 +59,12 @@ public partial class LocationPage : ContentPage
         });
     }
 
-    private void buzzer_Toggled(object sender, ToggledEventArgs e)
+    private void ChartPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var state = (Switch)sender;
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
 
-        if (state.IsToggled)
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.ON);
-        }
-        else
-        {
-            GeolocationController.Buzzer.ControlActuator(Models.Command.OFF);
-        }
+        PitchChart.IsVisible = selectedIndex == 0;
+        RollChart.IsVisible = selectedIndex == 1;
     }
 }

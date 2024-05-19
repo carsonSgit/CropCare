@@ -1,10 +1,8 @@
-﻿using CropCare.Interfaces;
-using Microsoft.Azure.Devices;
-using System.ComponentModel;
+﻿using Azure.Messaging.EventHubs.Consumer;
+using CropCare.Interfaces;
+using CropCare.Models.Controllers;
 using Newtonsoft.Json;
-using CropCare.Models.Plant;
-using CropCare.Models.Security;
-using CropCare.Models.Geolocation;
+using System.ComponentModel;
 
 namespace CropCare.Models
 {
@@ -15,6 +13,8 @@ namespace CropCare.Models
     // Description: Represents a farm entity.
     public class Farm : INotifyPropertyChanged, IHasKey
     {
+
+        private bool _isListening = false;
         /// <summary>
         /// Event that is raised when a property value changes.
         /// </summary>
@@ -34,6 +34,8 @@ namespace CropCare.Models
         /// Gets or sets the device ID of the farm.
         /// </summary>
         public string DeviceId { get; set; }
+
+        public EventHubConsumerClient Consumer { get; set; }
 
         /// <summary>
         /// Path to the icon used to represent this farm
@@ -67,10 +69,83 @@ namespace CropCare.Models
         {
             Name = farmName;
             DeviceId = deviceId;
+            PlantController = new PlantController(DeviceId);
+            SecurityController = new SecurityController(DeviceId);
+            GeolocationController = new GeolocationController(DeviceId);
             IconPath = iconPath;
-            PlantController = new PlantController(deviceId);
-            SecurityController = new SecurityController(deviceId);
-            GeolocationController = new GeolocationController(deviceId);
+        }
+
+        public void StopListeningToHub()
+        {
+            if (!_isListening)
+            {
+                return;
+            }
+
+            App.IOTService.MessageReceived -= IOTService_MessageReceived;
+            _isListening = false;
+        }
+
+        public async void StartListeningToHub()
+        {
+            if (_isListening)
+            {
+                return;
+            }
+
+            App.IOTService.MessageReceived += IOTService_MessageReceived;
+            var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
+            foreach (var controller in controllers)
+            {
+                await controller.GetInitialActuatorStates();
+            }
+            _isListening = true;
+        }
+
+        private void IOTService_MessageReceived(string deviceId, string data)
+        {
+            if (deviceId != DeviceId)
+            {
+                return;
+            }
+            Console.WriteLine($"{data}");
+
+            Reading reading = JSONToReading(data);
+
+            try
+            {
+                var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
+                foreach (var controller in controllers)
+                {
+                    if(controller.ValidateReading(reading))
+                    {
+                        controller.AddReading(reading);
+                        controller.UpdateChart(reading.Type);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not update sensor readings: {ex.Message}");
+            }
+        }
+
+        private Reading JSONToReading(string json)
+        {
+            Dictionary<string, string> dictionary = null;
+            try
+            {
+                json = json.Replace('\'', '"');
+                dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                return new Reading(dictionary["reading_type"], dictionary["unit"], dictionary["value"]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize {json} to Reading Class: {ex.Message}");
+            }
+            return null;
         }
     }
 }
+

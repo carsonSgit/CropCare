@@ -18,7 +18,8 @@ public partial class OverviewPage : ContentPage
     /// Gets or sets a value indicating whether the current user is an owner.
     /// </summary>
     public bool IsOwner { get; set; } = App.CurrentUser.IsOwner;
-    
+    public bool hasFarms => FarmsCollection?.Count > 0;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="OverviewPage"/> class.
     /// </summary>
@@ -46,8 +47,19 @@ public partial class OverviewPage : ContentPage
         }
         try
         {
+            if(FarmsCollection != null)
+            {
+                foreach(Farm f in FarmsCollection)
+                {
+                    f.StopListeningToHub();
+                }
+            }
             var FarmKeys = App.Repo.UserToFarmDb.Items.Where(u => u.UserId == App.CurrentUser.Key).Select(u => u.FarmId).ToList();
             FarmsCollection = App.Repo.FarmsDb.Items.Where(f => FarmKeys.Contains(f.Key)).ToObservableCollection();
+            foreach(Farm f in FarmsCollection)
+            {
+                Task.Run(() => f.StartListeningToHub());
+            }
         }
         catch (Exception ex)
         {
