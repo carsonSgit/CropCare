@@ -20,6 +20,7 @@
             <local:NumericToColorConverter x:Key="NumericToColorConverter"/>
             <local:NumericToStringConverter x:Key="NumericToStringConverter" />
             <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <local:DoorOpenHealthTextConverter x:Key="DoorOpenHealthTextConverter" />
             <model:HealthyRange x:Key="LuminosityRange" LowerHealthyLimit="75" UpperHealthyLimit="95" LowerCautionLimit="65" UpperCautionLimit="95" /> <!-- Make this accurate -->
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -103,7 +104,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,10" Padding="0, 0, 0, 0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
@@ -121,14 +122,32 @@
                             </Frame>
                         </Grid>
                     </Frame>
-                    
+
+                    <Frame BackgroundColor="White" CornerRadius="5" Margin="0,0,0,0" Padding="0, 0, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
+                                <VerticalStackLayout>
+                                    <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Door"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding DoorOpen.Value, Converter={StaticResource DoorOpenHealthTextConverter}}" x:Name="dooropenHealthLbl"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="{Binding DoorOpen.Value, Converter={StaticResource BooleanToColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                                <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding DoorOpen.Value}" x:Name="dooropenMeasurementLbl"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
                     
                 </VerticalStackLayout>
             </Frame>
 
             <Frame BackgroundColor="White" Margin="10, 10, 10, 0">
                 <VerticalStackLayout>
-                    <Frame Margin="0,0,0,10">
+                    <Frame Margin="0,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>

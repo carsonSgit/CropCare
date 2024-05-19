@@ -9,8 +9,7 @@ namespace CropCare.Models.Controllers
     // Description: Controller for security-related devices and sensors.
     public class SecurityController : BaseController, INotifyPropertyChanged
     {
-
-        private static readonly string[] _readingTypes = new string[] { ReadingType.LOUDNESS, ReadingType.MOTION, ReadingType.VIBRATION, ReadingType.LUMINOSITY };
+        private static readonly string[] _readingTypes = new string[] { ReadingType.LOUDNESS, ReadingType.MOTION, ReadingType.VIBRATION, ReadingType.LUMINOSITY, ReadingType.DOOROPEN };
         public string[] ReadingTypes { get => _readingTypes; }
         /// <summary>
         /// Event raised when a property value changes.
@@ -37,7 +36,7 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public Reading Luminosity { get; set; }
 
-        // public bool IsDoorLocked { get; set; }
+        public Reading DoorOpen { get; set; }
 
         private bool _isDoorLocked;
         public bool IsDoorLocked 
@@ -69,6 +68,7 @@ namespace CropCare.Models.Controllers
             Motion = NO_READING;
             Vibration = NO_READING;
             Luminosity = NO_READING;
+            DoorOpen = NO_READING;
         }
 
         /// <summary>
@@ -92,6 +92,9 @@ namespace CropCare.Models.Controllers
                 case ReadingType.LUMINOSITY:
                     Luminosity = reading;
                     break;
+                case ReadingType.DOOROPEN:
+                    DoorOpen = reading;
+                    break;
             }
         }
 
@@ -112,17 +115,14 @@ namespace CropCare.Models.Controllers
                 if (sensorValue > highThreshold)
                 {
                     health = "Critical";
-                    //healthLbl.TextColor = Colors.Red;
                 }
                 else if (sensorValue < lowThreshold)
                 {
                     health = "Needs Attention";
-                    //healthLbl.TextColor = Colors.Red;
                 }
                 else
                 {
                     health = "Healthy";
-                    //healthLbl.TextColor = Colors.Green;
                 }
             }
 
