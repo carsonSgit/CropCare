@@ -32,6 +32,7 @@ class ServoController(IActuator):
         self.state = float(value)
         self.servo.value = float(value)
 
+        print("Doorlock: " + self.state)
         return old_state != self.state
 
     def validate_command(self, command: ACommand) -> bool:

@@ -58,6 +58,7 @@ class LEDController(IActuator):
             self.__on_off(value)
         self.state = value.upper()
 
+        print("LED: " + self.state)
         return old_state != value
 
     def __on_off(self, value: str) -> None:
