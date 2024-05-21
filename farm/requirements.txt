@@ -33,3 +33,5 @@ serial==0.0.97
 smbus2==0.4.3
 typing_extensions==4.11.0
 urllib3==1.26.18
+seeed-python-reterminal @ git+https://github.com/Seeed-Studio/Seeed_Python_ReTerminal
+grove.py @ git+https://github.com/Seeed-Studio/grove.py
