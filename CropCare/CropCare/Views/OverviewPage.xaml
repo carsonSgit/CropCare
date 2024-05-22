@@ -2,10 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.OverviewPage"
+             xmlns:local="clr-namespace:CropCare.Converters"
              Title="Overview"
              Shell.BackgroundColor="#2D7245">
-       
-    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HealthStateToStringConverter x:Key="HealthStateToStringConverter" />
+            <local:HealthStateToColorConverter x:Key="HealthStateToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <!-- Main Layout -->
     <Grid>
         <!-- Main content area -->
@@ -37,8 +43,8 @@
                                         <Label Text="{Binding Name}" FontSize="Medium" />
                                         <!-- HARDCODED PLACEHOLDER -->
                                         <HorizontalStackLayout Margin="0, 5, 0, 0">
-                                            <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
-                                            <Label Text="Critical" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                                            <BoxView Color="{Binding OverallHealth, Converter={StaticResource HealthStateToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
+                                            <Label Text="{Binding OverallHealth, Converter={StaticResource HealthStateToStringConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
                                         </HorizontalStackLayout>
                                         <!-- HARDCODED PLACEHOLDER -->
                                     </StackLayout>

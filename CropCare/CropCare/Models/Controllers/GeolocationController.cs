@@ -134,5 +134,15 @@ namespace CropCare.Models.Controllers
         {
             IsBuzzerOn = await GetActuatorState(Actuator.BUZZER);
         }
+
+        /// <summary>
+        /// Gets the overall health of the controller.
+        /// </summary>
+        /// <returns></returns>
+        public override HealthState GetOverallHealth()
+        {
+            var healthStates = new HealthState[] { PitchHealth, RollHealth };
+            return healthStates.Max();
+        }
     }
 }

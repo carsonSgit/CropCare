@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.EventHubs.Consumer;
 using CropCare.Interfaces;
 using CropCare.Models.Controllers;
+using CropCare.Services;
 using Newtonsoft.Json;
 using System.ComponentModel;
 
@@ -47,8 +48,35 @@ namespace CropCare.Models
         /// </summary>
         public string IconPath { get; set; }
 
+        /// <summary>
+        /// Gets or sets the telemetry interval of the farm.
+        /// </summary>
         [JsonIgnore]
         public float TelemetryInterval { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overall health of the plant subsystem.
+        /// </summary>
+        [JsonIgnore]
+        public HealthState PlantControllerOverallHealth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overall health of the security subsystem.
+        /// </summary>
+        [JsonIgnore]
+        public HealthState SecurityControllerOverallHealth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overall health of the geolocation subsystem.
+        /// </summary>
+        [JsonIgnore]
+        public HealthState GeolocationControllerOverallHealth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overall health of the farm.
+        /// </summary>
+        [JsonIgnore]
+        public HealthState OverallHealth { get; set; }
 
         /// <summary>
         /// Gets or sets the plant controller associated with the farm.
@@ -81,6 +109,12 @@ namespace CropCare.Models
             SecurityController = new SecurityController(DeviceId);
             GeolocationController = new GeolocationController(DeviceId);
             IconPath = iconPath;
+
+            PlantControllerOverallHealth = HealthState.Unknown;
+            SecurityControllerOverallHealth = HealthState.Unknown;
+            GeolocationControllerOverallHealth = HealthState.Unknown;
+            OverallHealth = HealthState.Unknown;
+            App.IOTService.ConnectionStopped += GetOverallHealth;
         }
 
         /// <summary>
@@ -153,6 +187,7 @@ namespace CropCare.Models
                         controller.UpdateChart(reading.Type);
                     }
                 }
+                GetOverallHealth();
             }
             catch (Exception ex)
             {
@@ -175,6 +210,20 @@ namespace CropCare.Models
                 Console.WriteLine($"Could not deserialize {json} to Reading Class: {ex.Message}");
             }
             return null;
+        }
+
+        /// <summary>
+        /// Gets the overall health of the farm.
+        /// </summary>
+        /// <returns>Overall health of the farm being the worst health state.</returns>
+        public void GetOverallHealth()
+        {
+            PlantControllerOverallHealth = PlantController.GetOverallHealth();
+            SecurityControllerOverallHealth = SecurityController.GetOverallHealth();
+            GeolocationControllerOverallHealth = GeolocationController.GetOverallHealth();
+
+            var healthStates = new HealthState[] { PlantControllerOverallHealth, SecurityControllerOverallHealth, GeolocationControllerOverallHealth };
+            OverallHealth = healthStates.Max();
         }
     }
 }

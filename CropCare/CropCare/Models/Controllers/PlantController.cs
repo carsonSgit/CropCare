@@ -171,5 +171,15 @@ namespace CropCare.Models.Controllers
             IsFanOn = await GetActuatorState(Actuator.FAN);
             IsLedOn = await GetActuatorState(Actuator.LED);
         }
+
+        /// <summary>
+        /// This method should get the overall health of the controller.
+        /// </summary>
+        /// <returns>The overall health of the controller.</returns>
+        public override HealthState GetOverallHealth()
+        {
+            var healthStates = new HealthState[] { TemperatureHealth, HumidityHealth, MoistureHealth, WaterLevelHealth };
+            return healthStates.Max();
+        }
     }
 }

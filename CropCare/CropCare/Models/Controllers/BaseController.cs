@@ -26,6 +26,9 @@ namespace CropCare.Models.Controllers
         /// </summary>
         protected abstract Dictionary<string, double[]> HealthyRanges { get; }
 
+        /// <summary>
+        /// Lower and upper limits for healthy and caution ranges.
+        /// </summary>
         public const byte LOWER_HEALTHY_LIMIT = 0;
         public const byte UPPER_HEALTHY_LIMIT = 1;
         public const byte LOWER_CAUTION_LIMIT = 2;
@@ -159,6 +162,11 @@ namespace CropCare.Models.Controllers
             Charts[readingType] = cartesianChart;
         }
 
+        /// <summary>
+        /// Converts a reading to a health state enum.
+        /// </summary>
+        /// <param name="reading">The reading to check against.</param>
+        /// <returns>Health state depending on that readings health ranges.</returns>
         protected virtual HealthState ConvertReadingToHealth(Reading reading)
         {
             if(!double.TryParse(reading.Value, out double dValue))
@@ -187,6 +195,12 @@ namespace CropCare.Models.Controllers
         /// </summary>
         /// <returns></returns>
         public abstract Task GetInitialActuatorStates();
+
+        /// <summary>
+        /// This method should get the overall health of the controller.
+        /// </summary>
+        /// <returns>The worst healthstate of the sensors</returns>
+        public abstract HealthState GetOverallHealth();
 
         /// <summary>
         /// This method queries iot hub to get the specified actuator state.

@@ -128,6 +128,11 @@ namespace CropCare.Models.Controllers
             }
         }
 
+        /// <summary>
+        /// Overrides convert reading to health for special cases that don't use lower and upper limits.
+        /// </summary>
+        /// <param name="reading"></param>
+        /// <returns></returns>
         protected override HealthState ConvertReadingToHealth(Reading reading)
         {
             if(reading.Type == ReadingType.LOUDNESS)
@@ -194,6 +199,16 @@ namespace CropCare.Models.Controllers
         public override async Task GetInitialActuatorStates()
         {
             IsDoorLocked = await GetActuatorState(Actuator.SERVO);
+        }
+
+        /// <summary>
+        /// Gets the overall health of the controller.
+        /// </summary>
+        /// <returns></returns>
+        public override HealthState GetOverallHealth()
+        {
+            var healthStates = new HealthState[] { LoudnessHealth, MotionHealth, LuminosityHealth, DoorOpenHealth, VibrationHealth };
+            return healthStates.Max();
         }
     }
 }
