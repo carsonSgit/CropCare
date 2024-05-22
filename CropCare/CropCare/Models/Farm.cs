@@ -35,6 +35,9 @@ namespace CropCare.Models
         /// </summary>
         public string DeviceId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the consumer client for the farm.
+        /// </summary>
         public EventHubConsumerClient Consumer { get; set; }
 
         /// <summary>
@@ -75,6 +78,9 @@ namespace CropCare.Models
             IconPath = iconPath;
         }
 
+        /// <summary>
+        /// Unsubscribes from the IOTService MessageReceived event.
+        /// </summary>
         public void StopListeningToHub()
         {
             if (!_isListening)
@@ -86,6 +92,9 @@ namespace CropCare.Models
             _isListening = false;
         }
 
+        /// <summary>
+        /// Subscribes from the IOTService MessageReceived event.
+        /// </summary>
         public async void StartListeningToHub()
         {
             if (_isListening)

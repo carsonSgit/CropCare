@@ -14,6 +14,9 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Represents the types of readings that the controller can have.
+        /// </summary>
         public string[] ReadingTypes { get => _readingTypes; }
 
         /// <summary>
@@ -37,6 +40,9 @@ namespace CropCare.Models.Controllers
         public Reading Roll { get; set; }
 
         private bool _isBuzzerOn;
+        /// <summary>
+        /// Represents the state of the buzzer actuator.
+        /// </summary>
         public bool IsBuzzerOn 
         {
             get
@@ -58,7 +64,7 @@ namespace CropCare.Models.Controllers
         }
 
         /// <summary>
-        /// Adds a reading to the corrosponding property based on the reading type and updates list.
+        /// Adds a reading to the corresponding property based on the reading type and updates list.
         /// </summary>
         /// <param name="reading">The reading to add</param>
         public override void AddReading(Reading reading)
@@ -81,12 +87,19 @@ namespace CropCare.Models.Controllers
             }
         }
 
+        /// <summary>
+        /// Handles the event when the IOTService connection is stopped.
+        /// </summary>
         public override void IOTService_ConnectionStopped()
         {
             Pitch = NO_READING;
             Roll = NO_READING;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeolocationController"/> class.
+        /// </summary>
+        /// <param name="deviceId">The iot device id to target</param>
         public GeolocationController(string deviceId): base(deviceId, _readingTypes)
         {
             Latitude = new Reading(ReadingType.LATITUDE, "°", "0");
@@ -95,6 +108,10 @@ namespace CropCare.Models.Controllers
             Roll = NO_READING;     
         }
 
+        /// <summary>
+        /// Gets the initial actuator states for the controller.
+        /// </summary>
+        /// <returns></returns>
         public async override Task GetInitialActuatorStates()
         {
             IsBuzzerOn = await GetActuatorState(Actuator.BUZZER);

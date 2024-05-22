@@ -10,7 +10,13 @@ namespace CropCare.Services
 {
     public class IOTService
     {
+        /// <summary>
+        /// The event that is raised when a message is received from Azure IOT Hub.
+        /// </summary>
         public event Action<string, string> MessageReceived;
+        /// <summary>
+        /// The event that is raised when the connection to Azure IOT Hub is interrupted for any reason.
+        /// </summary>
         public event Action ConnectionStopped;
 
         private int retryDelay = 5000;
@@ -29,11 +35,21 @@ namespace CropCare.Services
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IOTService"/> class and starts receiving messages.
+        /// </summary>
         public IOTService()
         {
             Task.Run(() => StartReceivingMessagesAsync());
         }
 
+        /// <summary>
+        /// Sends a direct method to a device.
+        /// </summary>
+        /// <param name="deviceId">The device id to send the direct method to.</param>
+        /// <param name="methodName">The method name to invoke.</param>
+        /// <param name="payload">The payload formatted as json.</param>
+        /// <returns>The CloudToDeviceMethodResult of the direct method</returns>
         public async Task<CloudToDeviceMethodResult> InvokeDirectMethod(string deviceId, string methodName, string payload)
         {
             CloudToDeviceMethod method = new CloudToDeviceMethod(methodName)
@@ -56,7 +72,10 @@ namespace CropCare.Services
             }
         }
     
-
+        /// <summary>
+        /// Starts receiving messages from Azure IOT Hub.
+        /// </summary>
+        /// <returns></returns>
         public async Task StartReceivingMessagesAsync()
         {
             string connectionString = App.Settings.EventHubConnectionString;

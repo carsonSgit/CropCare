@@ -13,6 +13,9 @@ namespace CropCare.Models.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Represents the types of readings that the controller can have.
+        /// </summary>
         public string[] ReadingTypes { get => _readingTypes; }
 
         /// <summary>
@@ -36,6 +39,9 @@ namespace CropCare.Models.Controllers
         public Reading WaterLevel { get; set; }
 
         private bool _isFanOn;
+        /// <summary>
+        /// Represents the state of the fan actuator.
+        /// </summary>
         public bool IsFanOn 
         {
             get
@@ -57,6 +63,10 @@ namespace CropCare.Models.Controllers
         }
 
         private bool _isLedOn;
+
+        /// <summary>
+        /// Represents the state of the LED actuator.
+        /// </summary>
         public bool IsLedOn 
         {
             get
@@ -167,6 +177,9 @@ namespace CropCare.Models.Controllers
             return health;
         }
 
+        /// <summary>
+        /// Handles the event when the IOTService connection is stopped.
+        /// </summary>
         public override void IOTService_ConnectionStopped()
         {
             Temperature = NO_READING;
@@ -175,6 +188,10 @@ namespace CropCare.Models.Controllers
             WaterLevel = NO_READING;
         }
 
+        /// <summary>
+        /// This method should get the initial actuator states.
+        /// </summary>
+        /// <returns></returns>
         public override async Task GetInitialActuatorStates()
         {
             IsFanOn = await GetActuatorState(Actuator.FAN);
