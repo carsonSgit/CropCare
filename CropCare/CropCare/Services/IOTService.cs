@@ -1,5 +1,7 @@
 ﻿using Azure.Messaging.EventHubs.Consumer;
 using Microsoft.Azure.Devices;
+using Microsoft.Azure.Devices.Client;
+using Microsoft.Azure.Devices.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +22,22 @@ namespace CropCare.Services
         public event Action ConnectionStopped;
 
         private int retryDelay = 5000;
+
+        private RegistryManager _registryManager;
+        private RegistryManager RegistryManager
+        {
+            get
+            {
+                if (_registryManager == null)
+                {
+                    string connectionString = App.Settings.IOTHubConnectionString;
+                    _registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+                }
+                return _registryManager;
+            }
+        }
+
         private ServiceClient _serviceClient;
-        
         private ServiceClient ServiceClient
         {
             get
@@ -98,6 +114,49 @@ namespace CropCare.Services
                     ConnectionStopped?.Invoke();
                     await Task.Delay(retryDelay);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets a desired property for a device.
+        /// </summary>
+        /// <param name="deviceId">The device id to get the property for.</param>
+        /// <param name="property">The property name to get.</param>
+        /// <returns>The property value, if an error occured returns null.</returns>
+        public async Task<string> GetDesiredPropertyForDeviceAsync(string deviceId, string property)
+        {
+            try
+            {
+                Twin twin = await RegistryManager.GetTwinAsync(deviceId);
+                return twin.Properties.Desired[property];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving the twin for device '{deviceId}': {ex.Message}");
+                return null;
+            }
+        }
+        /// <summary>
+        /// Sets a desired property for a device.
+        /// </summary>
+        /// <param name="deviceId">The device id to set property for.</param>
+        /// <param name="property">The property name to change</param>
+        /// <param name="value">The value to change the property to.</param>
+        /// <returns>True if property was set else false.</returns>
+        public async Task<bool> SetDesiredPropertyForDeviceAsync(string deviceId, string property, dynamic value)
+        {
+            try
+            {
+                Twin twin = await RegistryManager.GetTwinAsync(deviceId);
+                twin.Properties.Desired[property] = value;
+
+                await RegistryManager.UpdateTwinAsync(twin.DeviceId, twin, twin.ETag);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while set the twin for device '{deviceId}': {ex.Message}");
+                return false;
             }
         }
     }

@@ -13,8 +13,15 @@ namespace CropCare.Models
     // Description: Represents a farm entity.
     public class Farm : INotifyPropertyChanged, IHasKey
     {
+        /// <summary>
+        /// The property name for the telemetry interval.
+        /// </summary>
+        public const string TELEMETRY_INTERVAL_PROP = "telemetryInterval";
 
         private bool _isListening = false;
+
+        private bool _setupComplete = false;
+
         /// <summary>
         /// Event that is raised when a property value changes.
         /// </summary>
@@ -36,14 +43,12 @@ namespace CropCare.Models
         public string DeviceId { get; set; }
 
         /// <summary>
-        /// Gets or sets the consumer client for the farm.
-        /// </summary>
-        public EventHubConsumerClient Consumer { get; set; }
-
-        /// <summary>
         /// Path to the icon used to represent this farm
         /// </summary>
         public string IconPath { get; set; }
+
+        [JsonIgnore]
+        public float TelemetryInterval { get; set; }
 
         /// <summary>
         /// Gets or sets the plant controller associated with the farm.
@@ -97,26 +102,42 @@ namespace CropCare.Models
         /// </summary>
         public async void StartListeningToHub()
         {
-            if (_isListening)
-            {
-                return;
-            }
-
             App.IOTService.MessageReceived += IOTService_MessageReceived;
-            var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
-            foreach (var controller in controllers)
-            {
-                await controller.GetInitialActuatorStates();
-            }
+            _setupComplete = await SetupFarm();
             _isListening = true;
         }
 
-        private void IOTService_MessageReceived(string deviceId, string data)
+        private async Task<bool> SetupFarm()
+        {
+            try
+            {
+                TelemetryInterval = float.Parse(await App.IOTService.GetDesiredPropertyForDeviceAsync(DeviceId, TELEMETRY_INTERVAL_PROP));
+
+                var controllers = new BaseController[] { PlantController, SecurityController, GeolocationController };
+                foreach (var controller in controllers)
+                {
+                    await controller.GetInitialActuatorStates();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not setup farm properly, {ex.Message}");
+                return false;
+            }
+        }
+
+        private async void IOTService_MessageReceived(string deviceId, string data)
         {
             if (deviceId != DeviceId)
             {
                 return;
             }
+            if(!_setupComplete)
+            {
+                _setupComplete = await SetupFarm();
+            }
+
             Console.WriteLine($"{data}");
 
             Reading reading = JSONToReading(data);

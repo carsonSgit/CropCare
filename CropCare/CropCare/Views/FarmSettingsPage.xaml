@@ -12,6 +12,10 @@
         <Label Text="Farm Name" FontSize="Small" Margin="25, 0, 0, 0" TextColor="{StaticResource GreenText}"/>
         <Entry x:Name="FarmNameEntry" Placeholder="Enter Farm Name" Text="{Binding FarmName}" Margin="20, 0, 20, 0"/>
 
+        <!-- Telemetry interval Entry -->
+        <Label Text="Telemetry Interval" FontSize="Small" Margin="25, 0, 0, 0" TextColor="{StaticResource GreenText}"/>
+        <Entry x:Name="TelemetryIntervalEntry" Text="{Binding TelemetryInterval}" Margin="20, 0, 20, 0"/>
+
         <!-- Farm Icon Picker -->
         <Label Text="Modify Farm Icon" FontSize="Small" Margin="25, 20, 0, 0" TextColor="{StaticResource GreenText}"/>
         <Picker x:Name="IconPicker" Title="Select Icon" Margin="20, 0, 20, 0"/>

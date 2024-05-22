@@ -10,13 +10,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:DynamicValueConverter x:Key="DynamicValueConverter"/>
-            <local:NumericToColorConverter x:Key="NumericToColorConverter" />
-            <local:NumericToStringConverter x:Key="NumericToStringConverter" />
+            <local:HealthStateToStringConverter x:Key="HealthStateToStringConverter" />
+            <local:HealthStateToColorConverter x:Key="HealthStateToColorConverter" />
             <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
-            <model:HealthyRange x:Key="HumidityRange" LowerHealthyLimit="75" UpperHealthyLimit="95" LowerCautionLimit="65" UpperCautionLimit="95" />
-            <model:HealthyRange x:Key="TemperatureRange" LowerHealthyLimit="26" UpperHealthyLimit="29" LowerCautionLimit="24" UpperCautionLimit="32" />
-            <model:HealthyRange x:Key="MoistureRange" LowerHealthyLimit="26" UpperHealthyLimit="29" LowerCautionLimit="24" UpperCautionLimit="32" /> <!-- Make this accurate -->
-            <model:HealthyRange x:Key="WaterLevelRange" LowerHealthyLimit="26" UpperHealthyLimit="29" LowerCautionLimit="24" UpperCautionLimit="32" /> <!-- Make this accurate -->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -35,11 +31,11 @@
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0">
                                 <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Temperature"/>
-                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Temperature.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource TemperatureRange}}" x:Name="temperature_healthLbl"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding TemperatureHealth, Converter={StaticResource HealthStateToStringConverter}}" x:Name="temperature_healthLbl"/>
                                 </VerticalStackLayout>
                             </Frame>
 
-                            <Frame Grid.Column="1" BackgroundColor="{Binding Temperature.Value, Converter={StaticResource NumericToColorConverter}, ConverterParameter={StaticResource TemperatureRange}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Frame Grid.Column="1" BackgroundColor="{Binding TemperatureHealth, Converter={StaticResource HealthStateToColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                                 <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" x:Name="temperature_measurementLbl">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -61,11 +57,11 @@
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                                 <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Humidity"/>
-                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Humidity.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource HumidityRange}}" x:Name="humidity_healthLbl"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding HumidityHealth, Converter={StaticResource HealthStateToStringConverter}}" x:Name="humidity_healthLbl"/>
                                 </VerticalStackLayout>
                             </Frame>
 
-                            <Frame Grid.Column="1" BackgroundColor="{Binding Humidity.Value, Converter={StaticResource NumericToColorConverter}, ConverterParameter={StaticResource HumidityRange}}"  HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Frame Grid.Column="1" BackgroundColor="{Binding HumidityHealth, Converter={StaticResource HealthStateToColorConverter}}"  HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                                 <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="5, 0, 5, 0" TextColor="White" x:Name="humidity_measurementLbl">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -87,11 +83,11 @@
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                                 <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Soil Moisture"/>
-                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding Moisture.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource MoistureRange}}" x:Name="moisture_healthLbl"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding MoistureHealth, Converter={StaticResource HealthStateToStringConverter}}" x:Name="moisture_healthLbl"/>
                                 </VerticalStackLayout>
                             </Frame>
 
-                            <Frame Grid.Column="1" BackgroundColor="{Binding Moisture.Value, Converter={StaticResource NumericToColorConverter}, ConverterParameter={StaticResource MoistureRange}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Frame Grid.Column="1" BackgroundColor="{Binding MoistureHealth, Converter={StaticResource HealthStateToColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                                 <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" Text="{Binding MoistureReading}" x:Name="moisture_measurementLbl">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -113,11 +109,11 @@
                             <Frame Grid.Column="0" Margin="0, 0, 10, 0" >
                                 <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="0, -5, 5, -5" Text="Water Level"/>
-                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding WaterLevel.Value, Converter={StaticResource NumericToStringConverter}, ConverterParameter={StaticResource WaterLevelRange}}" x:Name="waterlvl_healthLbl"/>
+                                    <Label Grid.Row="1" FontSize="15" HorizontalTextAlignment="Start" Margin="0, 2.5, 5, 0" Text="{Binding WaterLevelHealth, Converter={StaticResource HealthStateToStringConverter}}" x:Name="waterlvl_healthLbl"/>
                                 </VerticalStackLayout>
                             </Frame>
 
-                            <Frame Grid.Column="1" BackgroundColor="{Binding WaterLevel.Value, Converter={StaticResource NumericToColorConverter}, ConverterParameter={StaticResource WaterLevelRange}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
+                            <Frame Grid.Column="1" BackgroundColor="{Binding WaterLevelHealth, Converter={StaticResource HealthStateToColorConverter}}" HorizontalOptions="End" Padding="5,0,5,0" WidthRequest="85">
                                 <Label FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Center" FontAttributes="Bold" Margin="0, 0, 0, 0" TextColor="White" x:Name="waterlvl_measurementLbl" >
                                     <Label.FormattedText>
                                         <FormattedString>

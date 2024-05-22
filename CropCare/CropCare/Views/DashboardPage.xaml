@@ -16,7 +16,7 @@
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
                     <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                         <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
-                            <Label Text="Health" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            <Label Text="Plants" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="Red" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
                                 <Label Text="Critical" FontSize="14" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
@@ -40,7 +40,7 @@
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
                     <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                         <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
-                            <Label Text="Health" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
+                            <Label Text="Location" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="Orange" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
                                 <Label Text="Caution" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>

@@ -33,11 +33,13 @@ namespace CropCare.Models.Controllers
         /// Represents latest pitch reading
         /// </summary>
         public Reading Pitch { get; set; }
+        public HealthState PitchHealth { get; set; }
 
         /// <summary>
         /// Represents latest roll reading
         /// </summary>
         public Reading Roll { get; set; }
+        public HealthState RollHealth { get; set; }
 
         private bool _isBuzzerOn;
         /// <summary>
@@ -54,6 +56,7 @@ namespace CropCare.Models.Controllers
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Console.WriteLine("No Internet Connection");
+                    _isBuzzerOn = !value;
                 }
                 else
                 {
@@ -62,6 +65,15 @@ namespace CropCare.Models.Controllers
                 }
             }
         }
+            //                <model:HealthyRange x:Key="PitchRange" LowerHealthyLimit="-2.5" UpperHealthyLimit="2.5" LowerCautionLimit="5" UpperCautionLimit="5"/>
+            //<model:HealthyRange x:Key="RollRange" LowerHealthyLimit="-2.5" UpperHealthyLimit="2.5" LowerCautionLimit="5" UpperCautionLimit="5"/>
+        private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
+        {
+            { ReadingType.PITCH, new double[] { -2.5, 2.5, -5, 5} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
+            { ReadingType.ROLL, new double[] { -2.5, 2.5, -5, 5 } },
+        };
+
+        protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }
 
         /// <summary>
         /// Adds a reading to the corresponding property based on the reading type and updates list.
@@ -80,9 +92,11 @@ namespace CropCare.Models.Controllers
                     break;
                 case ReadingType.PITCH:
                     Pitch = reading;
+                    PitchHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.ROLL:
                     Roll = reading;
+                    RollHealth = ConvertReadingToHealth(reading);
                     break;
             }
         }
@@ -93,7 +107,9 @@ namespace CropCare.Models.Controllers
         public override void IOTService_ConnectionStopped()
         {
             Pitch = NO_READING;
+            PitchHealth = HealthState.Unknown;
             Roll = NO_READING;
+            RollHealth = HealthState.Unknown;
         }
 
         /// <summary>
@@ -105,7 +121,9 @@ namespace CropCare.Models.Controllers
             Latitude = new Reading(ReadingType.LATITUDE, "°", "0");
             Longitude = new Reading(ReadingType.LONGITUDE, "°", "0");
             Pitch = NO_READING;
+            PitchHealth = HealthState.Unknown;
             Roll = NO_READING;     
+            RollHealth = HealthState.Unknown;
         }
 
         /// <summary>

@@ -18,31 +18,46 @@ namespace CropCare.Models.Controllers
         /// </summary>
         public string[] ReadingTypes { get => _readingTypes; }
 
+
+        private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
+        {
+            { ReadingType.TEMPERATURE, new double[] { 26, 29, 24, 32} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
+            { ReadingType.HUMIDITY, new double[] { 75, 95, 65, 95 } },
+            { ReadingType.MOISTURE, new double[] { 26, 29, 24, 32} },
+            { ReadingType.WATERLEVEL, new double[] { 26, 29, 24, 32 } }
+        };
+
+        protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }
+
         /// <summary>
         /// Represents latest temperature reading
         /// </summary>
         public Reading Temperature { get; set; }
+        public HealthState TemperatureHealth { get; set; }
 
         /// <summary>
         /// Represents latest humidity reading
         /// </summary>
         public Reading Humidity { get; set; }
+        public HealthState HumidityHealth { get; set; }
 
         /// <summary>
         /// Represents latest moisture reading
         /// </summary>
         public Reading Moisture { get; set; }
+        public HealthState MoistureHealth { get; set; }
 
         /// <summary>
         /// Represents latest water level reading
         /// </summary>
         public Reading WaterLevel { get; set; }
+        public HealthState WaterLevelHealth { get; set; }
 
         private bool _isFanOn;
         /// <summary>
         /// Represents the state of the fan actuator.
         /// </summary>
-        public bool IsFanOn 
+        public bool IsFanOn
         {
             get
             {
@@ -53,6 +68,7 @@ namespace CropCare.Models.Controllers
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Console.WriteLine("No Internet Connection");
+                    _isFanOn = !value;
                 }
                 else
                 {
@@ -67,7 +83,7 @@ namespace CropCare.Models.Controllers
         /// <summary>
         /// Represents the state of the LED actuator.
         /// </summary>
-        public bool IsLedOn 
+        public bool IsLedOn
         {
             get
             {
@@ -78,6 +94,7 @@ namespace CropCare.Models.Controllers
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Console.WriteLine("No Internet Connection");
+                    _isLedOn = !value;
                 }
                 else
                 {
@@ -93,13 +110,17 @@ namespace CropCare.Models.Controllers
         public PlantController(string deviceId) : base(deviceId, _readingTypes)
         {
             Temperature = NO_READING;
+            TemperatureHealth = HealthState.Unknown;
             Humidity = NO_READING;
+            HumidityHealth = HealthState.Unknown;
             Moisture = NO_READING;
+            MoistureHealth = HealthState.Unknown;
             WaterLevel = NO_READING;
+            WaterLevelHealth = HealthState.Unknown;
         }
 
         /// <summary>
-        /// Adds a reading to the corrosponding property based on the reading type and updates list.
+        /// Adds a reading to the corresponding property based on the reading type and updates list.
         /// </summary>
         /// <param name="reading">The reading to add</param>
         public override void AddReading(Reading reading)
@@ -109,72 +130,21 @@ namespace CropCare.Models.Controllers
             {
                 case ReadingType.TEMPERATURE:
                     Temperature = reading;
+                    TemperatureHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.HUMIDITY:
                     Humidity = reading;
+                    HumidityHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.MOISTURE:
                     Moisture = reading;
+                    MoistureHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.WATERLEVEL:
                     WaterLevel = reading;
+                    WaterLevelHealth = ConvertReadingToHealth(reading);
                     break;
             }
-        }
-
-        /// <summary>
-        /// Updates the health label based on the sensor reading and specified thresholds.
-        /// </summary>
-        /// <param name="sensorReading">The sensor reading.</param>
-        /// <param name="unitSymbol">The symbol used to separate the value from the unit.</param>
-        /// <param name="highThreshold">The threshold for the high range.</param>
-        /// <param name="lowThreshold">The threshold for the low range.</param>
-        /// <returns>The health status based on the reading and thresholds.</returns>
-        public string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
-        {
-            string health = "";
-            double sensorValue;
-            if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
-            {
-                if (sensorValue > highThreshold)
-                {
-                    health = "Critical";
-                    //healthLbl.TextColor = Colors.Red;
-                }
-                else if (sensorValue < lowThreshold)
-                {
-                    health = "Needs Attention";
-                    //healthLbl.TextColor = Colors.Red;
-                }
-                else
-                {
-                    health = "Healthy";
-                    //healthLbl.TextColor = Colors.Green;
-                }
-            }
-
-            return health;
-        }
-
-        /// <summary>
-        /// Updates the health label based on the state of the actuator.
-        /// </summary>
-        /// <param name="actuatorState">The state of the actuator.</param>
-        /// <returns>The health status based on the actuator state.</returns>
-        public string UpdateStateHealthLabel(string actuatorState)
-        {
-            string health = "";
-            if (actuatorState.Equals(Command.ON.ToString(), StringComparison.OrdinalIgnoreCase))
-            {
-                health = "On";
-                //healthLbl.TextColor = Colors.Green;
-            }
-            else if (actuatorState.Equals(Command.OFF.ToString(), StringComparison.OrdinalIgnoreCase))
-            {
-                health = "Off";
-                //healthLbl.TextColor = Colors.Red;
-            }
-            return health;
         }
 
         /// <summary>
@@ -183,9 +153,13 @@ namespace CropCare.Models.Controllers
         public override void IOTService_ConnectionStopped()
         {
             Temperature = NO_READING;
+            TemperatureHealth = HealthState.Unknown;
             Humidity = NO_READING;
+            HumidityHealth = HealthState.Unknown;
             Moisture = NO_READING;
+            MoistureHealth = HealthState.Unknown;
             WaterLevel = NO_READING;
+            WaterLevelHealth = HealthState.Unknown;
         }
 
         /// <summary>

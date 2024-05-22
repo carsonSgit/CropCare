@@ -20,26 +20,31 @@ namespace CropCare.Models.Controllers
         /// Represents latest loudness reading
         /// </summary>
         public Reading Loudness { get; set; }
+        public HealthState LoudnessHealth { get; set; }
 
         /// <summary>
         /// Represents latest motion reading
         /// </summary>
         public Reading Motion { get; set; }
+        public HealthState MotionHealth { get; set; }
 
         /// <summary>
         /// Represents latest vibration reading
         /// </summary>
         public Reading Vibration { get; set; }
+        public HealthState VibrationHealth { get; set; }
 
         /// <summary>
         /// Represents latest luminosity reading
         /// </summary>
         public Reading Luminosity { get; set; }
+        public HealthState LuminosityHealth { get; set; }
 
         /// <summary>
         /// Represents latest door open reading
         /// </summary>
         public Reading DoorOpen { get; set; }
+        public HealthState DoorOpenHealth { get; set; }
 
         private bool _isDoorLocked;
         /// <summary>
@@ -56,6 +61,7 @@ namespace CropCare.Models.Controllers
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     Console.WriteLine("No Internet Connection");
+                    _isDoorLocked = !value;  
                 }
                 else
                 {
@@ -65,16 +71,29 @@ namespace CropCare.Models.Controllers
             }
         }
 
+        private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
+        {
+            { ReadingType.LOUDNESS, new double[] { 26, 29, 24, 32} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
+            { ReadingType.LUMINOSITY, new double[] { 75, 95, 65, 95 } },
+        };
+
+        protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityController"/> class.
         /// </summary>
         public SecurityController(string deviceId) : base(deviceId, _readingTypes)
         {
             Loudness = NO_READING;
+            LoudnessHealth = HealthState.Unknown;
             Motion = NO_READING;
+            MotionHealth = HealthState.Unknown;
             Vibration = NO_READING;
+            VibrationHealth = HealthState.Unknown;
             Luminosity = NO_READING;
+            LuminosityHealth = HealthState.Unknown;
             DoorOpen = NO_READING;
+            DoorOpenHealth = HealthState.Unknown;
         }
 
         /// <summary>
@@ -88,72 +107,67 @@ namespace CropCare.Models.Controllers
             {
                 case ReadingType.LOUDNESS:
                     Loudness = reading;
+                    LoudnessHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.MOTION:
                     Motion = reading;
+                    MotionHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.VIBRATION:
                     Vibration = reading;
+                    VibrationHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.LUMINOSITY:
                     Luminosity = reading;
+                    LuminosityHealth = ConvertReadingToHealth(reading);
                     break;
                 case ReadingType.DOOROPEN:
                     DoorOpen = reading;
+                    DoorOpenHealth = ConvertReadingToHealth(reading);
                     break;
             }
         }
 
-        /// <summary>
-        /// Updates the health label based on sensor readings.
-        /// </summary>
-        /// <param name="sensorReading">The sensor reading.</param>
-        /// <param name="unitSymbol">The symbol representing the unit of measurement.</param>
-        /// <param name="highThreshold">The high threshold for the reading.</param>
-        /// <param name="lowThreshold">The low threshold for the reading.</param>
-        /// <returns>The health status based on the sensor reading.</returns>
-        public string UpdateReadingHealthLabel(string sensorReading, char unitSymbol, double highThreshold, double lowThreshold)
+        protected override HealthState ConvertReadingToHealth(Reading reading)
         {
-            string health = "";
-            double sensorValue;
-            if (double.TryParse(sensorReading.Split(unitSymbol)[0], out sensorValue))
+            if(reading.Type == ReadingType.LOUDNESS)
             {
-                if (sensorValue > highThreshold)
+                if(reading.Value == "Quiet")
                 {
-                    health = "Critical";
+                    return HealthState.Healthy;
                 }
-                else if (sensorValue < lowThreshold)
+                if(reading.Value == "Noisy")
                 {
-                    health = "Needs Attention";
+                    return HealthState.Caution;
                 }
                 else
                 {
-                    health = "Healthy";
+                    return HealthState.Critical;
                 }
             }
-
-            return health;
-        }
-
-        /// <summary>
-        /// Updates the health label based on the state of an actuator.
-        /// </summary>
-        /// <param name="actuatorState">The state of the actuator.</param>
-        /// <returns>The health status based on the actuator state.</returns>
-        public string UpdateStateHealthLabel(string actuatorState)
-        {
-            string health = "";
-            if (actuatorState.Equals(Command.ON.ToString(), StringComparison.OrdinalIgnoreCase))
+            if (reading.Type == ReadingType.DOOROPEN)
             {
-                health = "Open";
-                //healthLbl.TextColor = Colors.Green;
+                if (reading.Value == "True")
+                {
+                    return HealthState.Healthy;
+                }
+                else
+                {
+                    return HealthState.Critical;
+                }
             }
-            else if (actuatorState.Equals(Command.OFF.ToString(), StringComparison.OrdinalIgnoreCase))
+            if (reading.Value.GetType() == typeof(string))
             {
-                health = "Closed";
-                //healthLbl.TextColor = Colors.Red;
+                if(reading.Value == "False")
+                {
+                    return HealthState.Healthy;
+                }
+                else
+                {
+                    return HealthState.Critical;
+                }
             }
-            return health;
+            return base.ConvertReadingToHealth(reading);
         }
 
         /// <summary>
@@ -162,9 +176,15 @@ namespace CropCare.Models.Controllers
         public override void IOTService_ConnectionStopped()
         {
             Loudness = NO_READING;
+            LoudnessHealth = HealthState.Unknown;
             Motion = NO_READING;
+            MotionHealth = HealthState.Unknown;
             Vibration = NO_READING;
+            VibrationHealth = HealthState.Unknown;
             Luminosity = NO_READING;
+            LuminosityHealth = HealthState.Unknown;
+            DoorOpen = NO_READING;
+            DoorOpenHealth = HealthState.Unknown;
         }
 
         /// <summary>

@@ -16,6 +16,8 @@ public partial class FarmSettingsPage : ContentPage
     /// </summary>
     public string Icon { get; set; }
 
+    public string TelemetryInterval { get; set; }
+
     /// <summary>
     /// Gets or sets the farm
     /// </summary>
@@ -27,6 +29,7 @@ public partial class FarmSettingsPage : ContentPage
         this.Farm = farm;
         this.Icon = farm.IconPath;
         this.FarmName = farm.Name;
+        TelemetryInterval = farm.TelemetryInterval.ToString();
         PopulateIconPicker();
         //IconPicker.SelectedItem = farm.IconPath;
         BindingContext = this;
@@ -57,6 +60,13 @@ public partial class FarmSettingsPage : ContentPage
             return;
         }
 
+        if(!float.TryParse(TelemetryInterval, out float fTelemetryInterval))
+        {
+            await DisplayAlert("Error", "Telemetry Interval must be a number", "OK");
+            return;
+        }
+
+
         bool answer = await DisplayAlert("Confirm Update", "Are you sure you want to update this farm?", "Yes", "No");
 
         if (!answer)
@@ -65,6 +75,15 @@ public partial class FarmSettingsPage : ContentPage
         this.Farm.IconPath = Constants.Constants.GetIconPath(IconPicker.SelectedItem as string);
         this.Farm.Name = this.FarmName;
         await App.Repo.FarmsDb.UpdateItemAsync(this.Farm);
+
+        if(!await App.IOTService.SetDesiredPropertyForDeviceAsync(this.Farm.DeviceId, Farm.TELEMETRY_INTERVAL_PROP, fTelemetryInterval))
+        {
+            await DisplayAlert("Error Setting Telemetry Interval", "An unexpected error occurred trying to set the telemetry interval. Please try again later.", "OK");
+        }
+        else
+        {
+            Farm.TelemetryInterval = fTelemetryInterval;
+        }
 
         await Navigation.PopAsync();
     }

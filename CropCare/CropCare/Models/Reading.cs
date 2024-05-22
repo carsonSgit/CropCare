@@ -20,7 +20,6 @@
         public const string PITCH = "PITCH";
         public const string ROLL = "ROLL";
         public const string VIBRATION = "VIBRATION";
-        public const string DOORLOCK = "DOORLOCK";
         public const string DOOROPEN = "MAGNET";
         public const string NODATA = "NODATA";
     }

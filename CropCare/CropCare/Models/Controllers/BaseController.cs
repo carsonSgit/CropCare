@@ -20,6 +20,18 @@ namespace CropCare.Models.Controllers
         /// A dictionary of readings for the controller.
         /// </summary>
         public Dictionary<string, ObservableCollection<Reading>> Readings { get; set; }
+
+        /// <summary>
+        /// Set the healthy ranges for each reading type.
+        /// </summary>
+        protected abstract Dictionary<string, double[]> HealthyRanges { get; }
+
+        public const byte LOWER_HEALTHY_LIMIT = 0;
+        public const byte UPPER_HEALTHY_LIMIT = 1;
+        public const byte LOWER_CAUTION_LIMIT = 2;
+        public const byte UPPER_CAUTION_LIMIT = 3;
+
+
         /// <summary>
         /// A dictionary of charts for the controller.
         /// </summary>
@@ -145,6 +157,29 @@ namespace CropCare.Models.Controllers
             };
 
             Charts[readingType] = cartesianChart;
+        }
+
+        protected virtual HealthState ConvertReadingToHealth(Reading reading)
+        {
+            if(!double.TryParse(reading.Value, out double dValue))
+            {
+                return HealthState.Unknown;
+            }
+
+            if (dValue >= HealthyRanges[reading.Type][LOWER_HEALTHY_LIMIT]
+                && dValue <= HealthyRanges[reading.Type][UPPER_HEALTHY_LIMIT])
+            {
+                return HealthState.Healthy;
+            }
+            if (dValue >= HealthyRanges[reading.Type][LOWER_CAUTION_LIMIT]
+                && dValue <= HealthyRanges[reading.Type][UPPER_CAUTION_LIMIT])
+            {
+                return HealthState.Caution;
+            }
+            else
+            {
+                return HealthState.Critical;
+            }
         }
 
         /// <summary>
