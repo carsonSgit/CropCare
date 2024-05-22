@@ -32,13 +32,19 @@ namespace CropCare.Models.Controllers
         public Reading Vibration { get; set; }
 
         /// <summary>
-        /// Reperesents latest luminosity reading
+        /// Represents latest luminosity reading
         /// </summary>
         public Reading Luminosity { get; set; }
 
+        /// <summary>
+        /// Represents latest door open reading
+        /// </summary>
         public Reading DoorOpen { get; set; }
 
         private bool _isDoorLocked;
+        /// <summary>
+        /// Represents the state of the door actuator.
+        /// </summary>
         public bool IsDoorLocked 
         {
             get
@@ -150,6 +156,9 @@ namespace CropCare.Models.Controllers
             return health;
         }
 
+        /// <summary>
+        /// Handles the IOTService ConnectionStopped event.
+        /// </summary>
         public override void IOTService_ConnectionStopped()
         {
             Loudness = NO_READING;
@@ -158,6 +167,10 @@ namespace CropCare.Models.Controllers
             Luminosity = NO_READING;
         }
 
+        /// <summary>
+        /// Gets the initial actuator states for the controller.
+        /// </summary>
+        /// <returns></returns>
         public override async Task GetInitialActuatorStates()
         {
             IsDoorLocked = await GetActuatorState(Actuator.SERVO);

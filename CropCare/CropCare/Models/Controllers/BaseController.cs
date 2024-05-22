@@ -16,12 +16,24 @@ namespace CropCare.Models.Controllers
         protected string _invokeGetActuatorStates = "get_actuator_states";
 
         protected readonly Reading NO_READING = new Reading(ReadingType.NODATA, String.Empty, "NO DATA");
-
+        /// <summary>
+        /// A dictionary of readings for the controller.
+        /// </summary>
         public Dictionary<string, ObservableCollection<Reading>> Readings { get; set; }
+        /// <summary>
+        /// A dictionary of charts for the controller.
+        /// </summary>
         public Dictionary<string, CartesianChart> Charts { get; set; }
-
+        /// <summary>
+        /// The device ID of the controller.
+        /// </summary>
         protected string DeviceId { get; set; }
 
+        /// <summary>
+        /// Validates that a reading can be added to the controller.
+        /// </summary>
+        /// <param name="reading">The reading to be checked.</param>
+        /// <returns>True if the reading can be added else false.</returns>
         public bool ValidateReading(Reading reading)
         {
             if (reading == null)
@@ -35,11 +47,20 @@ namespace CropCare.Models.Controllers
             return true;
         }
 
+        /// <summary>
+        /// Adds a reading to the controller.
+        /// </summary>
+        /// <param name="reading">The reading to add.</param>
         public virtual void AddReading(Reading reading)
         {
             Readings[reading.Type].Add(reading);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseController"/> class.
+        /// </summary>
+        /// <param name="deviceId">The iot device id to target</param>
+        /// <param name="readingTypes">A list of reading types as strings to be added to the controller.</param>
         public BaseController(string deviceId, string[] readingTypes)
         {
             DeviceId = deviceId;
@@ -62,7 +83,7 @@ namespace CropCare.Models.Controllers
         /// <summary>
         /// This method updates the chart for the given reading type.
         /// </summary>
-        /// <param name="readingType"></param>
+        /// <param name="readingType">The reading type to target which chart to update.</param>
         public virtual void UpdateChart(string readingType)
         {
             LineSeries<DateTimePoint>[] series =
@@ -102,7 +123,7 @@ namespace CropCare.Models.Controllers
                     Name = "Time",
                     NamePaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
                     TicksPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
-                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49"))
+                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
                     MinLimit = Readings[readingType][Math.Max(Readings[readingType].Count - 10, 0)].TimeStamp.Ticks
                 }
             };
@@ -126,8 +147,17 @@ namespace CropCare.Models.Controllers
             Charts[readingType] = cartesianChart;
         }
 
+        /// <summary>
+        /// This method should get the initial actuator states.
+        /// </summary>
+        /// <returns></returns>
         public abstract Task GetInitialActuatorStates();
 
+        /// <summary>
+        /// This method queries iot hub to get the specified actuator state.
+        /// </summary>
+        /// <param name="actuatorType"></param>
+        /// <returns>True if the actuator is on else false.</returns>
         protected async Task<bool> GetActuatorState(string actuatorType)
         {
             try
@@ -148,7 +178,12 @@ namespace CropCare.Models.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Updates the actuator state.
+        /// </summary>
+        /// <param name="actuatorType">The target actuator type to update.</param>
+        /// <param name="state">Whether the actuator should be set on or off.</param>
+        /// <returns></returns>
         protected async Task<bool> UpdateActuatorState(string actuatorType, bool state)
         {
             const string METHOD = "control_actuator";
