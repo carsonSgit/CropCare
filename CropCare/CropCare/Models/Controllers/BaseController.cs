@@ -102,7 +102,7 @@ namespace CropCare.Models.Controllers
                     Name = "Time",
                     NamePaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
                     TicksPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
-                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49"))
+                    LabelsPaint = new SolidColorPaint(SKColor.Parse("#4a8e49")),
                     MinLimit = Readings[readingType][Math.Max(Readings[readingType].Count - 10, 0)].TimeStamp.Ticks
                 }
             };
