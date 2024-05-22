@@ -23,6 +23,79 @@
 > The README.md is subject to change as we progress through development.
 > Stay up to date to observe the changes!
 
+# Controlling Actuators
+
+## Plant Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup. 
+
+| Sensor/Actuator       		| Port on Grove Base Hat | Port Type   | Unit                 |
+|---------------------------|------------------------|-------------|----------------------|
+| Soil Moisture Sensor  		| 0                      | PIN         | Ω                    |
+| Temperature/Humidity Sensor 	| 4                  | PIN         | Temp: °C, Humi: % HR |
+| Water Level Sensor    		| 5                      | PIN         | water level          |
+| Fan                   		| 12                     | PIN         | N/A                  |
+| LED                   		| 18                     | PIN         | N/A                  |
+
+## Security Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup.
+
+| Sensor/Actuator       | Port on Grove Base Hat | Port Type   | Unit     |
+|-----------------------|------------------------|-------------|----------|
+| Loudness Sensor       | 2                      | PIN         | unitless |
+| Luminosity Sensor     | N/A                    | BUS         | nm       |
+| Motion Sensor         | 22                     | PIN         | N/A      |
+| Vibration Sensor      | 26                     | PIN         | N/A      |
+| Servo                 | 16                     | PIN         | N/A      |
+
+## Geolocation Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup.
+
+| Sensor/Actuator | Port on Grove Base Hat | Port Type | Unit |
+|-----------------|------------------------|-----------|------|
+| Accelerometer   | N/A                    | BUS       | °    |
+| Buzzer          | N/A                    | BUS       | N/A  |
+| GPS             | /dev/ttyS0             | UART      | N/A  |
+
+## Controlling the Actuators from the Cloud:
+Direct Methods are used to control each actuator. We felt that it made the most sense since we control them
+with a method in our code to just invoke the same method with the parameters specified in the payload.
+
+### Fan
+The target field must be set to fan and the value can be either on or off. 
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"fan", "value": "on"}'`
+
+### Buzzer
+The target field must be set to buzzer and the value can be either on or off.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"buzzer", "value": "on"}'`
+
+### Servo
+The target field must be set to servo and the value can be a float from -1 to 1 inclusively.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"servo", "value": "1"}'`
+
+### LED
+The target field must be set to led and the value can be either on or off.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"led", "value": "on"}'`
+
+## Additional Communication from the Cloud
+We can also get the state of any actuator we want without changing them by using the following command:
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name get_single_actuator_state --method-payload '{"target":"fan"}'`
+
+This will return a message resembling:
+`{
+  "payload": {
+    "target": "fan",
+    "value": "ON"
+  },
+  "status": 200
+}`
+To set telemetryInterval to 5 seconds:
+`az iot hub device-twin update -n cropcare -d {device_id} --desired '{"telemetryInterval": 5}'`
+
+
+
 # 🌱 Functional Overview <a name="functional-overview"/>
 CropCare seeks to deliver timely delivery of relevant data, and allow users to remotely control key systems for containerized gardens. Leveraling build in hardware solutions, we can monitor the relevant plant data and control related hardware to ensure secure and efficient plant growth. Our mobile application will facilitate this remote control and will provide users with a visual interface with which to view the relevant data.
 
