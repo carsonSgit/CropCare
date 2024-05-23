@@ -29,7 +29,6 @@ requests-unixsocket==0.3.0
 RPi.GPIO==0.7.1
 rpi_ws281x==5.0.0
 seeed-python-reterminal==0.5
-serial==0.0.97
 smbus2==0.4.3
 typing_extensions==4.11.0
 urllib3==1.26.18
