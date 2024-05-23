@@ -8,9 +8,9 @@ namespace CropCare.Models
 {
     public enum HealthState
     {
+        Unknown,
         Healthy,
         Caution,
         Critical,
-        Unknown
     }
 }
