@@ -25,7 +25,7 @@
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutFooter>
-        <Label Text="CropCare Edu." Margin="20,20,0,20"/>
+        <Label Text="CropCare Edu." Margin="20,20,0,20" TextColor="White"/>
     </Shell.FlyoutFooter>
 
     <!-- Landing Page -->
