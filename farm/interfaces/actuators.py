@@ -11,7 +11,7 @@ class ACommand(ABC):
         """Enum defining types of actuators that can be targets for a command"""
 
         FAN = "fan"
-        LIGHT_ON_OFF = "light-on-off"
+        LIGHT_ON_OFF = "led"
         LIGHT_PULSE = "light-pulse"
         VIBRATION = "vibration"
         BUZZER = "buzzer"

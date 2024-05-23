@@ -52,7 +52,7 @@ class FanController(IActuator):
         elif value.upper() == "OFF":
             self.fan.off()
         self.state = value.upper()
-
+        print("FAN: " + self.state)
         return self.state != old_state
 
     def validate_command(self, command: ACommand) -> bool:
