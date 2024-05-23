@@ -257,7 +257,7 @@ Follow the port guide below to sucessfully utilize the farm setup.
 | Sensor/Actuator       		| Port on Grove Base Hat | Port Type   | Unit                 |
 |---------------------------|------------------------|-------------|----------------------|
 | Soil Moisture Sensor  		| 0                      | PIN         | Ω                    |
-| Temperature/Humidity Sensor 	| 4                  | PIN         | Temp: °C, Humi: % HR |
+| Temperature/Humidity Sensor 	| 26                  | PIN         | Temp: °C, Humi: % HR |
 | Water Level Sensor    		| 5                      | PIN         | water level          |
 | Fan                   		| 12                     | PIN         | N/A                  |
 | LED                   		| 18                     | PIN         | N/A                  |
@@ -271,7 +271,7 @@ Follow the port guide below to sucessfully utilize the farm setup.
 | Loudness Sensor       | 2                      | PIN         | unitless |
 | Luminosity Sensor     | N/A                    | BUS         | nm       |
 | Motion Sensor         | 22                     | PIN         | N/A      |
-| Vibration Sensor      | 26                     | PIN         | N/A      |
+| Vibration Sensor      | N/A                     | PIN         | N/A      |
 | Servo                 | 16                     | PIN         | N/A      |
 | Door Sensor           | 24                     | PIN         | N/A      |
 
