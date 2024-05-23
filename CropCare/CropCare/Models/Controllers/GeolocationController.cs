@@ -70,7 +70,7 @@ namespace CropCare.Models.Controllers
         private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
         {
             { ReadingType.PITCH, new double[] { -2.5, 2.5, -5, 5} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
-            { ReadingType.ROLL, new double[] { -2.5, 2.5, -5, 5 } },
+            { ReadingType.ROLL, new double[] { -85, -95, -75, -105 } },
         };
 
         protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }
