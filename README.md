@@ -2,9 +2,17 @@
 # <div align='center'> 420-6A6-AB Application Development III
 # <div align='center'> 420-6P3-AB Connected Objects 
 # <div align='center'> Winter 2024
-
 ### <div align='center'> Final Project
 
+![331641454-21308de5-e623-4add-ac92-0728f0213f9d-svg](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/b9b16fab-df28-40ea-8095-cfedfec55a18)
+
+## 🌐 3D Model
+
+[![3D Model](https://github.com/carsonSgit/cropcare-3d/assets/92652800/be20c061-606b-4168-88d2-2a20215ced2e)](https://carsonsgit.github.io/cropcare-3d/)
+
+> [!NOTE]
+> If you want to interact with the 3D model, please click the image above or you can follow [this link](https://carsonsgit.github.io/cropcare-3d/)
+    
 # Table of Contents
 1. [Functional Overview](#functional-overview)
 2. [Design Overview](#design-overview)
