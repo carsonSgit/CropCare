@@ -219,6 +219,11 @@ namespace CropCare.Models.Controllers
                 var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
                 result = dict["value"].ToString();
 
+                if(result == "-1")
+                {
+                    return true;
+                }
+
                 return Actuator.StringToBool(result);
             }
             catch
@@ -240,7 +245,7 @@ namespace CropCare.Models.Controllers
 
             if (actuatorType == Actuator.SERVO)
             {
-                stateString = state ? "1" : "-1";
+                stateString = state ? "-1" : "1";
             }
             else
             {
