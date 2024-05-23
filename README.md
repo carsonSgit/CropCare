@@ -48,6 +48,7 @@ Follow the port guide below to sucessfully utilize the farm setup.
 | Motion Sensor         | 22                     | PIN         | N/A      |
 | Vibration Sensor      | 26                     | PIN         | N/A      |
 | Servo                 | 16                     | PIN         | N/A      |
+| Door Sensor           | 24                     | PIN         | N/A      |
 
 ## Geolocation Subsystem Device Documentation
 
