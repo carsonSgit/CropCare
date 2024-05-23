@@ -170,7 +170,9 @@ In order to keep the screen less cluttered, a flyout menu will be used. This men
 This page will contain settings for the account of our users. These settings may include toggling app themes from a light mode to a dark mode using a switch button, as well as changing username, password, and email using text boxes.
 
 # 📱 App Prototype <a name="app-prototype"/>
-![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/98350514/13b4257c-38d5-4ae7-a987-5229442d5077)
+<!-- ![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/98350514/13b4257c-38d5-4ae7-a987-5229442d5077) -->
+![CropCare v2](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/c2cb2650-b560-48c5-a677-636ea55f1e1a)
+
 
 # 🧩 App UML Diagrams <a name="uml-diagrams"/>
 
