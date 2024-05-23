@@ -57,6 +57,13 @@ namespace CropCare.Services
         public IOTService()
         {
             Task.Run(() => StartReceivingMessagesAsync());
+            Connectivity.ConnectivityChanged += (object sender, ConnectivityChangedEventArgs e) =>
+            {
+                if(e.NetworkAccess != NetworkAccess.Internet)
+                {
+                    ConnectionStopped?.Invoke();
+                }
+            };
         }
 
         /// <summary>
@@ -99,6 +106,10 @@ namespace CropCare.Services
             await using var consumer = new EventHubConsumerClient(EventHubConsumerClient.DefaultConsumerGroupName, connectionString, eventHubName);
             while (true)
             {
+                if(NetworkAccess.Internet != Connectivity.NetworkAccess)
+                {
+                    ConnectionStopped?.Invoke();
+                }
                 try
                 {
                     await foreach (PartitionEvent partitionEvent in consumer.ReadEventsAsync(false))

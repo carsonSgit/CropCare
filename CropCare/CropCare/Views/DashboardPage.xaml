@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <local:HealthStateToStringConverter x:Key="HealthStateToStringConverter" />
             <local:HealthStateToColorConverter x:Key="HealthStateToColorConverter" />
+            <local:OverviewHealthTextConverter x:Key="OverviewHealthTextConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <VerticalStackLayout>
@@ -18,44 +19,47 @@
             </HorizontalStackLayout>
             <Label Text="Thank you for using CropCare" FontAttributes="None" FontSize="16" HorizontalOptions="Start" Padding="15, 0, 0, 20"/>
 
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                
             <HorizontalStackLayout>
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}" MinimumWidthRequest="100">
                         <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Plants" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="{Binding Farm.PlantControllerOverallHealth, Converter={StaticResource HealthStateToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
-                                <Label Text="{Binding Farm.PlantControllerOverallHealth, Converter={StaticResource HealthStateToStringConverter}}" FontSize="14" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                                    <Label Text="{Binding Farm.PlantControllerOverallHealth, Converter={StaticResource OverviewHealthTextConverter}}" FontSize="14" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                         <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Security" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="{Binding Farm.SecurityControllerOverallHealth, Converter={StaticResource HealthStateToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
-                                <Label Text="{Binding Farm.SecurityControllerOverallHealth, Converter={StaticResource HealthStateToStringConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                                    <Label Text="{Binding Farm.SecurityControllerOverallHealth, Converter={StaticResource OverviewHealthTextConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="15, 0, 10, 20">
-                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
+                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                         <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_HealthStatusBG}, Dark={StaticResource Dark_HealthStatusBG}}">
                             <Label Text="Location" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
                             <HorizontalStackLayout Margin="0, 10, 0, 5" HorizontalOptions="Center">
                                 <BoxView Color="{Binding Farm.GeolocationControllerOverallHealth, Converter={StaticResource HealthStateToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
-                                <Label Text="{Binding Farm.GeolocationControllerOverallHealth, Converter={StaticResource HealthStateToStringConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
-                            </HorizontalStackLayout>
+                                    <Label Text="{Binding Farm.GeolocationControllerOverallHealth, Converter={StaticResource OverviewHealthTextConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                                </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </HorizontalStackLayout>
             </HorizontalStackLayout>
 
+            </HorizontalStackLayout>
 
             <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" Margin="15, 0, 15, 0">
                 <VerticalStackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}">
