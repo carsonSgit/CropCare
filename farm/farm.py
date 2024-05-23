@@ -16,7 +16,7 @@ import dotenv
 dotenv.load_dotenv(override=True)
 
 READING_RATE = 5
-CONNECTION_STRING = os.environ.get("DEVICE_CONNTECTION_STRING")
+CONNECTION_STRING = os.environ.get("DEVICE_CONNECTION_STRING")
 
 
 class Farm:
