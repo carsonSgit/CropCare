@@ -74,7 +74,7 @@ namespace CropCare.Models.Controllers
         private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
         {
             { ReadingType.LOUDNESS, new double[] { 26, 29, 24, 32} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
-            { ReadingType.LUMINOSITY, new double[] { 75, 95, 65, 95 } },
+            { ReadingType.LUMINOSITY, new double[] { 10, 20, 5, 30 } },
         };
 
         protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }

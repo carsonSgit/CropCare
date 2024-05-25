@@ -21,10 +21,10 @@ namespace CropCare.Models.Controllers
 
         private Dictionary<string, double[]> _healthyRanges = new Dictionary<string, double[]>
         {
-            { ReadingType.TEMPERATURE, new double[] { 26, 29, 24, 32} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
+            { ReadingType.TEMPERATURE, new double[] { 25, 30, 20, 35} }, // LOWER_HEALTHY, UPPER_HEALTHY, LOWER_CAUTION, UPPER_CAUTION
             { ReadingType.HUMIDITY, new double[] { 75, 95, 65, 95 } },
-            { ReadingType.MOISTURE, new double[] { 26, 29, 24, 32} },
-            { ReadingType.WATERLEVEL, new double[] { 26, 29, 24, 32 } }
+            { ReadingType.MOISTURE, new double[] { 500, 700, 400, 800} },
+            { ReadingType.WATERLEVEL, new double[] { 500, 700, 400, 800 } }
         };
 
         protected override Dictionary<string, double[]> HealthyRanges { get => _healthyRanges; }
