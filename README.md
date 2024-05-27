@@ -65,6 +65,154 @@ If you are interested in viewing more details/more expansive versions of the inf
 
 <br/>
 
+## App Layout
+
+Below is an image displaying the functionality of each page within our mobile app (in light mode).
+![CropCare App Layout](https://github.com/carsonSgit/CropCare/assets/92652800/f87b2c54-088b-4cd1-b7be-5aca8196e6dd)
+
+### ⚙️ **App Setup**
+You need the following technology
+	- .NET MAUI & an Android Emulator
+	- A Raspberry Pi & a base hat
+ 	- Various sensors & actuators (all noted below)
+
+For .NET MAUI setup, you need to modify the appsettings.json to have the correct keys. Your appsettings.json should go in the project top level project directory. It should look like this:
+```
+{
+  "Settings": {
+    "FirebaseAuthorizedDomain": "my-firebase-app-d60e2.firebaseapp.com",
+    "FireBaseApiKey": "awdawdFWADSf32134dadwawda",
+    "FireBaseDatabaseURL": "https://my-firebase-app-d60e2-default-rtdb.firebaseio.com/",
+    "GoogleMapsAPIKey": "gdtrhrdffeff3fsdffasefsegjntsbgfawddwa",
+    "EventHubConnectionString": "Endpoint=sb://iothub-ns-my-app-59465961-6d1bd0200e.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=0es2007K2ch9jfd6n9rDBX1kEIX8HkAc9AIoTHoehx0=;EntityPath=my-app",
+    "EventHubName": "my-app",
+    "IotHubConnectionString": "HostName=my-app.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=0es2007K2ch9jfd6n9rDBX1kEIX8HkAc9AIoTHoehx0="
+  }
+}
+```
+In order to get a google maps api key, follow the intstructions here: [Use API Keys](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+For the azure setup, you must create an iothub resource. To get the EventHubConnectionString and EventHubName you must go to the Build-in endpoints tab and you will see them there.
+As for the iothubconnection string you must go to the Shared access policies tab, click on iothubowner and copy the primary connection string from there.
+There firebase API keys are all obtained from the firebase console.
+
+Once azure is set up, you must create a device, click on it and copy its primary key or connection string and put it in a .env in farm/ folder in this repo. You can use .env.example as an example of how your .env should look. 
+In order to properly get readings from iot hub from within the app, when you create a farm you must enter the device_id that matches the correct device in Azure iot hub: 
+
+![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/93663166/be141589-87fb-4e08-afb0-5a551934214c)
+![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/93663166/d9da34f5-9a83-414d-9a13-23b22336dd71)
+
+# 🎮 Controlling Actuators
+
+## 🌱 Plant Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup. 
+
+| Sensor/Actuator       		| Port on Grove Base Hat | Port Type   | Unit                 |
+|---------------------------|------------------------|-------------|----------------------|
+| Soil Moisture Sensor  		| 0                      | PIN         | Ω                    |
+| Temperature/Humidity Sensor 	| 26                  | PIN         | Temp: °C, Humi: % HR |
+| Water Level Sensor    		| 5                      | PIN         | water level          |
+| Fan                   		| 12                     | PIN         | N/A                  |
+| LED                   		| 18                     | PIN         | N/A                  |
+
+## 🔒 Security Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup.
+
+| Sensor/Actuator       | Port on Grove Base Hat | Port Type   | Unit     |
+|-----------------------|------------------------|-------------|----------|
+| Loudness Sensor       | 2                      | PIN         | unitless |
+| Luminosity Sensor     | N/A                    | BUS         | nm       |
+| Motion Sensor         | 22                     | PIN         | N/A      |
+| Vibration Sensor      | N/A                     | PIN         | N/A      |
+| Servo                 | 16                     | PIN         | N/A      |
+| Door Sensor           | 24                     | PIN         | N/A      |
+
+## 🌍 Geolocation Subsystem Device Documentation
+
+Follow the port guide below to sucessfully utilize the farm setup.
+
+| Sensor/Actuator | Port on Grove Base Hat | Port Type | Unit |
+|-----------------|------------------------|-----------|------|
+| Accelerometer   | N/A                    | BUS       | °    |
+| Buzzer          | N/A                    | BUS       | N/A  |
+| GPS             | /dev/ttyS0             | UART      | N/A  |
+
+## 🛠️ Controlling the Actuators from the Cloud:
+Direct Methods are used to control each actuator. We felt that it made the most sense since we control them
+with a method in our code to just invoke the same method with the parameters specified in the payload.
+
+### 🌀 Fan
+The target field must be set to fan and the value can be either on or off. 
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"fan", "value": "on"}'`
+
+### 🔊 Buzzer
+The target field must be set to buzzer and the value can be either on or off.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"buzzer", "value": "on"}'`
+
+### 🎚️ Servo
+The target field must be set to servo and the value can be a float from -1 to 1 inclusively.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"servo", "value": "1"}'`
+
+### 💡 LED
+The target field must be set to led and the value can be either on or off.
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"led", "value": "on"}'`
+
+## 📡 Additional Communication from the Cloud
+We can also get the state of any actuator we want without changing them by using the following command:
+`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name get_single_actuator_state --method-payload '{"target":"fan"}'`
+
+This will return a message resembling:
+`{
+  "payload": {
+    "target": "fan",
+    "value": "ON"
+  },
+  "status": 200
+}`
+To set telemetryInterval to 5 seconds:
+`az iot hub device-twin update -n cropcare -d {device_id} --desired '{"telemetryInterval": 5}'`
+
+## ⬆️ D2C Messages
+Longitude and Latitude to determine GPS location: 
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LONGITUDE', 'value': 152.408976, 'unit': '°'}"`
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LATITUDE', 'value': 152.408976, 'unit': '°'}"`
+
+Temperature of the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'TEMPERATURE', 'value': 40.34324, 'unit': '°C'}"`
+
+Humidity inside the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'HUMIDITY', 'value': 20.231, 'unit': '% HR'}"`
+
+Luminosity for detecting light levels:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LUMINOSITY', 'value': 433, 'unit': 'lux'}"`
+
+Loudness inside the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LOUDNESS', 'value': 200, 'unit': 'Db'}"`
+
+Moisture of the soil:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MOISTURE', 'value': 232.34311, 'unit': 'Ω'}"`
+
+Waterlevel:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'WATERLEVEL', 'value': 221, 'unit': 'Ω'}"`
+
+Motion inside the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MOTION', 'value': True, 'unit': ''}"`
+
+Vibration in the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'VIBRATION', 'value': False, 'unit': ''}"`
+
+Magnet for detecting if the door is closed:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MAGNET', 'value': True, 'unit': ''}"`
+
+Pitch of the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'PITCH', 'value': 12.322, 'unit': '°'}"`
+
+Roll of the container:
+- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'ROLL', 'value': 56.7445, 'unit': '°'}"`
+
+
 ### 🛠️ **App Overview**
 
 #### Hardware Features <a name="hardware-features"/>
@@ -245,126 +393,3 @@ classDiagram
     BaseController <|-- SecurityController
     BaseController <|-- GeolocationController
 ```
-
-
-### ⚙️ **App Setup**
-TBD.
-1. You need the following technology
-	- .NET MAUI & an Android Emulator
-	- A Raspberry Pi & a base hat
- 	- Various sensors & actuators (all noted below)
-2. Microsoft Azure
->[!IMPORTANT]
->THIS IS NOT DONE YET. THIS IS A BIG JOB.
-
-# 🎮 Controlling Actuators
-
-## 🌱 Plant Subsystem Device Documentation
-
-Follow the port guide below to sucessfully utilize the farm setup. 
-
-| Sensor/Actuator       		| Port on Grove Base Hat | Port Type   | Unit                 |
-|---------------------------|------------------------|-------------|----------------------|
-| Soil Moisture Sensor  		| 0                      | PIN         | Ω                    |
-| Temperature/Humidity Sensor 	| 26                  | PIN         | Temp: °C, Humi: % HR |
-| Water Level Sensor    		| 5                      | PIN         | water level          |
-| Fan                   		| 12                     | PIN         | N/A                  |
-| LED                   		| 18                     | PIN         | N/A                  |
-
-## 🔒 Security Subsystem Device Documentation
-
-Follow the port guide below to sucessfully utilize the farm setup.
-
-| Sensor/Actuator       | Port on Grove Base Hat | Port Type   | Unit     |
-|-----------------------|------------------------|-------------|----------|
-| Loudness Sensor       | 2                      | PIN         | unitless |
-| Luminosity Sensor     | N/A                    | BUS         | nm       |
-| Motion Sensor         | 22                     | PIN         | N/A      |
-| Vibration Sensor      | N/A                     | PIN         | N/A      |
-| Servo                 | 16                     | PIN         | N/A      |
-| Door Sensor           | 24                     | PIN         | N/A      |
-
-## 🌍 Geolocation Subsystem Device Documentation
-
-Follow the port guide below to sucessfully utilize the farm setup.
-
-| Sensor/Actuator | Port on Grove Base Hat | Port Type | Unit |
-|-----------------|------------------------|-----------|------|
-| Accelerometer   | N/A                    | BUS       | °    |
-| Buzzer          | N/A                    | BUS       | N/A  |
-| GPS             | /dev/ttyS0             | UART      | N/A  |
-
-## 🛠️ Controlling the Actuators from the Cloud:
-Direct Methods are used to control each actuator. We felt that it made the most sense since we control them
-with a method in our code to just invoke the same method with the parameters specified in the payload.
-
-### 🌀 Fan
-The target field must be set to fan and the value can be either on or off. 
-`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"fan", "value": "on"}'`
-
-### 🔊 Buzzer
-The target field must be set to buzzer and the value can be either on or off.
-`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"buzzer", "value": "on"}'`
-
-### 🎚️ Servo
-The target field must be set to servo and the value can be a float from -1 to 1 inclusively.
-`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"servo", "value": "1"}'`
-
-### 💡 LED
-The target field must be set to led and the value can be either on or off.
-`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name control_actuator --method-payload '{"target":"led", "value": "on"}'`
-
-## 📡 Additional Communication from the Cloud
-We can also get the state of any actuator we want without changing them by using the following command:
-`az iot hub invoke-device-method --hub-name cropcare --device-id {device_id} --method-name get_single_actuator_state --method-payload '{"target":"fan"}'`
-
-This will return a message resembling:
-`{
-  "payload": {
-    "target": "fan",
-    "value": "ON"
-  },
-  "status": 200
-}`
-To set telemetryInterval to 5 seconds:
-`az iot hub device-twin update -n cropcare -d {device_id} --desired '{"telemetryInterval": 5}'`
-
-## ⬆️ D2C Messages
-Longitude and Latitude to determine GPS location: 
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LONGITUDE', 'value': 152.408976, 'unit': '°'}"`
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LATITUDE', 'value': 152.408976, 'unit': '°'}"`
-
-Temperature of the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'TEMPERATURE', 'value': 40.34324, 'unit': '°C'}"`
-
-Humidity inside the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'HUMIDITY', 'value': 20.231, 'unit': '% HR'}"`
-
-Luminosity for detecting light levels:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LUMINOSITY', 'value': 433, 'unit': 'lux'}"`
-
-Loudness inside the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'LOUDNESS', 'value': 200, 'unit': 'Db'}"`
-
-Moisture of the soil:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MOISTURE', 'value': 232.34311, 'unit': 'Ω'}"`
-
-Waterlevel:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'WATERLEVEL', 'value': 221, 'unit': 'Ω'}"`
-
-Motion inside the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MOTION', 'value': True, 'unit': ''}"`
-
-Vibration in the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'VIBRATION', 'value': False, 'unit': ''}"`
-
-Magnet for detecting if the door is closed:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'MAGNET', 'value': True, 'unit': ''}"`
-
-Pitch of the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'PITCH', 'value': 12.322, 'unit': '°'}"`
-
-Roll of the container:
-- `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'ROLL', 'value': 56.7445, 'unit': '°'}"`
-
-
