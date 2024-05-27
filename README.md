@@ -1,11 +1,15 @@
 ![331641454-21308de5-e623-4add-ac92-0728f0213f9d-svg](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/b9b16fab-df28-40ea-8095-cfedfec55a18)
    	 
+<br/>
+
 ## 🌱 **Project Description**
 CropCare's goal is to combat the growing impact urbanization has on the safety of the farming & agriculture world. Our application provides users (farm Technicians or Owners) with a centralized control & monitoring center for everything that is going on in their IoT container farms. The mobile application sends and receives data through Microsoft Azure which acts as an intermediary between our mobile application and the project back-end. The project back-end is developed in Python and hosted/ran off of a Rasperry Pi reTerminal that is repeatedly getting readings and states from the hardware it is connected with, ultimately sending it off to Microsoft Azure to then be received on the Mobile Application interface.
 
+<br/>
+
 ## 🔧 **Contributions**
 
-| Name                  | Contribution                      |
+| Developer                  | Contribution                      |
 |-----------------------|-----------------------------------|
 | [Cristiano Fazi](https://github.com/Cristiano-Fazi)        | Full-stack developer & team lead  |
 | [Kevin Baggott](https://github.com/kbaggott1)         | Back-end & hardware developer     |
@@ -13,6 +17,8 @@ CropCare's goal is to combat the growing impact urbanization has on the safety o
 
 > [!IMPORTANT]
 > It is important to know that there were no distinct set roles, the contributions above are what each person primarily focused on, but each team member evenly contributed in various ways.
+
+<br/>
 
 ## 🌐 3D Model
 
@@ -23,10 +29,20 @@ CropCare's goal is to combat the growing impact urbanization has on the safety o
 > [!TIP]
 > If you want to interact with the 3D model, please click the image above or you can follow [this link](https://carsonsgit.github.io/cropcare-3d/).
 
+<br/>
 
-## 🌐 Design Document <a name="document-link"></a>
+## 🔗 Design Document
 
 If you are interested in the design of our app and code structure (i.e. our "blueprint" before we began developing), please visit [this link](https://docs.google.com/document/d/1CgeMB0Ia7MkWsxPN-nKMrvUxbPpmW7MrcGwJhg-tKfA/edit?usp=sharing), you will be met with a Google Doc with our detailed strategy.
+
+<br/>
+
+## 📄 Other documents & files
+
+If you are interested in viewing more details/more expansive versions of the information presented in this README (3D models, UML diagrams, wireframes), navigate to the **"./Documents"** path.
+![image](https://github.com/carsonSgit/CropCare/assets/92652800/59aabf13-2b9b-46c5-af77-0c196a496c64)
+
+<br/>
 
 ### 🛠️ **App Overview**
 
