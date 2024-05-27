@@ -20,6 +20,27 @@ CropCare's goal is to combat the growing impact urbanization has on the safety o
 
 <br/>
 
+## 🛠️ Relevant Technologies
+
+In relation to the courses this project was made for, below are the technologies used;
+
+**Application Development 3:**
+  - Development in .NET Maui
+  - Visual Studio 2022 Community Edition
+
+**Connected Objects:**
+  - Python
+  - Azure IoT Tools
+  - Raspberry Pi
+  - Visual Studio Code
+
+**External:**
+  - [TinkerCAD](https://www.tinkercad.com/) *for creating the model*
+  - Google's [model-viewer](https://github.com/google/model-viewer) *for displaying the exported CAD file*
+  - [GitHub Pages](https://pages.github.com/) *for hosting the 3D Model*
+
+<br/>
+
 ## 🌐 3D Model
 
 <a href="https://carsonsgit.github.io/cropcare-3d/">
