@@ -1,4 +1,4 @@
-![331641454-21308de5-e623-4add-ac92-0728f0213f9d-svg](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/b9b16fab-df28-40ea-8095-cfedfec55a18)
+![image](https://github.com/carsonSgit/CropCare/assets/92652800/2ce6cfa8-36e8-4f52-916c-8e7c0db2ccbf)
    	 
 <br/>
 
@@ -44,7 +44,7 @@ In relation to the courses this project was made for, below are the technologies
 ## 🌐 3D Model
 
 <a href="https://carsonsgit.github.io/cropcare-3d/">
-    <img src="https://github.com/carsonSgit/cropcare-3d/assets/92652800/be20c061-606b-4168-88d2-2a20215ced2e" alt="3D Model" width="350"/>
+    <img src="https://github.com/carsonSgit/CropCare/assets/92652800/94c7410c-1eea-4078-bdac-dc9dc733ff1c" alt="3D Model" width="350"/>
 </a>
 
 > [!TIP]
@@ -142,9 +142,9 @@ If you are interested in viewing more details/more expansive versions of the inf
   - Allow user to change account details
   - Allow users to change colour theme
 
-### 🎨 App Prototype <a name="app-prototype"/>
+### 🎨 App Wireframes <a name="app-prototype"/>
 <!-- ![image](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/98350514/13b4257c-38d5-4ae7-a987-5229442d5077) -->
-![CropCare v2](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/c2cb2650-b560-48c5-a677-636ea55f1e1a)
+![CropCare v2](https://github.com/carsonSgit/CropCare/assets/92652800/59fc84ea-f223-425e-ada7-e7569b46fd58)
 
 ### 📐 **App UML Diagrams**
 
