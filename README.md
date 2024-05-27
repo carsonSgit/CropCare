@@ -1,38 +1,32 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ZKGepmmw)
-# <div align='center'> 420-6A6-AB Application Development III
-# <div align='center'> 420-6P3-AB Connected Objects 
-# <div align='center'> Winter 2024
-### <div align='center'> Final Project
-> [!IMPORTANT]
-> The README.md is subject to change as we progress through development.
-> Stay up to date to observe the changes!
-
 ![331641454-21308de5-e623-4add-ac92-0728f0213f9d-svg](https://github.com/JAC-Final-Project-W24-6A6-6P3/final-project-cropcare/assets/92652800/b9b16fab-df28-40ea-8095-cfedfec55a18)
-
-### 🌟 **Team Information**
-- **Team Name:** CropCare
-- **Team Letter:** C
-- **Team Members:** *&lt;Student Name : Student ID&gt;*
-	- Cristiano Fazi : *2155506*
-	- Kevin Baggott : *2140455*
-	- Carson Spriggs-Audet : *2192019*
    	 
-### 🌱 **Project Description**
-CropCare is a solution created to combat the growth of urbanization and loss of valuable farmland. With our containerized farms, you can track the; temperature, humidity, soil moisture, water level, volumne, luminosity, motion, vibrations, location, and pitch/roll. You are also able to control the; fan, LED, door, door lock, and buzzer. This is achievable through the mobile application that has various IoT readings and messaging capabilities to ensure your container works to fulfill all your farming needs. The application supports two types of users, an Owner & a Technician. There is an important distinction between these two roles. An Owner is able to create farms, assign technicians, modify technicians, view location, and tweak farm settings. A technician does not have access to such things, they are only able to be added to farms and monitor plant and farm security. All of the farm accessibility is thanks to the Raspberri Pi reTerminal & backend code. The reTerminal connects to various sensors and actuators (as mentioned above) and sends all telemtry data to an Azure IoT device. This is the device that (when configured within an app using Device ID) then sends all telemetry data to the .NET MAUI application. The combination of the two codebases brings us to the final CropCare all-in-one farming solution.
+## 🌱 **Project Description**
+CropCare's goal is to combat the growing impact urbanization has on the safety of the farming & agriculture world. Our application provides users (farm Technicians or Owners) with a centralized control & monitoring center for everything that is going on in their IoT container farms. The mobile application sends and receives data through Microsoft Azure which acts as an intermediary between our mobile application and the project back-end. The project back-end is developed in Python and hosted/ran off of a Rasperry Pi reTerminal that is repeatedly getting readings and states from the hardware it is connected with, ultimately sending it off to Microsoft Azure to then be received on the Mobile Application interface.
 
-### 🔧 **Contributions**
+## 🔧 **Contributions**
 
 | Name                  | Contribution                      |
 |-----------------------|-----------------------------------|
-| Cristiano Fazi        | Full-stack developer & team lead  |
-| Kevin Baggott         | Back-end & hardware developer     |
-| Carson Spriggs-Audet  | Full-stack developer & designer   |
+| [Cristiano Fazi](https://github.com/Cristiano-Fazi)        | Full-stack developer & team lead  |
+| [Kevin Baggott](https://github.com/kbaggott1)         | Back-end & hardware developer     |
+| [Carson Spriggs-Audet](https://github.com/carsonSgit)  | Full-stack developer & designer   |
 
-> [!NOTE]
-> It is important to know that there were no distinct set roles, the contributions above are what each person primarily focused on, but each team member evenly contributed in various ways
+> [!IMPORTANT]
+> It is important to know that there were no distinct set roles, the contributions above are what each person primarily focused on, but each team member evenly contributed in various ways.
 
-### 📱 **Mobile App**
-CropCare provides timely data and remote control for containerized gardens via built-in hardware solutions, ensuring secure and efficient plant growth. The CropCare app features an intuitive interface for farm owners and technicians. Users can sign in or register, set up accounts as crop owners or technicians, and view an overview of their containers' statuses (healthy, needs attention, critical). The dashboard displays container health and includes navigation to the Plant Monitoring, Security, and GPS pages (for owners only). The Plant Monitoring Page shows detailed environmental data from sensors, providing critical information about the container's environment. The Security Page allows users to adjust various components within the container, making immediate changes based on the monitoring data of security related needs. The GPS Page, exclusive to crop owners, features an interactive map showing the current location of their containers. Navigation is streamlined with a flyout menu and an overview page that links to the dashboard. The flyout menu houses settings, logout, and overview options using shell navigation for login and register pages and stack navigation for other pages. The Settings Page allows users to toggle app themes between light and dark modes, and update account details such as username, password, and email, ensuring a personalized and user-friendly experience.
+## 🌐 3D Model
+
+<a href="https://carsonsgit.github.io/cropcare-3d/">
+    <img src="https://github.com/carsonSgit/cropcare-3d/assets/92652800/be20c061-606b-4168-88d2-2a20215ced2e" alt="3D Model" width="350"/>
+</a>
+
+> [!TIP]
+> If you want to interact with the 3D model, please click the image above or you can follow [this link](https://carsonsgit.github.io/cropcare-3d/).
+
+
+## 🌐 Design Document <a name="document-link"></a>
+
+If you are interested in the design of our app and code structure (i.e. our "blueprint" before we began developing), please visit [this link](https://docs.google.com/document/d/1CgeMB0Ia7MkWsxPN-nKMrvUxbPpmW7MrcGwJhg-tKfA/edit?usp=sharing), you will be met with a Google Doc with our detailed strategy.
 
 ### 🛠️ **App Overview**
 
@@ -218,35 +212,13 @@ classDiagram
 
 ### ⚙️ **App Setup**
 TBD.
+1. You need the following technology
+	- .NET MAUI & an Android Emulator
+	- A Raspberry Pi & a base hat
+ 	- Various sensors & actuators (all noted below)
+2. Microsoft Azure
 >[!IMPORTANT]
 >THIS IS NOT DONE YET. THIS IS A BIG JOB.
-
-### 🚀 **Future Work**
-- Implement Push Notifications
-- Implement more colour themes
-- Database storage of all data values
-- Messaging system between any users
-
-### 🎁 **Bonus Features**
-- Support for multiple containers
-- Built to-scale Container model
-	- Design 3D models of Containers
-	- Interactive hosted 3D model (https://carsonsgit.github.io/cropcare-3d/)
-	- Used recycled materials
-- Social Media presence
-- Different colour themes
-- Detailed presentation
-- Overall health status of 3 categories displayed
-	- Plant Monitoring
- 	- Security
-    - GPS
-
-## 🌐 3D Model
-
-[![3D Model](https://github.com/carsonSgit/cropcare-3d/assets/92652800/be20c061-606b-4168-88d2-2a20215ced2e)](https://carsonsgit.github.io/cropcare-3d/)
-
-> [!NOTE]
-> If you want to interact with the 3D model, please click the image above or you can follow [this link](https://carsonsgit.github.io/cropcare-3d/)
 
 # 🎮 Controlling Actuators
 
@@ -358,6 +330,4 @@ Pitch of the container:
 Roll of the container:
 - `az iot device send-d2c-message -n {iothub_name} -d {device_id} --data "{'reading_type': 'ROLL', 'value': 56.7445, 'unit': '°'}"`
 
-# 🌐 Link to Our Document <a name="document-link"></a>
-https://docs.google.com/document/d/1CgeMB0Ia7MkWsxPN-nKMrvUxbPpmW7MrcGwJhg-tKfA/edit?usp=sharing
 
