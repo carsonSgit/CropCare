@@ -1,0 +1,34 @@
+classDiagram
+    class User {
+        - List<string> farmKeys
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Email
+        + string Name
+        + bool IsOwner
+        + List<string> FarmKeys
+        + bool IsAssigned
+        + User(string email, string name, bool isOwner)
+    }
+
+    class Farm {
+        + PropertyChangedEventHandler PropertyChanged
+        + string Key
+        + string Name
+        + string DeviceId
+        + EventHubConsumerClient Consumer
+        - PlantController PlantController
+        - SecurityController SecurityController
+        - GeolocationController GeolocationController
+        + Farm(string farmName, string deviceId)
+    }
+
+    class UserToFarm {
+        + string Key
+        + string UserId
+        + string FarmId
+        + UserToFarm(string userId, string farmId)
+    }
+
+    User "1" --> "0..*" UserToFarm
+    Farm "1" --> "0..*" UserToFarm

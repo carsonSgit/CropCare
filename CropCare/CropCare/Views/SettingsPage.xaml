@@ -4,7 +4,7 @@
 
     <ScrollView>
         <StackLayout Spacing="25" Padding="20">
-            <Image Source="settings_icon_normal.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+            <Image Source="settings_icon_normal.png" Margin="0, 20, 0, 0" WidthRequest="130" HeightRequest="130"/>
             <Label Text="SETTINGS" FontSize="Title" HorizontalOptions="Center" />
 
             <!-- User Profile Settings -->
@@ -13,7 +13,7 @@
                 <StackLayout Padding="0, 0, 0, 0">
                     <HorizontalStackLayout Spacing="5" Padding="0, 0, 0, 0">
                         <Label Text="Name:" Padding="0, 13, 0, 0"/>
-                        
+
                         <Entry x:Name="NameEntry"
                            Placeholder="Enter your name"
                            Text="{Binding Name}"

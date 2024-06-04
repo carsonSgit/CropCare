@@ -2,7 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.OverviewPage"
-             Title="Overview">
+             xmlns:local="clr-namespace:CropCare.Converters"
+             Title="Overview"
+             Shell.BackgroundColor="#2D7245">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:HealthStateToStringConverter x:Key="HealthStateToStringConverter" />
+            <local:HealthStateToColorConverter x:Key="HealthStateToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <!-- Main Layout -->
     <Grid>
@@ -13,27 +21,40 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="10,10,10,10"  HorizontalOptions="Center">
-            <!-- CollectionView for displaying farms -->
-            <CollectionView 
-                x:Name="farmsCollectionView"
-                ItemsSource="{Binding FarmsCollection}"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="5" BorderColor="#516250" CornerRadius="5" Margin="5">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Farm_Tapped" />
-                            </Frame.GestureRecognizers>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Name}" FontSize="Medium" />
-                                <Label Text="{Binding DeviceId}" FontSize="Small" />
-                                <!-- Add other farm properties as needed -->
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_FarmFrameBG}, Dark={StaticResource Dark_FarmFrameBG}}" IsVisible="{Binding hasFarms}">
+                <!-- CollectionView for displaying farms -->
+                <CollectionView 
+                    x:Name="farmsCollectionView"
+                    ItemsSource="{Binding FarmsCollection}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="5" CornerRadius="5" Margin="0, 7.5, 0, 7.5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Farm_Tapped" />
+                                </Frame.GestureRecognizers>
+                                <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Padding="10">
+                                        <Label Text="{Binding Name}" FontSize="Medium" />
+                                        <!-- HARDCODED PLACEHOLDER -->
+                                        <HorizontalStackLayout Margin="0, 5, 0, 0">
+                                            <BoxView Color="{Binding OverallHealth, Converter={StaticResource HealthStateToColorConverter}}" HeightRequest="10" WidthRequest="10" CornerRadius="20"/>
+                                            <Label Text="{Binding OverallHealth, Converter={StaticResource HealthStateToStringConverter}}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                                        </HorizontalStackLayout>
+                                        <!-- HARDCODED PLACEHOLDER -->
+                                    </StackLayout>
+                                    <Image Grid.Column="1" Source="{Binding IconPath}" HeightRequest="40" HorizontalOptions="End" Margin="0, 0, 10, 0"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
         </VerticalStackLayout>
 
         <ImageButton 
@@ -45,11 +66,10 @@
             MaximumHeightRequest="60"
             MaximumWidthRequest="60"
             Padding="10"
-            CornerRadius="15"
+            CornerRadius="10"
             Clicked="Btn_Add_Farm"
-            BackgroundColor="#73A942" 
+            BackgroundColor="#7CA78A" 
             IsVisible="{Binding IsOwner}"
             />
     </Grid>
-
 </ContentPage>

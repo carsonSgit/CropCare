@@ -49,18 +49,5 @@ namespace CropCare.DataRepos
                 return userToFarmDb ??= new DatabaseService<UserToFarm>(AuthService.UserCreds.User, nameof(UserToFarm), App.Settings.FireBaseDatabaseURL);
             }
         }
-
-        private IDeviceController deviceController;
-
-        /// <summary>
-        /// Controller for managing devices.
-        /// </summary>
-        public IDeviceController DeviceController
-        {
-            get
-            {
-                return deviceController ??= new MockDeviceController();
-            }
-        }
     }
 }

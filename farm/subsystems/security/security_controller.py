@@ -46,7 +46,7 @@ class SecurityController(SubsystemController):
     def _initialize_sensors(self) -> list[ISensor]:
         return [
             LoudnessSensor(2, "LoudnessSensor", AReading.Type.LOUDNESS),
-            # LuminositySensor(-1, "light", AReading.Type.LUMINOSITY),
+            #LuminositySensor(-1, "light", AReading.Type.LUMINOSITY),
             MotionSensor(22, "motion", AReading.Type.MOTION),
             VibrationSensor(-1, "vibration", AReading.Type.VIBRATION),
             MagnetSensor(24, "magnet", AReading.Type.MAGNET),

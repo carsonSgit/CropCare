@@ -1,6 +1,8 @@
 ﻿using CropCare.Views;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using CropCare.Services;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace CropCare
 {
@@ -13,6 +15,7 @@ namespace CropCare
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UseMauiMaps()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,7 +23,7 @@ namespace CropCare
                 });
             builder.Services.AddSingleton<SignUpPage>();
             builder.Services.AddSingleton<OverviewPage>();
-
+            builder.Services.AddSingleton<IOTService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

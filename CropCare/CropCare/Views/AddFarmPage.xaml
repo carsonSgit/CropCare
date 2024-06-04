@@ -3,23 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CropCare.Views.AddFarmPage"
              Title="">
-    
-    <Frame BackgroundColor="Transparent" BorderColor="Transparent">
-        <VerticalStackLayout>
-            <Image Source="farmicon.png" Margin="0, 20, 0, 0" WidthRequest="130"  HeightRequest="130"/>
-            <Label Text="Add Farm" FontSize="35" Margin="0, 20, 0, 20" HorizontalOptions="Center" TextColor="#538D22"/>
 
-            <Label Text="Farm Name" FontSize="Small" Margin="5, 0, 0, 0" TextColor="#538D22"/>
+    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Light_GridBG}, Dark={StaticResource Dark_GridBG}}">
+        <VerticalStackLayout>
+            <!-- Hero Icon and Label -->
+            <Image Source="farmicon.png" Margin="0, 0, 0, 0" WidthRequest="130"  HeightRequest="130"/>
+            <Label Text="Add Farm" FontSize="35" Margin="0, 5, 0, 20" HorizontalOptions="Center" TextColor="{StaticResource GreenText}"/>
+
+            <!-- Farm Name Entry -->
+            <Label Text="Farm Name" FontSize="Small" Margin="5, 0, 0, 0" TextColor="{StaticResource GreenText}"/>
             <Entry x:Name="FarmNameEntry" Placeholder="Enter Farm Name" Text="{Binding FarmName}"/>
 
+            <!-- Farm ID Entry -->
             <HorizontalStackLayout Margin="5, 0, 0, 0">
-                <Label Text="Farm ID" FontSize="Small"  TextColor="#538D22"/>
+                <Label Text="Farm ID" FontSize="Small"  TextColor="{StaticResource GreenText}"/>
                 <ImageButton Grid.Column="1" Source="info.png" WidthRequest="20" HeightRequest="20" Margin="5,0,0,0" Clicked="DisplayFarmIDInfo"/>
             </HorizontalStackLayout>
             <Entry x:Name="FarmIdEntry" Placeholder="Enter Farm ID" Text="{Binding FarmId}"/>
+            
+            <!-- Farm Icon Picker -->
+            <Label Text="Farm Icon" FontSize="Small" Margin="5, 0, 0, 0" TextColor="{StaticResource GreenText}"/>
+            <Picker x:Name="IconPicker" Title="Select Icon"/>
 
-            <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 10" />
-            <Grid Padding="5">
+            <!-- Technician Picker -->
+            <SearchBar x:Name="SearchBar" Placeholder="Search Technicians" TextChanged="OnSearchBarTextChanged" Margin="-15, 5, 5, 0"/>
+            <Grid Padding="5" BackgroundColor="{StaticResource Frame_Border}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -33,16 +41,16 @@
                 <Label Grid.Column="2" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5, 5, 5, 0" Text="Email Address"/>
             </Grid>
             <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
-                <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150">
+                <CollectionView x:Name="TechnicianCollectionView" ItemsSource="{Binding Technicians}" HeightRequest="150" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Vertical">
-                                <Grid Padding="0, 5, 0, 5">
+                                <Grid Padding="0, 5, 0, 5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="1"/>
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Padding="5">
+                                    <Grid Grid.Row="0" Padding="5" BackgroundColor="{AppThemeBinding Light={StaticResource Light_FrameBG}, Dark={StaticResource Dark_FrameBG}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="0.5*"/>
                                             <ColumnDefinition Width="1.25*"/>
@@ -59,7 +67,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
-            <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 30, 70, 30" FontSize="Large" BackgroundColor="#538D22"/>
+            <Button x:Name="AddFarmButton" Text="Add Farm" Clicked="OnAddFarmButtonClicked" Margin="70, 10, 70, 30" FontSize="Large" BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
     </Frame>
 </ContentPage>

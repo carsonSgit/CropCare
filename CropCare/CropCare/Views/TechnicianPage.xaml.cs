@@ -31,22 +31,17 @@ public partial class TechnicianPage : ContentPage
         InitializeComponent();
         AssignedTechnicians = new List<User>();
         this.Farm = farm;
+        PopulateTechnicianPicker();
         BindingContext = this;
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        PopulateTechnicianPicker();
-    }
-
-    async private void PopulateTechnicianPicker()
+    private void PopulateTechnicianPicker()
     {
         //Retrieve all Technicians
         this.Technicians = new List<User>();
-        this.Technicians.AddRange((await App.Repo.UsersDb.GetItemsAsync(true)).Where(u => u.IsOwner == false));
+        this.Technicians.AddRange(App.Repo.UsersDb.Items.Where(u => u.IsOwner == false));
 
-        //Check users that are attachted to this farm
+        //Check users that are attached to this farm
         var UserKeys = App.Repo.UserToFarmDb.Items.Where(u => u.FarmId == this.Farm.Key).Select(u => u.UserId).ToList();
         this.AssignedTechnicians = App.Repo.UsersDb.Items.Where(u => UserKeys.Contains(u.Key) && u.IsOwner == false).ToList();
         this.Technicians.ForEach(u => u.IsAssigned = this.AssignedTechnicians.Any(t => t.Key == u.Key));

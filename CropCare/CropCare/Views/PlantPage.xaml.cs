@@ -1,5 +1,5 @@
 using CropCare.Models;
-using CropCare.Models.Plant;
+using CropCare.Models.Controllers;
 
 namespace CropCare.Views;
 
@@ -8,8 +8,6 @@ namespace CropCare.Views;
 /// </summary>
 public partial class PlantPage : ContentPage
 {
-    private Farm Farm { get; set; }
-
     /// <summary>
     /// Gets the plant controller associated with the page.
     /// </summary>
@@ -23,20 +21,34 @@ public partial class PlantPage : ContentPage
     {
         InitializeComponent();
         PlantController = farm.PlantController;
+
+        App.IOTService.MessageReceived += UpdateCharts;
         BindingContext = PlantController;
     }
 
-    private void fanSwitch_Toggled(object sender, ToggledEventArgs e)
+    private void UpdateCharts(string s = null, string s2 = null)
     {
-        var command = fanSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        PlantController.Fan.ControlActuator(command);
-        PlantController.FanState = PlantController.UpdateStateHealthLabel(command.ToString());
+        TempChart.BindingContext = PlantController.Charts[ReadingType.TEMPERATURE];
+        HumiChart.BindingContext = PlantController.Charts[ReadingType.HUMIDITY];
+        SoilChart.BindingContext = PlantController.Charts[ReadingType.MOISTURE];
+        WaterChart.BindingContext = PlantController.Charts[ReadingType.WATERLEVEL];
     }
 
-    private void ledSwitch_Toggled(object sender, ToggledEventArgs e)
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var command = ledSwitch.IsToggled ? Models.Command.ON : Models.Command.OFF;
-        PlantController.Led.ControlActuator(command);
-        PlantController.LedState = PlantController.UpdateStateHealthLabel(command.ToString());
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        TempChart.IsVisible = selectedIndex == 0;
+        HumiChart.IsVisible = selectedIndex == 1;
+        SoilChart.IsVisible = selectedIndex == 2;
+        WaterChart.IsVisible = selectedIndex == 3;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ChartPicker.SelectedIndex = 0;
+        UpdateCharts();
     }
 }

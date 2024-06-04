@@ -13,7 +13,6 @@ class ACommand(ABC):
         FAN = "fan"
         LIGHT_ON_OFF = "led"
         LIGHT_PULSE = "light-pulse"
-        VIBRATION = "vibration"
         BUZZER = "buzzer"
         SERVO = "servo"
 
