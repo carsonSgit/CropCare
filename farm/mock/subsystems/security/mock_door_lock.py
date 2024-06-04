@@ -4,7 +4,7 @@ from interfaces.sensors import ISensor, AReading
 
 
 class MockDoorLockSensor(ISensor):
-
+    
     def __init__(self, gpio: int, model: str, type: AReading.Type):
         self.gpio = gpio
         self.model = model

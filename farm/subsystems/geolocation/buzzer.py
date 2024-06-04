@@ -63,8 +63,9 @@ class BuzzerController(IActuator):
                 shell=True,
                 stdout=subprocess.DEVNULL,
             )
-        self.state = value.upper()
+        self.state = value.upper(
         print("Buzzer: " + self.state)
+
         return self.state != old_state
 
     def validate_command(self, command: ACommand) -> bool:

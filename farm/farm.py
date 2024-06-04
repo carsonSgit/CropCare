@@ -15,6 +15,7 @@ import dotenv
 
 dotenv.load_dotenv(override=True)
 
+# Telemetry Delay
 READING_RATE = 5
 CONNECTION_STRING = os.environ.get("DEVICE_CONNTECTION_STRING")
 
