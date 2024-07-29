@@ -11,9 +11,9 @@ CropCare's goal is to combat the growing impact urbanization has on the safety o
 
 | Developer                  | Contribution                      |
 |-----------------------|-----------------------------------|
-| [Cristiano Fazi](https://github.com/Cristiano-Fazi)        | Full-stack developer & team lead  |
-| [Kevin Baggott](https://github.com/kbaggott1)         | Back-end & hardware developer     |
-| [Carson Spriggs-Audet](https://github.com/carsonSgit)  | Full-stack developer & designer   |
+| **[Cristiano Fazi](https://github.com/Cristiano-Fazi)**        | *Full-stack developer & team lead*  |
+| **[Kevin Baggott](https://github.com/kbaggott1)**         | *Back-end & hardware developer*     |
+| **[Carson Spriggs-Audet](https://github.com/carsonSgit)**  | *Full-stack developer & designer*   |
 
 > [!IMPORTANT]
 > It is important to know that there were no distinct set roles, the contributions above are what each person primarily focused on, but each team member evenly contributed in various ways.
